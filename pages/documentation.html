@@ -1,0 +1,939 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Stackly Developer Portal</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-low": "#0d1c2d",
+              outline: "#909097",
+              "on-secondary-fixed": "#001e2c",
+              "tertiary-container": "#00055c",
+              "surface-container-high": "#1c2b3c",
+              primary: "#bec6e0",
+              "on-background": "#d4e4fa",
+              "primary-fixed-dim": "#bec6e0",
+              surface: "#051424",
+              "on-secondary": "#00354a",
+              "outline-variant": "#45464d",
+              "on-error": "#690005",
+              "on-secondary-container": "#00374d",
+              tertiary: "#bdc2ff",
+              background: "#051424",
+              "on-tertiary-fixed": "#000767",
+              "inverse-on-surface": "#233143",
+              "surface-container": "#122131",
+              "inverse-surface": "#d4e4fa",
+              "on-surface": "#d4e4fa",
+              "on-primary-fixed-variant": "#3f465c",
+              "on-error-container": "#ffdad6",
+              "secondary-container": "#00a6e0",
+              "on-tertiary-container": "#6c77e1",
+              "surface-container-highest": "#273647",
+              "secondary-fixed-dim": "#7bd0ff",
+              "surface-variant": "#273647",
+              error: "#ffb4ab",
+              "surface-bright": "#2c3a4c",
+              secondary: "#7bd0ff",
+              "secondary-fixed": "#c4e7ff",
+              "on-primary": "#283044",
+              "inverse-primary": "#565e74",
+              "on-surface-variant": "#c6c6cd",
+              "surface-dim": "#051424",
+              "on-primary-fixed": "#131b2e",
+              "surface-tint": "#bec6e0",
+              "tertiary-fixed": "#e0e0ff",
+              "surface-container-lowest": "#010f1f",
+              "tertiary-fixed-dim": "#bdc2ff",
+              "primary-fixed": "#dae2fd",
+              "on-secondary-fixed-variant": "#004c69",
+              "primary-container": "#0f172a",
+              "error-container": "#93000a",
+              "on-primary-container": "#798098",
+              "on-tertiary-fixed-variant": "#2f3aa3",
+              "on-tertiary": "#131e8c",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              unit: "4px",
+              gutter: "16px",
+              "max-width": "1440px",
+              "margin-desktop": "32px",
+              "margin-mobile": "16px",
+            },
+            fontFamily: {
+              "body-lg": ["Inter"],
+              "headline-xl": ["Inter"],
+              "headline-md": ["Inter"],
+              "headline-lg": ["Inter"],
+              "headline-xl-mobile": ["Inter"],
+              "body-md": ["Inter"],
+              "code-sm": ["JetBrains Mono"],
+              "label-md": ["Inter"],
+            },
+            fontSize: {
+              "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "headline-xl": [
+                "36px",
+                {
+                  lineHeight: "44px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "headline-md": [
+                "20px",
+                { lineHeight: "28px", fontWeight: "600" },
+              ],
+              "headline-lg": [
+                "24px",
+                {
+                  lineHeight: "32px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-xl-mobile": [
+                "28px",
+                {
+                  lineHeight: "34px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+              "code-sm": ["13px", { lineHeight: "18px", fontWeight: "400" }],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "600",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+        vertical-align: middle;
+      }
+      .dot-grid {
+        background-image: radial-gradient(circle, #1e293b 1px, transparent 1px);
+        background-size: 24px 24px;
+      }
+      .noise-texture {
+        background-image: url("https://www.transparenttextures.com/patterns/carbon-fibre.png");
+        opacity: 0.03;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background text-on-surface font-body-md selection:bg-secondary/30"
+  >
+    <!-- TopNavBar -->
+    <header
+      class="bg-surface-container fixed top-0 w-full border-b border-outline-variant shadow-sm z-50 transition-all duration-200 ease-in-out"
+    >
+      <div
+        class="flex items-center justify-between px-margin-desktop max-w-max-width mx-auto h-16"
+      >
+        <div class="flex items-center gap-8">
+          <span
+            class="font-headline-md text-headline-md font-bold text-on-surface"
+            >Stackly</span
+          >
+          <nav class="hidden md:flex items-center gap-6">
+            <a
+              class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors"
+              href="#"
+              >Products</a
+            >
+            <a
+              class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors"
+              href="#"
+              >Services</a
+            >
+            <a
+              class="font-body-md text-body-md text-secondary font-bold border-b-2 border-secondary pb-1"
+              href="#"
+              >Pricing</a
+            >
+            <a
+              class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors"
+              href="#"
+              >Case Studies</a
+            >
+            <a
+              class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors"
+              href="#"
+              >Blog</a
+            >
+          </nav>
+        </div>
+        <div class="flex items-center gap-4">
+          <button
+            class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors px-4 py-2"
+          >
+            Login
+          </button>
+          <button
+            class="bg-secondary-container text-on-secondary-container font-body-md text-body-md px-6 py-2 rounded transition-all hover:bg-secondary hover:text-on-secondary-fixed"
+          >
+            Start Free Trial
+          </button>
+        </div>
+      </div>
+    </header>
+    <main class="pt-16 min-h-screen relative overflow-hidden">
+      <!-- Ambient Background -->
+      <div class="absolute inset-0 dot-grid -z-10 opacity-40"></div>
+      <!-- 1. Search-centric Hero -->
+      <section
+        class="relative py-24 px-margin-desktop max-w-max-width mx-auto text-center"
+      >
+        <div class="max-w-3xl mx-auto">
+          <h1
+            class="font-headline-xl text-headline-xl md:text-[64px] md:leading-[1.1] mb-6 tracking-tight"
+          >
+            Build with <span class="text-secondary">Stackly</span>
+          </h1>
+          <p class="font-body-lg text-body-lg text-on-surface-variant mb-12">
+            The unified developer platform for high-velocity enterprise
+            automation and workflow orchestration.
+          </p>
+          <div class="relative group">
+            <div
+              class="absolute -inset-1 bg-secondary/20 rounded-xl blur opacity-25 group-focus-within:opacity-50 transition duration-500"
+            ></div>
+            <div
+              class="relative flex items-center bg-surface-container-highest border border-outline-variant rounded-xl overflow-hidden px-6 py-4"
+            >
+              <span
+                class="material-symbols-outlined text-outline mr-4"
+                data-icon="search"
+                >search</span
+              >
+              <input
+                class="bg-transparent border-none focus:ring-0 w-full text-body-lg placeholder:text-outline/60"
+                placeholder="Search documentation, API endpoints, SDKs..."
+                type="text"
+              />
+              <div class="hidden md:flex gap-2 ml-4">
+                <kbd
+                  class="bg-surface-container-low px-2 py-1 rounded text-[10px] text-outline border border-outline-variant font-code-sm"
+                  >CMD</kbd
+                >
+                <kbd
+                  class="bg-surface-container-low px-2 py-1 rounded text-[10px] text-outline border border-outline-variant font-code-sm"
+                  >K</kbd
+                >
+              </div>
+            </div>
+          </div>
+          <div class="mt-6 flex flex-wrap justify-center gap-3">
+            <span
+              class="text-outline text-[12px] font-label-md uppercase tracking-widest"
+              >Popular:</span
+            >
+            <a
+              class="text-secondary hover:underline text-[12px] font-label-md"
+              href="#"
+              >Webhooks guide</a
+            >
+            <a
+              class="text-secondary hover:underline text-[12px] font-label-md"
+              href="#"
+              >Python SDK</a
+            >
+            <a
+              class="text-secondary hover:underline text-[12px] font-label-md"
+              href="#"
+              >Auth flow</a
+            >
+          </div>
+        </div>
+      </section>
+      <!-- 2. Quick Start Guides Grid -->
+      <section class="py-12 px-margin-desktop max-w-max-width mx-auto">
+        <div class="flex items-center justify-between mb-8">
+          <h2 class="font-headline-lg text-headline-lg">Quick Start Guides</h2>
+          <a
+            class="text-secondary flex items-center gap-2 hover:gap-3 transition-all"
+            href="#"
+          >
+            View all guides
+            <span class="material-symbols-outlined" data-icon="arrow_forward"
+              >arrow_forward</span
+            >
+          </a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Card 1 -->
+          <div
+            class="bg-surface-container border border-outline-variant p-6 rounded-lg hover:border-secondary/50 transition-colors group"
+          >
+            <div
+              class="w-12 h-12 bg-secondary/10 flex items-center justify-center rounded-lg mb-4 text-secondary"
+            >
+              <span class="material-symbols-outlined" data-icon="rocket_launch"
+                >rocket_launch</span
+              >
+            </div>
+            <h3 class="font-headline-md text-headline-md mb-2">
+              Getting Started
+            </h3>
+            <p class="text-on-surface-variant mb-4 font-body-md">
+              Set up your workspace and trigger your first workflow in under 5
+              minutes.
+            </p>
+            <div
+              class="h-1 w-0 bg-secondary transition-all group-hover:w-full"
+            ></div>
+          </div>
+          <!-- Card 2 -->
+          <div
+            class="bg-surface-container border border-outline-variant p-6 rounded-lg hover:border-secondary/50 transition-colors group"
+          >
+            <div
+              class="w-12 h-12 bg-tertiary/10 flex items-center justify-center rounded-lg mb-4 text-tertiary"
+            >
+              <span class="material-symbols-outlined" data-icon="key">key</span>
+            </div>
+            <h3 class="font-headline-md text-headline-md mb-2">
+              Authentication
+            </h3>
+            <p class="text-on-surface-variant mb-4 font-body-md">
+              Learn about OAuth2, Personal Access Tokens, and secure secret
+              management.
+            </p>
+            <div
+              class="h-1 w-0 bg-tertiary transition-all group-hover:w-full"
+            ></div>
+          </div>
+          <!-- Card 3 -->
+          <div
+            class="bg-surface-container border border-outline-variant p-6 rounded-lg hover:border-secondary/50 transition-colors group"
+          >
+            <div
+              class="w-12 h-12 bg-primary/10 flex items-center justify-center rounded-lg mb-4 text-primary"
+            >
+              <span class="material-symbols-outlined" data-icon="hub">hub</span>
+            </div>
+            <h3 class="font-headline-md text-headline-md mb-2">
+              Webhooks & Events
+            </h3>
+            <p class="text-on-surface-variant mb-4 font-body-md">
+              Configure real-time event delivery and signature verification
+              logic.
+            </p>
+            <div
+              class="h-1 w-0 bg-primary transition-all group-hover:w-full"
+            ></div>
+          </div>
+        </div>
+      </section>
+      <!-- 3. API Reference Preview (Bento-ish) -->
+      <section class="py-12 px-margin-desktop max-w-max-width mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+          <div
+            class="lg:col-span-7 bg-surface-container-low border border-outline-variant rounded-xl overflow-hidden flex flex-col"
+          >
+            <div
+              class="p-6 border-b border-outline-variant bg-surface-container/50 flex justify-between items-center"
+            >
+              <div>
+                <h2 class="font-headline-lg text-headline-lg">API Reference</h2>
+                <p class="text-on-surface-variant font-body-md">
+                  RESTful API documentation for core services.
+                </p>
+              </div>
+              <div class="flex gap-2">
+                <span
+                  class="px-2 py-1 bg-surface-container-highest rounded font-code-sm text-secondary"
+                  >v2.4.0</span
+                >
+              </div>
+            </div>
+            <div class="p-0 flex-1 grid grid-cols-1 md:grid-cols-2">
+              <div
+                class="p-6 border-r border-outline-variant border-b md:border-b-0"
+              >
+                <ul class="space-y-4">
+                  <li
+                    class="group flex items-center justify-between cursor-pointer"
+                  >
+                    <div class="flex items-center gap-3">
+                      <span
+                        class="text-[10px] font-bold text-emerald-400 bg-emerald-400/10 px-1.5 py-0.5 rounded"
+                        >GET</span
+                      >
+                      <span
+                        class="font-code-sm text-on-surface group-hover:text-secondary"
+                        >/v1/workflows</span
+                      >
+                    </div>
+                    <span
+                      class="material-symbols-outlined text-[16px] text-outline opacity-0 group-hover:opacity-100 transition-opacity"
+                      data-icon="chevron_right"
+                      >chevron_right</span
+                    >
+                  </li>
+                  <li
+                    class="group flex items-center justify-between cursor-pointer"
+                  >
+                    <div class="flex items-center gap-3">
+                      <span
+                        class="text-[10px] font-bold text-secondary bg-secondary/10 px-1.5 py-0.5 rounded"
+                        >POST</span
+                      >
+                      <span
+                        class="font-code-sm text-on-surface group-hover:text-secondary"
+                        >/v1/executions</span
+                      >
+                    </div>
+                    <span
+                      class="material-symbols-outlined text-[16px] text-outline opacity-0 group-hover:opacity-100 transition-opacity"
+                      data-icon="chevron_right"
+                      >chevron_right</span
+                    >
+                  </li>
+                  <li
+                    class="group flex items-center justify-between cursor-pointer"
+                  >
+                    <div class="flex items-center gap-3">
+                      <span
+                        class="text-[10px] font-bold text-amber-400 bg-amber-400/10 px-1.5 py-0.5 rounded"
+                        >PUT</span
+                      >
+                      <span
+                        class="font-code-sm text-on-surface group-hover:text-secondary"
+                        >/v1/nodes/{id}</span
+                      >
+                    </div>
+                    <span
+                      class="material-symbols-outlined text-[16px] text-outline opacity-0 group-hover:opacity-100 transition-opacity"
+                      data-icon="chevron_right"
+                      >chevron_right</span
+                    >
+                  </li>
+                </ul>
+                <button
+                  class="mt-8 text-secondary font-label-md flex items-center gap-2"
+                >
+                  EXPLORE ALL ENDPOINTS
+                  <span
+                    class="material-symbols-outlined text-[18px]"
+                    data-icon="open_in_new"
+                    >open_in_new</span
+                  >
+                </button>
+              </div>
+              <div class="bg-surface-container-highest p-6 relative">
+                <div class="absolute inset-0 noise-texture"></div>
+                <div class="relative">
+                  <div class="flex items-center justify-between mb-4">
+                    <span class="text-[10px] font-code-sm text-outline"
+                      >RESPONSE PREVIEW</span
+                    >
+                    <span
+                      class="material-symbols-outlined text-outline text-[16px]"
+                      data-icon="content_copy"
+                      >content_copy</span
+                    >
+                  </div>
+                  <pre
+                    class="font-code-sm text-[12px] text-on-secondary-container/80 space-y-1"
+                  ><span class="text-tertiary">{</span>
+  <span class="text-secondary">"id"</span>: <span class="text-primary">"exec_82kL9"</span>,
+  <span class="text-secondary">"status"</span>: <span class="text-primary">"completed"</span>,
+  <span class="text-secondary">"timestamp"</span>: <span class="text-primary">"2024-05-20T10:44:02Z"</span>,
+  <span class="text-secondary">"outputs"</span>: <span class="text-tertiary">{</span>
+    <span class="text-secondary">"status_code"</span>: <span class="text-primary">200</span>
+  <span class="text-tertiary">}</span>
+<span class="text-tertiary">}</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 4. SDK Downloads -->
+          <div
+            class="lg:col-span-5 bg-surface-container border border-outline-variant rounded-xl p-8 flex flex-col justify-between"
+          >
+            <div>
+              <h2 class="font-headline-lg text-headline-lg mb-2">
+                SDKs & Tools
+              </h2>
+              <p class="text-on-surface-variant font-body-md mb-8">
+                Official libraries to integrate Stackly into your stack faster.
+              </p>
+              <div class="grid grid-cols-2 gap-4">
+                <a
+                  class="flex items-center gap-3 p-4 bg-surface-container-high border border-outline-variant rounded hover:bg-surface-bright transition-colors group"
+                  href="#"
+                >
+                  <img
+                    class="w-6 h-6 invert opacity-80 group-hover:opacity-100"
+                    data-alt="Official Python logo stylized for a high-tech developer portal. Minimalist white line art on a dark background showing the intertwined snakes. Professional and clean corporate aesthetic."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5CknqAl-ZaNvXt0ZK2ZDLzSKkogP24iKxXobOMVK1pqJe23XC6pJxPWKOqmIQDYRgYxV10om_aH25nqnDwnoJWUUQ_x_LHiT1gWPaSg-AtYkc4sruP3nQjaUNGFJQ-hJL4GeF2QI4E3PiWSPzGphF3MqNbEsn3nOrFJqdnC4axskO55bC2hxtvYIATEMhKMFY--uFaYaXqp_BsvGc113GmLkaZvKbncgXkNj9hL8cQJCSCjXscK_DIZO6ftiuAg24GwIDszuhSg9ku"
+                  />
+                  <span class="font-code-sm text-on-surface">Python</span>
+                </a>
+                <a
+                  class="flex items-center gap-3 p-4 bg-surface-container-high border border-outline-variant rounded hover:bg-surface-bright transition-colors group"
+                  href="#"
+                >
+                  <img
+                    class="w-6 h-6 invert opacity-80 group-hover:opacity-100"
+                    data-alt="Official Node.js logo icon in a minimalist white monochrome style for a dark mode interface. Hexagonal shape with 'Node' letters, clean and professional look for a tech-noir developer ecosystem."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8f53vla3uPLKDyhFa2rzITUonedfPl7fVrmBlwdvNsrP7gkn4WhR0mAP1RHO5LASTI6eOeBzZW5OcibvpIhcKzh-SFobWHoX6k2b3aNtWv9BPzRvFisENS7wSd6I1IoECAchPk8HYsQG_SIksiatWCCKIQj-irCcz9QlB3G6Rzfn2SbBqRbQ8PBJfC1MzNSaJe80E9ngt5vzecImWy20uD6gP1HtF9SOlAAoXnSjTzpv4LvJvA7yTi1tCvtI9rJ0-zOiDj4TAe2z-"
+                  />
+                  <span class="font-code-sm text-on-surface">Node.js</span>
+                </a>
+                <a
+                  class="flex items-center gap-3 p-4 bg-surface-container-high border border-outline-variant rounded hover:bg-surface-bright transition-colors group"
+                  href="#"
+                >
+                  <img
+                    class="w-6 h-6 invert opacity-80 group-hover:opacity-100"
+                    data-alt="Go programming language logo, minimalist vector icon in white on a dark navy background. Professional tech branding for a modern developer portal software development kit section."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbJA0sKVjdQTIA3D_jOj94ynWlDvPuoJHhjD0QkmlTLJQHZQtVqz8TaozbwzxDJl-WuefgV_OM3v24m4ICOG68ZCqCu2dQskUw-sK1eLKUOCyrVumm2k8p1phHyzUAa8Ss6Wi0xERBhnTgBPt59phXTN5OMaQ-CRHOJJTnMO9coGi7yRw2PJTD7umbAOob4CFE2SPj4e9pS0H0A9-yYt-vm8klUlrX0paKadDx6yNnghA-qgqF50foHzRKwMiT9vd3xxM4E6_pl_ct"
+                  />
+                  <span class="font-code-sm text-on-surface">Golang</span>
+                </a>
+                <a
+                  class="flex items-center gap-3 p-4 bg-surface-container-high border border-outline-variant rounded hover:bg-surface-bright transition-colors group"
+                  href="#"
+                >
+                  <img
+                    class="w-6 h-6 invert opacity-80 group-hover:opacity-100"
+                    data-alt="Rust programming language logo showing the characteristic gear shape in a minimalist white monochrome aesthetic. High-contrast and sharp vector icon for a technical enterprise developer platform."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPBqlYmciUQBNOrnQlzo3ftqm0Jj5Sf9zEHlPApapd-rWsAHREzkweiTw-jQwMEv8AT8IPSw-21OcRctkHrOuKnzIv30xAv_3JOIF5Qrywe6LTX7qOwG_QuedaC25S1uhW2Ua5UkgzjoVS_Rykzoe6jwpOEvO1k37G6FGB-E-2y7CpcOpVTdqFDsOxYVh-5Lvho920z0iLNrB_8IXvL3yKHMecDesc_xYnCsHCIj34K1NCaP3uwHc3UMeErPsTJKD_sy5Fc5-SwQKL"
+                  />
+                  <span class="font-code-sm text-on-surface">Rust</span>
+                </a>
+              </div>
+            </div>
+            <div class="mt-8 pt-6 border-t border-outline-variant">
+              <div
+                class="flex items-center gap-4 bg-surface-container-low p-4 rounded border border-outline-variant"
+              >
+                <span
+                  class="material-symbols-outlined text-secondary"
+                  data-icon="terminal"
+                  >terminal</span
+                >
+                <div class="flex-1 overflow-hidden">
+                  <div
+                    class="text-[10px] text-outline font-label-md mb-1 uppercase"
+                  >
+                    Install CLI
+                  </div>
+                  <div
+                    class="font-code-sm text-on-secondary-container truncate"
+                  >
+                    $ brew install Stackly-cli
+                  </div>
+                </div>
+                <span
+                  class="material-symbols-outlined text-outline cursor-pointer hover:text-on-surface"
+                  data-icon="content_copy"
+                  >content_copy</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- 5. Community & 6. Status Dashboard Snippet -->
+      <section class="py-12 px-margin-desktop max-w-max-width mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Community Teaser -->
+          <div
+            class="bg-gradient-to-br from-surface-container to-surface-container-high border border-outline-variant rounded-xl p-8 relative overflow-hidden group"
+          >
+            <div
+              class="absolute top-0 right-0 w-32 h-32 bg-secondary/10 blur-3xl rounded-full -mr-16 -mt-16 group-hover:bg-secondary/20 transition-all"
+            ></div>
+            <h2
+              class="font-headline-lg text-headline-lg mb-4 flex items-center gap-3"
+            >
+              <span
+                class="material-symbols-outlined text-secondary"
+                data-icon="forum"
+                >forum</span
+              >
+              Developer Community
+            </h2>
+            <p
+              class="text-on-surface-variant mb-6 font-body-md leading-relaxed"
+            >
+              Join 50k+ developers discussing automation patterns, custom node
+              builds, and workflow optimization on our forums.
+            </p>
+            <div class="space-y-3 mb-8">
+              <div
+                class="flex items-center gap-3 bg-surface-container-lowest/50 p-3 rounded border border-outline-variant/30"
+              >
+                <div
+                  class="w-8 h-8 rounded-full bg-surface-bright flex items-center justify-center text-[10px] font-bold"
+                >
+                  JD
+                </div>
+                <div class="text-body-md text-on-surface-variant">
+                  <span class="text-on-surface font-semibold">JaneDoe:</span>
+                  Best practices for massive fan-out...
+                </div>
+              </div>
+              <div
+                class="flex items-center gap-3 bg-surface-container-lowest/50 p-3 rounded border border-outline-variant/30"
+              >
+                <div
+                  class="w-8 h-8 rounded-full bg-surface-bright flex items-center justify-center text-[10px] font-bold"
+                >
+                  MS
+                </div>
+                <div class="text-body-md text-on-surface-variant">
+                  <span class="text-on-surface font-semibold">MikeS:</span>
+                  Stackly vs. Temporal for long-running...
+                </div>
+              </div>
+            </div>
+            <button
+              class="border border-secondary text-secondary font-body-md px-6 py-2 rounded hover:bg-secondary/10 transition-colors"
+            >
+              Go to Forums
+            </button>
+          </div>
+          <!-- System Status Dashboard -->
+          <div
+            class="bg-surface-container border border-outline-variant rounded-xl p-8"
+          >
+            <div class="flex items-center justify-between mb-8">
+              <h2
+                class="font-headline-lg text-headline-lg flex items-center gap-3"
+              >
+                <span
+                  class="material-symbols-outlined text-emerald-400"
+                  data-icon="cloud_done"
+                  >cloud_done</span
+                >
+                System Status
+              </h2>
+              <span
+                class="text-[11px] font-label-md text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded border border-emerald-400/20"
+                >ALL SYSTEMS OPERATIONAL</span
+              >
+            </div>
+            <div class="space-y-6">
+              <div class="space-y-2">
+                <div
+                  class="flex justify-between text-[11px] font-label-md text-outline"
+                >
+                  <span>API GATEWAY</span>
+                  <span class="text-on-surface">99.99%</span>
+                </div>
+                <div class="flex gap-1 h-8">
+                  <!-- Status bars -->
+                  <div class="flex-1 bg-emerald-500/80 rounded-[1px]"></div>
+                  <div class="flex-1 bg-emerald-500/80 rounded-[1px]"></div>
+                  <div class="flex-1 bg-emerald-500/80 rounded-[1px]"></div>
+                  <div class="flex-1 bg-emerald-500/80 rounded-[1px]"></div>
+                  <div class="flex-1 bg-emerald-500/80 rounded-[1px]"></div>
+                  <div class="flex-1 bg-emerald-500/80 rounded-[1px]"></div>
+                  <div class="flex-1 bg-amber-500/80 rounded-[1px]"></div>
+                  <div class="flex-1 bg-emerald-500/80 rounded-[1px]"></div>
+                  <div class="flex-1 bg-emerald-500/80 rounded-[1px]"></div>
+                  <div class="flex-1 bg-emerald-500/80 rounded-[1px]"></div>
+                  <div class="flex-1 bg-emerald-500/80 rounded-[1px]"></div>
+                  <div class="flex-1 bg-emerald-500/80 rounded-[1px]"></div>
+                  <div class="flex-1 bg-emerald-500/80 rounded-[1px]"></div>
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+                <div
+                  class="p-4 bg-surface-container-high rounded border border-outline-variant/30"
+                >
+                  <div class="text-[10px] font-label-md text-outline mb-1">
+                    GLOBAL LATENCY
+                  </div>
+                  <div class="text-xl font-code-sm text-secondary">32ms</div>
+                </div>
+                <div
+                  class="p-4 bg-surface-container-high rounded border border-outline-variant/30"
+                >
+                  <div class="text-[10px] font-label-md text-outline mb-1">
+                    UPTIME (30D)
+                  </div>
+                  <div class="text-xl font-code-sm text-secondary">100%</div>
+                </div>
+              </div>
+            </div>
+            <button
+              class="mt-8 text-outline hover:text-on-surface font-body-md text-[13px] flex items-center gap-2"
+            >
+              View incident history
+              <span
+                class="material-symbols-outlined text-[16px]"
+                data-icon="history"
+                >history</span
+              >
+            </button>
+          </div>
+        </div>
+      </section>
+      <!-- 7. Developer Support Link -->
+      <section class="py-12 px-margin-desktop max-w-max-width mx-auto mb-20">
+        <div
+          class="bg-surface-container-highest rounded-2xl p-12 text-center border border-outline-variant/50 relative overflow-hidden"
+        >
+          <div class="relative z-10">
+            <h2 class="font-headline-lg text-headline-lg mb-4">
+              Can't find what you're looking for?
+            </h2>
+            <p
+              class="text-on-surface-variant font-body-md mb-8 max-w-xl mx-auto"
+            >
+              Our engineering support team is available 24/7 for Enterprise
+              customers and during business hours for all developers.
+            </p>
+            <div class="flex flex-col md:flex-row justify-center gap-4">
+              <a
+                class="bg-on-surface text-surface px-8 py-3 rounded-lg font-bold flex items-center justify-center gap-2 hover:bg-secondary transition-colors"
+                href="#"
+              >
+                <span
+                  class="material-symbols-outlined"
+                  data-icon="support_agent"
+                  >support_agent</span
+                >
+                Contact Developer Support
+              </a>
+              <a
+                class="bg-surface border border-outline-variant text-on-surface px-8 py-3 rounded-lg font-bold flex items-center justify-center gap-2 hover:border-secondary transition-colors"
+                href="#"
+              >
+                <span
+                  class="material-symbols-outlined"
+                  data-icon="calendar_month"
+                  >calendar_month</span
+                >
+                Book a Tech Review
+              </a>
+            </div>
+          </div>
+          <!-- Abstract BG decoration -->
+          <div
+            class="absolute -bottom-10 -right-10 w-64 h-64 bg-secondary/5 blur-3xl rounded-full"
+          ></div>
+          <div
+            class="absolute -top-10 -left-10 w-48 h-48 bg-tertiary/5 blur-3xl rounded-full"
+          ></div>
+        </div>
+      </section>
+    </main>
+    <!-- Footer -->
+    <footer
+      class="bg-surface-container-low border-t border-outline-variant transition-opacity duration-150"
+    >
+      <div
+        class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-gutter px-margin-desktop py-12 max-w-max-width mx-auto"
+      >
+        <div class="col-span-2">
+          <span
+            class="font-headline-sm text-headline-sm font-bold text-on-surface block mb-4"
+            >Stackly</span
+          >
+          <p class="text-on-surface-variant font-body-md max-w-xs mb-6">
+            Empowering developers to automate complex infrastructures with
+            reliability and precision.
+          </p>
+        </div>
+        <div>
+          <h4 class="text-secondary font-bold font-body-md mb-4">Product</h4>
+          <ul class="space-y-2">
+            <li>
+              <a
+                class="font-body-md text-on-surface-variant hover:text-primary transition-colors hover:underline"
+                href="#"
+                >Features</a
+              >
+            </li>
+            <li>
+              <a
+                class="font-body-md text-on-surface-variant hover:text-primary transition-colors hover:underline"
+                href="#"
+                >Integrations</a
+              >
+            </li>
+            <li>
+              <a
+                class="font-body-md text-on-surface-variant hover:text-primary transition-colors hover:underline"
+                href="#"
+                >Pricing</a
+              >
+            </li>
+            <li>
+              <a
+                class="font-body-md text-on-surface-variant hover:text-primary transition-colors hover:underline"
+                href="#"
+                >Security</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-secondary font-bold font-body-md mb-4">Resources</h4>
+          <ul class="space-y-2">
+            <li>
+              <a
+                class="font-body-md text-on-surface-variant hover:text-primary transition-colors hover:underline"
+                href="#"
+                >Documentation</a
+              >
+            </li>
+            <li>
+              <a
+                class="font-body-md text-on-surface-variant hover:text-primary transition-colors hover:underline"
+                href="#"
+                >API Reference</a
+              >
+            </li>
+            <li>
+              <a
+                class="font-body-md text-on-surface-variant hover:text-primary transition-colors hover:underline"
+                href="#"
+                >Community</a
+              >
+            </li>
+            <li>
+              <a
+                class="font-body-md text-on-surface-variant hover:text-primary transition-colors hover:underline"
+                href="#"
+                >Case Studies</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-secondary font-bold font-body-md mb-4">Company</h4>
+          <ul class="space-y-2">
+            <li>
+              <a
+                class="font-body-md text-on-surface-variant hover:text-primary transition-colors hover:underline"
+                href="#"
+                >About Us</a
+              >
+            </li>
+            <li>
+              <a
+                class="font-body-md text-on-surface-variant hover:text-primary transition-colors hover:underline"
+                href="#"
+                >Blog</a
+              >
+            </li>
+            <li>
+              <a
+                class="font-body-md text-on-surface-variant hover:text-primary transition-colors hover:underline"
+                href="#"
+                >Careers</a
+              >
+            </li>
+            <li>
+              <a
+                class="font-body-md text-on-surface-variant hover:text-primary transition-colors hover:underline"
+                href="#"
+                >Contact</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-secondary font-bold font-body-md mb-4">Legal</h4>
+          <ul class="space-y-2">
+            <li>
+              <a
+                class="font-body-md text-on-surface-variant hover:text-primary transition-colors hover:underline"
+                href="#"
+                >Privacy Policy</a
+              >
+            </li>
+            <li>
+              <a
+                class="font-body-md text-on-surface-variant hover:text-primary transition-colors hover:underline"
+                href="#"
+                >Terms of Service</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div
+        class="px-margin-desktop py-6 border-t border-outline-variant max-w-max-width mx-auto flex flex-col md:flex-row justify-between items-center gap-4"
+      >
+        <p class="text-on-surface-variant font-body-md">
+          © 2024 Stackly Automation Inc. All rights reserved.
+        </p>
+        <div class="flex gap-6">
+          <a
+            class="material-symbols-outlined text-on-surface-variant hover:text-secondary"
+            data-icon="brand_awareness"
+            href="#"
+            >brand_awareness</a
+          >
+          <a
+            class="material-symbols-outlined text-on-surface-variant hover:text-secondary"
+            data-icon="monitoring"
+            href="#"
+            >monitoring</a
+          >
+          <a
+            class="material-symbols-outlined text-on-surface-variant hover:text-secondary"
+            data-icon="alternate_email"
+            href="#"
+            >alternate_email</a
+          >
+        </div>
+      </div>
+    </footer>
+    <script>
+      // Micro-interactions
+      document.querySelectorAll(".group").forEach((el) => {
+        el.addEventListener("mouseenter", () => {
+          // Subtle interaction logic if needed
+        });
+      });
+    </script>
+  </body>
+</html>

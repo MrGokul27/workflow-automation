@@ -1,0 +1,742 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>About Stackly | Architects of Automation</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <!-- Tailwind Configuration -->
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-low": "#0d1c2d",
+              outline: "#909097",
+              "on-secondary-fixed": "#001e2c",
+              "tertiary-container": "#00055c",
+              "surface-container-high": "#1c2b3c",
+              primary: "#bec6e0",
+              "on-background": "#d4e4fa",
+              "primary-fixed-dim": "#bec6e0",
+              surface: "#051424",
+              "on-secondary": "#00354a",
+              "outline-variant": "#45464d",
+              "on-error": "#690005",
+              "on-secondary-container": "#00374d",
+              tertiary: "#bdc2ff",
+              background: "#051424",
+              "on-tertiary-fixed": "#000767",
+              "inverse-on-surface": "#233143",
+              "surface-container": "#122131",
+              "inverse-surface": "#d4e4fa",
+              "on-surface": "#d4e4fa",
+              "on-primary-fixed-variant": "#3f465c",
+              "on-error-container": "#ffdad6",
+              "secondary-container": "#00a6e0",
+              "on-tertiary-container": "#6c77e1",
+              "surface-container-highest": "#273647",
+              "secondary-fixed-dim": "#7bd0ff",
+              "surface-variant": "#273647",
+              error: "#ffb4ab",
+              "surface-bright": "#2c3a4c",
+              secondary: "#7bd0ff",
+              "secondary-fixed": "#c4e7ff",
+              "on-primary": "#283044",
+              "inverse-primary": "#565e74",
+              "on-surface-variant": "#c6c6cd",
+              "surface-dim": "#051424",
+              "on-primary-fixed": "#131b2e",
+              "surface-tint": "#bec6e0",
+              "tertiary-fixed": "#e0e0ff",
+              "surface-container-lowest": "#010f1f",
+              "tertiary-fixed-dim": "#bdc2ff",
+              "primary-fixed": "#dae2fd",
+              "on-secondary-fixed-variant": "#004c69",
+              "primary-container": "#0f172a",
+              "error-container": "#93000a",
+              "on-primary-container": "#798098",
+              "on-tertiary-fixed-variant": "#2f3aa3",
+              "on-tertiary": "#131e8c",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              unit: "4px",
+              gutter: "16px",
+              "max-width": "1440px",
+              "margin-desktop": "32px",
+              "margin-mobile": "16px",
+            },
+            fontFamily: {
+              "body-lg": ["Inter"],
+              "headline-xl": ["Inter"],
+              "headline-md": ["Inter"],
+              "headline-lg": ["Inter"],
+              "headline-xl-mobile": ["Inter"],
+              "body-md": ["Inter"],
+              "code-sm": ["JetBrains Mono"],
+              "label-md": ["Inter"],
+            },
+            fontSize: {
+              "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "headline-xl": [
+                "36px",
+                {
+                  lineHeight: "44px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "headline-md": [
+                "20px",
+                { lineHeight: "28px", fontWeight: "600" },
+              ],
+              "headline-lg": [
+                "24px",
+                {
+                  lineHeight: "32px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-xl-mobile": [
+                "28px",
+                {
+                  lineHeight: "34px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+              "code-sm": ["13px", { lineHeight: "18px", fontWeight: "400" }],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "600",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        background-color: #051424;
+        color: #d4e4fa;
+        font-family: "Inter", sans-serif;
+      }
+      .dot-grid {
+        background-image: radial-gradient(#1e293b 1px, transparent 1px);
+        background-size: 24px 24px;
+      }
+      .glass-card {
+        background: rgba(18, 33, 49, 0.7);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(69, 70, 77, 0.3);
+      }
+      .timeline-line {
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          #7bd0ff,
+          transparent
+        );
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: #051424;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #45464d;
+        border-radius: 10px;
+      }
+    </style>
+    <!-- Link Common Stylesheet -->
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <!-- Link Common Script -->
+    <script src="../assets/js/script.js" defer></script>
+  </head>
+  <body
+    data-page="about"
+    class="selection:bg-secondary/30 selection:text-secondary"
+  >
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+    <main class="overflow-x-hidden">
+      <!-- Section 1: Hero with Mission Statement -->
+      <section
+        class="relative min-h-[819px] flex items-center justify-center py-24 dot-grid overflow-hidden"
+      >
+        <div class="relative z-10 max-w-4xl px-margin-desktop text-center">
+          <div
+            class="inline-flex items-center px-3 py-1 rounded-full bg-secondary/10 border border-secondary/20 text-secondary font-label-md text-label-md mb-8"
+          >
+            <span class="material-symbols-outlined mr-2 !text-[14px]"
+              >rocket_launch</span
+            >
+            FOUNDED 2018
+          </div>
+          <h1
+            class="font-headline-xl text-headline-xl md:text-[64px] md:leading-[1.1] mb-8 tracking-tighter"
+          >
+            Engineering the future of
+            <span class="text-secondary">autonomous enterprise logic.</span>
+          </h1>
+          <p
+            class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-12 leading-relaxed"
+          >
+            Stackly exists to bridge the gap between complex DevOps requirements
+            and operational simplicity. Our mission is to empower technical
+            teams with a visual reasoning engine that eliminates manual toil and
+            accelerates innovation velocity.
+          </p>
+          <div
+            class="grid grid-cols-2 md:grid-cols-4 gap-8 py-12 border-t border-outline-variant/30"
+          >
+            <div>
+              <div class="text-headline-lg font-headline-lg text-secondary">
+                500M+
+              </div>
+              <div class="text-label-md font-label-md text-outline">
+                NODES DEPLOYED
+              </div>
+            </div>
+            <div>
+              <div class="text-headline-lg font-headline-lg text-secondary">
+                99.99%
+              </div>
+              <div class="text-label-md font-label-md text-outline">
+                UPTIME SLA
+              </div>
+            </div>
+            <div>
+              <div class="text-headline-lg font-headline-lg text-secondary">
+                40+
+              </div>
+              <div class="text-label-md font-label-md text-outline">
+                COUNTRIES
+              </div>
+            </div>
+            <div>
+              <div class="text-headline-lg font-headline-lg text-secondary">
+                150+
+              </div>
+              <div class="text-label-md font-label-md text-outline">
+                ENGINEERS
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Section 2: Our Story Timeline -->
+      <section class="py-24 bg-surface-container-lowest">
+        <div class="max-w-max-width mx-auto px-margin-desktop">
+          <div class="mb-16">
+            <h2 class="font-headline-lg text-headline-lg mb-4">
+              Our Evolution
+            </h2>
+            <p class="text-on-surface-variant font-body-md max-w-xl">
+              From a garage-born kernel of an idea to a global automation
+              standard.
+            </p>
+          </div>
+          <div class="relative">
+            <!-- Vertical Line -->
+            <div
+              class="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-px timeline-line opacity-30"
+            ></div>
+            <div class="space-y-24">
+              <!-- Year 1 -->
+              <div
+                class="relative flex flex-col md:flex-row items-center md:justify-between group"
+              >
+                <div class="md:w-[45%] mb-8 md:mb-0 text-left md:text-right">
+                  <div
+                    class="font-headline-md text-headline-md text-secondary mb-2"
+                  >
+                    2018: The Kernel
+                  </div>
+                  <p class="text-on-surface-variant font-body-md">
+                    Stackly was founded by a team of three ex-AWS engineers
+                    frustrated with the fragility of custom scripts. We built
+                    the first prototype of our visual logic engine in a small
+                    shared office in Berlin.
+                  </p>
+                </div>
+                <div
+                  class="absolute left-[-4px] md:left-1/2 transform md:-translate-x-1/2 w-2 h-2 rounded-full bg-secondary shadow-[0_0_10px_rgba(123,208,255,0.8)] z-10"
+                ></div>
+                <div class="hidden md:block md:w-[45%]"></div>
+              </div>
+              <!-- Year 2 -->
+              <div
+                class="relative flex flex-col md:flex-row items-center md:justify-between group"
+              >
+                <div class="hidden md:block md:w-[45%]"></div>
+                <div
+                  class="absolute left-[-4px] md:left-1/2 transform md:-translate-x-1/2 w-2 h-2 rounded-full bg-secondary shadow-[0_0_10px_rgba(123,208,255,0.8)] z-10"
+                ></div>
+                <div class="md:w-[45%] mb-8 md:mb-0">
+                  <div
+                    class="font-headline-md text-headline-md text-secondary mb-2"
+                  >
+                    2020: Series A &amp; Scale
+                  </div>
+                  <p class="text-on-surface-variant font-body-md">
+                    Despite a global shift to remote work, our tool became
+                    essential for distributed teams. We closed $25M in funding
+                    to expand our cloud-native automation capabilities.
+                  </p>
+                </div>
+              </div>
+              <!-- Year 3 -->
+              <div
+                class="relative flex flex-col md:flex-row items-center md:justify-between group"
+              >
+                <div class="md:w-[45%] mb-8 md:mb-0 text-left md:text-right">
+                  <div
+                    class="font-headline-md text-headline-md text-secondary mb-2"
+                  >
+                    2023: Enterprise Standard
+                  </div>
+                  <p class="text-on-surface-variant font-body-md">
+                    Stackly is now deployed across 30% of Fortune 500 tech
+                    stacks, managing billions of production events every day
+                    with military-grade precision.
+                  </p>
+                </div>
+                <div
+                  class="absolute left-[-4px] md:left-1/2 transform md:-translate-x-1/2 w-2 h-2 rounded-full bg-secondary shadow-[0_0_10px_rgba(123,208,255,0.8)] z-10"
+                ></div>
+                <div class="hidden md:block md:w-[45%]"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Section 3: Leadership Team -->
+      <section class="py-24 bg-surface">
+        <div class="max-w-max-width mx-auto px-margin-desktop">
+          <div class="text-center mb-16">
+            <h2 class="font-headline-lg text-headline-lg mb-4">Leadership</h2>
+            <p class="text-on-surface-variant font-body-md">
+              Guided by decades of experience in distributed systems and
+              software architecture.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Leader 1 -->
+            <div
+              class="glass-card group hover:border-secondary/50 transition-all duration-300 rounded-xl overflow-hidden"
+            >
+              <div
+                class="aspect-square relative overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500"
+              >
+                <img
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  data-alt="A professional headshot of a female tech executive in her 40s with a confident expression, wearing a dark navy blazer. The background is a minimalist, tech-noir inspired studio with soft blue ambient lighting. High-end editorial photography style, sharp focus, cinematic lighting."
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBf4vQjqUyxfJTjlhirBjPNz7KpLt-JvjV7qkY3U3AIIlmT03Pnoc14VhmJai0y-Bs_THzC3ruG2AzQTYTbBxonIqv_Yfwh9tObuWgfEJ1KtvravCPo2xyNwku-AE1jeSC4nazQLDwko5gg-i4AdRZNAl0W_vG0wiMZ03xJXaGMtw8IIRwQWpo8LcI27ERD0HjMqM5ERYh6WUdiAlM225qQ57_sVFy0g23UbyzLbiE5ZqjE-liiTnBmcmitlUBocqZM18qUdKwZLhly"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent opacity-60"
+                ></div>
+              </div>
+              <div class="p-6">
+                <h3 class="font-headline-md text-headline-md text-secondary">
+                  Dr. Elena Vance
+                </h3>
+                <p class="font-label-md text-label-md text-outline mb-4">
+                  CHIEF EXECUTIVE OFFICER
+                </p>
+                <p
+                  class="font-body-md text-body-md text-on-surface-variant line-clamp-3"
+                >
+                  Former VP of Engineering at a top-tier cloud provider, Elena
+                  holds a PhD in Distributed Systems from MIT.
+                </p>
+              </div>
+            </div>
+            <!-- Leader 2 -->
+            <div
+              class="glass-card group hover:border-secondary/50 transition-all duration-300 rounded-xl overflow-hidden"
+            >
+              <div
+                class="aspect-square relative overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500"
+              >
+                <img
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  data-alt="A professional headshot of a male tech leader in his late 30s with short hair and a focused look, wearing a charcoal grey sweater. The setting is a modern architectural space with clean glass lines and dark accents. The lighting is sophisticated and directional, emphasizing the corporate modern aesthetic."
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTplonXY6so3tEwwWGGVOiaDroSDcJHrrHSgvFpsYxqb6g97uaQTd2kE31rPUeDZTeDsjVq-HYu4w5zDN8--rlpxQH2lyMUK61cCe2e7PH4-P8R2V9ZV5uQpEb-akNnb6XoQ3WruZ1kjJil_FrobvMsC-o208Xs5e6XJy7rEFxEqC8obvUAGkZvuj10s9mIfTBPpimSHS7u0mLqojy0Swqt2ZoWEQhBdyeoNLDeSpGIFk4PelAj-zGNjurtD9_D-2Ypc4DqH6xoQ6P"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent opacity-60"
+                ></div>
+              </div>
+              <div class="p-6">
+                <h3 class="font-headline-md text-headline-md text-secondary">
+                  Marcus Thorne
+                </h3>
+                <p class="font-label-md text-label-md text-outline mb-4">
+                  CHIEF TECHNOLOGY OFFICER
+                </p>
+                <p
+                  class="font-body-md text-body-md text-on-surface-variant line-clamp-3"
+                >
+                  Architect of the Stackly kernel and author of 'The Logic
+                  Mesh'. Marcus previously led reliability teams at Netflix.
+                </p>
+              </div>
+            </div>
+            <!-- Leader 3 -->
+            <div
+              class="glass-card group hover:border-secondary/50 transition-all duration-300 rounded-xl overflow-hidden"
+            >
+              <div
+                class="aspect-square relative overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500"
+              >
+                <img
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  data-alt="A professional portrait of a female operations executive in her early 40s, looking composed and authoritative. She is wearing a modern black turtleneck against a dark, textured background with subtle deep blue lens flares. Professional corporate portraiture with a sharp, high-tech edge."
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjClbadPjh3OXxOtijb576a-vUI5_gdP14983YqYAqMhNcShL3onfeFU6qo8kqz0oSSyyddvPBbK4v3YHl8MI9lpbSdeQsHa8YrvyGxm1ktPNovQMcIUQBNOrnQlzo3ftqm0Jj5Sf9zEHlPApapd-rWsAHREzkweiTw-wuJmTmI2_ai7JefEzUQBNOrnQlzo3ftqm0Jj5Sf9zEHlPApapd-rWsAHREzkweiTw-9lZbYo4vmVcpagjWcj6l30BbeHJfdMOA9D4q966a"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent opacity-60"
+                ></div>
+              </div>
+              <div class="p-6">
+                <h3 class="font-headline-md text-headline-md text-secondary">
+                  Sarah Jenkins
+                </h3>
+                <p class="font-label-md text-label-md text-outline mb-4">
+                  CHIEF OPERATING OFFICER
+                </p>
+                <p
+                  class="font-body-md text-body-md text-on-surface-variant line-clamp-3"
+                >
+                  Expert in enterprise scaling, Sarah led international
+                  expansion for three successful SaaS unicorns.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Section 4: Core Values -->
+      <section
+        class="py-24 bg-surface-container-low border-y border-outline-variant/30"
+      >
+        <div class="max-w-max-width mx-auto px-margin-desktop">
+          <div class="text-center mb-16">
+            <span class="section-badge">Our DNA</span>
+            <h2 class="font-headline-lg text-headline-lg mt-4">
+              What We Stand For
+            </h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div class="flex flex-col gap-6">
+              <div
+                class="w-12 h-12 rounded bg-secondary/10 flex items-center justify-center border border-secondary/20"
+              >
+                <span class="material-symbols-outlined text-secondary"
+                  >auto_awesome</span
+                >
+              </div>
+              <h3 class="font-headline-lg text-headline-lg">Innovation</h3>
+              <p class="font-body-md text-on-surface-variant leading-relaxed">
+                We don't just solve existing problems; we anticipate the
+                architectural shifts of tomorrow. We foster a culture of bold
+                experimentation where no legacy constraint is permanent.
+              </p>
+            </div>
+            <div class="flex flex-col gap-6">
+              <div
+                class="w-12 h-12 rounded bg-secondary/10 flex items-center justify-center border border-secondary/20"
+              >
+                <span class="material-symbols-outlined text-secondary"
+                  >biotech</span
+                >
+              </div>
+              <h3 class="font-headline-lg text-headline-lg">Precision</h3>
+              <p class="font-body-md text-on-surface-variant leading-relaxed">
+                In enterprise automation, "good enough" is a failure. We obsess
+                over the micro-seconds and the edge cases, ensuring that every
+                flow executes with mathematical certainty.
+              </p>
+            </div>
+            <div class="flex flex-col gap-6">
+              <div
+                class="w-12 h-12 rounded bg-secondary/10 flex items-center justify-center border border-secondary/20"
+              >
+                <span class="material-symbols-outlined text-secondary"
+                  >verified_user</span
+                >
+              </div>
+              <h3 class="font-headline-lg text-headline-lg">Security</h3>
+              <p class="font-body-md text-on-surface-variant leading-relaxed">
+                Trust is our primary product. We build security into the
+                foundation of our code, not as an afterthought. Our zero-trust
+                architecture protects the world's most sensitive data.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Section 5: Global Office Locations -->
+      <section class="py-24 bg-surface overflow-hidden relative">
+        <div class="max-w-max-width mx-auto px-margin-desktop relative z-10">
+          <div class="mb-16">
+            <h2 class="font-headline-lg text-headline-lg mb-4">
+              Global Presence
+            </h2>
+            <p class="text-on-surface-variant font-body-md">
+              Building locally, operating globally.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
+            <div class="space-y-8">
+              <div
+                class="p-6 rounded-lg border-l-4 border-secondary bg-surface-container"
+              >
+                <div class="font-headline-md text-headline-md mb-1">
+                  San Francisco
+                </div>
+                <div class="text-on-surface-variant font-body-md">
+                  Global HQ &amp; R&amp;D Center
+                </div>
+              </div>
+              <div
+                class="p-6 rounded-lg border-l-4 border-outline bg-surface-container/50 hover:border-secondary transition-colors cursor-pointer"
+              >
+                <div class="font-headline-md text-headline-md mb-1">Berlin</div>
+                <div class="text-on-surface-variant font-body-md">
+                  European Operations &amp; Design
+                </div>
+              </div>
+              <div
+                class="p-6 rounded-lg border-l-4 border-outline bg-surface-container/50 hover:border-secondary transition-colors cursor-pointer"
+              >
+                <div class="font-headline-md text-headline-md mb-1">
+                  Singapore
+                </div>
+                <div class="text-on-surface-variant font-body-md">
+                  APAC Hub &amp; Support
+                </div>
+              </div>
+            </div>
+            <div
+              class="lg:col-span-2 h-[500px] glass-card rounded-xl overflow-hidden relative"
+            >
+              <div
+                class="w-full h-full bg-cover bg-center"
+                data-alt="A highly detailed 3D digital map of the world rendered in a dark navy and electric blue 'tech-noir' style. Glowing nodes represent office locations in San Francisco, Berlin, and Singapore, with faint pulsating data lines connecting them. The map features a subtle dot-grid overlay and a sense of depth and perspective, emphasizing a global enterprise reach."
+                style="
+                  background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuCYFOd1lKiw78YuQlgk2uLQY1axt6nfJb_Gaoiul7iS1IZil15M0mL0oHbSkIWb2Rybaa0Ijwql9Bin_gDV3t-tpNNoE1pfvTnxz1sds0Dq19eWJh8J6Mx9DrGXKEv3ojKmqw8Cv9pscK-E7jiKJMUY6dqi6QF_gidhBwenfQMEczcwEzHh1ocqU6R2HUojtC-IAGVE7KMEyQdu4p-3MluQyp_STKUZmkqcvsIIq9k7MprDi5FuTMMD7sddRJx0X_W5Aq9ODlOKQMlrCRjx3&quot;);
+                "
+              ></div>
+              <div
+                class="absolute inset-0 bg-gradient-to-r from-surface/40 to-transparent"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Section 6: Engineering Culture -->
+      <section class="py-24 bg-surface-container-lowest">
+        <div class="max-w-max-width mx-auto px-margin-desktop">
+          <div class="flex flex-col lg:flex-row gap-16 items-center">
+            <div class="lg:w-1/2">
+              <div
+                class="inline-block text-secondary font-code-sm text-code-sm border border-secondary/30 px-2 py-1 mb-6 rounded bg-secondary/5"
+              >
+                # culture.engineering
+              </div>
+              <h2 class="font-headline-xl text-headline-xl mb-6">
+                Build the systems that build themselves.
+              </h2>
+              <p
+                class="font-body-lg text-body-lg text-on-surface-variant mb-8 leading-relaxed"
+              >
+                Our engineering culture is rooted in autonomy and ownership. We
+                don't have "resource managers"; we have tech leads who code. We
+                prioritize documentation as code, rigorous peer review, and a
+                radical commitment to open-source contributions.
+              </p>
+              <div class="space-y-4">
+                <div class="flex gap-4 items-start">
+                  <span class="material-symbols-outlined text-secondary mt-1"
+                    >check_circle</span
+                  >
+                  <div class="font-body-md">
+                    Ship weekly with zero-downtime canary deployments.
+                  </div>
+                </div>
+                <div class="flex gap-4 items-start">
+                  <span class="material-symbols-outlined text-secondary mt-1"
+                    >check_circle</span
+                  >
+                  <div class="font-body-md">
+                    Internal "Free Code" Fridays for experimental R&amp;D.
+                  </div>
+                </div>
+                <div class="flex gap-4 items-start">
+                  <span class="material-symbols-outlined text-secondary mt-1"
+                    >check_circle</span
+                  >
+                  <div class="font-body-md">
+                    Remote-first, asynchronous-heavy workflow for focused work.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="lg:w-1/2 grid grid-cols-2 gap-4">
+              <div class="space-y-4 pt-12">
+                <div class="h-64 rounded-lg overflow-hidden glass-card">
+                  <img
+                    class="w-full h-full object-cover"
+                    data-alt="A candid, high-quality photograph of a modern software engineering workspace. Two engineers are collaborating on a large monitor displaying complex code and logic graphs. The environment is dark with vibrant neon blue highlights from hardware and screens. The mood is one of intense focus and creative collaboration in a sleek, industrial-modern office."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCv68lQU7SrU7_KBoqkNE0qjAQv3Qv6jcg8z-l5U2plpstU1tyTa6ETgH0ElQ0JjoGWiG19yS76WCnvimW5J5BAbQAz2gobirGaS3LtxdO5NFZs5bVPZJV324IQo3T9GsBUDv60sbahUcpy0JgRqvQ5zHjADEPoe3VgNwuB7FHRELD165epGMAwycb0qknWyHdeTm84K3LnZqjxKhoB6SQmav-TN_u3OpYlr-hzizmIanJ3BvH3Xzw6XTfKJH5u1q8l7FI9pHDGTEDx"
+                  />
+                </div>
+                <div class="h-48 rounded-lg overflow-hidden glass-card">
+                  <img
+                    class="w-full h-full object-cover"
+                    data-alt="An abstract, high-tech close-up of computer server racks with glowing blue status lights. The image has a narrow depth of field and a professional, industrial look, emphasizing the high-performance infrastructure behind Stackly's automation platform."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWU1OIBmxncZEYqCW3gm0_O7AXCR1RTm8FpFBCL3_tJVz53IcJ7am5-_hX7lwrAoZad_-WVolqx9pG1fG_4c2giXshP2UoWQfVBnkqZNNznI8Bk_MMzoSLSp-chJC-_tx5FSZMDPSxII56AcxfXNU2b8daiB1Hs0QvATbfoQ_mNqAo4Bcvxd2qZXAblrSHu-y1E_r63trbua-oK0zuiVSY08K79JWyL8qsR61zE3cZMMu5SUtAPbhlBCWW1C60pCRPel5pdVHfWM8K"
+                  />
+                </div>
+              </div>
+              <div class="space-y-4">
+                <div class="h-48 rounded-lg overflow-hidden glass-card">
+                  <img
+                    class="w-full h-full object-cover"
+                    data-alt="A minimalist overhead shot of a developer's desk featuring a high-end mechanical keyboard, a digital tablet with UI wireframes, and a single cup of espresso. The color palette is strictly deep navy, grey, and electric blue, reflecting a clean and productive technical workflow."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOqGH3qnT64KSYKPZE7n3xI0Ndgyyk2AjqEDmRHwt-WweCttnplZn-eUHXXPUIoajgJf1AXZ6MvStkDm89kNsn8nwsdf8kI_2dId-a8vs4Q7Ye_8f5GXWrzkSHKv_-IXLojDEj_OAIPN7A5_GetKJjEyE1EuvLBcrdnP7wq2O1MbkGA9VknDO934BA_EkUyTGCkpTzaxutleN4KD12e1pmOStWxtiMhWCH2_DcJHrrHSgvFpsYxqb6g97uaQTd2kE31rPUeDZTeDsjVq"
+                  />
+                </div>
+                <div class="h-64 rounded-lg overflow-hidden glass-card">
+                  <img
+                    class="w-full h-full object-cover"
+                    data-alt="A wide-angle interior shot of a tech-focused collaboration space with ergonomic furniture and glass walls covered in complex architecture diagrams and flowcharts. Soft ambient lighting creates a professional yet innovative atmosphere suitable for a cutting-edge automation company."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfuzUkKvqBnF9bp1p3t8duoUuywuvOqEkTRVpF2FlE4Vd_kIpHsqGFslv8ok9V8sqhlrFCN22bJXW5P2lovxIpMuc1bvwshwQ91uB_4Wrf-bvGA2McxIlSyMKRHif72Kdj1n-vrzCbOvK0QFJeuPh7_JmS0R08Qc-He1yUhXhoUbVUKGNqkyjnMQXNFA1I6gnR8UEIAtc9VrLSzNp6_fKKAjXye_puOslp1nh7vY4m7kvHCpmrVSZmNd5eCLRsPwSKngcBE8b_8XJH"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Section 7: Awards Shelf -->
+      <section class="py-24 bg-surface border-t border-outline-variant/30">
+        <div class="max-w-max-width mx-auto px-margin-desktop text-center">
+          <h2
+            class="font-label-md text-label-md text-outline tracking-[0.2em] uppercase mb-12"
+          >
+            Industry Recognition
+          </h2>
+          <div
+            class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-12 items-center opacity-70 hover:opacity-100 transition-opacity"
+          >
+            <div class="flex flex-col items-center gap-4">
+              <span
+                class="material-symbols-outlined !text-4xl text-on-surface-variant"
+                >military_tech</span
+              >
+              <div class="font-body-md font-bold">Gartner Cool Vendor 2021</div>
+            </div>
+            <div class="flex flex-col items-center gap-4">
+              <span
+                class="material-symbols-outlined !text-4xl text-on-surface-variant"
+                >workspace_premium</span
+              >
+              <div class="font-body-md font-bold">Forbes Cloud 100</div>
+            </div>
+            <div class="flex flex-col items-center gap-4">
+              <span
+                class="material-symbols-outlined !text-4xl text-on-surface-variant"
+                >stars</span
+              >
+              <div class="font-body-md font-bold">Red Herring Top 100</div>
+            </div>
+            <div class="flex flex-col items-center gap-4">
+              <span
+                class="material-symbols-outlined !text-4xl text-on-surface-variant"
+                >emoji_events</span
+              >
+              <div class="font-body-md font-bold">SaaS Awards Winner</div>
+            </div>
+            <div class="hidden lg:flex flex-col items-center gap-4">
+              <span
+                class="material-symbols-outlined !text-4xl text-on-surface-variant"
+                >verified</span
+              >
+              <div class="font-body-md font-bold">ISO 27001 Certified</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Section 8: Careers CTA -->
+      <section
+        class="py-24 px-margin-desktop bg-surface relative overflow-hidden"
+      >
+        <div
+          class="max-w-4xl mx-auto glass-card rounded-2xl p-12 text-center relative overflow-hidden"
+        >
+          <div
+            class="absolute -top-24 -right-24 w-64 h-64 bg-secondary/10 rounded-full blur-3xl"
+          ></div>
+          <div class="relative z-10">
+            <h2 class="font-headline-xl text-headline-xl mb-6">
+              Build the next generation of logic.
+            </h2>
+            <p
+              class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-2xl mx-auto"
+            >
+              We're looking for architects, engineers, and designers who thrive
+              on solving hard technical problems. Join us in shaping the future
+              of autonomous enterprises.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-6 justify-center">
+              <button
+                class="bg-secondary text-on-secondary-fixed px-8 py-4 rounded-lg font-bold hover:shadow-[0_0_20px_rgba(123,208,255,0.4)] transition-all flex items-center justify-center gap-2"
+              >
+                View Open Roles
+                <span class="material-symbols-outlined">trending_flat</span>
+              </button>
+              <button
+                class="border border-outline-variant text-on-surface px-8 py-4 rounded-lg font-bold hover:bg-surface-bright/10 transition-all"
+              >
+                Learn About Benefits
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+  </body>
+</html>

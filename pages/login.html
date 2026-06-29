@@ -1,0 +1,508 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Stackly | Secure Login</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-low": "#0d1c2d",
+              outline: "#909097",
+              "on-secondary-fixed": "#001e2c",
+              "tertiary-container": "#00055c",
+              "surface-container-high": "#1c2b3c",
+              primary: "#bec6e0",
+              "on-background": "#d4e4fa",
+              "primary-fixed-dim": "#bec6e0",
+              surface: "#051424",
+              "on-secondary": "#00354a",
+              "outline-variant": "#45464d",
+              "on-error": "#690005",
+              "on-secondary-container": "#00374d",
+              tertiary: "#bdc2ff",
+              background: "#051424",
+              "on-tertiary-fixed": "#000767",
+              "inverse-on-surface": "#233143",
+              "surface-container": "#122131",
+              "inverse-surface": "#d4e4fa",
+              "on-surface": "#d4e4fa",
+              "on-primary-fixed-variant": "#3f465c",
+              "on-error-container": "#ffdad6",
+              "secondary-container": "#00a6e0",
+              "on-tertiary-container": "#6c77e1",
+              "surface-container-highest": "#273647",
+              "secondary-fixed-dim": "#7bd0ff",
+              "surface-variant": "#273647",
+              error: "#ffb4ab",
+              "surface-bright": "#2c3a4c",
+              secondary: "#7bd0ff",
+              "secondary-fixed": "#c4e7ff",
+              "on-primary": "#283044",
+              "inverse-primary": "#565e74",
+              "on-surface-variant": "#c6c6cd",
+              "surface-dim": "#051424",
+              "on-primary-fixed": "#131b2e",
+              "surface-tint": "#bec6e0",
+              "tertiary-fixed": "#e0e0ff",
+              "surface-container-lowest": "#010f1f",
+              "tertiary-fixed-dim": "#bdc2ff",
+              "primary-fixed": "#dae2fd",
+              "on-secondary-fixed-variant": "#004c69",
+              "primary-container": "#0f172a",
+              "error-container": "#93000a",
+              "on-primary-container": "#798098",
+              "on-tertiary-fixed-variant": "#2f3aa3",
+              "on-tertiary": "#131e8c",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              unit: "4px",
+              gutter: "16px",
+              "max-width": "1440px",
+              "margin-desktop": "32px",
+              "margin-mobile": "16px",
+            },
+            fontFamily: {
+              "body-lg": ["Inter"],
+              "headline-xl": ["Inter"],
+              "headline-md": ["Inter"],
+              "headline-lg": ["Inter"],
+              "headline-xl-mobile": ["Inter"],
+              "body-md": ["Inter"],
+              "code-sm": ["JetBrains Mono"],
+              "label-md": ["Inter"],
+            },
+            fontSize: {
+              "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "headline-xl": [
+                "36px",
+                {
+                  lineHeight: "44px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "headline-md": [
+                "20px",
+                { lineHeight: "28px", fontWeight: "600" },
+              ],
+              "headline-lg": [
+                "24px",
+                {
+                  lineHeight: "32px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-xl-mobile": [
+                "28px",
+                {
+                  lineHeight: "34px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+              "code-sm": ["13px", { lineHeight: "18px", fontWeight: "400" }],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "600",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        background-color: #051424;
+        background-image: radial-gradient(
+          circle at 2px 2px,
+          #1e293b 1px,
+          transparent 0
+        );
+        background-size: 24px 24px;
+      }
+
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+
+      .node-connection {
+        stroke-dasharray: 5;
+        animation: dash 10s linear infinite;
+      }
+
+      @keyframes dash {
+        to {
+          stroke-dashoffset: -100;
+        }
+      }
+
+      .glow-input:focus {
+        box-shadow: 0 0 10px rgba(123, 208, 255, 0.3);
+      }
+
+      .node-float {
+        animation: float 6s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="page-auth font-body-md text-on-surface flex flex-col min-h-screen overflow-hidden selection:bg-secondary/30"
+  >
+    <!-- Background Atmospheric Nodes -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+      <svg
+        class="w-full h-full opacity-20"
+        preserveaspectratio="xMidYMid slice"
+        viewbox="0 0 1000 1000"
+      >
+        <!-- Background Web -->
+        <path
+          class="node-connection"
+          d="M100,200 L400,300 L300,600 L100,200"
+          fill="none"
+          stroke="#7bd0ff"
+          stroke-width="1"
+        ></path>
+        <path
+          class="node-connection"
+          d="M400,300 L700,150 L850,450 L400,300"
+          fill="none"
+          stroke="#7bd0ff"
+          stroke-width="1"
+        ></path>
+        <path
+          class="node-connection"
+          d="M300,600 L600,800 L850,450"
+          fill="none"
+          stroke="#7bd0ff"
+          stroke-width="1"
+        ></path>
+        <!-- Nodes -->
+        <g class="node-float" style="animation-delay: 0s">
+          <rect
+            fill="#00a6e0"
+            height="20"
+            rx="2"
+            width="20"
+            x="90"
+            y="190"
+          ></rect>
+          <rect
+            fill="#bec6e0"
+            height="20"
+            rx="2"
+            width="20"
+            x="390"
+            y="290"
+          ></rect>
+        </g>
+        <g class="node-float" style="animation-delay: 1s">
+          <rect
+            fill="#bdc2ff"
+            height="20"
+            rx="2"
+            width="20"
+            x="690"
+            y="140"
+          ></rect>
+          <rect
+            fill="#00a6e0"
+            height="20"
+            rx="2"
+            width="20"
+            x="290"
+            y="590"
+          ></rect>
+        </g>
+        <g class="node-float" style="animation-delay: 2s">
+          <rect
+            fill="#7bd0ff"
+            height="20"
+            rx="2"
+            width="20"
+            x="840"
+            y="440"
+          ></rect>
+          <rect
+            fill="#bec6e0"
+            height="20"
+            rx="2"
+            width="20"
+            x="590"
+            y="790"
+          ></rect>
+        </g>
+      </svg>
+    </div>
+    <!-- Main Content Canvas -->
+    <main
+      class="relative z-10 flex flex-col items-center justify-center grow p-margin-mobile md:p-0"
+    >
+      <!-- Login Card -->
+      <div
+        class="w-full max-w-[440px] bg-surface-container rounded-xl border border-outline-variant shadow-2xl overflow-hidden backdrop-blur-sm"
+      >
+        <!-- Branding Header -->
+        <div class="px-8 pt-10 pb-6 text-center">
+          <div
+            class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-primary-container border border-secondary/20 mb-4"
+          >
+            <span class="material-symbols-outlined text-secondary text-3xl"
+              >hub</span
+            >
+          </div>
+          <h1
+            class="font-headline-lg text-headline-lg text-on-surface tracking-tight mb-2"
+          >
+            Stackly
+          </h1>
+          <p class="font-body-md text-on-surface-variant">
+            Sign in to orchestrate your workflow
+          </p>
+        </div>
+        <!-- Form Section -->
+        <form class="px-8 pb-10 space-y-6" onsubmit="event.preventDefault()">
+          <!-- Role Selection -->
+          <div class="space-y-2">
+            <label
+              class="block font-label-md text-label-md text-outline uppercase tracking-widest"
+              for="role"
+              >Access Role</label
+            >
+            <div class="relative">
+              <select
+                class="w-full h-12 pl-12 pr-4 bg-surface-container-lowest border border-outline-variant rounded-lg text-on-surface appearance-none focus:outline-none focus:border-secondary transition-all glow-input"
+                id="role"
+                name="role"
+              >
+                <option value="devops">DevOps Engineer</option>
+                <option value="architect">System Architect</option>
+                <option value="manager">Ops Manager</option>
+                <option value="admin">Platform Admin</option>
+              </select>
+              <div
+                class="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none"
+              >
+                <span
+                  class="material-symbols-outlined text-on-surface-variant text-[20px]"
+                  >badge</span
+                >
+              </div>
+              <div
+                class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none"
+              >
+                <span
+                  class="material-symbols-outlined text-on-surface-variant text-[20px]"
+                  >expand_more</span
+                >
+              </div>
+            </div>
+          </div>
+          <!-- Email Input -->
+          <div class="space-y-2">
+            <label
+              class="block font-label-md text-label-md text-outline uppercase tracking-widest"
+              for="email"
+              >Email Address</label
+            >
+            <div class="relative">
+              <input
+                class="w-full h-12 pl-12 pr-4 bg-surface-container-lowest border border-outline-variant rounded-lg text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:border-secondary transition-all glow-input"
+                id="email"
+                name="email"
+                placeholder="name@company.com"
+                type="email"
+              />
+              <div
+                class="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none"
+              >
+                <span
+                  class="material-symbols-outlined text-on-surface-variant text-[20px]"
+                  >alternate_email</span
+                >
+              </div>
+            </div>
+          </div>
+          <!-- Password Input -->
+          <div class="space-y-2">
+            <div class="flex justify-between items-center">
+              <label
+                class="block font-label-md text-label-md text-outline uppercase tracking-widest"
+                for="password"
+                >Password</label
+              >
+              <a
+                class="text-xs font-semibold text-secondary hover:underline transition-all"
+                href="#"
+                >Forgot Password?</a
+              >
+            </div>
+            <div class="relative">
+              <input
+                class="w-full h-12 pl-12 pr-12 bg-surface-container-lowest border border-outline-variant rounded-lg text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:border-secondary transition-all glow-input"
+                id="password"
+                name="password"
+                placeholder="••••••••"
+                type="password"
+              />
+              <div
+                class="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none"
+              >
+                <span
+                  class="material-symbols-outlined text-on-surface-variant text-[20px]"
+                  >lock</span
+                >
+              </div>
+              <button
+                class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-on-surface transition-colors"
+                type="button"
+              >
+                <span class="material-symbols-outlined text-[20px]"
+                  >visibility</span
+                >
+              </button>
+            </div>
+          </div>
+          <!-- Remember Me -->
+          <div class="flex items-center space-x-3">
+            <div class="relative flex items-center">
+              <input
+                class="w-5 h-5 rounded border-outline-variant bg-surface-container-lowest text-secondary focus:ring-secondary focus:ring-offset-surface"
+                id="remember"
+                name="remember"
+                type="checkbox"
+              />
+            </div>
+            <label
+              class="font-body-md text-on-surface-variant cursor-pointer select-none"
+              for="remember"
+              >Remember this session</label
+            >
+          </div>
+          <!-- Action Button -->
+          <button
+            class="group relative w-full h-12 bg-secondary text-on-secondary font-bold rounded-lg overflow-hidden transition-all hover:bg-secondary/90 hover:scale-[1.01] active:scale-[0.98]"
+            type="submit"
+          >
+            <span class="relative z-10 flex items-center justify-center gap-2">
+              <span>Initialize Session</span>
+              <span
+                class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform"
+                >arrow_forward</span
+              >
+            </span>
+            <div
+              class="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"
+            ></div>
+          </button>
+          <!-- Signup Link -->
+          <p class="text-center font-body-md text-on-surface-variant pt-2">
+            Don't have an account?
+            <a
+              class="text-secondary font-bold hover:underline"
+              href="register.html"
+              >Sign Up</a
+            >
+          </p>
+        </form>
+        <!-- Bottom Accent Bar -->
+        <div
+          class="h-1.5 w-full bg-gradient-to-r from-secondary via-primary to-tertiary"
+        ></div>
+      </div>
+      <!-- Footer Info -->
+      <div class="mt-8 flex flex-col items-center space-y-4">
+        <div
+          class="flex space-x-6 text-on-surface-variant font-label-md text-[11px] uppercase tracking-widest opacity-60"
+        >
+          <span class="flex items-center gap-1"
+            ><span class="material-symbols-outlined text-[14px]"
+              >verified_user</span
+            >
+            AES-256 Encrypted</span
+          >
+          <span class="flex items-center gap-1"
+            ><span class="material-symbols-outlined text-[14px]"
+              >cloud_done</span
+            >
+            99.9% Uptime</span
+          >
+        </div>
+        <p class="text-[10px] text-on-surface-variant/40 font-code-sm">
+          SYSTEM_VERSION: 2.4.0-STABLE // BUILD: 0xA4F29
+        </p>
+      </div>
+    </main>
+    <script>
+      // Simple micro-interaction for password visibility toggle
+      document
+        .querySelector('button[type="button"]')
+        .addEventListener("click", function () {
+          const input = document.getElementById("password");
+          const icon = this.querySelector(".material-symbols-outlined");
+          if (input.type === "password") {
+            input.type = "text";
+            icon.textContent = "visibility_off";
+          } else {
+            input.type = "password";
+            icon.textContent = "visibility";
+          }
+        });
+
+      // Interactive background node reactivity (optional)
+      document.addEventListener("mousemove", (e) => {
+        const x = e.clientX / window.innerWidth;
+        const y = e.clientY / window.innerHeight;
+        const nodes = document.querySelectorAll(".node-float");
+        nodes.forEach((node, i) => {
+          const speed = (i + 1) * 10;
+          node.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+        });
+      });
+    </script>
+  </body>
+</html>

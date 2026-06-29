@@ -1,0 +1,1465 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>
+      Stackly | Streamline Every Workflow, Accelerate Business Growth
+    </title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=JetBrains+Mono&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-low": "#0d1c2d",
+              outline: "#909097",
+              "on-secondary-fixed": "#001e2c",
+              "tertiary-container": "#00055c",
+              "surface-container-high": "#1c2b3c",
+              primary: "#bec6e0",
+              "on-background": "#d4e4fa",
+              "primary-fixed-dim": "#bec6e0",
+              surface: "#051424",
+              "on-secondary": "#00354a",
+              "outline-variant": "#45464d",
+              "on-error": "#690005",
+              "on-secondary-container": "#00374d",
+              tertiary: "#bdc2ff",
+              background: "#051424",
+              "on-tertiary-fixed": "#000767",
+              "inverse-on-surface": "#233143",
+              "surface-container": "#122131",
+              "inverse-surface": "#d4e4fa",
+              "on-surface": "#d4e4fa",
+              "on-primary-fixed-variant": "#3f465c",
+              "on-error-container": "#ffdad6",
+              "secondary-container": "#00a6e0",
+              "on-tertiary-container": "#6c77e1",
+              "surface-container-highest": "#273647",
+              "secondary-fixed-dim": "#7bd0ff",
+              "surface-variant": "#273647",
+              error: "#ffb4ab",
+              "surface-bright": "#2c3a4c",
+              secondary: "#7bd0ff",
+              "secondary-fixed": "#c4e7ff",
+              "on-primary": "#283044",
+              "inverse-primary": "#565e74",
+              "on-surface-variant": "#c6c6cd",
+              "surface-dim": "#051424",
+              "on-primary-fixed": "#131b2e",
+              "surface-tint": "#bec6e0",
+              "tertiary-fixed": "#e0e0ff",
+              "surface-container-lowest": "#010f1f",
+              "tertiary-fixed-dim": "#bdc2ff",
+              "primary-fixed": "#dae2fd",
+              "on-secondary-fixed-variant": "#004c69",
+              "primary-container": "#0f172a",
+              "error-container": "#93000a",
+              "on-primary-container": "#798098",
+              "on-tertiary-fixed-variant": "#2f3aa3",
+              "on-tertiary": "#131e8c",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              unit: "4px",
+              gutter: "16px",
+              "max-width": "1440px",
+              "margin-desktop": "32px",
+              "margin-mobile": "16px",
+            },
+            fontFamily: {
+              "body-lg": ["Inter"],
+              "headline-xl": ["Inter"],
+              "headline-md": ["Inter"],
+              "headline-lg": ["Inter"],
+              "headline-xl-mobile": ["Inter"],
+              "body-md": ["Inter"],
+              "code-sm": ["JetBrains Mono"],
+              "label-md": ["Inter"],
+            },
+            fontSize: {
+              "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "headline-xl": [
+                "36px",
+                {
+                  lineHeight: "44px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "headline-md": [
+                "20px",
+                { lineHeight: "28px", fontWeight: "600" },
+              ],
+              "headline-lg": [
+                "24px",
+                {
+                  lineHeight: "32px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-xl-mobile": [
+                "28px",
+                {
+                  lineHeight: "34px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+              "code-sm": ["13px", { lineHeight: "18px", fontWeight: "400" }],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "600",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      html {
+        overflow-x: hidden;
+      }
+      body {
+        background-color: #051424;
+        color: #d4e4fa;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+      }
+      .canvas-grid {
+        background-image: radial-gradient(circle, #1e293b 1px, transparent 1px);
+        background-size: 24px 24px;
+      }
+      .glass-panel {
+        background: rgba(28, 43, 60, 0.7);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(144, 144, 151, 0.2);
+      }
+      .marquee-track {
+        display: flex;
+        width: calc(250px * 10);
+        animation: scroll 30s linear infinite;
+      }
+      @keyframes scroll {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(calc(-250px * 5));
+        }
+      }
+      .step-line::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 100%;
+        width: 100%;
+        border-top: 2px dashed #45464d;
+        z-index: -1;
+      }
+    </style>
+    <!-- Shared Styles and Scripts -->
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+    <script src="./assets/js/script.js" defer></script>
+  </head>
+  <body data-page="home" class="font-body-md text-body-md overflow-x-hidden">
+    <!-- ================= Loader ================= -->
+    <div id="page-loader">
+      <div class="loader-content">
+        <div class="loader-network">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <h2 class="loader-title">Stackly</h2>
+
+        <p class="loader-subtitle">Initializing Workflow Engine...</p>
+
+        <div class="loader-progress">
+          <div class="loader-bar"></div>
+        </div>
+      </div>
+    </div>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+    <!-- 1. Hero Section -->
+    <section
+      class="relative pt-10 pb-10 px-margin-desktop overflow-hidden canvas-grid"
+    >
+      <div
+        class="max-w-max-width mx-auto grid lg:grid-cols-2 gap-16 items-center relative z-10"
+      >
+        <div>
+          <span
+            class="inline-block px-3 py-1 bg-secondary-container/20 text-secondary border border-secondary/30 rounded-full font-label-md text-label-md mb-6"
+            >v4.0 ENGINE LIVE</span
+          >
+          <h1
+            class="font-headline-xl text-headline-xl lg:text-5xl mb-6 leading-tight"
+          >
+            Streamline Every Workflow, <br /><span class="text-secondary"
+              >Accelerate Business Growth</span
+            >
+          </h1>
+          <p
+            class="text-on-surface-variant text-body-lg font-body-lg mb-8 max-w-lg"
+          >
+            The enterprise-grade workflow engine built for high-velocity
+            engineering teams. Orchestrate complex logic across 500+ apps with
+            mathematical precision.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <button
+              class="bg-secondary-container text-on-secondary-container px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:scale-[1.02] transition-transform"
+            >
+              Build Your First Flow
+              <span class="material-symbols-outlined">arrow_forward</span>
+            </button>
+            <button
+              class="border border-outline px-8 py-4 rounded-xl font-bold hover:bg-surface-bright/10 transition-colors"
+            >
+              View Demo
+            </button>
+          </div>
+        </div>
+        <div class="relative group">
+          <div
+            class="absolute -inset-4 bg-secondary/20 blur-3xl rounded-full transition-opacity group-hover:opacity-40"
+          ></div>
+          <div class="glass-panel p-4 rounded-xl shadow-2xl relative">
+            <img
+              class="w-full h-auto rounded-lg shadow-lg"
+              data-alt="A sophisticated 3D glassmorphism UI dashboard showing a node-based workflow editor. The interface features dark navy backgrounds, electric blue glowing connections between rectangular logic blocks, and semi-transparent sidebars with real-time data visualizations. Professional, high-tech, and futuristic enterprise software aesthetic."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_lLlqh77YyIOmKeJoKQCkh4N5lcxxcX0mN-HzaljkKJQu_oi8jTA1QMO8uCH5IZTSDxkkLlzOKAex6GbDnR2d8ap_bi7x33yM7Jq7kDMpBn5kF_dAuVhHyzoAuRw12CIFeVxmZdMS6pGHT6nr0VW4x4oy6ejlNduqKwV7WpPsaKUdqrQzqksIrUzPcljo8g2i7FqXslGgrz91wfPQgiWNpgVOwbguzU54AxTnfvnsC935q9r4np4CNy87jRd72TJ2Znvebhhu8ZHr"
+            />
+            <div
+              class="absolute -bottom-6 -right-6 bg-surface-bright p-4 rounded-lg border border-outline-variant shadow-xl hidden md:block"
+            >
+              <div class="flex items-center gap-3">
+                <div
+                  class="w-2 h-2 bg-green-500 rounded-full animate-pulse"
+                ></div>
+                <span class="font-code-sm text-code-sm"
+                  >Status: 124 Nodes Synchronized</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- 2. Trusted By Marquee -->
+    <section
+      class="py-16 border-y border-outline-variant bg-surface-container-low overflow-hidden"
+    >
+      <!-- Section label -->
+      <p
+        class="text-center font-label-md text-label-md text-outline uppercase tracking-[0.3em] mb-10"
+      >
+        Trusted by 45,000+ engineering teams worldwide
+      </p>
+      <!-- Marquee wrapper with edge masks -->
+      <div
+        class="relative"
+        style="
+          mask-image: linear-gradient(
+            to right,
+            transparent 0%,
+            black 8%,
+            black 92%,
+            transparent 100%
+          );
+          -webkit-mask-image: linear-gradient(
+            to right,
+            transparent 0%,
+            black 8%,
+            black 92%,
+            transparent 100%
+          );
+        "
+      >
+        <div
+          class="marquee-track"
+          style="width: calc(220px * 16); animation: scroll 36s linear infinite"
+        >
+          <!-- Set 1 -->
+          <div
+            class="flex items-center gap-3 min-w-[220px] opacity-50 hover:opacity-100 transition-opacity"
+          >
+            <div
+              class="w-9 h-9 bg-secondary/20 rounded-lg flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined text-secondary text-[18px]"
+                >bolt</span
+              >
+            </div>
+            <span class="font-bold text-sm tracking-wide text-on-surface"
+              >TECHCORP</span
+            >
+          </div>
+          <div
+            class="flex items-center gap-3 min-w-[220px] opacity-50 hover:opacity-100 transition-opacity"
+          >
+            <div
+              class="w-9 h-9 bg-tertiary/20 rounded-lg flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined text-tertiary text-[18px]"
+                >stream</span
+              >
+            </div>
+            <span class="font-bold text-sm tracking-wide text-on-surface"
+              >DATASTREAM</span
+            >
+          </div>
+          <div
+            class="flex items-center gap-3 min-w-[220px] opacity-50 hover:opacity-100 transition-opacity"
+          >
+            <div
+              class="w-9 h-9 bg-on-tertiary-container/20 rounded-lg flex items-center justify-center"
+            >
+              <span
+                class="material-symbols-outlined text-on-tertiary-container text-[18px]"
+                >hub</span
+              >
+            </div>
+            <span class="font-bold text-sm tracking-wide text-on-surface"
+              >QUANTUMCORE</span
+            >
+          </div>
+          <div
+            class="flex items-center gap-3 min-w-[220px] opacity-50 hover:opacity-100 transition-opacity"
+          >
+            <div
+              class="w-9 h-9 bg-error/20 rounded-lg flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined text-error text-[18px]"
+                >security</span
+              >
+            </div>
+            <span class="font-bold text-sm tracking-wide text-on-surface"
+              >CYBERCORE</span
+            >
+          </div>
+          <div
+            class="flex items-center gap-3 min-w-[220px] opacity-50 hover:opacity-100 transition-opacity"
+          >
+            <div
+              class="w-9 h-9 bg-secondary/20 rounded-lg flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined text-secondary text-[18px]"
+                >account_tree</span
+              >
+            </div>
+            <span class="font-bold text-sm tracking-wide text-on-surface"
+              >SYNAPSE</span
+            >
+          </div>
+          <div
+            class="flex items-center gap-3 min-w-[220px] opacity-50 hover:opacity-100 transition-opacity"
+          >
+            <div
+              class="w-9 h-9 bg-tertiary/20 rounded-lg flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined text-tertiary text-[18px]"
+                >cloud</span
+              >
+            </div>
+            <span class="font-bold text-sm tracking-wide text-on-surface"
+              >CLOUDSPHERE</span
+            >
+          </div>
+          <div
+            class="flex items-center gap-3 min-w-[220px] opacity-50 hover:opacity-100 transition-opacity"
+          >
+            <div
+              class="w-9 h-9 bg-on-tertiary-container/20 rounded-lg flex items-center justify-center"
+            >
+              <span
+                class="material-symbols-outlined text-on-tertiary-container text-[18px]"
+                >rocket_launch</span
+              >
+            </div>
+            <span class="font-bold text-sm tracking-wide text-on-surface"
+              >VELOCITYAI</span
+            >
+          </div>
+          <div
+            class="flex items-center gap-3 min-w-[220px] opacity-50 hover:opacity-100 transition-opacity"
+          >
+            <div
+              class="w-9 h-9 bg-secondary/20 rounded-lg flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined text-secondary text-[18px]"
+                >payments</span
+              >
+            </div>
+            <span class="font-bold text-sm tracking-wide text-on-surface"
+              >OMEGAFLOW</span
+            >
+          </div>
+          <!-- Set 2 (duplicate for seamless loop) -->
+          <div
+            class="flex items-center gap-3 min-w-[220px] opacity-50 hover:opacity-100 transition-opacity"
+          >
+            <div
+              class="w-9 h-9 bg-secondary/20 rounded-lg flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined text-secondary text-[18px]"
+                >bolt</span
+              >
+            </div>
+            <span class="font-bold text-sm tracking-wide text-on-surface"
+              >TECHCORP</span
+            >
+          </div>
+          <div
+            class="flex items-center gap-3 min-w-[220px] opacity-50 hover:opacity-100 transition-opacity"
+          >
+            <div
+              class="w-9 h-9 bg-tertiary/20 rounded-lg flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined text-tertiary text-[18px]"
+                >stream</span
+              >
+            </div>
+            <span class="font-bold text-sm tracking-wide text-on-surface"
+              >DATASTREAM</span
+            >
+          </div>
+          <div
+            class="flex items-center gap-3 min-w-[220px] opacity-50 hover:opacity-100 transition-opacity"
+          >
+            <div
+              class="w-9 h-9 bg-on-tertiary-container/20 rounded-lg flex items-center justify-center"
+            >
+              <span
+                class="material-symbols-outlined text-on-tertiary-container text-[18px]"
+                >hub</span
+              >
+            </div>
+            <span class="font-bold text-sm tracking-wide text-on-surface"
+              >QUANTUMCORE</span
+            >
+          </div>
+          <div
+            class="flex items-center gap-3 min-w-[220px] opacity-50 hover:opacity-100 transition-opacity"
+          >
+            <div
+              class="w-9 h-9 bg-error/20 rounded-lg flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined text-error text-[18px]"
+                >security</span
+              >
+            </div>
+            <span class="font-bold text-sm tracking-wide text-on-surface"
+              >CYBERCORE</span
+            >
+          </div>
+          <div
+            class="flex items-center gap-3 min-w-[220px] opacity-50 hover:opacity-100 transition-opacity"
+          >
+            <div
+              class="w-9 h-9 bg-secondary/20 rounded-lg flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined text-secondary text-[18px]"
+                >account_tree</span
+              >
+            </div>
+            <span class="font-bold text-sm tracking-wide text-on-surface"
+              >SYNAPSE</span
+            >
+          </div>
+          <div
+            class="flex items-center gap-3 min-w-[220px] opacity-50 hover:opacity-100 transition-opacity"
+          >
+            <div
+              class="w-9 h-9 bg-tertiary/20 rounded-lg flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined text-tertiary text-[18px]"
+                >cloud</span
+              >
+            </div>
+            <span class="font-bold text-sm tracking-wide text-on-surface"
+              >CLOUDSPHERE</span
+            >
+          </div>
+          <div
+            class="flex items-center gap-3 min-w-[220px] opacity-50 hover:opacity-100 transition-opacity"
+          >
+            <div
+              class="w-9 h-9 bg-on-tertiary-container/20 rounded-lg flex items-center justify-center"
+            >
+              <span
+                class="material-symbols-outlined text-on-tertiary-container text-[18px]"
+                >rocket_launch</span
+              >
+            </div>
+            <span class="font-bold text-sm tracking-wide text-on-surface"
+              >VELOCITYAI</span
+            >
+          </div>
+          <div
+            class="flex items-center gap-3 min-w-[220px] opacity-50 hover:opacity-100 transition-opacity"
+          >
+            <div
+              class="w-9 h-9 bg-secondary/20 rounded-lg flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined text-secondary text-[18px]"
+                >payments</span
+              >
+            </div>
+            <span class="font-bold text-sm tracking-wide text-on-surface"
+              >OMEGAFLOW</span
+            >
+          </div>
+        </div>
+      </div>
+      <!-- Stats strip -->
+      <div class="mt-12 flex flex-wrap justify-center gap-8 px-margin-desktop">
+        <div class="text-center">
+          <div class="text-2xl font-extrabold text-secondary">45,000+</div>
+          <div
+            class="text-label-md text-on-surface-variant uppercase tracking-wider"
+          >
+            Engineering Teams
+          </div>
+        </div>
+        <div class="w-px bg-outline-variant hidden sm:block"></div>
+        <div class="text-center">
+          <div class="text-2xl font-extrabold text-secondary">1.2B+</div>
+          <div
+            class="text-label-md text-on-surface-variant uppercase tracking-wider"
+          >
+            Tasks Automated
+          </div>
+        </div>
+        <div class="w-px bg-outline-variant hidden sm:block"></div>
+        <div class="text-center">
+          <div class="text-2xl font-extrabold text-secondary">99.99%</div>
+          <div
+            class="text-label-md text-on-surface-variant uppercase tracking-wider"
+          >
+            Uptime SLA
+          </div>
+        </div>
+        <div class="w-px bg-outline-variant hidden sm:block"></div>
+        <div class="text-center">
+          <div class="text-2xl font-extrabold text-secondary">500+</div>
+          <div
+            class="text-label-md text-on-surface-variant uppercase tracking-wider"
+          >
+            Integrations
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- 3. Core Features Grid -->
+    <section class="py-24 px-margin-desktop max-w-max-width mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="font-headline-lg text-headline-lg mb-4">
+          Precision Engineering Components
+        </h2>
+        <p class="text-on-surface-variant max-w-2xl mx-auto">
+          Build with atomic components designed for 99.99% reliability and
+          infinite scale.
+        </p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div
+          class="p-8 bg-surface-container rounded-xl border border-outline-variant hover:border-secondary transition-colors group"
+        >
+          <div
+            class="w-12 h-12 bg-secondary/10 rounded flex items-center justify-center text-secondary mb-6 group-hover:scale-110 transition-transform"
+          >
+            <span
+              class="material-symbols-outlined"
+              style="font-variation-settings: &quot;FILL&quot; 1"
+              >bolt</span
+            >
+          </div>
+          <h3 class="font-headline-md text-headline-md mb-3">Event Triggers</h3>
+          <p class="text-on-surface-variant">
+            Listen for real-time events across your stack. Webhooks, polling,
+            and schedule-based initiators with sub-second latency.
+          </p>
+        </div>
+        <div
+          class="p-8 bg-surface-container rounded-xl border border-outline-variant hover:border-green-500 transition-colors group"
+        >
+          <div
+            class="w-12 h-12 bg-green-500/10 rounded flex items-center justify-center text-green-500 mb-6 group-hover:scale-110 transition-transform"
+          >
+            <span
+              class="material-symbols-outlined"
+              style="font-variation-settings: &quot;FILL&quot; 1"
+              >settings</span
+            >
+          </div>
+          <h3 class="font-headline-md text-headline-md mb-3">Smart Actions</h3>
+          <p class="text-on-surface-variant">
+            Execute complex payloads, transform data, or trigger API calls. Each
+            action is sandboxed and secure.
+          </p>
+        </div>
+        <div
+          class="p-8 bg-surface-container rounded-xl border border-outline-variant hover:border-tertiary transition-colors group"
+        >
+          <div
+            class="w-12 h-12 bg-tertiary/10 rounded flex items-center justify-center text-tertiary mb-6 group-hover:scale-110 transition-transform"
+          >
+            <span
+              class="material-symbols-outlined"
+              style="font-variation-settings: &quot;FILL&quot; 1"
+              >account_tree</span
+            >
+          </div>
+          <h3 class="font-headline-md text-headline-md mb-3">Branch Logic</h3>
+          <p class="text-on-surface-variant">
+            Sophisticated conditional routing, loops, and parallel execution
+            paths for complex decision-making trees.
+          </p>
+        </div>
+      </div>
+    </section>
+    <!-- 4. How it works -->
+    <section class="py-24 bg-surface-container-lowest overflow-hidden">
+      <div
+        class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop"
+      >
+        <!-- Section header -->
+        <div class="text-center mb-20">
+          <span
+            class="inline-block px-3 py-1 rounded-full bg-secondary/10 border border-secondary/30 text-secondary font-label-md text-label-md uppercase tracking-widest mb-4"
+            >How It Works</span
+          >
+          <h2 class="font-headline-lg text-headline-lg mb-4">
+            From Zero to Automated in Minutes
+          </h2>
+          <p class="text-on-surface-variant max-w-2xl mx-auto">
+            Three simple steps to transform your workflows into intelligent,
+            self-running automation pipelines.
+          </p>
+        </div>
+        <!-- Steps grid -->
+        <div class="relative">
+          <!-- Connector line (desktop) -->
+          <div
+            class="hidden md:block absolute top-10 left-[calc(16.67%+2rem)] right-[calc(16.67%+2rem)] h-px bg-gradient-to-r from-secondary/20 via-secondary/60 to-secondary/20 z-0"
+          ></div>
+          <div class="grid md:grid-cols-3 gap-12 relative z-10">
+            <!-- Step 1 -->
+            <div class="group flex flex-col items-center text-center">
+              <div class="relative mb-8">
+                <div
+                  class="w-20 h-20 rounded-2xl bg-surface-bright border border-outline-variant group-hover:border-secondary group-hover:bg-secondary/10 flex items-center justify-center transition-all duration-300 shadow-lg"
+                >
+                  <span
+                    class="material-symbols-outlined text-secondary text-[32px]"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >link</span
+                  >
+                </div>
+                <div
+                  class="absolute -top-3 -right-3 w-7 h-7 rounded-full bg-secondary text-on-secondary-fixed text-xs font-extrabold flex items-center justify-center shadow"
+                >
+                  1
+                </div>
+              </div>
+              <h3
+                class="font-headline-md text-headline-md mb-3 group-hover:text-secondary transition-colors"
+              >
+                Connect
+              </h3>
+              <p class="text-on-surface-variant leading-relaxed mb-4">
+                Authenticate your data sources via OAuth or secure API keys.
+                Supports 500+ built-in integrations from Slack to Salesforce.
+              </p>
+              <div class="flex flex-wrap justify-center gap-2">
+                <span
+                  class="px-2 py-1 bg-surface-container rounded text-label-md text-on-surface-variant"
+                  >OAuth 2.0</span
+                >
+                <span
+                  class="px-2 py-1 bg-surface-container rounded text-label-md text-on-surface-variant"
+                  >API Keys</span
+                >
+                <span
+                  class="px-2 py-1 bg-surface-container rounded text-label-md text-on-surface-variant"
+                  >Webhooks</span
+                >
+              </div>
+            </div>
+            <!-- Step 2 -->
+            <div class="group flex flex-col items-center text-center">
+              <div class="relative mb-8">
+                <div
+                  class="w-20 h-20 rounded-2xl bg-surface-bright border border-outline-variant group-hover:border-secondary group-hover:bg-secondary/10 flex items-center justify-center transition-all duration-300 shadow-lg"
+                >
+                  <span
+                    class="material-symbols-outlined text-secondary text-[32px]"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >account_tree</span
+                  >
+                </div>
+                <div
+                  class="absolute -top-3 -right-3 w-7 h-7 rounded-full bg-secondary text-on-secondary-fixed text-xs font-extrabold flex items-center justify-center shadow"
+                >
+                  2
+                </div>
+              </div>
+              <h3
+                class="font-headline-md text-headline-md mb-3 group-hover:text-secondary transition-colors"
+              >
+                Build
+              </h3>
+              <p class="text-on-surface-variant leading-relaxed mb-4">
+                Drag and drop nodes to map your logic flow visually. No code
+                required, but full JavaScript and Python support available.
+              </p>
+              <div class="flex flex-wrap justify-center gap-2">
+                <span
+                  class="px-2 py-1 bg-surface-container rounded text-label-md text-on-surface-variant"
+                  >No-Code</span
+                >
+                <span
+                  class="px-2 py-1 bg-surface-container rounded text-label-md text-on-surface-variant"
+                  >JS/Python</span
+                >
+                <span
+                  class="px-2 py-1 bg-surface-container rounded text-label-md text-on-surface-variant"
+                  >Visual Editor</span
+                >
+              </div>
+            </div>
+            <!-- Step 3 -->
+            <div class="group flex flex-col items-center text-center">
+              <div class="relative mb-8">
+                <div
+                  class="w-20 h-20 rounded-2xl bg-surface-bright border border-outline-variant group-hover:border-secondary group-hover:bg-secondary/10 flex items-center justify-center transition-all duration-300 shadow-lg"
+                >
+                  <span
+                    class="material-symbols-outlined text-secondary text-[32px]"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >rocket_launch</span
+                  >
+                </div>
+                <div
+                  class="absolute -top-3 -right-3 w-7 h-7 rounded-full bg-secondary text-on-secondary-fixed text-xs font-extrabold flex items-center justify-center shadow"
+                >
+                  3
+                </div>
+              </div>
+              <h3
+                class="font-headline-md text-headline-md mb-3 group-hover:text-secondary transition-colors"
+              >
+                Automate
+              </h3>
+              <p class="text-on-surface-variant leading-relaxed mb-4">
+                Deploy to production with one click. Monitor health, execution
+                logs, and performance metrics in real-time dashboards.
+              </p>
+              <div class="flex flex-wrap justify-center gap-2">
+                <span
+                  class="px-2 py-1 bg-surface-container rounded text-label-md text-on-surface-variant"
+                  >1-Click Deploy</span
+                >
+                <span
+                  class="px-2 py-1 bg-surface-container rounded text-label-md text-on-surface-variant"
+                  >Monitoring</span
+                >
+                <span
+                  class="px-2 py-1 bg-surface-container rounded text-label-md text-on-surface-variant"
+                  >Auto-Retry</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Pipeline Preview -->
+        <div
+          class="mt-20 bg-surface-container rounded-2xl border border-outline-variant p-6 overflow-x-auto"
+        >
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-3 h-3 rounded-full bg-error"></div>
+            <div class="w-3 h-3 rounded-full bg-secondary"></div>
+            <div class="w-3 h-3 rounded-full bg-tertiary"></div>
+            <span class="ml-2 font-code-sm text-code-sm text-on-surface-variant"
+              >stackly-pipeline.flow</span
+            >
+          </div>
+          <div class="flex items-center gap-3 min-w-max">
+            <!-- Trigger -->
+            <div class="flex flex-col items-center gap-2">
+              <div
+                class="px-4 py-3 bg-secondary/15 border border-secondary/40 rounded-xl flex items-center gap-2"
+              >
+                <span
+                  class="material-symbols-outlined text-secondary text-[18px]"
+                  >notifications_active</span
+                >
+                <span class="font-code-sm text-code-sm text-secondary"
+                  >WEBHOOK_TRIGGER</span
+                >
+              </div>
+              <span class="font-label-md text-[10px] text-outline uppercase"
+                >Source</span
+              >
+            </div>
+            <div class="flex items-center gap-1">
+              <div class="w-8 h-px bg-secondary/40"></div>
+              <span
+                class="material-symbols-outlined text-secondary/40 text-[14px]"
+                >arrow_forward</span
+              >
+            </div>
+            <!-- Transform -->
+            <div class="flex flex-col items-center gap-2">
+              <div
+                class="px-4 py-3 bg-tertiary/15 border border-tertiary/40 rounded-xl flex items-center gap-2"
+              >
+                <span
+                  class="material-symbols-outlined text-tertiary text-[18px]"
+                  >transform</span
+                >
+                <span class="font-code-sm text-code-sm text-tertiary"
+                  >DATA_TRANSFORM</span
+                >
+              </div>
+              <span class="font-label-md text-[10px] text-outline uppercase"
+                >Process</span
+              >
+            </div>
+            <div class="flex items-center gap-1">
+              <div class="w-8 h-px bg-secondary/40"></div>
+              <span
+                class="material-symbols-outlined text-secondary/40 text-[14px]"
+                >arrow_forward</span
+              >
+            </div>
+            <!-- Filter -->
+            <div class="flex flex-col items-center gap-2">
+              <div
+                class="px-4 py-3 bg-on-tertiary-container/15 border border-on-tertiary-container/40 rounded-xl flex items-center gap-2"
+              >
+                <span
+                  class="material-symbols-outlined text-on-tertiary-container text-[18px]"
+                  >filter_alt</span
+                >
+                <span
+                  class="font-code-sm text-code-sm text-on-tertiary-container"
+                  >IF_CONDITION</span
+                >
+              </div>
+              <span class="font-label-md text-[10px] text-outline uppercase"
+                >Logic</span
+              >
+            </div>
+            <div class="flex items-center gap-1">
+              <div class="w-8 h-px bg-secondary/40"></div>
+              <span
+                class="material-symbols-outlined text-secondary/40 text-[14px]"
+                >arrow_forward</span
+              >
+            </div>
+            <!-- Action -->
+            <div class="flex flex-col items-center gap-2">
+              <div
+                class="px-4 py-3 bg-secondary/15 border border-secondary/40 rounded-xl flex items-center gap-2"
+              >
+                <span
+                  class="material-symbols-outlined text-secondary text-[18px]"
+                  >send</span
+                >
+                <span class="font-code-sm text-code-sm text-secondary"
+                  >NOTIFY_SLACK</span
+                >
+              </div>
+              <span class="font-label-md text-[10px] text-outline uppercase"
+                >Action</span
+              >
+            </div>
+            <div class="flex items-center gap-1">
+              <div class="w-8 h-px bg-secondary/40"></div>
+              <span
+                class="material-symbols-outlined text-secondary/40 text-[14px]"
+                >arrow_forward</span
+              >
+            </div>
+            <!-- Log -->
+            <div class="flex flex-col items-center gap-2">
+              <div
+                class="px-4 py-3 bg-surface-bright border border-outline-variant rounded-xl flex items-center gap-2"
+              >
+                <span
+                  class="material-symbols-outlined text-on-surface-variant text-[18px]"
+                  >receipt_long</span
+                >
+                <span class="font-code-sm text-code-sm text-on-surface-variant"
+                  >LOG &amp; MONITOR</span
+                >
+              </div>
+              <span class="font-label-md text-[10px] text-outline uppercase"
+                >Observe</span
+              >
+            </div>
+          </div>
+          <!-- Status bar -->
+          <div
+            class="mt-4 flex items-center gap-4 pt-4 border-t border-outline-variant/30"
+          >
+            <div class="flex items-center gap-2">
+              <div
+                class="w-2 h-2 rounded-full bg-green-500 animate-pulse"
+              ></div>
+              <span class="font-code-sm text-code-sm text-on-surface-variant"
+                >Pipeline Active</span
+              >
+            </div>
+            <span class="font-code-sm text-code-sm text-on-surface-variant"
+              >|</span
+            >
+            <span class="font-code-sm text-code-sm text-secondary"
+              >12,847 executions today</span
+            >
+            <span class="font-code-sm text-code-sm text-on-surface-variant"
+              >|</span
+            >
+            <span class="font-code-sm text-code-sm text-green-400"
+              >Avg: 0.4ms</span
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- 5. Live Counter -->
+    <section
+      class="py-20 bg-secondary-container/5 border-y border-outline-variant"
+    >
+      <div
+        class="max-w-max-width mx-auto px-margin-desktop grid md:grid-cols-4 gap-8 text-center"
+      >
+        <div>
+          <div class="text-4xl font-extrabold text-secondary mb-2" id="stat-1">
+            1.2B+
+          </div>
+          <div
+            class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest"
+          >
+            Tasks Executed
+          </div>
+        </div>
+        <div>
+          <div class="text-4xl font-extrabold text-secondary mb-2" id="stat-2">
+            99.99%
+          </div>
+          <div
+            class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest"
+          >
+            System Uptime
+          </div>
+        </div>
+        <div>
+          <div class="text-4xl font-extrabold text-secondary mb-2" id="stat-3">
+            45k+
+          </div>
+          <div
+            class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest"
+          >
+            Teams Scaling
+          </div>
+        </div>
+        <div>
+          <div class="text-4xl font-extrabold text-secondary mb-2" id="stat-4">
+            0.4ms
+          </div>
+          <div
+            class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest"
+          >
+            Avg Latency
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- 6. Integration Library -->
+    <section class="py-24 px-margin-desktop max-w-max-width mx-auto">
+      <div
+        class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6"
+      >
+        <div>
+          <h2 class="font-headline-lg text-headline-lg mb-4">
+            Integrated with your Ecosystem
+          </h2>
+          <p class="text-on-surface-variant max-w-xl">
+            Stackly natively supports the tools your team already relies on,
+            from dev tools to CRM.
+          </p>
+        </div>
+        <button
+          class="text-secondary font-bold flex items-center gap-2 hover:underline"
+        >
+          View all 500+ Integrations
+          <span class="material-symbols-outlined">chevron_right</span>
+        </button>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        <!-- Icon Card -->
+        <div
+          class="bg-surface-container p-6 rounded-lg border border-outline-variant flex flex-col items-center gap-4 hover:bg-surface-bright transition-colors cursor-pointer"
+        >
+          <div
+            class="w-12 h-12 bg-white/5 rounded flex items-center justify-center text-3xl font-bold"
+          >
+            #
+          </div>
+          <span class="font-label-md">Slack</span>
+        </div>
+        <div
+          class="bg-surface-container p-6 rounded-lg border border-outline-variant flex flex-col items-center gap-4 hover:bg-surface-bright transition-colors cursor-pointer"
+        >
+          <div
+            class="w-12 h-12 bg-white/5 rounded flex items-center justify-center text-3xl font-bold"
+          >
+            sf
+          </div>
+          <span class="font-label-md">Salesforce</span>
+        </div>
+        <div
+          class="bg-surface-container p-6 rounded-lg border border-outline-variant flex flex-col items-center gap-4 hover:bg-surface-bright transition-colors cursor-pointer"
+        >
+          <div
+            class="w-12 h-12 bg-white/5 rounded flex items-center justify-center text-3xl font-bold"
+          >
+            J
+          </div>
+          <span class="font-label-md">Jira</span>
+        </div>
+        <div
+          class="bg-surface-container p-6 rounded-lg border border-outline-variant flex flex-col items-center gap-4 hover:bg-surface-bright transition-colors cursor-pointer"
+        >
+          <div
+            class="w-12 h-12 bg-white/5 rounded flex items-center justify-center text-3xl font-bold"
+          >
+            Gh
+          </div>
+          <span class="font-label-md">GitHub</span>
+        </div>
+        <div
+          class="bg-surface-container p-6 rounded-lg border border-outline-variant flex flex-col items-center gap-4 hover:bg-surface-bright transition-colors cursor-pointer"
+        >
+          <div
+            class="w-12 h-12 bg-white/5 rounded flex items-center justify-center text-3xl font-bold"
+          >
+            Az
+          </div>
+          <span class="font-label-md">AWS</span>
+        </div>
+        <div
+          class="bg-surface-container p-6 rounded-lg border border-outline-variant flex flex-col items-center gap-4 hover:bg-surface-bright transition-colors cursor-pointer"
+        >
+          <div
+            class="w-12 h-12 bg-white/5 rounded flex items-center justify-center text-3xl font-bold"
+          >
+            S
+          </div>
+          <span class="font-label-md">Stripe</span>
+        </div>
+      </div>
+    </section>
+    <!-- 7. Testimonial with Video -->
+    <section class="py-24 bg-surface">
+      <div
+        class="max-w-max-width mx-auto px-margin-desktop grid lg:grid-cols-2 gap-16 items-center"
+      >
+        <div
+          class="relative rounded-2xl overflow-hidden shadow-2xl aspect-video group cursor-pointer"
+        >
+          <img
+            class="w-full h-full object-cover"
+            data-alt="A professional video interview frame featuring a female CTO in a modern, glass-walled office overlooking a city at dusk. She is smiling warmly towards the camera. The scene is lit with warm ambient light and soft blue key lighting, creating a high-end corporate cinematography feel. Overlay includes a play button icon."
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTm-AOu_r1aMiN3kIM3fMrTq9aIppyt_BqVNODIFflIxVNEWYq8XCoQZziMUpoyzwSMW0Kwrx0jsp5S4Gb8_OXfFXMtEUakyZKd_34AyrfAg2xSVdmlO6-d0KEGW6ccSWwypCw6OVFbdutkUkAWGoGPDvADPiQ8_AguJPoKpRBjxqL3wtqdqP2M-Ji2cJJ7X6YASLV4geylIox8GwXWFNsHrTF3ISrGbCS3BdOwaLhcFal6uXhU78VQ2FlCzQS5GBgtNbDT9ZQpBY5"
+          />
+          <div
+            class="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/20 transition-all"
+          >
+            <div
+              class="w-20 h-20 bg-secondary text-on-secondary rounded-full flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform"
+            >
+              <span
+                class="material-symbols-outlined text-4xl"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >play_arrow</span
+              >
+            </div>
+          </div>
+        </div>
+        <div>
+          <span class="material-symbols-outlined text-secondary text-5xl mb-6"
+            >format_quote</span
+          >
+          <p
+            class="font-headline-md text-headline-md italic mb-8 leading-relaxed"
+          >
+            "Stackly transformed our operation. We went from managing 50 manual
+            deployments a week to a fully automated pipeline that handles
+            itself. The ROI was immediate."
+          </p>
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-outline-variant"></div>
+            <div>
+              <div class="font-bold">Sarah Chen</div>
+              <div class="text-on-surface-variant text-body-md">
+                CTO, Global Logistics Solutions
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- 8. ROI Calculator -->
+    <section class="py-24 px-margin-desktop bg-surface-container-low">
+      <div
+        class="max-w-max-width mx-auto glass-panel p-12 rounded-3xl grid lg:grid-cols-2 gap-16"
+      >
+        <div>
+          <h2 class="font-headline-lg text-headline-lg mb-6">
+            Calculate Your Potential ROI
+          </h2>
+          <p class="text-on-surface-variant mb-8">
+            See how much time and budget you can reclaim by automating routine
+            operations with Stackly.
+          </p>
+          <div class="space-y-8">
+            <div>
+              <div class="flex justify-between mb-2">
+                <label class="font-bold">Employees</label>
+                <span class="text-secondary font-code-sm" id="emp-val">50</span>
+              </div>
+              <input
+                class="w-full h-2 bg-surface-bright rounded-lg appearance-none cursor-pointer accent-secondary"
+                id="emp-slider"
+                max="500"
+                min="1"
+                type="range"
+                value="50"
+              />
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <label class="font-bold">Hours lost/week per person</label>
+                <span class="text-secondary font-code-sm" id="hours-val"
+                  >10</span
+                >
+              </div>
+              <input
+                class="w-full h-2 bg-surface-bright rounded-lg appearance-none cursor-pointer accent-secondary"
+                id="hours-slider"
+                max="40"
+                min="1"
+                type="range"
+                value="10"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-surface p-8 rounded-2xl border border-outline-variant flex flex-col justify-center items-center text-center"
+        >
+          <div
+            class="text-on-surface-variant font-label-md uppercase tracking-widest mb-2"
+          >
+            Estimated Yearly Savings
+          </div>
+          <div
+            class="text-6xl font-extrabold text-secondary mb-4"
+            id="roi-result"
+          >
+            $260,000
+          </div>
+          <div class="text-on-surface-variant max-w-xs">
+            Based on an average industry rate of $50/hr. Realize efficiency
+            gains in weeks, not months.
+          </div>
+          <button
+            class="mt-8 bg-secondary-container text-on-secondary-container w-full py-4 rounded-xl font-bold"
+          >
+            Get Full Report
+          </button>
+        </div>
+      </div>
+    </section>
+    <!-- 9. Industry Solutions -->
+    <section class="py-24 px-margin-desktop max-w-max-width mx-auto">
+      <h2 class="font-headline-lg text-headline-lg text-center mb-16">
+        Customized for Your Domain
+      </h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div
+          class="relative group h-96 rounded-2xl overflow-hidden border border-outline-variant"
+        >
+          <div
+            class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+            data-alt="Close up of high-end server racks in a data center with neon blue lighting and atmospheric fog. Technological and data-heavy aesthetic. Focus on digital infrastructure and marketing automation."
+            style="
+              background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAugSOckciszIrnPScmH2sTfwtd2bNbU3_O45uHkvFyiLqBP-P0eG8Sj-7oczMbf4sVJpmReq0S2phtgnGdlVYolTWFtC7CivCU9Kj2TiUMjFyNUvmRuqoEI_aKe5TiMTDzMDXfJDi_5kZrU5OY4iu1YKi1wj9ZLYBvjYyN1Uu6jlHp9DVycok4d18VK4Armt4kjedfVyVnx4ZJTAHl0ImXC3ld1M0Jj-I-0pazRTR6SfmjggDQIWn__Bb7cCdywTQCpVQBdPltmd1f&quot;);
+            "
+          ></div>
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-surface to-transparent"
+          ></div>
+          <div class="absolute bottom-0 p-8">
+            <h3 class="font-headline-md text-headline-md mb-2">
+              Marketing Operations
+            </h3>
+            <p class="text-on-surface-variant text-body-md">
+              Lead scoring, multi-channel attribution, and automated campaign
+              triggering.
+            </p>
+          </div>
+        </div>
+        <div
+          class="relative group h-96 rounded-2xl overflow-hidden border border-outline-variant"
+        >
+          <div
+            class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+            data-alt="A futuristic office lobby with clean white lines, minimalist furniture, and large glass windows. Professional HR and corporate environment, soft lighting, very clean and organized."
+            style="
+              background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuDWUHtvZckbw_mDO17MXTF8mycmrJpoSwXuGhospD3WZr00d5L7_5FCXiQ0KqJyrdF3_MmkhUciLnkMYXA841Aa02Z8gQQVulWPpvbCLgrDdSr31O4a02LX8MqUlLnn_8YiWvyjnW2rTPD9FA4UhWeTykoqhSE4qxpGU8JMcMggZqIihF2YJwrbpR61k6gTQ3GNZW0BKFbp9eKIaSohQqaAMBg5jAZXWF2u7EJarjp66rKB8q4vqEqWZUq4RiIqnQ2oZRsyo3B5fF2q&quot;);
+            "
+          ></div>
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-surface to-transparent"
+          ></div>
+          <div class="absolute bottom-0 p-8">
+            <h3 class="font-headline-md text-headline-md mb-2">
+              Human Resources
+            </h3>
+            <p class="text-on-surface-variant text-body-md">
+              Onboarding orchestration, document verification, and performance
+              cycle automation.
+            </p>
+          </div>
+        </div>
+        <div
+          class="relative group h-96 rounded-2xl overflow-hidden border border-outline-variant"
+        >
+          <div
+            class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+            data-alt="A dark themed financial trading floor with multiple glowing monitors showing green and red stock charts and data streams. High density of information, precise and analytical atmosphere."
+            style="
+              background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuBw8Hg7MdewQ4jrGiKgM3gUXs2ok78S8Vojw_JPQ5mi3ZAzkjmOKRYQKm_cWu0rq4cPeGSiUZrHIDP6yEN6Ues7ko7NQEFs-JcL3i_jj1crBaoNv4i9BjX8c8kxOl07Dx6z4mxIOSHPTj5gRSed4_fCI5zeRA7vhZJpKvfLzOD1ylhVMlaSBdQgTnOWLSuj0Euxohx0dWKEhib0KPiFhaeH4OkufL7Clxh5oHou-jxbJg04mAF7FnvPGRQaqDTf39WsM1ubYFIopkOo&quot;);
+            "
+          ></div>
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-surface to-transparent"
+          ></div>
+          <div class="absolute bottom-0 p-8">
+            <h3 class="font-headline-md text-headline-md mb-2">
+              FinOps &amp; Compliance
+            </h3>
+            <p class="text-on-surface-variant text-body-md">
+              Audit trail generation, real-time fraud alerts, and automated
+              reconciliation.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- 10. Blog Teaser -->
+    <section
+      class="py-24 px-margin-desktop max-w-max-width mx-auto border-t border-outline-variant"
+    >
+      <div class="flex justify-between items-center mb-12">
+        <h2 class="font-headline-lg text-headline-lg">Stackly Insights</h2>
+        <a class="text-secondary font-bold" href="#">All Articles</a>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <article class="flex flex-col">
+          <div class="rounded-xl overflow-hidden mb-4 aspect-video">
+            <img
+              class="w-full h-full object-cover"
+              data-alt="Abstract digital visualization of data packets moving through a high-speed network fiber optic cable. Electric blue and purple glowing lights against a pitch black background. Modern tech aesthetic."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAecvJHIl2KfsWd0F1oOFfzpy2NBO4P4grQHHF92OUQhaXyhfWCsWq5B0TbKhFfdykDT3bDxbWq0TZHfhKVY4N9MJQpt8Joflje4_4JSLoHjcgUwiwwgdh83sZXauxKyaWNiCeTOFBDlIPG9Gx4j6NWikojP0QeVsKCVJeorDVUjguH-D900UMIaDVUxCwUR4oJl2HsPIMlKWw6AA--2j4wze3vIzeMOnd36zmVl3b88ki3zn0a3SUX94W1LpzK7kmwWiP0b-eXDvBQ"
+            />
+          </div>
+          <span class="font-label-md text-secondary mb-2">ENGINEERING</span>
+          <h3
+            class="font-headline-md text-headline-md mb-2 hover:text-secondary cursor-pointer transition-colors"
+          >
+            Scaling Workflows to 10M Tasks/Sec
+          </h3>
+          <p class="text-on-surface-variant text-body-md line-clamp-2">
+            How we optimized our core engine for enterprise-scale throughput
+            without compromising on latency.
+          </p>
+        </article>
+        <article class="flex flex-col">
+          <div class="rounded-xl overflow-hidden mb-4 aspect-video">
+            <img
+              class="w-full h-full object-cover"
+              data-alt="A minimalist overhead view of a clean desk with a laptop, a notebook, and a small plant. Bright and airy workspace, focused on productivity and efficient design."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBirkfjgLVXxEoqKpP_Glf4jUqGfs7SZiOmTepwZST9E4LMlHbjKZOi59DDz-KbDuMTIlqvHV6GPJV5VAAKlWSuTP52B_dT0bMjN8VIpbG5v6RYZeBu985Nmqe77LwRsU_GUJIGmCTDcKQoF5gVmdPeSfA-ZDnDlhPog3elfmVs0jCa2SruXUWx09iWkYa0G3bH7xc7-jOH_guKK4Wz5Jr5u0Iy2hGQuyr9kmOE0LV9KmN0l3ObYb8P4AyYu1LVvSdmFOQocjqRZDlb"
+            />
+          </div>
+          <span class="font-label-md text-secondary mb-2">PRODUCTIVITY</span>
+          <h3
+            class="font-headline-md text-headline-md mb-2 hover:text-secondary cursor-pointer transition-colors"
+          >
+            The No-Code Revolution in DevOps
+          </h3>
+          <p class="text-on-surface-variant text-body-md line-clamp-2">
+            Empowering non-technical stakeholders to build robust automation
+            without bothering the dev team.
+          </p>
+        </article>
+        <article class="flex flex-col">
+          <div class="rounded-xl overflow-hidden mb-4 aspect-video">
+            <img
+              class="w-full h-full object-cover"
+              data-alt="Macro photography of a computer microchip with glowing circuit lines. Deep blues and intricate details of silver circuitry. High tech and industrial theme."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhSLrR-uaIV5-T-UFM8Gnn9hwBFW5KzNSzAP42YIL4wlV-q7psHXogzvg0ZICnyNb4bq9adscuekm1qvZTiypGI523pMAQ7q4Lcg50b1C8TufQx2lu5NrwUc-Q_xbqRG3vong2Fv3c3P-EA7sTzijYupYAWoq6exbXgZM-uKANepK24Tly07AF2U15twJDdSRgbfzjZ2FqytfAmo_PzqncG1jTEB71QigCOt0LWoxh05-qH7GX3kWIfzmGm688Lc-OqfclDxrLBCTo"
+            />
+          </div>
+          <span class="font-label-md text-secondary mb-2">SECURITY</span>
+          <h3
+            class="font-headline-md text-headline-md mb-2 hover:text-secondary cursor-pointer transition-colors"
+          >
+            Zero-Trust Architecture for Logic
+          </h3>
+          <p class="text-on-surface-variant text-body-md line-clamp-2">
+            Our approach to securing sensitive API credentials and data
+            transmission in a distributed world.
+          </p>
+        </article>
+      </div>
+    </section>
+    <!-- 11. FAQ Accordion -->
+    <section class="py-24 px-margin-desktop bg-surface-container-lowest">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="font-headline-lg text-headline-lg text-center mb-12">
+          Frequently Asked Questions
+        </h2>
+        <div class="space-y-4">
+          <details
+            class="group bg-surface-container rounded-xl border border-outline-variant p-6 transition-all"
+            open=""
+          >
+            <summary
+              class="flex justify-between items-center font-bold cursor-pointer list-none"
+            >
+              <span>How secure is my data in Stackly?</span>
+              <span
+                class="material-symbols-outlined transition-transform group-open:rotate-180"
+                >expand_more</span
+              >
+            </summary>
+            <p class="mt-4 text-on-surface-variant leading-relaxed">
+              We employ enterprise-grade encryption both in transit (TLS 1.3)
+              and at rest (AES-256). Our platform is SOC2 Type II compliant and
+              we offer self-hosted runners for complete data sovereignty.
+            </p>
+          </details>
+          <details
+            class="group bg-surface-container rounded-xl border border-outline-variant p-6 transition-all"
+          >
+            <summary
+              class="flex justify-between items-center font-bold cursor-pointer list-none"
+            >
+              <span>Can I write custom code for complex logic?</span>
+              <span
+                class="material-symbols-outlined transition-transform group-open:rotate-180"
+                >expand_more</span
+              >
+            </summary>
+            <p class="mt-4 text-on-surface-variant leading-relaxed">
+              Yes. While we offer 500+ pre-built blocks, you can drop in custom
+              JavaScript or Python snippets within any workflow for specialized
+              data processing or proprietary calculations.
+            </p>
+          </details>
+          <details
+            class="group bg-surface-container rounded-xl border border-outline-variant p-6 transition-all"
+          >
+            <summary
+              class="flex justify-between items-center font-bold cursor-pointer list-none"
+            >
+              <span>What happens if an automation fails?</span>
+              <span
+                class="material-symbols-outlined transition-transform group-open:rotate-180"
+                >expand_more</span
+              >
+            </summary>
+            <p class="mt-4 text-on-surface-variant leading-relaxed">
+              Our intelligent retry logic attempts execution based on your
+              custom backoff strategy. If a terminal failure occurs, you are
+              alerted via Slack/PagerDuty, and can replay any step with the
+              original payload.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+    <!-- 12. Final CTA -->
+    <section class="py-24 px-margin-desktop">
+      <div
+        class="max-w-max-width mx-auto bg-gradient-to-br from-secondary-container to-tertiary-container rounded-[2rem] p-16 text-center relative overflow-hidden"
+      >
+        <div class="absolute inset-0 opacity-20 pointer-events-none"></div>
+        <div class="relative z-10">
+          <h2 class="font-headline-xl text-headline-xl mb-6">
+            Ready to stop the busywork?
+          </h2>
+          <p class="text-on-background text-body-lg mb-10 max-w-2xl mx-auto">
+            Join 45,000+ companies using Stackly to build the future of their
+            business operations. Start your 14-day free trial today.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <button
+              class="bg-surface text-secondary px-10 py-5 rounded-xl font-bold text-lg hover:scale-105 transition-transform"
+            >
+              Get Started for Free
+            </button>
+            <button
+              class="bg-transparent border border-white/30 text-white px-10 py-5 rounded-xl font-bold text-lg hover:bg-white/10 transition-colors"
+            >
+              Talk to Sales
+            </button>
+          </div>
+          <div class="mt-8 text-on-background/70 text-label-md">
+            No credit card required • Unlimited triggers • 24/7 Priority Support
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+  </body>
+</html>

@@ -1,0 +1,674 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Stackly Services | Enterprise Automation Solutions</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <!-- Tailwind Configuration -->
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-low": "#0d1c2d",
+              outline: "#909097",
+              "on-secondary-fixed": "#001e2c",
+              "tertiary-container": "#00055c",
+              "surface-container-high": "#1c2b3c",
+              primary: "#bec6e0",
+              "on-background": "#d4e4fa",
+              "primary-fixed-dim": "#bec6e0",
+              surface: "#051424",
+              "on-secondary": "#00354a",
+              "outline-variant": "#45464d",
+              "on-error": "#690005",
+              "on-secondary-container": "#00374d",
+              tertiary: "#bdc2ff",
+              background: "#051424",
+              "on-tertiary-fixed": "#000767",
+              "inverse-on-surface": "#233143",
+              "surface-container": "#122131",
+              "inverse-surface": "#d4e4fa",
+              "on-surface": "#d4e4fa",
+              "on-primary-fixed-variant": "#3f465c",
+              "on-error-container": "#ffdad6",
+              "secondary-container": "#00a6e0",
+              "on-tertiary-container": "#6c77e1",
+              "surface-container-highest": "#273647",
+              "secondary-fixed-dim": "#7bd0ff",
+              "surface-variant": "#273647",
+              error: "#ffb4ab",
+              "surface-bright": "#2c3a4c",
+              secondary: "#7bd0ff",
+              "secondary-fixed": "#c4e7ff",
+              "on-primary": "#283044",
+              "inverse-primary": "#565e74",
+              "on-surface-variant": "#c6c6cd",
+              "surface-dim": "#051424",
+              "on-primary-fixed": "#131b2e",
+              "surface-tint": "#bec6e0",
+              "tertiary-fixed": "#e0e0ff",
+              "surface-container-lowest": "#010f1f",
+              "tertiary-fixed-dim": "#bdc2ff",
+              "primary-fixed": "#dae2fd",
+              "on-secondary-fixed-variant": "#004c69",
+              "primary-container": "#0f172a",
+              "error-container": "#93000a",
+              "on-primary-container": "#798098",
+              "on-tertiary-fixed-variant": "#2f3aa3",
+              "on-tertiary": "#131e8c",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              unit: "4px",
+              gutter: "16px",
+              "max-width": "1440px",
+              "margin-desktop": "32px",
+              "margin-mobile": "16px",
+            },
+            fontFamily: {
+              "body-lg": ["Inter"],
+              "headline-xl": ["Inter"],
+              "headline-md": ["Inter"],
+              "headline-lg": ["Inter"],
+              "headline-xl-mobile": ["Inter"],
+              "body-md": ["Inter"],
+              "code-sm": ["JetBrains Mono"],
+              "label-md": ["Inter"],
+            },
+            fontSize: {
+              "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "headline-xl": [
+                "36px",
+                {
+                  lineHeight: "44px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "headline-md": [
+                "20px",
+                { lineHeight: "28px", fontWeight: "600" },
+              ],
+              "headline-lg": [
+                "24px",
+                {
+                  lineHeight: "32px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-xl-mobile": [
+                "28px",
+                {
+                  lineHeight: "34px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+              "code-sm": ["13px", { lineHeight: "18px", fontWeight: "400" }],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "600",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        background-color: #051424;
+        color: #d4e4fa;
+        font-family: "Inter", sans-serif;
+      }
+      .dot-grid {
+        background-image: radial-gradient(#1e293b 1px, transparent 1px);
+        background-size: 24px 24px;
+      }
+      .glass-card {
+        background: rgba(18, 33, 49, 0.7);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(69, 70, 77, 0.3);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .glass-card:hover {
+        border-color: rgba(123, 208, 255, 0.4);
+        transform: translateY(-4px);
+        box-shadow:
+          0 12px 40px rgba(0, 0, 0, 0.4),
+          0 0 20px rgba(123, 208, 255, 0.15);
+      }
+      .timeline-step::after {
+        content: "";
+        position: absolute;
+        top: 24px;
+        left: 50px;
+        right: -50px;
+        height: 2px;
+        border-top: 2px dashed rgba(69, 70, 77, 0.4);
+        z-index: 0;
+      }
+      @media (max-width: 767px) {
+        .timeline-step::after {
+          display: none;
+        }
+      }
+    </style>
+    <!-- Link Common Stylesheet -->
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <!-- Link Common Script -->
+    <script src="../assets/js/script.js" defer></script>
+  </head>
+  <body
+    data-page="services"
+    class="selection:bg-secondary/30 selection:text-secondary"
+  >
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <main class="overflow-x-hidden">
+      <!-- Section 1: Hero -->
+      <section
+        class="relative min-h-[500px] flex items-center justify-center py-20 dot-grid overflow-hidden"
+      >
+        <div class="relative z-10 max-w-4xl px-margin-desktop text-center">
+          <div
+            class="inline-flex items-center px-3 py-1 rounded-full bg-secondary/10 border border-secondary/20 text-secondary font-label-md text-label-md mb-8"
+          >
+            <span class="material-symbols-outlined mr-2 !text-[14px]"
+              >engineering</span
+            >
+            ENTERPRISE CAPABILITIES
+          </div>
+          <h1
+            class="font-headline-xl text-headline-xl md:text-[56px] md:leading-[1.1] mb-8 tracking-tighter"
+          >
+            Professional Services for
+            <span class="text-secondary">Enterprise Workflow Automation.</span>
+          </h1>
+          <p
+            class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-12 leading-relaxed"
+          >
+            Maximize your Stackly deployment with direct access to core
+            architects. We provide low-latency architecture consulting, secure
+            custom integration engineering, and 24/7 operational support.
+          </p>
+          <div class="flex flex-wrap justify-center gap-4">
+            <a href="#" class="btn btn-secondary">
+              Schedule Architecture Audit
+              <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+            <a href="#" class="btn btn-outline"> Browse API Reference </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Services Grid -->
+      <section
+        class="py-24 bg-surface-container-low/50 border-y border-outline-variant/30"
+      >
+        <div class="max-w-max-width mx-auto px-margin-desktop">
+          <div class="text-center mb-16">
+            <h2 class="font-headline-lg text-headline-lg mb-4">
+              Our Professional Capabilities
+            </h2>
+            <p class="text-on-surface-variant max-w-xl mx-auto">
+              High-precision engineering and operational security tailored for
+              your distributed logical pipelines.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Service 1 -->
+            <div
+              class="glass-card p-8 rounded-2xl flex flex-col justify-between"
+            >
+              <div>
+                <div
+                  class="w-12 h-12 rounded-xl bg-secondary/10 border border-secondary/20 flex items-center justify-center text-secondary mb-6"
+                >
+                  <span class="material-symbols-outlined text-2xl">hub</span>
+                </div>
+                <h3
+                  class="font-headline-md text-headline-md text-on-surface mb-3"
+                >
+                  Architecture Consulting
+                </h3>
+                <p
+                  class="text-on-surface-variant text-body-md mb-6 leading-relaxed"
+                >
+                  Design complex, fail-safe logical meshes. We evaluate cluster
+                  latency, database throughput, and cross-region event
+                  distribution.
+                </p>
+                <ul class="space-y-2 text-body-md text-on-surface-variant mb-8">
+                  <li class="flex items-center gap-2">
+                    <span
+                      class="material-symbols-outlined text-secondary text-sm"
+                      >check_circle</span
+                    >
+                    Topology planning & optimization
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span
+                      class="material-symbols-outlined text-secondary text-sm"
+                      >check_circle</span
+                    >
+                    Disaster recovery orchestration
+                  </li>
+                </ul>
+              </div>
+              <a
+                href="#"
+                class="text-secondary font-bold flex items-center gap-1 hover:gap-2 transition-all"
+              >
+                Learn More
+                <span class="material-symbols-outlined text-[18px]"
+                  >arrow_forward</span
+                >
+              </a>
+            </div>
+
+            <!-- Service 2 -->
+            <div
+              class="glass-card p-8 rounded-2xl flex flex-col justify-between"
+            >
+              <div>
+                <div
+                  class="w-12 h-12 rounded-xl bg-tertiary/10 border border-tertiary/20 flex items-center justify-center text-tertiary mb-6"
+                >
+                  <span class="material-symbols-outlined text-2xl"
+                    >terminal</span
+                  >
+                </div>
+                <h3
+                  class="font-headline-md text-headline-md text-on-surface mb-3"
+                >
+                  Custom Integrations
+                </h3>
+                <p
+                  class="text-on-surface-variant text-body-md mb-6 leading-relaxed"
+                >
+                  Connect proprietary backends and legacy databases using
+                  Stackly’s custom webhooks and custom-engineered connector
+                  modules.
+                </p>
+                <ul class="space-y-2 text-body-md text-on-surface-variant mb-8">
+                  <li class="flex items-center gap-2">
+                    <span
+                      class="material-symbols-outlined text-tertiary text-sm"
+                      >check_circle</span
+                    >
+                    Secure legacy-system mapping
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span
+                      class="material-symbols-outlined text-tertiary text-sm"
+                      >check_circle</span
+                    >
+                    Custom auth & token exchanges
+                  </li>
+                </ul>
+              </div>
+              <a
+                href="#"
+                class="text-secondary font-bold flex items-center gap-1 hover:gap-2 transition-all"
+              >
+                Learn More
+                <span class="material-symbols-outlined text-[18px]"
+                  >arrow_forward</span
+                >
+              </a>
+            </div>
+
+            <!-- Service 3 -->
+            <div
+              class="glass-card p-8 rounded-2xl flex flex-col justify-between"
+            >
+              <div>
+                <div
+                  class="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary mb-6"
+                >
+                  <span class="material-symbols-outlined text-2xl"
+                    >troubleshoot</span
+                  >
+                </div>
+                <h3
+                  class="font-headline-md text-headline-md text-on-surface mb-3"
+                >
+                  DevOps Pipeline Audits
+                </h3>
+                <p
+                  class="text-on-surface-variant text-body-md mb-6 leading-relaxed"
+                >
+                  Diagnostics on your deployment workflows. We cut compilation
+                  runtimes, analyze load profiles, and optimize task
+                  concurrency.
+                </p>
+                <ul class="space-y-2 text-body-md text-on-surface-variant mb-8">
+                  <li class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-sm"
+                      >check_circle</span
+                    >
+                    60%+ reduction in build times
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-sm"
+                      >check_circle</span
+                    >
+                    Runner load analysis & caching
+                  </li>
+                </ul>
+              </div>
+              <a
+                href="#"
+                class="text-secondary font-bold flex items-center gap-1 hover:gap-2 transition-all"
+              >
+                Learn More
+                <span class="material-symbols-outlined text-[18px]"
+                  >arrow_forward</span
+                >
+              </a>
+            </div>
+
+            <!-- Service 4 -->
+            <div
+              class="glass-card p-8 rounded-2xl flex flex-col justify-between"
+            >
+              <div>
+                <div
+                  class="w-12 h-12 rounded-xl bg-secondary/10 border border-secondary/20 flex items-center justify-center text-secondary mb-6"
+                >
+                  <span class="material-symbols-outlined text-2xl"
+                    >support_agent</span
+                  >
+                </div>
+                <h3
+                  class="font-headline-md text-headline-md text-on-surface mb-3"
+                >
+                  Managed Operations
+                </h3>
+                <p
+                  class="text-on-surface-variant text-body-md mb-6 leading-relaxed"
+                >
+                  Completely outsource your pipeline operations. Our engineers
+                  provide 24/7 proactive incident monitoring and immediate
+                  hotfixes.
+                </p>
+                <ul class="space-y-2 text-body-md text-on-surface-variant mb-8">
+                  <li class="flex items-center gap-2">
+                    <span
+                      class="material-symbols-outlined text-secondary text-sm"
+                      >check_circle</span
+                    >
+                    SLA-backed uptime guarantees
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span
+                      class="material-symbols-outlined text-secondary text-sm"
+                      >check_circle</span
+                    >
+                    Zero-downtime updates & patches
+                  </li>
+                </ul>
+              </div>
+              <a
+                href="#"
+                class="text-secondary font-bold flex items-center gap-1 hover:gap-2 transition-all"
+              >
+                Learn More
+                <span class="material-symbols-outlined text-[18px]"
+                  >arrow_forward</span
+                >
+              </a>
+            </div>
+
+            <!-- Service 5 -->
+            <div
+              class="glass-card p-8 rounded-2xl flex flex-col justify-between"
+            >
+              <div>
+                <div
+                  class="w-12 h-12 rounded-xl bg-tertiary/10 border border-tertiary/20 flex items-center justify-center text-tertiary mb-6"
+                >
+                  <span class="material-symbols-outlined text-2xl">school</span>
+                </div>
+                <h3
+                  class="font-headline-md text-headline-md text-on-surface mb-3"
+                >
+                  Training & Enablement
+                </h3>
+                <p
+                  class="text-on-surface-variant text-body-md mb-6 leading-relaxed"
+                >
+                  Accelerate node developer onboarding. Hands-on coding labs,
+                  custom workshops, and design pattern blueprints for technical
+                  squads.
+                </p>
+                <ul class="space-y-2 text-body-md text-on-surface-variant mb-8">
+                  <li class="flex items-center gap-2">
+                    <span
+                      class="material-symbols-outlined text-tertiary text-sm"
+                      >check_circle</span
+                    >
+                    Certified Architect curriculum
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span
+                      class="material-symbols-outlined text-tertiary text-sm"
+                      >check_circle</span
+                    >
+                    Direct slack channels with engineering
+                  </li>
+                </ul>
+              </div>
+              <a
+                href="#"
+                class="text-secondary font-bold flex items-center gap-1 hover:gap-2 transition-all"
+              >
+                Learn More
+                <span class="material-symbols-outlined text-[18px]"
+                  >arrow_forward</span
+                >
+              </a>
+            </div>
+
+            <!-- Service 6 -->
+            <div
+              class="glass-card p-8 rounded-2xl flex flex-col justify-between"
+            >
+              <div>
+                <div
+                  class="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary mb-6"
+                >
+                  <span class="material-symbols-outlined text-2xl"
+                    >cloud_upload</span
+                  >
+                </div>
+                <h3
+                  class="font-headline-md text-headline-md text-on-surface mb-3"
+                >
+                  Migration Orchestration
+                </h3>
+                <p
+                  class="text-on-surface-variant text-body-md mb-6 leading-relaxed"
+                >
+                  Migrate complex monolithic cron jobs and legacy schedulers
+                  onto Stackly's event-driven serverless mesh without data loss.
+                </p>
+                <ul class="space-y-2 text-body-md text-on-surface-variant mb-8">
+                  <li class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-sm"
+                      >check_circle</span
+                    >
+                    Zero-downtime cutover patterns
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-sm"
+                      >check_circle</span
+                    >
+                    Data schema migration mapping
+                  </li>
+                </ul>
+              </div>
+              <a
+                href="#"
+                class="text-secondary font-bold flex items-center gap-1 hover:gap-2 transition-all"
+              >
+                Learn More
+                <span class="material-symbols-outlined text-[18px]"
+                  >arrow_forward</span
+                >
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Process Timeline -->
+      <section class="py-24 bg-surface">
+        <div class="max-w-max-width mx-auto px-margin-desktop">
+          <div class="text-center mb-20">
+            <h2 class="font-headline-lg text-headline-lg mb-4">
+              Our Engagement Process
+            </h2>
+            <p class="text-on-surface-variant max-w-xl mx-auto">
+              A phased execution framework to guarantee speed, consistency, and
+              top-tier operations.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+            <!-- Step 1 -->
+            <div
+              class="timeline-step flex flex-col items-center text-center relative z-10"
+            >
+              <div
+                class="w-12 h-12 rounded-full bg-secondary text-on-secondary-fixed font-bold flex items-center justify-center mb-6 border-4 border-surface shadow-lg"
+              >
+                1
+              </div>
+              <h3
+                class="font-headline-md text-headline-md mb-2 text-on-surface"
+              >
+                Discovery & Audit
+              </h3>
+              <p class="text-on-surface-variant text-body-md max-w-[200px]">
+                We assess pipeline metrics, dependency volumes, and key scaling
+                objectives.
+              </p>
+            </div>
+            <!-- Step 2 -->
+            <div
+              class="timeline-step flex flex-col items-center text-center relative z-10"
+            >
+              <div
+                class="w-12 h-12 rounded-full bg-tertiary text-on-tertiary-fixed font-bold flex items-center justify-center mb-6 border-4 border-surface shadow-lg"
+              >
+                2
+              </div>
+              <h3
+                class="font-headline-md text-headline-md mb-2 text-on-surface"
+              >
+                Blueprint Design
+              </h3>
+              <p class="text-on-surface-variant text-body-md max-w-[200px]">
+                Our architects chart the topology mesh, failover mechanisms, and
+                custom code specs.
+              </p>
+            </div>
+            <!-- Step 3 -->
+            <div
+              class="timeline-step flex flex-col items-center text-center relative z-10"
+            >
+              <div
+                class="w-12 h-12 rounded-full bg-primary text-on-primary-fixed font-bold flex items-center justify-center mb-6 border-4 border-surface shadow-lg"
+              >
+                3
+              </div>
+              <h3
+                class="font-headline-md text-headline-md mb-2 text-on-surface"
+              >
+                Integration
+              </h3>
+              <p class="text-on-surface-variant text-body-md max-w-[200px]">
+                We script the webhooks and connectors inside private sandbox
+                environments.
+              </p>
+            </div>
+            <!-- Step 4 -->
+            <div
+              class="timeline-step flex flex-col items-center text-center relative z-10"
+            >
+              <div
+                class="w-12 h-12 rounded-full bg-emerald-500 text-surface font-bold flex items-center justify-center mb-6 border-4 border-surface shadow-lg"
+              >
+                4
+              </div>
+              <h3
+                class="font-headline-md text-headline-md mb-2 text-on-surface"
+              >
+                Scale & Launch
+              </h3>
+              <p class="text-on-surface-variant text-body-md max-w-[200px]">
+                Production cutoff, training delivery, and transition to managed
+                24/7 SLA monitoring.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: CTA Banner -->
+      <section
+        class="py-24 px-margin-mobile md:px-margin-desktop bg-surface-container-low"
+      >
+        <div
+          class="max-w-4xl mx-auto rounded-2xl bg-gradient-to-br from-surface-container to-surface-container-highest border border-outline-variant p-12 text-center relative overflow-hidden shadow-2xl"
+        >
+          <div
+            class="absolute -inset-4 bg-secondary/5 blur-3xl rounded-full"
+          ></div>
+          <div class="relative z-10">
+            <h2 class="font-headline-xl text-headline-xl mb-4">
+              Partner with Stackly's Core Engineers
+            </h2>
+            <p
+              class="text-on-surface-variant text-body-lg mb-8 max-w-xl mx-auto"
+            >
+              Ready to eliminate workflow bottlenecks and scale your logical
+              operations with guaranteed SLAs? Let's connect.
+            </p>
+            <a href="#" class="btn btn-secondary">
+              Schedule An Audit Consultation
+              <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+  </body>
+</html>

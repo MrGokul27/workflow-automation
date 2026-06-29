@@ -1,0 +1,711 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Stackly | Enterprise-Grade Pricing</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <!-- Tailwind Configuration -->
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-low": "#0d1c2d",
+              outline: "#909097",
+              "on-secondary-fixed": "#001e2c",
+              "tertiary-container": "#00055c",
+              "surface-container-high": "#1c2b3c",
+              primary: "#bec6e0",
+              "on-background": "#d4e4fa",
+              "primary-fixed-dim": "#bec6e0",
+              surface: "#051424",
+              "on-secondary": "#00354a",
+              "outline-variant": "#45464d",
+              "on-error": "#690005",
+              "on-secondary-container": "#00374d",
+              tertiary: "#bdc2ff",
+              background: "#051424",
+              "on-tertiary-fixed": "#000767",
+              "inverse-on-surface": "#233143",
+              "surface-container": "#122131",
+              "inverse-surface": "#d4e4fa",
+              "on-surface": "#d4e4fa",
+              "on-primary-fixed-variant": "#3f465c",
+              "on-error-container": "#ffdad6",
+              "secondary-container": "#00a6e0",
+              "on-tertiary-container": "#6c77e1",
+              "surface-container-highest": "#273647",
+              "secondary-fixed-dim": "#7bd0ff",
+              "surface-variant": "#273647",
+              error: "#ffb4ab",
+              "surface-bright": "#2c3a4c",
+              secondary: "#7bd0ff",
+              "secondary-fixed": "#c4e7ff",
+              "on-primary": "#283044",
+              "inverse-primary": "#565e74",
+              "on-surface-variant": "#c6c6cd",
+              "surface-dim": "#051424",
+              "on-primary-fixed": "#131b2e",
+              "surface-tint": "#bec6e0",
+              "tertiary-fixed": "#e0e0ff",
+              "surface-container-lowest": "#010f1f",
+              "tertiary-fixed-dim": "#bdc2ff",
+              "primary-fixed": "#dae2fd",
+              "on-secondary-fixed-variant": "#004c69",
+              "primary-container": "#0f172a",
+              "error-container": "#93000a",
+              "on-primary-container": "#798098",
+              "on-tertiary-fixed-variant": "#2f3aa3",
+              "on-tertiary": "#131e8c",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              unit: "4px",
+              gutter: "16px",
+              "max-width": "1440px",
+              "margin-desktop": "32px",
+              "margin-mobile": "16px",
+            },
+            fontFamily: {
+              "body-lg": ["Inter"],
+              "headline-xl": ["Inter"],
+              "headline-md": ["Inter"],
+              "headline-lg": ["Inter"],
+              "headline-xl-mobile": ["Inter"],
+              "body-md": ["Inter"],
+              "code-sm": ["JetBrains Mono"],
+              "label-md": ["Inter"],
+            },
+            fontSize: {
+              "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "headline-xl": [
+                "36px",
+                {
+                  lineHeight: "44px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "headline-md": [
+                "20px",
+                { lineHeight: "28px", fontWeight: "600" },
+              ],
+              "headline-lg": [
+                "24px",
+                {
+                  lineHeight: "32px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-xl-mobile": [
+                "28px",
+                {
+                  lineHeight: "34px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+              "code-sm": ["13px", { lineHeight: "18px", fontWeight: "400" }],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "600",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        background-color: #051424;
+        color: #d4e4fa;
+        font-family: "Inter", sans-serif;
+      }
+      .canvas-bg {
+        background-image: radial-gradient(
+          circle at 1px 1px,
+          #1e293b 1px,
+          transparent 0
+        );
+        background-size: 24px 24px;
+      }
+      .glass-card {
+        background: rgba(18, 33, 49, 0.7);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(69, 70, 77, 0.3);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .glass-card:hover {
+        border-color: rgba(123, 208, 255, 0.4);
+      }
+      .pro-glow {
+        box-shadow: 0 0 20px rgba(0, 166, 224, 0.2);
+        border-color: var(--color-secondary-container);
+      }
+    </style>
+    <!-- Link Common Stylesheet -->
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <!-- Link Common Script -->
+    <script src="../assets/js/script.js" defer></script>
+  </head>
+  <body
+    data-page="pricing"
+    class="bg-background text-on-background font-body-md selection:bg-secondary/30"
+  >
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <main class="canvas-bg">
+      <!-- 1. Pricing Hero with Toggle -->
+      <section
+        class="relative py-24 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto text-center overflow-hidden"
+      >
+        <div class="relative z-10">
+          <h1 class="font-headline-xl text-headline-xl mb-6">
+            Scale Your Automation Velocity
+          </h1>
+          <p
+            class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-12"
+          >
+            Predictable pricing for DevOps teams and enterprise architects. No
+            hidden fees, just pure technical precision.
+          </p>
+          <div class="flex items-center justify-center gap-4">
+            <span
+              class="font-label-md text-label-md text-on-surface"
+              id="monthly-label"
+              >MONTHLY</span
+            >
+            <button
+              class="relative w-16 h-8 bg-surface-container-high rounded-full p-1 transition-all"
+              id="billing-toggle"
+            >
+              <div
+                class="w-6 h-6 bg-secondary transition-all rounded-full"
+                id="toggle-thumb"
+              ></div>
+            </button>
+            <span
+              class="font-label-md text-label-md text-on-surface-variant flex items-center"
+              id="yearly-label"
+            >
+              ANNUALLY
+              <span
+                class="ml-2 text-secondary text-[10px] border border-secondary px-1 py-0.5 font-bold rounded"
+                >SAVE 20%</span
+              >
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Pricing Cards -->
+      <section
+        class="py-12 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto"
+      >
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+          <!-- Starter -->
+          <div
+            class="glass-card p-8 flex flex-col border-t-4 border-outline rounded-xl"
+          >
+            <div class="font-headline-md text-headline-md mb-2">Starter</div>
+            <div class="text-on-surface-variant font-body-md mb-8">
+              For individual developers and small test pods.
+            </div>
+            <div class="mb-8">
+              <span class="font-headline-xl text-headline-xl text-secondary"
+                >$</span
+              >
+              <span
+                class="font-headline-xl text-headline-xl text-secondary"
+                id="starter-price"
+                >49</span
+              >
+              <span class="text-on-surface-variant font-body-md">/mo</span>
+            </div>
+            <ul
+              class="space-y-4 mb-12 flex-grow font-body-md text-on-surface-variant"
+            >
+              <li class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-secondary text-sm"
+                  >check_circle</span
+                >
+                <span>Up to 10 active workflows</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-secondary text-sm"
+                  >check_circle</span
+                >
+                <span>Standard node library</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-secondary text-sm"
+                  >check_circle</span
+                >
+                <span>10,000 executions / month</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-secondary text-sm"
+                  >check_circle</span
+                >
+                <span>Community Slack support</span>
+              </li>
+            </ul>
+            <a href="#" class="btn btn-outline w-full"
+              >Start Trial</a
+            >
+          </div>
+
+          <!-- Pro -->
+          <div
+            class="glass-card p-8 flex flex-col border-t-4 border-secondary pro-glow rounded-xl relative"
+          >
+            <div
+              class="absolute -top-4 right-6 bg-secondary text-on-secondary-fixed font-label-md text-[10px] px-3 py-1 font-bold rounded-full uppercase tracking-wider"
+            >
+              Most Popular
+            </div>
+            <div class="font-headline-md text-headline-md mb-2">
+              Professional
+            </div>
+            <div class="text-on-surface-variant font-body-md mb-8">
+              For growing technical organizations and platform squads.
+            </div>
+            <div class="mb-8">
+              <span class="font-headline-xl text-headline-xl text-secondary"
+                >$</span
+              >
+              <span
+                class="font-headline-xl text-headline-xl text-secondary"
+                id="pro-price"
+                >199</span
+              >
+              <span class="text-on-surface-variant font-body-md">/mo</span>
+            </div>
+            <ul
+              class="space-y-4 mb-12 flex-grow font-body-md text-on-surface-variant"
+            >
+              <li class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-secondary text-sm"
+                  >check_circle</span
+                >
+                <span class="text-on-surface font-semibold"
+                  >Unlimited workflows</span
+                >
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-secondary text-sm"
+                  >check_circle</span
+                >
+                <span>Premium node library (AWS, SQL, etc.)</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-secondary text-sm"
+                  >check_circle</span
+                >
+                <span>150,000 executions / month</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-secondary text-sm"
+                  >check_circle</span
+                >
+                <span>4-hour response support ticket SLA</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-secondary text-sm"
+                  >check_circle</span
+                >
+                <span>Advanced logging & telemetry</span>
+              </li>
+            </ul>
+            <a href="#" class="btn btn-secondary w-full"
+              >Get Professional</a
+            >
+          </div>
+
+          <!-- Enterprise -->
+          <div
+            class="glass-card p-8 flex flex-col border-t-4 border-tertiary rounded-xl"
+          >
+            <div class="font-headline-md text-headline-md mb-2">Enterprise</div>
+            <div class="text-on-surface-variant font-body-md mb-8">
+              For critical infrastructure and strict security requirements.
+            </div>
+            <div class="mb-8">
+              <span class="font-headline-xl text-headline-xl text-tertiary"
+                >Custom</span
+              >
+            </div>
+            <ul
+              class="space-y-4 mb-12 flex-grow font-body-md text-on-surface-variant"
+            >
+              <li class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-tertiary text-sm"
+                  >check_circle</span
+                >
+                <span>Self-hosted / Private cloud deployment</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-tertiary text-sm"
+                  >check_circle</span
+                >
+                <span>Custom connector engineering</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-tertiary text-sm"
+                  >check_circle</span
+                >
+                <span>Unlimited executions</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-tertiary text-sm"
+                  >check_circle</span
+                >
+                <span>24/7 pager support & dedicated TAM</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-tertiary text-sm"
+                  >check_circle</span
+                >
+                <span>SSO/SAML, audit logs & RBAC</span>
+              </li>
+            </ul>
+            <a href="#" class="btn btn-outline w-full"
+              >Contact Sales</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. ROI Calculator -->
+      <section
+        class="py-24 bg-surface-container-low/40 border-y border-outline-variant/30"
+      >
+        <div class="max-w-4xl mx-auto px-margin-mobile md:px-margin-desktop">
+          <div class="text-center mb-16">
+            <span class="section-badge">Calculator</span>
+            <h2 class="font-headline-lg text-headline-lg mb-4">
+              Calculate Your Engineering ROI
+            </h2>
+            <p class="text-on-surface-variant">
+              Estimate the annual savings of offloading repetitive operational
+              tasks to Stackly.
+            </p>
+          </div>
+          <div
+            class="glass-card p-8 md:p-12 rounded-2xl grid md:grid-cols-2 gap-12 items-center"
+          >
+            <div class="space-y-8">
+              <!-- Metric 1 -->
+              <div class="space-y-4">
+                <div class="flex justify-between font-bold">
+                  <span>Weekly manual hours saved</span>
+                  <span class="text-secondary"
+                    ><span id="hours-display">20</span> hours</span
+                  >
+                </div>
+                <input
+                  class="w-full accent-secondary"
+                  id="roi-hours"
+                  max="100"
+                  min="5"
+                  step="5"
+                  type="range"
+                  value="20"
+                />
+              </div>
+              <!-- Metric 2 -->
+              <div class="space-y-4">
+                <div class="flex justify-between font-bold">
+                  <span>Blended dev/ops hourly rate</span>
+                  <span class="text-secondary"
+                    >$<span id="rate-display">75</span>/hr</span
+                  >
+                </div>
+                <input
+                  class="w-full accent-secondary"
+                  id="roi-rate"
+                  max="200"
+                  min="40"
+                  step="5"
+                  type="range"
+                  value="75"
+                />
+              </div>
+            </div>
+            <div
+              class="text-center p-8 bg-surface-container rounded-xl border border-outline-variant/30 flex flex-col justify-center items-center"
+            >
+              <div
+                class="text-outline text-label-md font-label-md uppercase tracking-wider mb-2"
+              >
+                Estimated Annual Savings
+              </div>
+              <div
+                class="text-headline-xl text-secondary font-headline-xl font-bold mb-4"
+                id="roi-result"
+              >
+                $62,400
+              </div>
+              <p class="text-[12px] text-on-surface-variant leading-relaxed">
+                Calculated on standard developer load offsets over 52 weeks at
+                80% automated execution efficiency.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Enterprise details -->
+      <section
+        class="py-24 max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop"
+      >
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div
+            class="h-[400px] rounded-2xl overflow-hidden glass-card relative group"
+          >
+            <div
+              class="w-full h-full bg-cover bg-center opacity-85 group-hover:scale-105 transition-all duration-700"
+              data-alt="Close up of enterprise computing hardware in a modern server room, featuring deep blue led indicators and optical fiber networks. Minimalist, professional high-fidelity engineering aesthetic."
+              style="
+                background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAWU1OIBmxncZEYqCW3gm0_O7AXCR1RTm8FpFBCL3_tJVz53IcJ7am5-_hX7lwrAoZad_-WVolqx9pG1fG_4c2giXshP2UoWQfVBnkqZNNznI8Bk_MMzoSLSp-chJC-_tx5FSZMDPSxII56AcxfXNU2b8daiB1Hs0QvATbfoQ_mNqAo4Bcvxd2qZXAblrSHu-y1E_r63trbua-oK0zuiVSY08K79JWyL8qsR61zE3cZMMu5SUtAPbhlBCWW1C60pCRPel5pdVHfWM8K&quot;);
+              "
+            ></div>
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-surface to-transparent opacity-60"
+            ></div>
+          </div>
+          <div>
+            <h2 class="font-headline-lg text-headline-lg mb-6">
+              Built for the Global Fortune 500
+            </h2>
+            <p class="text-on-surface-variant mb-8 text-body-lg">
+              Our Enterprise plan isn't just about more features—it's about
+              becoming an extension of your infrastructure. We offer white-glove
+              onboarding, dedicated Slack channels, and a 99.99% Uptime SLA.
+            </p>
+            <div class="space-y-4 mb-10">
+              <div class="flex items-start gap-4">
+                <span class="material-symbols-outlined text-secondary"
+                  >security</span
+                >
+                <div>
+                  <div class="font-bold">Air-Gapped Security</div>
+                  <div class="text-on-surface-variant text-body-md">
+                    Self-hosted control planes for ultra-secure enterprise
+                    environments.
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <span class="material-symbols-outlined text-secondary"
+                  >diversity_3</span
+                >
+                <div>
+                  <div class="font-bold">Custom Logic Assistance</div>
+                  <div class="text-on-surface-variant text-body-md">
+                    Our core engineers help you architect complex
+                    mission-critical logic loops.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a href="#" class="btn btn-secondary w-full md:w-auto">
+              Request a Specialized Quote
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Customer Success -->
+      <section
+        class="py-24 bg-surface-container-highest/20 border-t border-outline-variant/30"
+      >
+        <div
+          class="px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto"
+        >
+          <h2 class="font-headline-lg text-headline-lg mb-12 text-center">
+            Powering Industry Leaders
+          </h2>
+          <div class="grid md:grid-cols-3 gap-gutter">
+            <div class="glass-card p-6 flex flex-col rounded-xl">
+              <div class="mb-4 flex items-center gap-2">
+                <div
+                  class="w-10 h-10 bg-secondary rounded-full flex items-center justify-center text-on-secondary font-bold"
+                >
+                  V
+                </div>
+                <span class="font-bold text-on-surface">Vortex Systems</span>
+              </div>
+              <p class="italic text-on-surface-variant mb-6 text-body-md">
+                "Stackly reduced our deployment cycle from 6 hours to 12
+                minutes. The Pro tier ROI was visible within the first week."
+              </p>
+              <div class="mt-auto">
+                <div class="font-bold text-sm">Sarah Chen</div>
+                <div class="text-on-surface-variant text-[12px]">
+                  VP Engineering
+                </div>
+              </div>
+            </div>
+            <div class="glass-card p-6 flex flex-col rounded-xl">
+              <div class="mb-4 flex items-center gap-2">
+                <div
+                  class="w-10 h-10 bg-tertiary rounded-full flex items-center justify-center text-on-tertiary font-bold"
+                >
+                  L
+                </div>
+                <span class="font-bold text-on-surface">Lumina Cloud</span>
+              </div>
+              <p class="italic text-on-surface-variant mb-6 text-body-md">
+                "The enterprise support is unmatched. Having a dedicated success
+                manager meant we could scale without fear."
+              </p>
+              <div class="mt-auto">
+                <div class="font-bold text-sm">Marcus Thorne</div>
+                <div class="text-on-surface-variant text-[12px]">CTO</div>
+              </div>
+            </div>
+            <div class="glass-card p-6 flex flex-col rounded-xl">
+              <div class="mb-4 flex items-center gap-2">
+                <div
+                  class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-on-primary font-bold"
+                >
+                  N
+                </div>
+                <span class="font-bold text-on-surface">Nebula Fintech</span>
+              </div>
+              <p class="italic text-on-surface-variant mb-6 text-body-md">
+                "We integrated over 400 microservices using Stackly's premium
+                nodes. It's the backbone of our data pipeline."
+              </p>
+              <div class="mt-auto">
+                <div class="font-bold text-sm">Elena Rodriguez</div>
+                <div class="text-on-surface-variant text-[12px]">
+                  Lead Architect
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. FAQ Section -->
+      <section
+        class="py-24 px-margin-mobile md:px-margin-desktop max-w-4xl mx-auto"
+      >
+        <h2 class="font-headline-lg text-headline-lg mb-12 text-center">
+          Billing &amp; Logistics FAQ
+        </h2>
+        <div class="space-y-4">
+          <details
+            class="group glass-card p-6 cursor-pointer open:border-secondary rounded-xl"
+          >
+            <summary
+              class="flex justify-between items-center list-none font-bold text-on-surface"
+            >
+              Can I switch between plans at any time?
+              <span
+                class="material-symbols-outlined transition-transform group-open:rotate-180"
+                >expand_more</span
+              >
+            </summary>
+            <p
+              class="mt-4 text-on-surface-variant text-body-md leading-relaxed"
+            >
+              Yes, you can upgrade or downgrade at any time. If you upgrade, the
+              change is immediate and we'll prorate the difference. Downgrades
+              take effect at the end of your current billing cycle.
+            </p>
+          </details>
+          <details
+            class="group glass-card p-6 cursor-pointer open:border-secondary rounded-xl"
+          >
+            <summary
+              class="flex justify-between items-center list-none font-bold text-on-surface"
+            >
+              What happens if I exceed my workflow limit?
+              <span
+                class="material-symbols-outlined transition-transform group-open:rotate-180"
+                >expand_more</span
+              >
+            </summary>
+            <p
+              class="mt-4 text-on-surface-variant text-body-md leading-relaxed"
+            >
+              On the Starter plan, you'll receive a notification 24 hours before
+              your workflows are paused. On Professional and Enterprise plans,
+              we offer unlimited workflows so you never have to worry about
+              hitting a hard cap.
+            </p>
+          </details>
+          <details
+            class="group glass-card p-6 cursor-pointer open:border-secondary rounded-xl"
+          >
+            <summary
+              class="flex justify-between items-center list-none font-bold text-on-surface"
+            >
+              Do you offer discounts for non-profits or open source?
+              <span
+                class="material-symbols-outlined transition-transform group-open:rotate-180"
+                >expand_more</span
+              >
+            </summary>
+            <p
+              class="mt-4 text-on-surface-variant text-body-md leading-relaxed"
+            >
+              Absolutely. We support the community. Verified non-profits and
+              registered open-source projects are eligible for a 50% discount on
+              any Professional plan. Contact our support team to apply.
+            </p>
+          </details>
+          <details
+            class="group glass-card p-6 cursor-pointer open:border-secondary rounded-xl"
+          >
+            <summary
+              class="flex justify-between items-center list-none font-bold text-on-surface"
+            >
+              How secure is my billing information?
+              <span
+                class="material-symbols-outlined transition-transform group-open:rotate-180"
+                >expand_more</span
+              >
+            </summary>
+            <p
+              class="mt-4 text-on-surface-variant text-body-md leading-relaxed"
+            >
+              We use Stripe for all payment processing. Your credit card
+              information never touches our servers. We are fully PCI-DSS Level
+              1 compliant.
+            </p>
+          </details>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+  </body>
+</html>

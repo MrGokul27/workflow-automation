@@ -1,0 +1,795 @@
+﻿<!doctype html>
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Case Studies | Stackly Automation</title>
+    <meta
+      name="description"
+      content="Explore how enterprise leaders leverage Stackly's high-velocity automation to eliminate operational friction and scale technical precision globally."
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-low": "#0d1c2d",
+              outline: "#909097",
+              "on-secondary-fixed": "#001e2c",
+              "tertiary-container": "#00055c",
+              "surface-container-high": "#1c2b3c",
+              primary: "#bec6e0",
+              "on-background": "#d4e4fa",
+              "primary-fixed-dim": "#bec6e0",
+              surface: "#051424",
+              "on-secondary": "#00354a",
+              "outline-variant": "#45464d",
+              "on-error": "#690005",
+              "on-secondary-container": "#00374d",
+              tertiary: "#bdc2ff",
+              background: "#051424",
+              "on-tertiary-fixed": "#000767",
+              "inverse-on-surface": "#233143",
+              "surface-container": "#122131",
+              "inverse-surface": "#d4e4fa",
+              "on-surface": "#d4e4fa",
+              "on-primary-fixed-variant": "#3f465c",
+              "on-error-container": "#ffdad6",
+              "secondary-container": "#00a6e0",
+              "on-tertiary-container": "#6c77e1",
+              "surface-container-highest": "#273647",
+              "secondary-fixed-dim": "#7bd0ff",
+              "surface-variant": "#273647",
+              error: "#ffb4ab",
+              "surface-bright": "#2c3a4c",
+              secondary: "#7bd0ff",
+              "secondary-fixed": "#c4e7ff",
+              "on-primary": "#283044",
+              "inverse-primary": "#565e74",
+              "on-surface-variant": "#c6c6cd",
+              "surface-dim": "#051424",
+              "on-primary-fixed": "#131b2e",
+              "surface-tint": "#bec6e0",
+              "tertiary-fixed": "#e0e0ff",
+              "surface-container-lowest": "#010f1f",
+              "tertiary-fixed-dim": "#bdc2ff",
+              "primary-fixed": "#dae2fd",
+              "on-secondary-fixed-variant": "#004c69",
+              "primary-container": "#0f172a",
+              "error-container": "#93000a",
+              "on-primary-container": "#798098",
+              "on-tertiary-fixed-variant": "#2f3aa3",
+              "on-tertiary": "#131e8c",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              unit: "4px",
+              gutter: "16px",
+              "max-width": "1440px",
+              "margin-desktop": "32px",
+              "margin-mobile": "16px",
+            },
+            fontFamily: {
+              "body-lg": ["Inter"],
+              "headline-xl": ["Inter"],
+              "headline-md": ["Inter"],
+              "headline-lg": ["Inter"],
+              "body-md": ["Inter"],
+              "code-sm": ["JetBrains Mono"],
+              "label-md": ["Inter"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      .dot-grid {
+        background-image: radial-gradient(circle, #1e293b 1px, transparent 1px);
+        background-size: 24px 24px;
+      }
+      .bento-card {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .bento-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 30px -10px rgba(0, 166, 224, 0.2);
+      }
+    </style>
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <script src="../assets/js/script.js" defer></script>
+  </head>
+  <body
+    data-page="case-studies"
+    class="bg-background text-on-surface font-body-md overflow-x-hidden selection:bg-secondary/30"
+  >
+    <div id="header-placeholder"></div>
+    <main class="pt-16">
+      <!-- Section 1: Hero -->
+      <section
+        class="relative min-h-[580px] flex items-center justify-center overflow-hidden border-b border-outline-variant"
+      >
+        <div class="absolute inset-0 z-0">
+          <img
+            src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1400&q=80"
+            alt=""
+            class="w-full h-full object-cover opacity-15"
+          />
+          <div
+            class="absolute inset-0 bg-gradient-to-b from-surface/50 via-surface/70 to-surface"
+          ></div>
+        </div>
+        <div
+          class="relative z-10 px-margin-mobile md:px-margin-desktop text-center max-w-4xl mx-auto"
+        >
+          <div
+            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/10 border border-secondary/30 text-secondary mb-6"
+          >
+            <span class="material-symbols-outlined text-[18px]">verified</span>
+            <span class="font-label-md text-label-md uppercase tracking-widest"
+              >Global Success Index</span
+            >
+          </div>
+          <h1
+            class="font-headline-xl text-headline-xl md:text-5xl text-on-surface mb-6 leading-tight"
+          >
+            Real Work, <span class="text-secondary">Real Results</span>
+          </h1>
+          <p
+            class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-10"
+          >
+            Explore how enterprise leaders leverage Stackly's high-velocity
+            automation to eliminate operational friction and scale technical
+            precision globally.
+          </p>
+          <div
+            class="flex flex-col sm:flex-row items-center justify-center gap-4"
+          >
+            <a
+              class="px-8 py-4 bg-secondary text-on-secondary-fixed font-bold rounded-lg transition-all hover:shadow-[0_0_20px_rgba(123,208,255,0.4)] hover:brightness-110"
+              href="#"
+              >View Featured Story</a
+            >
+            <a
+              class="px-8 py-4 border border-outline-variant text-on-surface font-bold rounded-lg hover:bg-surface-variant transition-all"
+              href="#"
+              >Browse Industries</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Industry Filter Bento Grid -->
+      <section
+        class="py-24 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto dot-grid"
+        id="grid"
+      >
+        <div
+          class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6"
+        >
+          <div>
+            <h2 class="font-headline-lg text-headline-lg mb-2">
+              Industry Solutions
+            </h2>
+            <p class="text-on-surface-variant">
+              Filter our database of technical implementations.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <button
+              class="px-4 py-2 rounded-full bg-secondary text-on-secondary-fixed font-bold"
+            >
+              All sectors
+            </button>
+            <button
+              class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-all"
+            >
+              FinTech
+            </button>
+            <button
+              class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-all"
+            >
+              Logistics
+            </button>
+            <button
+              class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-all"
+            >
+              Healthcare
+            </button>
+            <button
+              class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-all"
+            >
+              DevOps
+            </button>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+          <!-- Card 1 - Large with image -->
+          <div
+            class="md:col-span-8 bento-card bg-surface-container-low rounded-xl border border-outline-variant overflow-hidden group"
+          >
+            <div class="relative h-56 overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=900&q=80"
+                alt="Financial trading infrastructure"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-b from-transparent to-surface-container-low/90"
+              ></div>
+            </div>
+            <div class="p-8">
+              <div
+                class="text-secondary font-label-md uppercase mb-3 tracking-widest"
+              >
+                Financial Services
+              </div>
+              <h3 class="font-headline-md text-headline-md mb-3">
+                Zero-Latency Trading Infrastructure for Global Hedge Fund
+              </h3>
+              <p class="text-on-surface-variant mb-4 max-w-lg">
+                How Stackly optimized sub-millisecond execution patterns across
+                distributed cloud clusters.
+              </p>
+              <a
+                href="#"
+                class="text-secondary flex items-center gap-1 font-bold hover:underline"
+                >Read Case Study
+                <span class="material-symbols-outlined text-[18px]"
+                  >arrow_forward</span
+                ></a
+              >
+            </div>
+          </div>
+          <!-- Card 2 -->
+          <div
+            class="md:col-span-4 bento-card bg-surface-container-low rounded-xl border border-outline-variant p-8 flex flex-col"
+          >
+            <div
+              class="text-on-tertiary-container font-label-md uppercase mb-4 tracking-widest"
+            >
+              Automation
+            </div>
+            <h3 class="font-headline-md text-headline-md mb-4">
+              CI/CD Pipeline Redesign
+            </h3>
+            <p class="text-on-surface-variant mb-6">
+              Cutting deployment cycles from 45 minutes to 180 seconds for a
+              SaaS unicorn.
+            </p>
+            <div class="mt-auto">
+              <div
+                class="w-full bg-surface-container-highest h-2 rounded-full mb-2"
+              >
+                <div class="bg-secondary w-[85%] h-full rounded-full"></div>
+              </div>
+              <div
+                class="flex justify-between text-label-md text-on-surface-variant"
+              >
+                <span>85% Efficiency Gain</span>
+              </div>
+            </div>
+          </div>
+          <!-- Card 3 -->
+          <div
+            class="md:col-span-4 bento-card bg-surface-container-low rounded-xl border border-outline-variant p-8"
+          >
+            <div class="flex flex-col h-full">
+              <div
+                class="text-on-secondary-container font-label-md uppercase mb-4 tracking-widest"
+              >
+                Cybersecurity
+              </div>
+              <h3 class="font-headline-md text-headline-md mb-4">
+                Autonomous Threat Response
+              </h3>
+              <p class="text-on-surface-variant">
+                Neutralizing 99.9% of edge-layer vulnerabilities before human
+                detection.
+              </p>
+              <div class="mt-8">
+                <span
+                  class="material-symbols-outlined text-[48px] text-secondary"
+                  >shield</span
+                >
+              </div>
+            </div>
+          </div>
+          <!-- Card 4 - with code block -->
+          <div
+            class="md:col-span-8 bento-card bg-surface-container-low rounded-xl border border-outline-variant p-8 flex flex-col md:flex-row gap-8"
+          >
+            <div class="flex-1">
+              <div
+                class="text-secondary font-label-md uppercase mb-4 tracking-widest"
+              >
+                Infrastructure
+              </div>
+              <h3 class="font-headline-md text-headline-md mb-4">
+                Multi-Cloud Orchestration
+              </h3>
+              <p class="text-on-surface-variant mb-4">
+                Managing 45,000 active nodes across three major cloud providers
+                with a unified logic layer.
+              </p>
+              <button
+                class="bg-surface-container-highest px-4 py-2 rounded text-body-md hover:bg-surface-bright transition-all"
+              >
+                Download Technical Specs
+              </button>
+            </div>
+            <div
+              class="flex-1 rounded-lg border border-outline-variant bg-surface overflow-hidden"
+            >
+              <div class="p-2 border-b border-outline-variant flex gap-1.5">
+                <div class="w-2 h-2 rounded-full bg-error"></div>
+                <div class="w-2 h-2 rounded-full bg-secondary"></div>
+                <div
+                  class="w-2 h-2 rounded-full bg-on-tertiary-container"
+                ></div>
+              </div>
+              <pre
+                class="p-4 font-code-sm text-code-sm text-on-surface-variant"
+              ><code>Stackly init --cloud-node
+checking connectivity... [OK]
+balancing payload [7.4ms]
+status: optimized</code></pre>
+            </div>
+          </div>
+          <!-- Card 5 - Healthcare with image -->
+          <div
+            class="md:col-span-6 bento-card bg-surface-container-low rounded-xl border border-outline-variant overflow-hidden group"
+          >
+            <div class="relative h-44 overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=700&q=80"
+                alt="Healthcare automation"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-b from-transparent to-surface-container-low/80"
+              ></div>
+            </div>
+            <div class="p-6">
+              <div
+                class="text-tertiary font-label-md uppercase mb-2 tracking-widest"
+              >
+                Healthcare
+              </div>
+              <h3 class="font-headline-md text-headline-md mb-2">
+                Patient Workflow Automation
+              </h3>
+              <p class="text-on-surface-variant text-body-md">
+                Reducing hospital admin overhead by 70% through intelligent
+                scheduling and record automation.
+              </p>
+              <div class="mt-4 flex items-center gap-3">
+                <span class="text-secondary font-bold text-2xl">70%</span
+                ><span class="text-on-surface-variant text-body-md"
+                  >Admin Overhead Reduction</span
+                >
+              </div>
+            </div>
+          </div>
+          <!-- Card 6 - Logistics with image -->
+          <div
+            class="md:col-span-6 bento-card bg-surface-container-low rounded-xl border border-outline-variant overflow-hidden group"
+          >
+            <div class="relative h-44 overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=700&q=80"
+                alt="Logistics supply chain"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-b from-transparent to-surface-container-low/80"
+              ></div>
+            </div>
+            <div class="p-6">
+              <div
+                class="text-on-secondary-container font-label-md uppercase mb-2 tracking-widest"
+              >
+                Logistics
+              </div>
+              <h3 class="font-headline-md text-headline-md mb-2">
+                Supply Chain Optimization
+              </h3>
+              <p class="text-on-surface-variant text-body-md">
+                Real-time route optimization and inventory prediction across
+                12,000+ delivery nodes.
+              </p>
+              <div class="mt-4 flex items-center gap-3">
+                <span class="text-secondary font-bold text-2xl">12x</span
+                ><span class="text-on-surface-variant text-body-md"
+                  >Delivery Speed Increase</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Featured Success Story -->
+      <section
+        class="py-24 bg-surface-container-low relative overflow-hidden"
+        id="featured"
+      >
+        <div
+          class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop"
+        >
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="relative">
+              <div
+                class="absolute -top-10 -left-10 w-40 h-40 bg-secondary/10 rounded-full blur-3xl"
+              ></div>
+              <div
+                class="relative z-10 rounded-2xl overflow-hidden border border-outline-variant shadow-2xl"
+              >
+                <img
+                  class="w-full h-[380px] object-cover"
+                  alt="TechGlobal Corp command center"
+                  src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80"
+                />
+              </div>
+              <div
+                class="absolute -bottom-6 -right-6 bg-surface-bright border border-outline-variant p-6 rounded-xl shadow-lg"
+              >
+                <div class="flex items-center gap-4">
+                  <div
+                    class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center text-on-secondary-fixed"
+                  >
+                    <span class="material-symbols-outlined">trending_up</span>
+                  </div>
+                  <div>
+                    <div class="text-headline-md font-bold text-on-surface">
+                      +124%
+                    </div>
+                    <div class="text-label-md text-on-surface-variant">
+                      Annual ROI
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div
+                class="inline-block px-3 py-1 rounded bg-tertiary/10 border border-tertiary/30 text-tertiary mb-6 font-label-md uppercase tracking-wider"
+              >
+                Spotlight: TechGlobal Corp
+              </div>
+              <h2
+                class="font-headline-lg text-headline-lg text-on-surface mb-6"
+              >
+                Transforming Legacy Enterprise Logic into High-Velocity
+                Automation
+              </h2>
+              <p class="font-body-lg text-body-lg text-on-surface-variant mb-8">
+                "Before Stackly, our infrastructure was a black box of manual
+                scripts and fragile hand-offs. Now, we have a unified
+                operational brain that thinks faster than our engineers can."
+              </p>
+              <div class="flex items-center gap-4 mb-10">
+                <div
+                  class="w-12 h-12 rounded-full overflow-hidden border border-outline-variant"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80"
+                    alt="Sarah J. Mitchell"
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div>
+                  <div class="font-bold text-on-surface">Sarah J. Mitchell</div>
+                  <div class="text-body-md text-on-surface-variant">
+                    Chief Operations Officer, TechGlobal
+                  </div>
+                </div>
+              </div>
+              <button
+                class="bg-secondary text-on-secondary-fixed font-bold px-8 py-3 rounded-lg flex items-center gap-2 hover:brightness-110 transition-all"
+              >
+                Read Full Narrative
+                <span class="material-symbols-outlined">description</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: Client Logos with Quotes -->
+      <section
+        class="py-24 px-margin-mobile md:px-margin-desktop border-t border-outline-variant"
+      >
+        <div class="max-w-max-width mx-auto">
+          <div class="text-center mb-16">
+            <h2 class="font-headline-lg text-headline-lg mb-2">
+              Trusted by Technical Visionaries
+            </h2>
+            <p class="text-on-surface-variant">
+              Powering the backbone of the next-generation digital economy.
+            </p>
+          </div>
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter"
+          >
+            <div
+              class="p-6 rounded-xl border border-outline-variant bg-surface hover:bg-surface-container transition-all group"
+            >
+              <div
+                class="h-12 flex items-center mb-6 opacity-60 group-hover:opacity-100 transition-all"
+              >
+                <div class="font-bold text-xl tracking-tighter text-on-surface">
+                  VELOCITY<span class="text-secondary">AI</span>
+                </div>
+              </div>
+              <p class="italic text-on-surface-variant mb-4">
+                "The only platform that handles our scale without sacrificing
+                security."
+              </p>
+              <div class="text-label-md font-bold text-secondary">
+                Director of Eng
+              </div>
+            </div>
+            <div
+              class="p-6 rounded-xl border border-outline-variant bg-surface hover:bg-surface-container transition-all group"
+            >
+              <div
+                class="h-12 flex items-center mb-6 opacity-60 group-hover:opacity-100 transition-all"
+              >
+                <div class="font-bold text-xl tracking-tighter text-on-surface">
+                  CLOUD<span class="text-tertiary">SPHERE</span>
+                </div>
+              </div>
+              <p class="italic text-on-surface-variant mb-4">
+                "Stackly turned our 2-week onboarding into a 2-hour automated
+                flow."
+              </p>
+              <div class="text-label-md font-bold text-secondary">
+                Head of Product
+              </div>
+            </div>
+            <div
+              class="p-6 rounded-xl border border-outline-variant bg-surface hover:bg-surface-container transition-all group"
+            >
+              <div
+                class="h-12 flex items-center mb-6 opacity-60 group-hover:opacity-100 transition-all"
+              >
+                <div class="font-bold text-xl tracking-tighter text-on-surface">
+                  QUANTUM<span class="text-error">CORE</span>
+                </div>
+              </div>
+              <p class="italic text-on-surface-variant mb-4">
+                "Mathematical precision meet world-class UI. Truly a dev's dream
+                tool."
+              </p>
+              <div class="text-label-md font-bold text-secondary">
+                VP Systems
+              </div>
+            </div>
+            <div
+              class="p-6 rounded-xl border border-outline-variant bg-surface hover:bg-surface-container transition-all group"
+            >
+              <div
+                class="h-12 flex items-center mb-6 opacity-60 group-hover:opacity-100 transition-all"
+              >
+                <div class="font-bold text-xl tracking-tighter text-on-surface">
+                  OMEGA<span class="text-on-secondary-container">FLOW</span>
+                </div>
+              </div>
+              <p class="italic text-on-surface-variant mb-4">
+                "Reliability was our #1 concern. Stackly has had 0% downtime
+                since launch."
+              </p>
+              <div class="text-label-md font-bold text-secondary">
+                DevOps Lead
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 5: Performance Metrics -->
+      <section class="py-24 bg-surface relative">
+        <div
+          class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 lg:grid-cols-3 gap-12"
+        >
+          <div class="lg:col-span-1">
+            <h2 class="font-headline-lg text-headline-lg mb-6">
+              Aggregated Impact Metrics
+            </h2>
+            <p class="text-on-surface-variant mb-8">
+              Performance data across our entire ecosystem over the last 12
+              months. All metrics are verified by independent third-party audit.
+            </p>
+            <div
+              class="p-6 rounded-lg bg-surface-container-high border border-outline-variant"
+            >
+              <div class="flex items-center gap-3 text-secondary mb-2">
+                <span class="material-symbols-outlined">data_exploration</span
+                ><span class="font-label-md uppercase tracking-widest"
+                  >Real-time Data</span
+                >
+              </div>
+              <div class="text-headline-md font-bold mb-1">1.2 Trillion</div>
+              <p class="text-body-md text-on-surface-variant">
+                Automated logic triggers executed annually.
+              </p>
+            </div>
+          </div>
+          <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-gutter">
+            <div
+              class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant relative overflow-hidden group"
+            >
+              <div class="relative z-10">
+                <div class="text-on-surface-variant mb-2">OpEx Reduction</div>
+                <div class="text-headline-xl font-bold text-secondary mb-4">
+                  64%
+                </div>
+                <p class="text-body-md text-on-surface-variant">
+                  Average decrease in operational expenses post-implementation
+                  within 6 months.
+                </p>
+              </div>
+              <div
+                class="absolute bottom-0 right-0 w-32 h-32 opacity-5 group-hover:scale-110 transition-transform"
+              >
+                <span class="material-symbols-outlined text-[128px]"
+                  >account_balance_wallet</span
+                >
+              </div>
+            </div>
+            <div
+              class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant relative overflow-hidden group"
+            >
+              <div class="relative z-10">
+                <div class="text-on-surface-variant mb-2">
+                  Mean Time To Recovery
+                </div>
+                <div
+                  class="text-headline-xl font-bold text-on-tertiary-container mb-4"
+                >
+                  -82%
+                </div>
+                <p class="text-body-md text-on-surface-variant">
+                  Reduction in system downtime duration through autonomous
+                  healing nodes.
+                </p>
+              </div>
+              <div
+                class="absolute bottom-0 right-0 w-32 h-32 opacity-5 group-hover:scale-110 transition-transform"
+              >
+                <span class="material-symbols-outlined text-[128px]">bolt</span>
+              </div>
+            </div>
+            <div
+              class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant relative overflow-hidden group"
+            >
+              <div class="relative z-10">
+                <div class="text-on-surface-variant mb-2">Human Error Rate</div>
+                <div class="text-headline-xl font-bold text-tertiary mb-4">
+                  &lt;0.01%
+                </div>
+                <p class="text-body-md text-on-surface-variant">
+                  Achieving near-perfect accuracy by replacing manual JSON
+                  parsing with FlowLogic.
+                </p>
+              </div>
+              <div
+                class="absolute bottom-0 right-0 w-32 h-32 opacity-5 group-hover:scale-110 transition-transform"
+              >
+                <span class="material-symbols-outlined text-[128px]"
+                  >psychology</span
+                >
+              </div>
+            </div>
+            <div
+              class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant relative overflow-hidden group"
+            >
+              <div class="relative z-10">
+                <div class="text-on-surface-variant mb-2">
+                  Deployment Velocity
+                </div>
+                <div class="text-headline-xl font-bold text-primary mb-4">
+                  12x
+                </div>
+                <p class="text-body-md text-on-surface-variant">
+                  Faster shipping cadence for product teams integrated into the
+                  Stackly API.
+                </p>
+              </div>
+              <div
+                class="absolute bottom-0 right-0 w-32 h-32 opacity-5 group-hover:scale-110 transition-transform"
+              >
+                <span class="material-symbols-outlined text-[128px]"
+                  >rocket_launch</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 6: Submit Success Story CTA -->
+      <section
+        class="py-32 px-margin-mobile md:px-margin-desktop relative overflow-hidden border-t border-outline-variant"
+      >
+        <div class="absolute inset-0 bg-surface-container-low z-0"></div>
+        <div class="max-w-3xl mx-auto text-center relative z-10">
+          <h2 class="font-headline-xl text-headline-xl mb-6">
+            Ready to lead the next evolution?
+          </h2>
+          <p class="font-body-lg text-body-lg text-on-surface-variant mb-12">
+            Whether you've just automated your first pipeline or optimized a
+            global cluster, we want to feature your success. Join the ranks of
+            industry leaders.
+          </p>
+          <div
+            class="bg-surface/80 backdrop-blur-xl border border-outline-variant p-8 rounded-2xl text-left"
+          >
+            <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="space-y-2">
+                <label class="font-label-md uppercase text-on-surface-variant"
+                  >Company Name</label
+                ><input
+                  class="w-full bg-surface-container border border-outline-variant text-on-surface rounded-lg px-4 py-3 focus:ring-1 focus:ring-secondary focus:border-secondary transition-all placeholder:text-outline"
+                  placeholder="e.g. Stackly"
+                  type="text"
+                />
+              </div>
+              <div class="space-y-2">
+                <label class="font-label-md uppercase text-on-surface-variant"
+                  >Impact Metric</label
+                ><input
+                  class="w-full bg-surface-container border border-outline-variant text-on-surface rounded-lg px-4 py-3 focus:ring-1 focus:ring-secondary focus:border-secondary transition-all placeholder:text-outline"
+                  placeholder="e.g. 50% increase in speed"
+                  type="text"
+                />
+              </div>
+              <div class="md:col-span-2 space-y-2">
+                <label class="font-label-md uppercase text-on-surface-variant"
+                  >Brief Narrative Summary</label
+                ><textarea
+                  class="w-full bg-surface-container border border-outline-variant text-on-surface rounded-lg px-4 py-3 focus:ring-1 focus:ring-secondary focus:border-secondary transition-all placeholder:text-outline"
+                  placeholder="Describe your technical victory..."
+                  rows="3"
+                ></textarea>
+              </div>
+              <div class="md:col-span-2">
+                <button
+                  class="w-full bg-secondary text-on-secondary-fixed font-bold py-4 rounded-lg hover:brightness-110 active:scale-[0.98] transition-all"
+                  type="submit"
+                >
+                  Submit Story for Review
+                </button>
+              </div>
+            </form>
+            <p class="text-center text-label-md text-on-surface-variant mt-4">
+              By submitting, you agree to our
+              <a class="underline text-secondary" href="#"
+                >Case Study Disclosure Policy</a
+              >.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <div id="footer-placeholder"></div>
+  </body>
+</html>
