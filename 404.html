@@ -1,0 +1,385 @@
+<!doctype html>
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>404 - Logic Path Terminated | Stackly</title>
+    <meta
+      name="description"
+      content="The page you're looking for could not be found."
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-low": "#0d1c2d",
+              outline: "#909097",
+              "on-secondary-fixed": "#001e2c",
+              "tertiary-container": "#00055c",
+              "surface-container-high": "#1c2b3c",
+              primary: "#bec6e0",
+              "on-background": "#d4e4fa",
+              "primary-fixed-dim": "#bec6e0",
+              surface: "#051424",
+              "on-secondary": "#00354a",
+              "outline-variant": "#45464d",
+              "on-error": "#690005",
+              "on-secondary-container": "#00374d",
+              tertiary: "#bdc2ff",
+              background: "#051424",
+              "on-tertiary-fixed": "#000767",
+              "inverse-on-surface": "#233143",
+              "surface-container": "#122131",
+              "inverse-surface": "#d4e4fa",
+              "on-surface": "#d4e4fa",
+              "on-primary-fixed-variant": "#3f465c",
+              "on-error-container": "#ffdad6",
+              "secondary-container": "#00a6e0",
+              "on-tertiary-container": "#6c77e1",
+              "surface-container-highest": "#273647",
+              "secondary-fixed-dim": "#7bd0ff",
+              "surface-variant": "#273647",
+              error: "#ffb4ab",
+              "surface-bright": "#2c3a4c",
+              secondary: "#7bd0ff",
+              "secondary-fixed": "#c4e7ff",
+              "on-primary": "#283044",
+              "inverse-primary": "#565e74",
+              "on-surface-variant": "#c6c6cd",
+              "surface-dim": "#051424",
+              "on-primary-fixed": "#131b2e",
+              "surface-tint": "#bec6e0",
+              "tertiary-fixed": "#e0e0ff",
+              "surface-container-lowest": "#010f1f",
+              "tertiary-fixed-dim": "#bdc2ff",
+              "primary-fixed": "#dae2fd",
+              "on-secondary-fixed-variant": "#004c69",
+              "primary-container": "#0f172a",
+              "error-container": "#93000a",
+              "on-primary-container": "#798098",
+              "on-tertiary-fixed-variant": "#2f3aa3",
+              "on-tertiary": "#131e8c",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              unit: "4px",
+              gutter: "16px",
+              "max-width": "1440px",
+              "margin-desktop": "32px",
+              "margin-mobile": "16px",
+            },
+            fontFamily: {
+              "body-lg": ["Inter"],
+              "headline-xl": ["Inter"],
+              "headline-md": ["Inter"],
+              "headline-lg": ["Inter"],
+              "body-md": ["Inter"],
+              "code-sm": ["JetBrains Mono"],
+              "label-md": ["Inter"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      .scanline {
+        background: repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 2px,
+          rgba(123, 208, 255, 0.03) 2px,
+          rgba(123, 208, 255, 0.03) 4px
+        );
+        animation: scanMove 8s linear infinite;
+      }
+      @keyframes scanMove {
+        from {
+          background-position: 0 0;
+        }
+        to {
+          background-position: 0 100%;
+        }
+      }
+      .glow-pulse {
+        animation: pulse-glow 2s ease-in-out infinite;
+      }
+      @keyframes pulse-glow {
+        0%,
+        100% {
+          box-shadow: 0 0 5px rgba(123, 208, 255, 0.2);
+        }
+        50% {
+          box-shadow:
+            0 0 25px rgba(123, 208, 255, 0.6),
+            0 0 50px rgba(123, 208, 255, 0.2);
+        }
+      }
+      .dot-grid {
+        background-image: radial-gradient(circle, #1e293b 1px, transparent 1px);
+        background-size: 24px 24px;
+      }
+      .terminal-cursor {
+        border-right: 2px solid #7bd0ff;
+        animation: blink 1s step-end infinite;
+      }
+      @keyframes blink {
+        from,
+        to {
+          border-color: transparent;
+        }
+        50% {
+          border-color: #7bd0ff;
+        }
+      }
+      .error-flicker {
+        animation: flicker 5s ease-in-out infinite;
+      }
+      @keyframes flicker {
+        0%,
+        95%,
+        100% {
+          opacity: 1;
+        }
+        96% {
+          opacity: 0.8;
+        }
+        97% {
+          opacity: 1;
+        }
+        98% {
+          opacity: 0.6;
+        }
+        99% {
+          opacity: 1;
+        }
+      }
+      .float-card {
+        animation: float 6s ease-in-out infinite;
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-8px);
+        }
+      }
+    </style>
+    <!-- Paths are relative to repo root since this file lives at root -->
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+    <script src="./assets/js/script.js" defer></script>
+  </head>
+  <body
+    data-page="404"
+    class="bg-background text-on-surface font-body-md min-h-screen flex flex-col overflow-x-hidden p-0"
+  >
+    <div id="header-placeholder"></div>
+    <main class="flex-grow flex flex-col lg:flex-row relative overflow-hidden">
+      <!-- Left Side: Atmospheric Visual -->
+      <div
+        class="w-full lg:w-1/2 relative overflow-hidden min-h-[300px] lg:min-h-0"
+      >
+        <!-- Background image -->
+        <img
+          alt="Server error atmospheric background"
+          class="w-full h-full object-cover absolute inset-0"
+          src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1000&q=80"
+        />
+        <!-- Overlays -->
+        <div
+          class="absolute inset-0 bg-gradient-to-r from-transparent via-surface/30 to-background"
+        ></div>
+        <div
+          class="absolute inset-0 bg-gradient-to-b from-transparent to-background lg:hidden"
+        ></div>
+        <div class="absolute inset-0 scanline opacity-20"></div>
+        <!-- Floating error card -->
+        <div
+          class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 float-card hidden lg:block w-64"
+        >
+          <div
+            class="p-5 border border-secondary/30 bg-surface-container/60 backdrop-blur-md rounded-xl"
+          >
+            <div class="flex items-center gap-3 mb-3">
+              <span class="material-symbols-outlined text-error animate-pulse"
+                >error</span
+              >
+              <span class="font-code-sm text-code-sm text-error font-bold"
+                >SYSTEM_ERROR_404</span
+              >
+            </div>
+            <div
+              class="font-code-sm text-code-sm text-on-surface-variant space-y-1"
+            >
+              <p>LOG_REF: ERR_EXEC_NODE_NULL</p>
+              <p>STATUS: UNREACHABLE_SECTOR</p>
+              <p>LATENCY: -- ms</p>
+              <p class="text-secondary/60">RETRYING... 0x2F</p>
+            </div>
+          </div>
+        </div>
+        <!-- Large 404 watermark -->
+        <div
+          class="absolute inset-0 flex items-center justify-center pointer-events-none"
+        >
+          <span
+            class="text-[220px] font-black text-secondary/5 leading-none select-none error-flicker"
+            >404</span
+          >
+        </div>
+      </div>
+
+      <!-- Right Side: Content -->
+      <div
+        class="w-full lg:w-1/2 flex flex-col justify-center dot-grid relative px-margin-mobile md:px-16 xl:px-24 py-16 lg:py-0"
+      >
+        <div class="max-w-lg mx-auto lg:mx-0 w-full py-5">
+          <!-- Status badge -->
+          <div class="mb-4">
+            <span
+              class="bg-error/10 text-error border border-error/30 px-3 py-1 rounded-full font-label-md text-label-md inline-flex items-center gap-2"
+            >
+              <span class="w-2 h-2 rounded-full bg-error animate-ping"></span>
+              CONNECTION SEVERED
+            </span>
+          </div>
+          <!-- 404 number -->
+          <div
+            class="font-code-sm font-black text-secondary mb-2 leading-none error-flicker"
+            style="font-size: clamp(80px, 12vw, 140px)"
+          >
+            404
+          </div>
+          <!-- Headline -->
+          <h1 class="font-headline-xl text-headline-xl text-on-surface mb-4">
+            Logic Path Terminated
+          </h1>
+          <p
+            class="font-body-lg text-body-lg text-on-surface-variant mb-10 leading-relaxed"
+          >
+            The automated execution path you followed has encountered a dead
+            end. Our systems indicate this node may have been de-provisioned or
+            moved to a different sector.
+          </p>
+
+          <!-- Action buttons -->
+          <div class="flex flex-col sm:flex-row gap-4 mb-10">
+            <a
+              href="./index.html"
+              class="bg-secondary-container text-on-secondary-fixed font-bold px-8 py-4 rounded-xl flex items-center justify-center gap-3 hover:brightness-110 transition-all glow-pulse active:scale-95 duration-150"
+            >
+              <span class="material-symbols-outlined">restart_alt</span>
+              Initialize Recovery
+            </a>
+            <button
+              onclick="history.back()"
+              class="border border-outline text-on-surface font-bold px-8 py-4 rounded-xl flex items-center justify-center gap-3 hover:bg-surface-variant/30 transition-all active:scale-95 duration-150"
+            >
+              <span class="material-symbols-outlined">arrow_back</span>
+              Go Back
+            </button>
+          </div>
+
+          <!-- Technical Trace -->
+          <div
+            class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-6 overflow-hidden"
+          >
+            <div
+              class="flex items-center justify-between mb-4 border-b border-outline-variant/20 pb-3"
+            >
+              <span
+                class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest flex items-center gap-2"
+              >
+                <span class="material-symbols-outlined text-[16px]"
+                  >terminal</span
+                >Technical Trace
+              </span>
+              <span class="text-secondary font-code-sm text-code-sm"
+                >PID: 90244</span
+              >
+            </div>
+            <div
+              class="font-code-sm text-code-sm text-secondary/70 space-y-1.5 overflow-y-auto max-h-32"
+              id="log-output"
+            >
+              <p>
+                &gt; Initializing request trace for:
+                <span class="text-on-surface"
+                  >/api/v1/workflows/nexus-alpha</span
+                >
+              </p>
+              <p>&gt; Searching global node registry...</p>
+              <p class="text-error">
+                &gt; [CRITICAL] 0x8823: Remote entity not found in current
+                namespace.
+              </p>
+              <p>
+                &gt; Attempting failover to secondary cluster...
+                <span class="text-error">FAILED</span>
+              </p>
+              <p>&gt; Terminating execution thread 812B.</p>
+              <p class="terminal-cursor">
+                &gt; Waiting for operator intervention...
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div id="footer-placeholder"></div>
+    <script>
+      // Append fake system logs periodically
+      const logOutput = document.getElementById("log-output");
+      const logs = [
+        "> Retrying protocol handshake...",
+        "> ERROR: Handshake timeout.",
+        "> Warning: Unauthorized sector access detected.",
+        "> Re-routing logic through bridge 7...",
+        "> Trace completed. Result: NULL.",
+        "> Scanning alternate node paths...",
+        "> ERROR: All paths exhausted.",
+        "> Escalating to supervisor node...",
+      ];
+      let logIndex = 0;
+      setInterval(() => {
+        const p = document.createElement("p");
+        p.className = "text-secondary/70";
+        p.textContent = logs[logIndex % logs.length];
+        if (
+          logOutput.lastChild &&
+          logOutput.lastChild.classList &&
+          logOutput.lastChild.classList.contains("terminal-cursor")
+        ) {
+          logOutput.lastChild.classList.remove("terminal-cursor");
+        }
+        logOutput.appendChild(p);
+        p.classList.add("terminal-cursor");
+        logOutput.scrollTop = logOutput.scrollHeight;
+        logIndex++;
+        if (logOutput.children.length > 20) {
+          logOutput.removeChild(logOutput.firstChild);
+        }
+      }, 3500);
+    </script>
+  </body>
+</html>

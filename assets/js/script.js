@@ -3,8 +3,9 @@
 /* ---- Config ---- */
 const CONFIG = {
   rootPath: (() => {
-    // Determine if we're in /pages/ sub-directory or root
+    // Determine depth relative to repo root
     const path = window.location.pathname;
+    if (path.includes("/pages/components/")) return "../..";
     if (path.includes("/pages/")) return "..";
     return ".";
   })(),
@@ -510,7 +511,7 @@ document.addEventListener("click", function (event) {
     // Check if href is missing, completely empty, or exactly '#'
     if (!href || href.trim() === "" || href.trim() === "#") {
       event.preventDefault(); // Stop default anchor behavior
-      window.location.href = "../pages/components/404.html"; // Redirect to your 404 page
+      window.location.href = CONFIG.rootPath + "/pages/components/404.html"; // Redirect to your 404 page
     }
   }
 });
