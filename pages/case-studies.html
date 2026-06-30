@@ -749,6 +749,8 @@ status: optimized</code></pre>
                   required
                   pattern="[A-Za-z\s]+"
                   title="Company Name can only contain letters and spaces."
+                  maxlength="16"
+                  oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
                 />
               </div>
 
