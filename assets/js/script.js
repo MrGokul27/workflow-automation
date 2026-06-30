@@ -499,35 +499,18 @@ window.addEventListener("load", () => {
   }, 2000);
 });
 
-// Script to redirect empty links, '#', and unconfigured buttons to 404.html
+//  Script to redirect empty links and '#' to 404.html
 document.addEventListener("click", function (event) {
-  // Find the closest anchor tag OR button tag
-  const element = event.target.closest("a, button");
+  // Find the closest anchor tag if the user clicked inside a link (e.g., text, icon)
+  const link = event.target.closest("a");
 
-  if (element) {
-    const tagName = element.tagName.toLowerCase();
+  if (link) {
+    const href = link.getAttribute("href");
 
-    // Handle Anchor Tags
-    if (tagName === "a") {
-      const href = element.getAttribute("href");
-      // Check if href is missing, completely empty, or exactly '#'
-      if (!href || href.trim() === "" || href.trim() === "#") {
-        event.preventDefault(); // Stop default anchor behavior
-        window.location.href = "../pages/components/404.html"; // Redirect to 404 page
-      }
-    }
-
-    // Handle Buttons
-    else if (tagName === "button") {
-      const hasOnclick = element.hasAttribute("onclick");
-      const hasTypeSubmit = element.getAttribute("type") === "submit";
-      const hasDataHref = element.hasAttribute("data-href");
-
-      // Redirect if the button doesn't do anything (no inline JS click handler, isn't a form submit, and has no custom redirect)
-      if (!hasOnclick && !hasTypeSubmit && !hasDataHref) {
-        event.preventDefault();
-        window.location.href = "../pages/components/404.html";
-      }
+    // Check if href is missing, completely empty, or exactly '#'
+    if (!href || href.trim() === "" || href.trim() === "#") {
+      event.preventDefault(); // Stop default anchor behavior
+      window.location.href = "../pages/components/404.html"; // Redirect to your 404 page
     }
   }
 });

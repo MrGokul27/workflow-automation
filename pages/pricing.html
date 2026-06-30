@@ -178,20 +178,37 @@
     <div id="header-placeholder"></div>
 
     <main class="canvas-bg">
-      <!-- 1. Pricing Hero with Toggle -->
-      <section
-        class="relative py-24 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto text-center overflow-hidden"
-      >
-        <div class="relative z-10">
-          <h1 class="font-headline-xl text-headline-xl mb-6">
-            Scale Your Automation Velocity
+      <!-- Page Banner -->
+      <section class="page-banner page-banner--pricing">
+        <div class="page-banner__inner">
+          <!-- Breadcrumbs -->
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="../index.html" class="breadcrumb__item">Home</a>
+            <span class="breadcrumb__sep" aria-hidden="true">›</span>
+            <span class="breadcrumb__item breadcrumb__item--active"
+              >Pricing</span
+            >
+          </nav>
+          <!-- Title -->
+          <h1 class="page-banner__title">
+            Scale Your<br />
+            <span>Automation Velocity</span>
           </h1>
-          <p
-            class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-12"
-          >
+          <!-- Subtitle -->
+          <p class="page-banner__subtitle">
             Predictable pricing for DevOps teams and enterprise architects. No
             hidden fees, just pure technical precision.
           </p>
+          <!-- Shimmer line -->
+          <div class="page-banner__line"></div>
+        </div>
+      </section>
+
+      <!-- Billing Toggle -->
+      <section
+        class="relative py-10 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto text-center overflow-hidden"
+      >
+        <div class="relative z-10">
           <div class="flex items-center justify-center gap-4">
             <span
               class="font-label-md text-label-md text-on-surface"
@@ -273,9 +290,7 @@
                 <span>Community Slack support</span>
               </li>
             </ul>
-            <a href="#" class="btn btn-outline w-full"
-              >Start Trial</a
-            >
+            <a href="#" class="btn btn-outline w-full">Start Trial</a>
           </div>
 
           <!-- Pro -->
@@ -340,9 +355,7 @@
                 <span>Advanced logging & telemetry</span>
               </li>
             </ul>
-            <a href="#" class="btn btn-secondary w-full"
-              >Get Professional</a
-            >
+            <a href="#" class="btn btn-secondary w-full">Get Professional</a>
           </div>
 
           <!-- Enterprise -->
@@ -392,9 +405,7 @@
                 <span>SSO/SAML, audit logs & RBAC</span>
               </li>
             </ul>
-            <a href="#" class="btn btn-outline w-full"
-              >Contact Sales</a
-            >
+            <a href="#" class="btn btn-outline w-full">Contact Sales</a>
           </div>
         </div>
       </section>
@@ -490,7 +501,7 @@
               class="w-full h-full bg-cover bg-center opacity-85 group-hover:scale-105 transition-all duration-700"
               data-alt="Close up of enterprise computing hardware in a modern server room, featuring deep blue led indicators and optical fiber networks. Minimalist, professional high-fidelity engineering aesthetic."
               style="
-                background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAWU1OIBmxncZEYqCW3gm0_O7AXCR1RTm8FpFBCL3_tJVz53IcJ7am5-_hX7lwrAoZad_-WVolqx9pG1fG_4c2giXshP2UoWQfVBnkqZNNznI8Bk_MMzoSLSp-chJC-_tx5FSZMDPSxII56AcxfXNU2b8daiB1Hs0QvATbfoQ_mNqAo4Bcvxd2qZXAblrSHu-y1E_r63trbua-oK0zuiVSY08K79JWyL8qsR61zE3cZMMu5SUtAPbhlBCWW1C60pCRPel5pdVHfWM8K&quot;);
+                background-image: url(&quot;../assets/images/pricing/pricing-Enterprise-image.webp&quot;);
               "
             ></div>
             <div

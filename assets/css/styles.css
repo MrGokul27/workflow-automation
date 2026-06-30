@@ -1895,3 +1895,202 @@ section {
     opacity: 1;
   }
 }
+
+/* =========================================================
+   PAGE BANNER — Shared banner section for inner pages
+   ========================================================= */
+
+/* --- Base Banner --- */
+.page-banner {
+  position: relative;
+  min-height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 80px var(--margin-desktop) 64px;
+  background-color: var(--color-surface-container-lowest);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Unique banner images per page */
+.page-banner--about {
+  background-image: url("../images/banner_about.webp");
+}
+.page-banner--services {
+  background-image: url("../images/banner_services.webp");
+}
+.page-banner--pricing {
+  background-image: url("../images/banner_pricing.webp");
+}
+.page-banner--case-studies {
+  background-image: url("../images/banner_case_studies.webp");
+}
+.page-banner--blog {
+  background-image: url("../images/banner_blog.webp");
+}
+.page-banner--contact {
+  background-image: url("../images/banner_contact.webp");
+}
+
+/* Dark overlay with subtle gradient */
+.page-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(5, 20, 36, 0.82) 0%,
+    rgba(0, 0, 0, 0.65) 50%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  z-index: 1;
+}
+
+/* Bottom fade to page background */
+.page-banner::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, var(--color-background));
+  z-index: 2;
+}
+
+/* Banner content wrapper */
+.page-banner__inner {
+  position: relative;
+  z-index: 3;
+  max-width: var(--max-width);
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* --- Breadcrumbs --- */
+.breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 20px;
+  padding: 6px 14px;
+  border-radius: 100px;
+  background: rgba(123, 208, 255, 0.06);
+  border: 1px solid rgba(123, 208, 255, 0.18);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.breadcrumb__item {
+  color: var(--color-on-surface-variant);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+
+.breadcrumb__item:hover {
+  color: var(--color-secondary);
+}
+
+.breadcrumb__item--active {
+  color: var(--color-secondary);
+  font-weight: 600;
+  pointer-events: none;
+}
+
+.breadcrumb__sep {
+  color: var(--color-outline);
+  font-size: 14px;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+/* --- Banner Text --- */
+.page-banner__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  border-radius: 100px;
+  background: rgba(123, 208, 255, 0.08);
+  border: 1px solid rgba(123, 208, 255, 0.22);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-secondary);
+  margin-bottom: 20px;
+}
+
+.page-banner__eyebrow .material-symbols-outlined {
+  font-size: 16px !important;
+}
+
+.page-banner__title {
+  font-size: clamp(28px, 5vw, 54px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: var(--color-on-surface);
+  margin-bottom: 16px;
+}
+
+.page-banner__title span {
+  color: var(--color-secondary);
+}
+
+.page-banner__subtitle {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--color-on-surface-variant);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* --- Shimmer accent line --- */
+.page-banner__line {
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-secondary),
+    transparent
+  );
+  border-radius: 2px;
+  margin: 20px auto 0;
+  animation: bannerLineShimmer 3s ease-in-out infinite;
+}
+
+@keyframes bannerLineShimmer {
+  0%,
+  100% {
+    opacity: 0.4;
+    width: 60px;
+  }
+  50% {
+    opacity: 1;
+    width: 100px;
+  }
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+  .page-banner {
+    min-height: 260px;
+    padding: 72px var(--margin-mobile) 56px;
+  }
+  .page-banner__title {
+    font-size: clamp(24px, 7vw, 36px);
+  }
+  .page-banner__subtitle {
+    font-size: 14px;
+  }
+}

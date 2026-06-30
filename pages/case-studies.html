@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html class="dark" lang="en">
   <head>
     <meta charset="utf-8" />
@@ -121,58 +121,31 @@
     class="bg-background text-on-surface font-body-md overflow-x-hidden selection:bg-secondary/30"
   >
     <div id="header-placeholder"></div>
-    <main class="pt-16">
-      <!-- Section 1: Hero -->
-      <section
-        class="relative min-h-[580px] flex items-center justify-center overflow-hidden border-b border-outline-variant"
-      >
-        <div class="absolute inset-0 z-0">
-          <img
-            src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1400&q=80"
-            alt=""
-            class="w-full h-full object-cover opacity-15"
-          />
-          <div
-            class="absolute inset-0 bg-gradient-to-b from-surface/50 via-surface/70 to-surface"
-          ></div>
-        </div>
-        <div
-          class="relative z-10 px-margin-mobile md:px-margin-desktop text-center max-w-4xl mx-auto"
-        >
-          <div
-            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/10 border border-secondary/30 text-secondary mb-6"
-          >
-            <span class="material-symbols-outlined text-[18px]">verified</span>
-            <span class="font-label-md text-label-md uppercase tracking-widest"
-              >Global Success Index</span
+    <main>
+      <!-- Page Banner -->
+      <section class="page-banner page-banner--case-studies">
+        <div class="page-banner__inner">
+          <!-- Breadcrumbs -->
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="../index.html" class="breadcrumb__item">Home</a>
+            <span class="breadcrumb__sep" aria-hidden="true">›</span>
+            <span class="breadcrumb__item breadcrumb__item--active"
+              >Case Studies</span
             >
-          </div>
-          <h1
-            class="font-headline-xl text-headline-xl md:text-5xl text-on-surface mb-6 leading-tight"
-          >
-            Real Work, <span class="text-secondary">Real Results</span>
+          </nav>
+          <!-- Title -->
+          <h1 class="page-banner__title">
+            Real Work,<br />
+            <span>Real Results</span>
           </h1>
-          <p
-            class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-10"
-          >
+          <!-- Subtitle -->
+          <p class="page-banner__subtitle">
             Explore how enterprise leaders leverage Stackly's high-velocity
             automation to eliminate operational friction and scale technical
             precision globally.
           </p>
-          <div
-            class="flex flex-col sm:flex-row items-center justify-center gap-4"
-          >
-            <a
-              class="px-8 py-4 bg-secondary text-on-secondary-fixed font-bold rounded-lg transition-all hover:shadow-[0_0_20px_rgba(123,208,255,0.4)] hover:brightness-110"
-              href="#"
-              >View Featured Story</a
-            >
-            <a
-              class="px-8 py-4 border border-outline-variant text-on-surface font-bold rounded-lg hover:bg-surface-variant transition-all"
-              href="#"
-              >Browse Industries</a
-            >
-          </div>
+          <!-- Shimmer line -->
+          <div class="page-banner__line"></div>
         </div>
       </section>
 
@@ -193,31 +166,41 @@
             </p>
           </div>
           <div class="flex flex-wrap gap-2">
-            <button
-              class="px-4 py-2 rounded-full bg-secondary text-on-secondary-fixed font-bold"
-            >
-              All sectors
-            </button>
-            <button
-              class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-all"
-            >
-              FinTech
-            </button>
-            <button
-              class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-all"
-            >
-              Logistics
-            </button>
-            <button
-              class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-all"
-            >
-              Healthcare
-            </button>
-            <button
-              class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-all"
-            >
-              DevOps
-            </button>
+            <a href="#">
+              <button
+                class="px-4 py-2 rounded-full bg-secondary text-on-secondary-fixed font-bold"
+              >
+                All sectors
+              </button>
+            </a>
+            <a href="#">
+              <button
+                class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-all"
+              >
+                FinTech
+              </button>
+            </a>
+            <a href="#">
+              <button
+                class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-all"
+              >
+                Logistics
+              </button>
+            </a>
+            <a href="#">
+              <button
+                class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-all"
+              >
+                Healthcare
+              </button>
+            </a>
+            <a href="#">
+              <button
+                class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-all"
+              >
+                DevOps
+              </button>
+            </a>
           </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
@@ -227,7 +210,7 @@
           >
             <div class="relative h-56 overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=900&q=80"
+                src="../assets/images/case-studies/case-study-Industry-filter-card-1.webp"
                 alt="Financial trading infrastructure"
                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
@@ -329,11 +312,13 @@
                 Managing 45,000 active nodes across three major cloud providers
                 with a unified logic layer.
               </p>
-              <button
-                class="bg-surface-container-highest px-4 py-2 rounded text-body-md hover:bg-surface-bright transition-all"
-              >
-                Download Technical Specs
-              </button>
+              <a href="#">
+                <button
+                  class="bg-surface-container-highest px-4 py-2 rounded text-body-md hover:bg-surface-bright transition-all"
+                >
+                  Download Technical Specs
+                </button>
+              </a>
             </div>
             <div
               class="flex-1 rounded-lg border border-outline-variant bg-surface overflow-hidden"
@@ -359,7 +344,7 @@ status: optimized</code></pre>
           >
             <div class="relative h-44 overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=700&q=80"
+                src="../assets/images/case-studies/case-study-Industry-filter-card-5.webp"
                 alt="Healthcare automation"
                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
@@ -394,7 +379,7 @@ status: optimized</code></pre>
           >
             <div class="relative h-44 overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=700&q=80"
+                src="../assets/images/case-studies/case-study-Industry-filter-card-6.webp"
                 alt="Logistics supply chain"
                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
@@ -445,7 +430,7 @@ status: optimized</code></pre>
                 <img
                   class="w-full h-[380px] object-cover"
                   alt="TechGlobal Corp command center"
-                  src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80"
+                  src="../assets/images/case-studies/case-study-featured-story.webp"
                 />
               </div>
               <div
@@ -490,7 +475,7 @@ status: optimized</code></pre>
                   class="w-12 h-12 rounded-full overflow-hidden border border-outline-variant"
                 >
                   <img
-                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80"
+                    src="../assets/images/about/about-person-1.webp"
                     alt="Sarah J. Mitchell"
                     class="w-full h-full object-cover"
                   />
@@ -502,12 +487,14 @@ status: optimized</code></pre>
                   </div>
                 </div>
               </div>
-              <button
-                class="bg-secondary text-on-secondary-fixed font-bold px-8 py-3 rounded-lg flex items-center gap-2 hover:brightness-110 transition-all"
-              >
-                Read Full Narrative
-                <span class="material-symbols-outlined">description</span>
-              </button>
+              <a href="#">
+                <button
+                  class="bg-secondary text-on-secondary-fixed font-bold px-8 py-3 rounded-lg flex items-center gap-2 hover:brightness-110 transition-all"
+                >
+                  Read Full Narrative
+                  <span class="material-symbols-outlined">description</span>
+                </button>
+              </a>
             </div>
           </div>
         </div>
@@ -743,34 +730,55 @@ status: optimized</code></pre>
           <div
             class="bg-surface/80 backdrop-blur-xl border border-outline-variant p-8 rounded-2xl text-left"
           >
-            <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <form
+              class="grid grid-cols-1 md:grid-cols-2 gap-6"
+              onsubmit="
+                event.preventDefault();
+                window.location.href = '../pages/components/404.html';
+              "
+            >
+              <!-- Company Name -->
               <div class="space-y-2">
                 <label class="font-label-md uppercase text-on-surface-variant"
                   >Company Name</label
-                ><input
-                  class="w-full bg-surface-container border border-outline-variant text-on-surface rounded-lg px-4 py-3 focus:ring-1 focus:ring-secondary focus:border-secondary transition-all placeholder:text-outline"
+                >
+                <input
+                  class="w-full bg-surface-container border border-outline-variant text-on-surface rounded-lg px-4 py-3 focus:ring-1 focus:ring-secondary focus:border-secondary transition-all placeholder:text-outline invalid:border-error/50"
                   placeholder="e.g. Stackly"
                   type="text"
+                  required
+                  pattern="[A-Za-z\s]+"
+                  title="Company Name can only contain letters and spaces."
                 />
               </div>
+
+              <!-- Impact Metric -->
               <div class="space-y-2">
                 <label class="font-label-md uppercase text-on-surface-variant"
                   >Impact Metric</label
-                ><input
+                >
+                <input
                   class="w-full bg-surface-container border border-outline-variant text-on-surface rounded-lg px-4 py-3 focus:ring-1 focus:ring-secondary focus:border-secondary transition-all placeholder:text-outline"
                   placeholder="e.g. 50% increase in speed"
                   type="text"
+                  required
                 />
               </div>
+
+              <!-- Brief Narrative Summary -->
               <div class="md:col-span-2 space-y-2">
                 <label class="font-label-md uppercase text-on-surface-variant"
                   >Brief Narrative Summary</label
-                ><textarea
+                >
+                <textarea
                   class="w-full bg-surface-container border border-outline-variant text-on-surface rounded-lg px-4 py-3 focus:ring-1 focus:ring-secondary focus:border-secondary transition-all placeholder:text-outline"
                   placeholder="Describe your technical victory..."
                   rows="3"
+                  required
                 ></textarea>
               </div>
+
+              <!-- Submit Button -->
               <div class="md:col-span-2">
                 <button
                   class="w-full bg-secondary text-on-secondary-fixed font-bold py-4 rounded-lg hover:brightness-110 active:scale-[0.98] transition-all"

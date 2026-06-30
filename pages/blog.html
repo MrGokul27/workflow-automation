@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html class="dark" lang="en">
   <head>
     <meta charset="utf-8" />
@@ -165,7 +165,32 @@
     class="bg-background text-on-surface selection:bg-secondary selection:text-on-secondary-fixed"
   >
     <div id="header-placeholder"></div>
-    <main class="pt-16 dot-grid min-h-screen">
+    <main class="dot-grid">
+      <!-- Page Banner -->
+      <section class="page-banner page-banner--blog">
+        <div class="page-banner__inner">
+          <!-- Breadcrumbs -->
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="../index.html" class="breadcrumb__item">Home</a>
+            <span class="breadcrumb__sep" aria-hidden="true">›</span>
+            <span class="breadcrumb__item breadcrumb__item--active">Blog</span>
+          </nav>
+
+          <!-- Title -->
+          <h1 class="page-banner__title">
+            The Architect's<br />
+            <span>Knowledge Base</span>
+          </h1>
+          <!-- Subtitle -->
+          <p class="page-banner__subtitle">
+            Deep-dive articles, technical guides and engineering insights from
+            the minds building the future of workflow automation.
+          </p>
+          <!-- Shimmer line -->
+          <div class="page-banner__line"></div>
+        </div>
+      </section>
+
       <!-- 1. Featured Article Hero -->
       <section
         class="relative px-margin-mobile md:px-margin-desktop py-12 lg:py-20 max-w-max-width mx-auto"
@@ -213,15 +238,17 @@
                 </div>
               </div>
             </div>
-            <button
-              class="group flex items-center gap-2 px-8 py-3 bg-secondary text-on-secondary-fixed font-bold rounded-lg hover:bg-secondary-fixed transition-all"
-            >
-              Read Full Article
-              <span
-                class="material-symbols-outlined group-hover:translate-x-1 transition-transform"
-                >arrow_forward</span
+            <a href="#">
+              <button
+                class="group flex items-center gap-2 px-8 py-3 bg-secondary text-on-secondary-fixed font-bold rounded-lg hover:bg-secondary-fixed transition-all"
               >
-            </button>
+                Read Full Article
+                <span
+                  class="material-symbols-outlined group-hover:translate-x-1 transition-transform"
+                  >arrow_forward</span
+                >
+              </button>
+            </a>
           </div>
           <div class="order-1 lg:order-2">
             <div
@@ -247,31 +274,41 @@
         <div
           class="max-w-max-width mx-auto px-margin-desktop h-16 flex items-center gap-8 overflow-x-auto"
         >
-          <button
-            class="whitespace-nowrap text-secondary font-bold border-b-2 border-secondary h-full flex items-center px-2"
-          >
-            All Resources
-          </button>
-          <button
-            class="whitespace-nowrap text-on-surface-variant hover:text-on-surface transition-colors font-body-md h-full flex items-center px-2"
-          >
-            AI &amp; Machine Learning
-          </button>
-          <button
-            class="whitespace-nowrap text-on-surface-variant hover:text-on-surface transition-colors font-body-md h-full flex items-center px-2"
-          >
-            Engineering
-          </button>
-          <button
-            class="whitespace-nowrap text-on-surface-variant hover:text-on-surface transition-colors font-body-md h-full flex items-center px-2"
-          >
-            Success Stories
-          </button>
-          <button
-            class="whitespace-nowrap text-on-surface-variant hover:text-on-surface transition-colors font-body-md h-full flex items-center px-2"
-          >
-            Company News
-          </button>
+          <a>
+            <button
+              class="whitespace-nowrap text-secondary font-bold border-b-2 border-secondary h-full flex items-center px-2"
+            >
+              All Resources
+            </button>
+          </a>
+          <a>
+            <button
+              class="whitespace-nowrap text-on-surface-variant hover:text-on-surface transition-colors font-body-md h-full flex items-center px-2"
+            >
+              AI &amp; Machine Learning
+            </button>
+          </a>
+          <a>
+            <button
+              class="whitespace-nowrap text-on-surface-variant hover:text-on-surface transition-colors font-body-md h-full flex items-center px-2"
+            >
+              Engineering
+            </button>
+          </a>
+          <a>
+            <button
+              class="whitespace-nowrap text-on-surface-variant hover:text-on-surface transition-colors font-body-md h-full flex items-center px-2"
+            >
+              Success Stories
+            </button>
+          </a>
+          <a>
+            <button
+              class="whitespace-nowrap text-on-surface-variant hover:text-on-surface transition-colors font-body-md h-full flex items-center px-2"
+            >
+              Company News
+            </button>
+          </a>
         </div>
       </section>
 
@@ -547,32 +584,42 @@
             </div>
             <!-- Pagination -->
             <div class="flex items-center justify-center gap-2 pt-8">
-              <button
+              <a
+                href="#"
                 class="w-10 h-10 flex items-center justify-center rounded bg-surface-container-high border border-outline-variant text-on-surface-variant hover:bg-secondary hover:text-on-secondary-fixed transition-colors"
               >
                 <span class="material-symbols-outlined">chevron_left</span>
-              </button>
-              <button
+              </a>
+
+              <a
+                href="#"
                 class="w-10 h-10 flex items-center justify-center rounded bg-secondary text-on-secondary-fixed font-bold"
               >
                 1
-              </button>
-              <button
+              </a>
+
+              <a
+                href="#"
                 class="w-10 h-10 flex items-center justify-center rounded bg-surface-container-high border border-outline-variant text-on-surface-variant hover:bg-secondary hover:text-on-secondary-fixed transition-colors"
               >
                 2
-              </button>
-              <button
+              </a>
+
+              <a
+                href="#"
                 class="w-10 h-10 flex items-center justify-center rounded bg-surface-container-high border border-outline-variant text-on-surface-variant hover:bg-secondary hover:text-on-secondary-fixed transition-colors"
               >
                 3
-              </button>
+              </a>
+
               <span class="px-2 text-on-surface-variant">...</span>
-              <button
+
+              <a
+                href="#"
                 class="w-10 h-10 flex items-center justify-center rounded bg-surface-container-high border border-outline-variant text-on-surface-variant hover:bg-secondary hover:text-on-secondary-fixed transition-colors"
               >
                 <span class="material-symbols-outlined">chevron_right</span>
-              </button>
+              </a>
             </div>
           </div>
 
@@ -590,17 +637,40 @@
                   Join 45k+ DevOps professionals and get the latest in technical
                   automation delivered to your inbox.
                 </p>
-                <form class="space-y-4">
-                  <input
-                    class="w-full bg-surface-dim border border-outline-variant rounded-lg px-4 py-3 focus:border-secondary focus:ring-1 focus:ring-secondary outline-none transition-all placeholder:text-outline"
-                    placeholder="work@email.com"
-                    type="email"
-                  />
+                <form
+                  class="space-y-4"
+                  onsubmit="
+                    event.preventDefault();
+                    window.location.href = '../pages/components/404.html';
+                  "
+                >
+                  <div class="space-y-1">
+                    <input
+                      class="w-full bg-surface-dim border border-outline-variant rounded-lg px-4 py-3 focus:border-secondary focus:ring-1 focus:ring-secondary outline-none transition-all placeholder:text-outline text-on-surface"
+                      placeholder="Company Name"
+                      type="text"
+                      required
+                      pattern="[A-Za-z\s]+"
+                      title="Company Name can only contain letters and spaces."
+                    />
+                  </div>
+
+                  <div class="space-y-1">
+                    <input
+                      class="w-full bg-surface-dim border border-outline-variant rounded-lg px-4 py-3 focus:border-secondary focus:ring-1 focus:ring-secondary outline-none transition-all placeholder:text-outline text-on-surface"
+                      placeholder="work@email.com"
+                      type="email"
+                      required
+                    />
+                  </div>
+
                   <button
-                    class="w-full py-3 bg-secondary text-on-secondary-fixed font-bold rounded-lg hover:brightness-110 transition-all"
+                    type="submit"
+                    class="w-full py-3 bg-secondary text-on-secondary-fixed font-bold rounded-lg hover:brightness-110 active:scale-[0.98] transition-all"
                   >
                     Subscribe
                   </button>
+
                   <p
                     class="text-[11px] text-center text-outline uppercase tracking-wider"
                   >
@@ -719,38 +789,54 @@
                 Topics
               </h4>
               <div class="flex flex-wrap gap-2">
-                <span
-                  class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-body-md rounded-full hover:bg-secondary hover:text-on-secondary-fixed cursor-pointer transition-all"
-                  >Kubernetes</span
-                >
-                <span
-                  class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-body-md rounded-full hover:bg-secondary hover:text-on-secondary-fixed cursor-pointer transition-all"
-                  >CI/CD</span
-                >
-                <span
-                  class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-body-md rounded-full hover:bg-secondary hover:text-on-secondary-fixed cursor-pointer transition-all"
-                  >DevOps</span
-                >
-                <span
-                  class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-body-md rounded-full hover:bg-secondary hover:text-on-secondary-fixed cursor-pointer transition-all"
-                  >Security</span
-                >
-                <span
-                  class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-body-md rounded-full hover:bg-secondary hover:text-on-secondary-fixed cursor-pointer transition-all"
-                  >AI/ML</span
-                >
-                <span
-                  class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-body-md rounded-full hover:bg-secondary hover:text-on-secondary-fixed cursor-pointer transition-all"
-                  >APIs</span
-                >
-                <span
-                  class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-body-md rounded-full hover:bg-secondary hover:text-on-secondary-fixed cursor-pointer transition-all"
-                  >Microservices</span
-                >
-                <span
-                  class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-body-md rounded-full hover:bg-secondary hover:text-on-secondary-fixed cursor-pointer transition-all"
-                  >Cloud</span
-                >
+                <a>
+                  <span
+                    class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-body-md rounded-full hover:bg-secondary hover:text-on-secondary-fixed cursor-pointer transition-all"
+                    >Kubernetes</span
+                  >
+                </a>
+                <a>
+                  <span
+                    class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-body-md rounded-full hover:bg-secondary hover:text-on-secondary-fixed cursor-pointer transition-all"
+                    >CI/CD</span
+                  >
+                </a>
+                <a>
+                  <span
+                    class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-body-md rounded-full hover:bg-secondary hover:text-on-secondary-fixed cursor-pointer transition-all"
+                    >DevOps</span
+                  >
+                </a>
+                <a>
+                  <span
+                    class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-body-md rounded-full hover:bg-secondary hover:text-on-secondary-fixed cursor-pointer transition-all"
+                    >Security</span
+                  >
+                </a>
+                <a>
+                  <span
+                    class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-body-md rounded-full hover:bg-secondary hover:text-on-secondary-fixed cursor-pointer transition-all"
+                    >AI/ML</span
+                  >
+                </a>
+                <a>
+                  <span
+                    class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-body-md rounded-full hover:bg-secondary hover:text-on-secondary-fixed cursor-pointer transition-all"
+                    >APIs</span
+                  >
+                </a>
+                <a>
+                  <span
+                    class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-body-md rounded-full hover:bg-secondary hover:text-on-secondary-fixed cursor-pointer transition-all"
+                    >Microservices</span
+                  >
+                </a>
+                <a>
+                  <span
+                    class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-body-md rounded-full hover:bg-secondary hover:text-on-secondary-fixed cursor-pointer transition-all"
+                    >Cloud</span
+                  >
+                </a>
               </div>
             </div>
           </aside>
@@ -799,11 +885,13 @@
                 A 45-page comprehensive guide for CTOs planning large-scale
                 workflow migrations.
               </p>
-              <button
-                class="font-label-md text-label-md text-secondary border border-secondary px-4 py-2 rounded-lg group-hover:bg-secondary group-hover:text-on-secondary-fixed transition-colors uppercase"
-              >
-                Download PDF
-              </button>
+              <a>
+                <button
+                  class="font-label-md text-label-md text-secondary border border-secondary px-4 py-2 rounded-lg group-hover:bg-secondary group-hover:text-on-secondary-fixed transition-colors uppercase"
+                >
+                  Download PDF
+                </button>
+              </a>
             </div>
             <div
               class="group bg-surface-container p-8 rounded-xl border border-outline-variant hover:border-secondary transition-all"
@@ -822,11 +910,13 @@
                 On-demand session with Google Cloud &amp; AWS architects on
                 multi-cloud monitoring.
               </p>
-              <button
-                class="font-label-md text-label-md text-secondary border border-secondary px-4 py-2 rounded-lg group-hover:bg-secondary group-hover:text-on-secondary-fixed transition-colors uppercase"
-              >
-                Watch Video
-              </button>
+              <a>
+                <button
+                  class="font-label-md text-label-md text-secondary border border-secondary px-4 py-2 rounded-lg group-hover:bg-secondary group-hover:text-on-secondary-fixed transition-colors uppercase"
+                >
+                  Watch Video
+                </button>
+              </a>
             </div>
             <div
               class="group bg-surface-container p-8 rounded-xl border border-outline-variant hover:border-secondary transition-all"
@@ -845,11 +935,13 @@
                 Comparative data on the top 5 automation engines used in Fortune
                 500 companies.
               </p>
-              <button
-                class="font-label-md text-label-md text-secondary border border-secondary px-4 py-2 rounded-lg group-hover:bg-secondary group-hover:text-on-secondary-fixed transition-colors uppercase"
-              >
-                View Report
-              </button>
+              <a>
+                <button
+                  class="font-label-md text-label-md text-secondary border border-secondary px-4 py-2 rounded-lg group-hover:bg-secondary group-hover:text-on-secondary-fixed transition-colors uppercase"
+                >
+                  View Report
+                </button>
+              </a>
             </div>
           </div>
         </div>
