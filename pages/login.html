@@ -190,7 +190,7 @@
     </style>
   </head>
   <body
-    class="page-auth font-body-md text-on-surface flex flex-col min-h-screen overflow-hidden selection:bg-secondary/30"
+    class="bg-background text-on-background font-body-md min-h-screen flex flex-col overflow-x-hidden py-3"
   >
     <!-- Background Atmospheric Nodes -->
     <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
@@ -278,6 +278,13 @@
         </g>
       </svg>
     </div>
+    <!-- Logo -->
+    <a
+      href="../index.html"
+      class="relative md:fixed z-50 inline-flex items-center px-4 py-2"
+    >
+      <img src="../assets/images/logoStackly.webp" alt="" width="100px" />
+    </a>
     <!-- Main Content Canvas -->
     <main
       class="relative z-10 flex flex-col items-center justify-center grow p-margin-mobile md:p-0"
@@ -286,22 +293,27 @@
       <div
         class="w-full max-w-[440px] bg-surface-container rounded-xl border border-outline-variant shadow-2xl overflow-hidden backdrop-blur-sm"
       >
-        <!-- Branding Header -->
-        <div class="px-8 pt-10 pb-6 text-center">
-          <div
-            class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-primary-container border border-secondary/20 mb-4"
+        <!-- Back to Home -->
+        <div class="">
+          <a
+            href="../index.html"
+            class="inline-flex items-center gap-2 px-5 py-3 bg-surface-container text-on-surface transition-all duration-300 group"
           >
-            <span class="material-symbols-outlined text-secondary text-3xl"
-              >hub</span
+            <span
+              class="material-symbols-outlined text-[20px] group-hover:-translate-x-1 transition-transform duration-300"
             >
-          </div>
-          <h1
-            class="font-headline-lg text-headline-lg text-on-surface tracking-tight mb-2"
-          >
-            Stackly
+              arrow_back
+            </span>
+            <span class="font-medium">Back to Home</span>
+          </a>
+        </div>
+        <!-- Branding Header -->
+        <div class="px-8 pb-6">
+          <h1 class="font-headline-xl text-headline-xl text-on-surface mb-2">
+            Sign in
           </h1>
           <p class="font-body-md text-on-surface-variant">
-            Sign in to orchestrate your workflow
+            to orchestrate your workflow
           </p>
         </div>
         <!-- Form Section -->
@@ -319,6 +331,7 @@
                 id="role"
                 name="role"
               >
+                <option value="admin">Admin</option>
                 <option value="devops">DevOps Engineer</option>
                 <option value="architect">System Architect</option>
                 <option value="manager">Ops Manager</option>

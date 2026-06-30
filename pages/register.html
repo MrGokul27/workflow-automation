@@ -1,5 +1,4 @@
 <!doctype html>
-
 <html class="dark" lang="en">
   <head>
     <meta charset="utf-8" />
@@ -184,19 +183,39 @@
     </style>
   </head>
   <body
-    class="bg-background text-on-background font-body-md min-h-screen flex flex-col overflow-x-hidden"
+    class="bg-background text-on-background font-body-md min-h-screen flex flex-col overflow-x-hidden py-3"
   >
     <!-- Ambient Animated Background -->
     <div class="fixed inset-0 z-0 pointer-events-none">
       <div class="absolute inset-0 dot-grid"></div>
     </div>
-    <!-- Main Content: Register Card -->
+    <!-- Logo -->
+    <a
+      href="../index.html"
+      class="relative md:fixed z-50 inline-flex items-center px-4 py-2"
+    >
+      <img src="../assets/images/logoStackly.webp" alt="" width="100px" />
+    </a>
     <main
       class="relative z-10 flex flex-col items-center justify-center grow p-margin-mobile md:p-0"
     >
       <div
         class="w-full max-w-[480px] bg-surface-container-low border border-outline-variant p-8 md:p-10 rounded-xl shadow-2xl relative overflow-hidden"
       >
+        <!-- Back to Home -->
+        <div class="">
+          <a
+            href="../index.html"
+            class="inline-flex items-center gap-2 py-3 text-on-surface transition-all duration-300 group"
+          >
+            <span
+              class="material-symbols-outlined text-[20px] group-hover:-translate-x-1 transition-transform duration-300"
+            >
+              arrow_back
+            </span>
+            <span class="font-medium">Back to Home</span>
+          </a>
+        </div>
         <!-- Glassmorphic Accent -->
         <div
           class="absolute -top-24 -right-24 w-48 h-48 bg-secondary/10 blur-[80px] rounded-full"
@@ -229,6 +248,7 @@
                   placeholder="Enter full name"
                   required=""
                   type="text"
+                  maxlength="16"
                 />
               </div>
               <p class="field-error">
@@ -255,6 +275,7 @@
                   <option disabled="" selected="" value="">
                     Select your professional role
                   </option>
+                  <option value="admin">Admin</option>
                   <option value="devops">DevOps Engineer</option>
                   <option value="architect">Enterprise Architect</option>
                   <option value="manager">Operations Manager</option>
@@ -365,6 +386,7 @@
             <p class="field-error -mt-4" id="termsError">
               You must accept the terms to proceed.
             </p>
+
             <button
               class="w-full bg-secondary text-on-secondary-container font-bold py-4 rounded-lg flex items-center justify-center gap-2 hover:brightness-110 active:scale-[0.98] transition-all group mt-8"
               type="submit"
@@ -393,6 +415,12 @@
       document.addEventListener("DOMContentLoaded", () => {
         const form = document.getElementById("registerForm");
         const inputs = form.querySelectorAll("input, select");
+        const usernameInput = document.getElementById("username");
+
+        // Enforce letters and spaces exclusively during inputs
+        usernameInput.addEventListener("input", (e) => {
+          e.target.value = e.target.value.replace(/[^a-zA-Z\s]/g, "");
+        });
 
         const validateField = (input) => {
           const container =
@@ -400,7 +428,7 @@
             input.parentElement.parentElement;
           let isValid = true;
 
-          // Username: No numbers/special chars
+          // Username validation
           if (input.id === "username") {
             const regex = /^[a-zA-Z\s]+$/;
             isValid = regex.test(input.value) && input.value.trim() !== "";
@@ -418,8 +446,11 @@
           else if (input.type === "checkbox") {
             isValid = input.checked;
             const errorMsg = document.getElementById("termsError");
-            errorMsg.style.display = isValid ? "none" : "block";
-            return;
+            if (errorMsg) {
+              errorMsg.style.display = isValid ? "none" : "block";
+            }
+            // FIX: Must return the boolean status, otherwise it breaks form submission
+            return isValid;
           }
           // Generic required/select
           else {
@@ -456,7 +487,10 @@
           let isFormValid = true;
 
           inputs.forEach((input) => {
-            if (!validateField(input)) isFormValid = false;
+            // Now evaluates properly since checkbox returns a boolean
+            if (!validateField(input)) {
+              isFormValid = false;
+            }
           });
 
           if (isFormValid) {
@@ -465,20 +499,24 @@
               '<span class="material-symbols-outlined animate-spin">sync</span> Initializing...';
             btn.disabled = true;
 
-            // Simulate success
+            // Simulate success animation then redirect
             setTimeout(() => {
               btn.innerHTML =
                 '<span class="material-symbols-outlined">check_circle</span> Deployment Success';
               btn.classList.replace("bg-secondary", "bg-emerald-500");
-              confettiEffect();
+
+              // Safely check for confetti effect
+              if (typeof confettiEffect === "function") {
+                confettiEffect();
+              }
+
+              // Redirect to login page after short visual delay
+              setTimeout(() => {
+                window.location.href = "login.html";
+              }, 1200);
             }, 1500);
           }
         });
-
-        function confettiEffect() {
-          // Visual feedback for successful registration
-          console.log("User registered successfully");
-        }
       });
     </script>
   </body>

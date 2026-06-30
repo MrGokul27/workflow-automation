@@ -484,31 +484,6 @@ function initScrollToTop() {
 }
 
 /* =========================================
-   Redirect Empty / Placeholder Links
-   Redirects links with href="", "#", or whitespace
-   to the custom 404 page.
-   ========================================= */
-function initBrokenLinkRedirect() {
-  const notFoundPage = CONFIG.rootPath === ".." ? "../404.html" : "./404.html";
-
-  document.addEventListener("click", (e) => {
-    const link = e.target.closest("a");
-    if (!link) return;
-
-    const href = (link.getAttribute("href") || "").trim();
-
-    // Ignore javascript links
-    if (href.toLowerCase().startsWith("javascript:")) return;
-
-    // Redirect placeholder/empty links
-    if (href === "" || href === "#") {
-      e.preventDefault();
-      window.location.href = notFoundPage;
-    }
-  });
-}
-
-/* =========================================
    Page Loader
 ========================================= */
 
@@ -522,4 +497,37 @@ window.addEventListener("load", () => {
       loader.remove();
     }, 700);
   }, 2000);
+});
+
+// Script to redirect empty links, '#', and unconfigured buttons to 404.html
+document.addEventListener("click", function (event) {
+  // Find the closest anchor tag OR button tag
+  const element = event.target.closest("a, button");
+
+  if (element) {
+    const tagName = element.tagName.toLowerCase();
+
+    // Handle Anchor Tags
+    if (tagName === "a") {
+      const href = element.getAttribute("href");
+      // Check if href is missing, completely empty, or exactly '#'
+      if (!href || href.trim() === "" || href.trim() === "#") {
+        event.preventDefault(); // Stop default anchor behavior
+        window.location.href = "../pages/components/404.html"; // Redirect to 404 page
+      }
+    }
+
+    // Handle Buttons
+    else if (tagName === "button") {
+      const hasOnclick = element.hasAttribute("onclick");
+      const hasTypeSubmit = element.getAttribute("type") === "submit";
+      const hasDataHref = element.hasAttribute("data-href");
+
+      // Redirect if the button doesn't do anything (no inline JS click handler, isn't a form submit, and has no custom redirect)
+      if (!hasOnclick && !hasTypeSubmit && !hasDataHref) {
+        event.preventDefault();
+        window.location.href = "../pages/components/404.html";
+      }
+    }
+  }
 });
