@@ -1,0 +1,758 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Infrastructure Scaling | NexusFlow</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-high": "#1c2b3c",
+              surface: "#051424",
+              "primary-fixed-dim": "#bec6e0",
+              "on-primary-fixed-variant": "#3f465c",
+              "on-primary-container": "#798098",
+              "on-tertiary-container": "#6c77e1",
+              "on-background": "#d4e4fa",
+              "tertiary-container": "#00055c",
+              "primary-fixed": "#dae2fd",
+              "inverse-primary": "#565e74",
+              "tertiary-fixed-dim": "#bdc2ff",
+              "surface-container-highest": "#273647",
+              "error-container": "#93000a",
+              "tertiary-fixed": "#e0e0ff",
+              "on-secondary-fixed-variant": "#004c69",
+              "on-secondary-fixed": "#001e2c",
+              background: "#051424",
+              outline: "#909097",
+              "on-surface-variant": "#c6c6cd",
+              "inverse-surface": "#d4e4fa",
+              "secondary-fixed": "#c4e7ff",
+              "inverse-on-surface": "#233143",
+              "on-secondary-container": "#00374d",
+              "surface-container": "#122131",
+              "on-tertiary": "#131e8c",
+              "on-surface": "#d4e4fa",
+              "on-error": "#690005",
+              "on-primary-fixed": "#131b2e",
+              "on-primary": "#283044",
+              "surface-container-low": "#0d1c2d",
+              secondary: "#7bd0ff",
+              "primary-container": "#0f172a",
+              "outline-variant": "#45464d",
+              "on-tertiary-fixed": "#000767",
+              "surface-dim": "#051424",
+              "secondary-fixed-dim": "#7bd0ff",
+              primary: "#bec6e0",
+              "surface-tint": "#bec6e0",
+              tertiary: "#bdc2ff",
+              "on-tertiary-fixed-variant": "#2f3aa3",
+              "surface-bright": "#2c3a4c",
+              "surface-container-lowest": "#010f1f",
+              error: "#ffb4ab",
+              "surface-variant": "#273647",
+              "on-secondary": "#00354a",
+              "secondary-container": "#00a6e0",
+              "on-error-container": "#ffdad6",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              "margin-desktop": "32px",
+              gutter: "16px",
+              "max-width": "1440px",
+              unit: "4px",
+              "margin-mobile": "16px",
+            },
+            fontFamily: {
+              "headline-xl": ["Inter"],
+              "code-sm": ["JetBrains Mono"],
+              "headline-md": ["Inter"],
+              "body-lg": ["Inter"],
+              "headline-xl-mobile": ["Inter"],
+              "label-md": ["Inter"],
+              "headline-lg": ["Inter"],
+              "body-md": ["Inter"],
+            },
+            fontSize: {
+              "headline-xl": [
+                "36px",
+                {
+                  lineHeight: "44px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "code-sm": ["13px", { lineHeight: "18px", fontWeight: "400" }],
+              "headline-md": [
+                "20px",
+                { lineHeight: "28px", fontWeight: "600" },
+              ],
+              "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "headline-xl-mobile": [
+                "28px",
+                {
+                  lineHeight: "34px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "700",
+                },
+              ],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-lg": [
+                "24px",
+                {
+                  lineHeight: "32px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+        vertical-align: middle;
+      }
+      .dot-grid {
+        background-image: radial-gradient(circle, #1e293b 1px, transparent 1px);
+        background-size: 8px 8px;
+      }
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #051424;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #1e293b;
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #7bd0ff;
+      }
+    </style>
+  </head>
+  <body class="bg-surface text-on-surface font-body-md">
+    <div id="sb-overlay"></div>
+    <!-- Side Navigation Shell -->
+    <aside id="sidebar"></aside>
+    <!-- Main Content Canvas -->
+    <main
+      class="lg:ml-[272px] min-h-screen flex flex-col relative dot-grid"
+    >
+      <!-- Top App Bar -->
+      <header
+        class="flex justify-between items-center h-16 px-margin-desktop sticky top-0 bg-surface-dim border-b border-outline-variant z-40"
+      >
+        <div class="flex items-center gap-4 flex-1">
+          <div class="relative w-96 group">
+            <span
+              class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm"
+              >search</span
+            >
+            <input
+              class="w-full bg-surface-container-lowest border-outline-variant text-body-md py-2 pl-10 pr-4 rounded focus:ring-1 focus:ring-secondary focus:border-secondary transition-all"
+              placeholder="Search clusters, nodes, or events..."
+              type="text"
+            />
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <button
+            class="text-on-surface-variant hover:text-on-surface transition-colors p-2"
+          >
+            <span class="material-symbols-outlined">notifications</span>
+          </button>
+          <div
+            class="w-8 h-8 rounded-full bg-secondary-container/20 border border-secondary/30 flex items-center justify-center overflow-hidden"
+          >
+            <img
+              class="w-full h-full object-cover"
+              data-alt="A professional headshot of a DevOps engineer with a tech-noir aesthetic, high-contrast lighting from a single side, wearing a dark tactical turtleneck, with soft digital interface reflections on their face."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDA3pqzQvEKMCIL3sFS73Gk-KsQAwKBYgREqA8eVvy6BQ9zaoPTpIPDCSmXaAKxFjrKc_-51cp26VN7573bKDH7dBgtg5tToasQw5JcDGL9jyHHPnroQXuTN9neQY0MfJRowvPlsbcVAjKzG6iJu2POWtD1CmADXfQMDjNoqN6Mv_WyrLxZwVm8QdMaXpNRpkRkkCfbQLbJhu7eY-XkynOr5-WdW6GXDFaRq3DJqUYegGHawqmlGxyvt8qgjbVkiUEwfmDzKI7p6tow"
+            />
+          </div>
+        </div>
+      </header>
+      <!-- Content Area -->
+      <div class="p-margin-desktop space-y-8">
+        <!-- Page Header -->
+        <div class="flex justify-between items-end">
+          <div>
+            <h2 class="font-headline-xl text-headline-xl text-on-surface">
+              Infrastructure Scaling
+            </h2>
+            <p class="text-on-surface-variant font-body-lg">
+              Elastic compute management and auto-scaling orchestration
+            </p>
+          </div>
+          <div class="flex gap-4">
+            <button
+              class="px-4 py-2 border border-outline-variant text-on-surface font-label-md hover:bg-surface-container-high transition-colors rounded"
+            >
+              View Config
+            </button>
+            <button
+              class="px-4 py-2 bg-secondary text-on-secondary font-label-md hover:opacity-90 transition-all rounded shadow-lg shadow-secondary/10"
+            >
+              New Auto-Scaling Group
+            </button>
+          </div>
+        </div>
+        <!-- Dashboard Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+          <!-- Resource Usage Chart Card (Bento Style) -->
+          <div
+            class="col-span-12 lg:col-span-8 bg-surface-container p-6 border border-outline-variant relative overflow-hidden group"
+          >
+            <div class="flex justify-between items-start mb-6">
+              <div>
+                <h3 class="font-headline-md text-headline-md text-on-surface">
+                  Cluster Resource Pulse
+                </h3>
+                <p class="text-on-surface-variant font-label-md">
+                  Real-time aggregate utilization across 12 zones
+                </p>
+              </div>
+              <div class="flex gap-2">
+                <span
+                  class="px-2 py-1 bg-secondary/10 text-secondary border border-secondary/20 text-[10px] font-bold uppercase tracking-tighter"
+                  >Live Updates</span
+                >
+              </div>
+            </div>
+            <div
+              class="h-64 flex items-end justify-between gap-1 relative pt-12"
+            >
+              <!-- Simulated Chart Bars -->
+              <div class="flex-1 bg-secondary-container/10 relative group">
+                <div
+                  class="absolute bottom-0 w-full bg-secondary transition-all duration-700"
+                  style="height: 45%"
+                ></div>
+              </div>
+              <div class="flex-1 bg-secondary-container/10 relative">
+                <div
+                  class="absolute bottom-0 w-full bg-secondary transition-all duration-700"
+                  style="height: 62%"
+                ></div>
+              </div>
+              <div class="flex-1 bg-secondary-container/10 relative">
+                <div
+                  class="absolute bottom-0 w-full bg-secondary transition-all duration-700"
+                  style="height: 84%"
+                ></div>
+              </div>
+              <div class="flex-1 bg-secondary-container/10 relative">
+                <div
+                  class="absolute bottom-0 w-full bg-secondary transition-all duration-700"
+                  style="height: 55%"
+                ></div>
+              </div>
+              <div class="flex-1 bg-secondary-container/10 relative">
+                <div
+                  class="absolute bottom-0 w-full bg-secondary transition-all duration-700"
+                  style="height: 92%"
+                ></div>
+              </div>
+              <div class="flex-1 bg-secondary-container/10 relative">
+                <div
+                  class="absolute bottom-0 w-full bg-secondary transition-all duration-700"
+                  style="height: 70%"
+                ></div>
+              </div>
+              <div class="flex-1 bg-secondary-container/10 relative">
+                <div
+                  class="absolute bottom-0 w-full bg-secondary transition-all duration-700"
+                  style="height: 48%"
+                ></div>
+              </div>
+              <div class="flex-1 bg-secondary-container/10 relative">
+                <div
+                  class="absolute bottom-0 w-full bg-secondary transition-all duration-700"
+                  style="height: 35%"
+                ></div>
+              </div>
+              <!-- Grid Lines -->
+              <div
+                class="absolute inset-0 border-b border-outline-variant/30 flex flex-col justify-between pointer-events-none"
+              >
+                <div class="w-full border-t border-outline-variant/10"></div>
+                <div class="w-full border-t border-outline-variant/10"></div>
+                <div class="w-full border-t border-outline-variant/10"></div>
+              </div>
+            </div>
+            <div
+              class="flex justify-between mt-4 text-on-surface-variant font-label-md"
+            >
+              <div class="flex items-center gap-4">
+                <div class="flex items-center gap-1">
+                  <span class="w-2 h-2 bg-secondary rounded-full"></span> CPU
+                </div>
+                <div class="flex items-center gap-1">
+                  <span class="w-2 h-2 bg-tertiary rounded-full"></span> RAM
+                </div>
+                <div class="flex items-center gap-1">
+                  <span class="w-2 h-2 bg-outline rounded-full"></span> Disk
+                </div>
+              </div>
+              <span>Last 24 Hours</span>
+            </div>
+          </div>
+          <!-- Scaling Health Summary (Small Card) -->
+          <div class="col-span-12 lg:col-span-4 grid grid-rows-2 gap-gutter">
+            <div
+              class="bg-surface-container p-6 border border-outline-variant flex flex-col justify-between"
+            >
+              <p
+                class="text-on-surface-variant font-label-md uppercase tracking-widest"
+              >
+                Active Instances
+              </p>
+              <div class="flex items-baseline gap-2">
+                <span class="text-headline-xl font-headline-xl text-on-surface"
+                  >1,284</span
+                >
+                <span class="text-emerald-400 font-label-md flex items-center">
+                  <span class="material-symbols-outlined text-sm"
+                    >arrow_upward</span
+                  >
+                  12%
+                </span>
+              </div>
+              <div
+                class="w-full bg-surface-container-high h-1 rounded overflow-hidden"
+              >
+                <div class="bg-secondary h-full" style="width: 78%"></div>
+              </div>
+            </div>
+            <div
+              class="bg-surface-container p-6 border border-outline-variant flex flex-col justify-between"
+            >
+              <p
+                class="text-on-surface-variant font-label-md uppercase tracking-widest"
+              >
+                Autoscaling Efficacy
+              </p>
+              <div class="flex items-baseline gap-2">
+                <span class="text-headline-xl font-headline-xl text-on-surface"
+                  >98.2%</span
+                >
+              </div>
+              <p class="text-on-surface-variant font-body-md">
+                SLA maintained across all primary shards.
+              </p>
+            </div>
+          </div>
+          <!-- Active Auto-Scaling Groups -->
+          <div
+            class="col-span-12 bg-surface-container-low border border-outline-variant"
+          >
+            <div
+              class="px-6 py-4 border-b border-outline-variant flex justify-between items-center bg-surface-container/50"
+            >
+              <h3 class="font-headline-md text-headline-md text-on-surface">
+                Auto-Scaling Groups (ASGs)
+              </h3>
+              <div class="flex gap-2">
+                <button
+                  class="p-2 hover:bg-surface-container-high rounded transition-colors"
+                >
+                  <span class="material-symbols-outlined">filter_list</span>
+                </button>
+              </div>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left">
+                <thead
+                  class="bg-surface-container-high/30 border-b border-outline-variant"
+                >
+                  <tr>
+                    <th
+                      class="px-6 py-4 font-label-md text-on-surface-variant uppercase"
+                    >
+                      Group Name
+                    </th>
+                    <th
+                      class="px-6 py-4 font-label-md text-on-surface-variant uppercase"
+                    >
+                      Status
+                    </th>
+                    <th
+                      class="px-6 py-4 font-label-md text-on-surface-variant uppercase text-center"
+                    >
+                      Nodes (C/D/M)
+                    </th>
+                    <th
+                      class="px-6 py-4 font-label-md text-on-surface-variant uppercase"
+                    >
+                      Thresholds
+                    </th>
+                    <th
+                      class="px-6 py-4 font-label-md text-on-surface-variant uppercase"
+                    >
+                      Actions
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-outline-variant/30">
+                  <tr class="hover:bg-surface-container-high transition-colors">
+                    <td class="px-6 py-5">
+                      <div class="flex items-center gap-3">
+                        <div class="w-2 h-8 bg-secondary"></div>
+                        <div>
+                          <p
+                            class="text-on-surface font-headline-md leading-tight"
+                          >
+                            API-Gateway-Shard-A
+                          </p>
+                          <p
+                            class="text-on-surface-variant text-[10px] uppercase"
+                          >
+                            us-east-1 | production
+                          </p>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-6 py-5">
+                      <span
+                        class="px-2 py-1 bg-emerald-500/10 text-emerald-400 text-xs font-bold border border-emerald-500/20 rounded"
+                        >OPTIMIZED</span
+                      >
+                    </td>
+                    <td class="px-6 py-5">
+                      <div class="flex flex-col items-center">
+                        <div class="flex gap-2 text-on-surface font-code-sm">
+                          <span class="text-secondary">42</span> /
+                          <span>42</span> / <span class="opacity-40">100</span>
+                        </div>
+                        <p
+                          class="text-[9px] text-on-surface-variant uppercase mt-1"
+                        >
+                          Current / Desired / Max
+                        </p>
+                      </div>
+                    </td>
+                    <td class="px-6 py-5">
+                      <div class="space-y-1">
+                        <div
+                          class="flex justify-between text-[10px] text-on-surface-variant"
+                        >
+                          <span>CPU</span> <span>75%</span>
+                        </div>
+                        <div
+                          class="w-full h-1 bg-surface-container-highest rounded"
+                        >
+                          <div
+                            class="bg-secondary h-full"
+                            style="width: 75%"
+                          ></div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-6 py-5">
+                      <button
+                        class="text-on-surface-variant hover:text-secondary p-1"
+                      >
+                        <span class="material-symbols-outlined">tune</span>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="hover:bg-surface-container-high transition-colors">
+                    <td class="px-6 py-5">
+                      <div class="flex items-center gap-3">
+                        <div class="w-2 h-8 bg-tertiary"></div>
+                        <div>
+                          <p
+                            class="text-on-surface font-headline-md leading-tight"
+                          >
+                            Worker-Process-V3
+                          </p>
+                          <p
+                            class="text-on-surface-variant text-[10px] uppercase"
+                          >
+                            eu-central-1 | staging
+                          </p>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-6 py-5">
+                      <span
+                        class="px-2 py-1 bg-amber-500/10 text-amber-400 text-xs font-bold border border-amber-500/20 rounded"
+                        >SCALING UP</span
+                      >
+                    </td>
+                    <td class="px-6 py-5">
+                      <div class="flex flex-col items-center">
+                        <div class="flex gap-2 text-on-surface font-code-sm">
+                          <span class="text-tertiary">18</span> /
+                          <span class="text-amber-400">24</span> /
+                          <span class="opacity-40">50</span>
+                        </div>
+                        <p
+                          class="text-[9px] text-on-surface-variant uppercase mt-1"
+                        >
+                          Current / Desired / Max
+                        </p>
+                      </div>
+                    </td>
+                    <td class="px-6 py-5">
+                      <div class="space-y-1">
+                        <div
+                          class="flex justify-between text-[10px] text-on-surface-variant"
+                        >
+                          <span>RAM</span> <span>88%</span>
+                        </div>
+                        <div
+                          class="w-full h-1 bg-surface-container-highest rounded"
+                        >
+                          <div
+                            class="bg-tertiary h-full"
+                            style="width: 88%"
+                          ></div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-6 py-5">
+                      <button
+                        class="text-on-surface-variant hover:text-secondary p-1"
+                      >
+                        <span class="material-symbols-outlined">tune</span>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- Manual Threshold Override Panel -->
+          <div
+            class="col-span-12 lg:col-span-5 bg-surface-container p-6 border border-outline-variant"
+          >
+            <h3 class="font-headline-md text-headline-md text-on-surface mb-6">
+              Global Threshold Override
+            </h3>
+            <div class="space-y-6">
+              <div class="space-y-3">
+                <div class="flex justify-between font-label-md">
+                  <label class="text-on-surface-variant"
+                    >Scale-Up Trigger (CPU %)</label
+                  >
+                  <span class="text-secondary">82%</span>
+                </div>
+                <input
+                  class="w-full h-1.5 bg-surface-container-highest appearance-none rounded-full accent-secondary cursor-pointer"
+                  max="100"
+                  min="0"
+                  type="range"
+                  value="82"
+                />
+              </div>
+              <div class="space-y-3">
+                <div class="flex justify-between font-label-md">
+                  <label class="text-on-surface-variant"
+                    >Scale-Down Trigger (CPU %)</label
+                  >
+                  <span class="text-on-tertiary-container">25%</span>
+                </div>
+                <input
+                  class="w-full h-1.5 bg-surface-container-highest appearance-none rounded-full accent-on-tertiary-container cursor-pointer"
+                  max="100"
+                  min="0"
+                  type="range"
+                  value="25"
+                />
+              </div>
+              <div class="pt-4 border-t border-outline-variant/30">
+                <div class="flex items-center gap-2 mb-4">
+                  <input
+                    checked=""
+                    class="rounded border-outline-variant text-secondary bg-surface-container-lowest focus:ring-secondary"
+                    id="cooldown"
+                    type="checkbox"
+                  />
+                  <label class="text-body-md text-on-surface" for="cooldown"
+                    >Enable 300s Cooldown Period</label
+                  >
+                </div>
+                <button
+                  class="w-full py-3 bg-secondary/10 text-secondary border border-secondary hover:bg-secondary hover:text-on-secondary transition-all font-bold uppercase tracking-widest text-xs"
+                >
+                  Apply Policy Overrides
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Scaling Event History -->
+          <div
+            class="col-span-12 lg:col-span-7 bg-surface-container p-6 border border-outline-variant"
+          >
+            <div class="flex justify-between items-center mb-6">
+              <h3 class="font-headline-md text-headline-md text-on-surface">
+                Event Ledger
+              </h3>
+              <a
+                class="text-secondary text-xs font-bold uppercase hover:underline"
+                href="#"
+                >Full Log</a
+              >
+            </div>
+            <div class="space-y-4 max-h-[320px] overflow-y-auto pr-2">
+              <!-- History Items -->
+              <div
+                class="flex gap-4 items-start p-3 bg-surface-container-low border-l-2 border-emerald-500/50"
+              >
+                <span class="material-symbols-outlined text-emerald-400 mt-1"
+                  >arrow_upward</span
+                >
+                <div class="flex-1">
+                  <div class="flex justify-between">
+                    <p class="text-on-surface font-bold text-body-md">
+                      Scale Up: API-Gateway-Shard-A
+                    </p>
+                    <span
+                      class="text-[10px] text-on-surface-variant font-code-sm"
+                      >14:22:10</span
+                    >
+                  </div>
+                  <p class="text-on-surface-variant text-xs mt-1">
+                    Triggered by CPU Spike (89%). Added 4 nodes.
+                  </p>
+                </div>
+              </div>
+              <div
+                class="flex gap-4 items-start p-3 bg-surface-container-low border-l-2 border-secondary/50"
+              >
+                <span class="material-symbols-outlined text-secondary mt-1"
+                  >arrow_downward</span
+                >
+                <div class="flex-1">
+                  <div class="flex justify-between">
+                    <p class="text-on-surface font-bold text-body-md">
+                      Scale Down: Worker-Process-V3
+                    </p>
+                    <span
+                      class="text-[10px] text-on-surface-variant font-code-sm"
+                      >12:05:44</span
+                    >
+                  </div>
+                  <p class="text-on-surface-variant text-xs mt-1">
+                    Inactivity detected for 15m. Removed 2 nodes.
+                  </p>
+                </div>
+              </div>
+              <div
+                class="flex gap-4 items-start p-3 bg-surface-container-low border-l-2 border-error-container/50"
+              >
+                <span class="material-symbols-outlined text-error mt-1"
+                  >warning</span
+                >
+                <div class="flex-1">
+                  <div class="flex justify-between">
+                    <p class="text-on-surface font-bold text-body-md">
+                      Scaling Failed: Database-Relay
+                    </p>
+                    <span
+                      class="text-[10px] text-on-surface-variant font-code-sm"
+                      >09:12:30</span
+                    >
+                  </div>
+                  <p class="text-on-surface-variant text-xs mt-1">
+                    Insufficient quota in us-east-1. Retrying in 60s.
+                  </p>
+                </div>
+              </div>
+              <div
+                class="flex gap-4 items-start p-3 bg-surface-container-low border-l-2 border-emerald-500/50"
+              >
+                <span class="material-symbols-outlined text-emerald-400 mt-1"
+                  >arrow_upward</span
+                >
+                <div class="flex-1">
+                  <div class="flex justify-between">
+                    <p class="text-on-surface font-bold text-body-md">
+                      Scale Up: API-Gateway-Shard-A
+                    </p>
+                    <span
+                      class="text-[10px] text-on-surface-variant font-code-sm"
+                      >Yesterday</span
+                    >
+                  </div>
+                  <p class="text-on-surface-variant text-xs mt-1">
+                    Triggered by high latency alerts.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Contextual FAB (Hidden as per mandate for Details/Settings/Management screens, but shown here as a 'New Workflow' action if strictly required by JSON. The task is 'Infrastructure Scaling' management, usually suppressing FAB. Let's keep it minimalist.) -->
+    <script>
+      // Micro-interactions for chart bars
+      document
+        .querySelectorAll(".col-span-8 .flex-1 .bg-secondary")
+        .forEach((bar) => {
+          bar.addEventListener("mouseover", () => {
+            bar.style.opacity = "0.7";
+            bar.style.filter = "drop-shadow(0 0 8px #7bd0ff)";
+          });
+          bar.addEventListener("mouseout", () => {
+            bar.style.opacity = "1";
+            bar.style.filter = "none";
+          });
+        });
+
+      // Simple animation for the progress bar in ASG list
+      window.addEventListener("DOMContentLoaded", () => {
+        const bars = document.querySelectorAll(".h-64 .bg-secondary");
+        bars.forEach((bar, index) => {
+          const finalHeight = bar.style.height;
+          bar.style.height = "0";
+          setTimeout(() => {
+            bar.style.transition = `height 1s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.1}s`;
+            bar.style.height = finalHeight;
+          }, 100);
+        });
+      });
+    </script>
+    <script src="../dash-sidebar.js"></script>
+  </body>
+</html>

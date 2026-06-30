@@ -1,0 +1,1612 @@
+<!doctype html>
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Stackly | Dashboard</title>
+    <meta
+      name="description"
+      content="Stackly workflow automation — your role-based command centre."
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-low": "#0d1c2d",
+              outline: "#909097",
+              "on-secondary-fixed": "#001e2c",
+              "tertiary-container": "#00055c",
+              "surface-container-high": "#1c2b3c",
+              primary: "#bec6e0",
+              "on-background": "#d4e4fa",
+              "primary-fixed-dim": "#bec6e0",
+              surface: "#051424",
+              "on-secondary": "#00354a",
+              "outline-variant": "#45464d",
+              "on-error": "#690005",
+              "on-secondary-container": "#00374d",
+              tertiary: "#bdc2ff",
+              background: "#051424",
+              "on-tertiary-fixed": "#000767",
+              "inverse-on-surface": "#233143",
+              "surface-container": "#122131",
+              "inverse-surface": "#d4e4fa",
+              "on-surface": "#d4e4fa",
+              "on-primary-fixed-variant": "#3f465c",
+              "on-error-container": "#ffdad6",
+              "secondary-container": "#00a6e0",
+              "on-tertiary-container": "#6c77e1",
+              "surface-container-highest": "#273647",
+              "secondary-fixed-dim": "#7bd0ff",
+              "surface-variant": "#273647",
+              error: "#ffb4ab",
+              "surface-bright": "#2c3a4c",
+              secondary: "#7bd0ff",
+              "secondary-fixed": "#c4e7ff",
+              "on-primary": "#283044",
+              "inverse-primary": "#565e74",
+              "on-surface-variant": "#c6c6cd",
+              "surface-dim": "#051424",
+              "on-primary-fixed": "#131b2e",
+              "surface-tint": "#bec6e0",
+              "tertiary-fixed": "#e0e0ff",
+              "surface-container-lowest": "#010f1f",
+              "tertiary-fixed-dim": "#bdc2ff",
+              "primary-fixed": "#dae2fd",
+              "on-secondary-fixed-variant": "#004c69",
+              "primary-container": "#0f172a",
+              "error-container": "#93000a",
+              "on-primary-container": "#798098",
+              "on-tertiary-fixed-variant": "#2f3aa3",
+              "on-tertiary": "#131e8c",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              unit: "4px",
+              gutter: "16px",
+              "max-width": "1440px",
+              "margin-desktop": "32px",
+              "margin-mobile": "16px",
+            },
+            fontFamily: {
+              "body-lg": ["Inter"],
+              "headline-xl": ["Inter"],
+              "headline-md": ["Inter"],
+              "headline-lg": ["Inter"],
+              "body-md": ["Inter"],
+              "code-sm": ["JetBrains Mono"],
+              "label-md": ["Inter"],
+            },
+            fontSize: {
+              "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "headline-xl": [
+                "36px",
+                {
+                  lineHeight: "44px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "headline-md": [
+                "20px",
+                { lineHeight: "28px", fontWeight: "600" },
+              ],
+              "headline-lg": [
+                "24px",
+                {
+                  lineHeight: "32px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+              "code-sm": ["13px", { lineHeight: "18px", fontWeight: "400" }],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "600",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      /* ── Base ── */
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+        vertical-align: middle;
+        user-select: none;
+      }
+      body {
+        background-color: #051424;
+      }
+      .dot-grid {
+        background-image: radial-gradient(circle, #1e293b 1px, transparent 1px);
+        background-size: 24px 24px;
+      }
+      .glass-panel {
+        background: rgba(18, 33, 49, 0.78);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border: 1px solid rgba(69, 70, 77, 0.35);
+      }
+      ::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #051424;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #1c2b3c;
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #273647;
+      }
+
+      /* ── Sidebar ── */
+      #sidebar {
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      #sb-overlay {
+        transition: opacity 0.3s ease;
+      }
+      .nav-link {
+        transition:
+          background 0.15s ease,
+          color 0.15s ease,
+          border-color 0.15s ease;
+        border-right: 2px solid transparent;
+      }
+      .nav-link.active {
+        border-right-color: var(--accent, #7bd0ff);
+      }
+      .nav-link:not(.active):hover {
+        background: rgba(69, 70, 77, 0.28);
+        color: #d4e4fa;
+      }
+
+      /* ── Cards ── */
+      .stat-card {
+        transition:
+          transform 0.25s ease,
+          box-shadow 0.25s ease;
+        cursor: default;
+      }
+      .stat-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+      }
+      .activity-row {
+        transition: background 0.15s ease;
+        cursor: default;
+      }
+      .activity-row:hover {
+        background: rgba(69, 70, 77, 0.18);
+      }
+      .quick-btn {
+        transition: all 0.2s ease;
+        border: 1px solid rgba(69, 70, 77, 0.3);
+      }
+      .quick-btn:hover {
+        background: rgba(123, 208, 255, 0.07);
+        border-color: rgba(123, 208, 255, 0.28);
+        transform: translateX(4px);
+      }
+
+      /* ── Animations ── */
+      @keyframes fadeSlideUp {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .anim-in {
+        animation: fadeSlideUp 0.45s ease forwards;
+      }
+
+      @keyframes pulseDot {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.5;
+          transform: scale(1.5);
+        }
+      }
+      .pdot {
+        animation: pulseDot 2s ease-in-out infinite;
+      }
+
+      @keyframes progFill {
+        from {
+          width: 0;
+        }
+        to {
+          width: var(--w);
+        }
+      }
+      .prog-bar {
+        width: var(--w);
+        animation: progFill 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+
+      /* ── Welcome banner blobs ── */
+      .blob1 {
+        position: absolute;
+        right: -60px;
+        top: -60px;
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        background: rgba(123, 208, 255, 0.05);
+        filter: blur(40px);
+        pointer-events: none;
+      }
+      .blob2 {
+        position: absolute;
+        right: 40px;
+        bottom: -40px;
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        background: rgba(189, 194, 255, 0.05);
+        filter: blur(30px);
+        pointer-events: none;
+      }
+    </style>
+  </head>
+
+  <body class="bg-background text-on-surface font-body-md overflow-hidden">
+    <!-- ─── Mobile overlay ─── -->
+    <div
+      id="sb-overlay"
+      class="fixed inset-0 bg-black/60 z-40 opacity-0 pointer-events-none lg:hidden"
+      onclick="sbClose()"
+    ></div>
+
+    <!-- ════════════════════ SIDEBAR ════════════════════ -->
+    <aside
+      id="sidebar"
+      class="fixed left-0 top-0 h-full w-[272px] flex flex-col z-50 border-r border-outline-variant/20 -translate-x-full lg:translate-x-0"
+      style="background: #0d1c2d"
+    >
+      <!-- Brand strip -->
+      <div
+        class="flex items-center gap-3 px-5 py-[18px] border-b border-outline-variant/10 flex-shrink-0"
+      >
+        <a
+          href="../../index.html"
+          class="flex items-center gap-3 flex-1 min-w-0"
+        >
+          <div
+            id="sb-icon-wrap"
+            class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+            style="background: rgba(123, 208, 255, 0.15)"
+          >
+            <span
+              id="sb-icon"
+              class="material-symbols-outlined text-[22px]"
+              style="
+                font-variation-settings: &quot;FILL&quot; 1;
+                color: #7bd0ff;
+              "
+              >hub</span
+            >
+          </div>
+          <div class="min-w-0">
+            <p class="font-bold text-on-surface leading-tight text-[15px]">
+              Stackly
+            </p>
+            <p
+              id="sb-role"
+              class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold truncate mt-0.5"
+            >
+              Workspace
+            </p>
+          </div>
+        </a>
+        <button
+          onclick="sbClose()"
+          class="lg:hidden w-8 h-8 flex items-center justify-center rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/30 transition-all"
+        >
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <!-- Navigation -->
+      <nav id="sb-nav" class="flex-1 py-3 space-y-0.5 overflow-y-auto px-2">
+        <!-- Built by JS -->
+      </nav>
+
+      <!-- Footer links -->
+      <div
+        class="border-t border-outline-variant/10 px-2 py-2 space-y-0.5 flex-shrink-0"
+      >
+        <a
+          href="#"
+          class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant text-[13px]"
+        >
+          <span class="material-symbols-outlined text-[19px]">description</span>
+          <span class="font-semibold">Documentation</span>
+        </a>
+        <a
+          href="#"
+          class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant text-[13px]"
+        >
+          <span class="material-symbols-outlined text-[19px]"
+            >contact_support</span
+          >
+          <span class="font-semibold">Support</span>
+        </a>
+      </div>
+
+      <!-- User strip -->
+      <div class="border-t border-outline-variant/10 p-4 flex-shrink-0">
+        <div class="flex items-center gap-3">
+          <div
+            id="sb-av"
+            class="w-9 h-9 rounded-full flex items-center justify-center font-bold text-[13px] flex-shrink-0"
+            style="
+              background: rgba(123, 208, 255, 0.12);
+              color: #7bd0ff;
+              border: 1px solid rgba(123, 208, 255, 0.25);
+            "
+          >
+            --
+          </div>
+          <div class="flex-1 min-w-0">
+            <p id="sb-name" class="font-bold text-on-surface text-sm truncate">
+              —
+            </p>
+            <p
+              id="sb-email"
+              class="text-[11px] text-on-surface-variant truncate"
+            >
+              —
+            </p>
+          </div>
+          <button
+            onclick="doLogout()"
+            title="Sign out"
+            class="w-8 h-8 flex items-center justify-center rounded-lg text-on-surface-variant hover:text-error hover:bg-error/10 transition-all"
+          >
+            <span class="material-symbols-outlined text-[19px]">logout</span>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ════════════════════ MAIN AREA ════════════════════ -->
+    <div class="lg:ml-[272px] h-screen flex flex-col overflow-hidden">
+      <!-- ── Top header ── -->
+      <header
+        class="flex-shrink-0 h-[62px] flex items-center px-4 md:px-6 gap-3 border-b border-outline-variant/10 z-30"
+        style="background: rgba(13, 28, 45, 0.88); backdrop-filter: blur(14px)"
+      >
+        <!-- Hamburger -->
+        <button
+          onclick="sbOpen()"
+          class="lg:hidden w-9 h-9 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all"
+        >
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+
+        <!-- Breadcrumb -->
+        <div class="flex-1 min-w-0">
+          <div
+            class="flex items-center gap-1 text-[11px] text-on-surface-variant mb-0.5"
+          >
+            <a
+              href="../../index.html"
+              class="hover:text-on-surface transition-colors"
+              >Stackly</a
+            >
+            <span class="material-symbols-outlined text-[13px]"
+              >chevron_right</span
+            >
+            <span id="hdr-crumb" class="font-bold" style="color: #7bd0ff"
+              >Dashboard</span
+            >
+          </div>
+          <p
+            id="hdr-greet"
+            class="font-bold text-on-surface text-[14px] leading-tight truncate"
+          >
+            Loading workspace…
+          </p>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex items-center gap-2 flex-shrink-0">
+          <!-- Search (sm+) -->
+          <div class="relative hidden sm:block">
+            <span
+              class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[17px] text-on-surface-variant pointer-events-none"
+              >search</span
+            >
+            <input
+              type="text"
+              placeholder="Search workspace…"
+              class="bg-surface-container-high rounded-lg pl-9 pr-3 py-2 text-[13px] w-36 md:w-48 text-on-surface border border-outline-variant/20 outline-none focus:ring-1 focus:ring-secondary/40 placeholder:text-on-surface-variant/40 transition-all"
+            />
+          </div>
+          <!-- Notifications -->
+          <button
+            class="relative w-9 h-9 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all"
+          >
+            <span class="material-symbols-outlined text-[20px]"
+              >notifications</span
+            >
+            <span
+              class="absolute top-[7px] right-[7px] w-2 h-2 rounded-full bg-error pdot"
+            ></span>
+          </button>
+          <!-- Avatar -->
+          <div
+            id="hdr-av"
+            class="w-9 h-9 rounded-full flex items-center justify-center font-bold text-[13px] cursor-pointer transition-all"
+            style="
+              background: rgba(123, 208, 255, 0.12);
+              color: #7bd0ff;
+              border: 1px solid rgba(123, 208, 255, 0.25);
+            "
+          >
+            --
+          </div>
+        </div>
+      </header>
+
+      <!-- ── Scrollable content ── -->
+      <main class="flex-1 overflow-y-auto dot-grid">
+        <div
+          class="p-4 md:p-6 xl:p-8 space-y-5 md:space-y-6 max-w-[1400px] mx-auto pb-12"
+        >
+          <!-- ▸ Welcome banner -->
+          <div
+            class="glass-panel rounded-2xl p-5 md:p-8 relative overflow-hidden anim-in"
+            style="animation-delay: 0ms"
+          >
+            <div class="blob1"></div>
+            <div class="blob2"></div>
+            <div
+              class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 relative"
+            >
+              <!-- Left text -->
+              <div>
+                <span
+                  id="welcome-badge"
+                  class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider mb-3"
+                  style="
+                    background: rgba(123, 208, 255, 0.1);
+                    border: 1px solid rgba(123, 208, 255, 0.22);
+                    color: #7bd0ff;
+                  "
+                >
+                  <span
+                    class="w-1.5 h-1.5 rounded-full pdot"
+                    style="background: #7bd0ff"
+                  ></span>
+                  Active Session
+                </span>
+                <h2
+                  id="welcome-head"
+                  class="font-headline-xl text-on-surface mb-1"
+                  style="font-size: clamp(22px, 3.5vw, 32px)"
+                >
+                  Welcome back! 👋
+                </h2>
+                <p id="welcome-sub" class="text-on-surface-variant text-[15px]">
+                  Your workspace is ready. Here's what's happening today.
+                </p>
+              </div>
+              <!-- Live clock -->
+              <div
+                class="flex-shrink-0 text-left sm:text-right rounded-xl px-5 py-3 border border-outline-variant/20"
+                style="background: rgba(28, 43, 60, 0.5)"
+              >
+                <p
+                  id="clk-time"
+                  class="font-bold text-[28px] leading-tight"
+                  style="
+                    font-family: &quot;JetBrains Mono&quot;, monospace;
+                    color: #7bd0ff;
+                    letter-spacing: -0.03em;
+                  "
+                ></p>
+                <p
+                  id="clk-date"
+                  class="text-on-surface-variant text-xs mt-1"
+                ></p>
+                <p
+                  class="text-[10px] uppercase tracking-widest mt-0.5"
+                  style="color: rgba(198, 198, 205, 0.4)"
+                >
+                  Local Time
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ▸ KPI cards -->
+          <div
+            id="stats-grid"
+            class="grid grid-cols-2 xl:grid-cols-4 gap-3 md:gap-4"
+          >
+            <!-- Built by JS -->
+          </div>
+
+          <!-- ▸ Body grid: activity + right column -->
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 md:gap-6">
+            <!-- Activity feed (2/3) -->
+            <section
+              class="lg:col-span-2 glass-panel rounded-2xl overflow-hidden anim-in"
+              style="animation-delay: 200ms"
+            >
+              <div
+                class="flex items-center justify-between px-6 py-4 border-b border-outline-variant/10"
+              >
+                <div>
+                  <h3 class="font-bold text-on-surface text-[15px]">
+                    Recent Activity
+                  </h3>
+                  <p class="text-on-surface-variant text-[12px] mt-0.5">
+                    Latest events across your workspace
+                  </p>
+                </div>
+                <a
+                  href="#"
+                  class="text-[12px] font-bold flex items-center gap-1 transition-all hover:underline"
+                  style="color: #7bd0ff"
+                >
+                  View all
+                  <span class="material-symbols-outlined text-[14px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+              <div id="activity-feed"></div>
+            </section>
+
+            <!-- Right column (1/3) -->
+            <div class="space-y-4">
+              <!-- Quick access -->
+              <section
+                class="glass-panel rounded-2xl p-5 anim-in"
+                style="animation-delay: 250ms"
+              >
+                <h3 class="font-bold text-on-surface text-[15px] mb-3">
+                  Quick Access
+                </h3>
+                <div id="quick-actions" class="space-y-1.5"></div>
+              </section>
+
+              <!-- System status -->
+              <section
+                class="glass-panel rounded-2xl p-5 anim-in"
+                style="animation-delay: 300ms"
+              >
+                <div class="flex items-center justify-between mb-4">
+                  <h3 class="font-bold text-on-surface text-[15px]">
+                    System Status
+                  </h3>
+                  <span
+                    class="text-[11px] font-bold flex items-center gap-1.5"
+                    style="color: #4ade80"
+                  >
+                    <span
+                      class="w-2 h-2 rounded-full pdot"
+                      style="background: #4ade80"
+                    ></span>
+                    All Operational
+                  </span>
+                </div>
+                <div class="space-y-3.5">
+                  <div>
+                    <div class="flex justify-between text-[12px] mb-1.5">
+                      <span class="text-on-surface-variant">API Gateway</span>
+                      <span class="font-bold" style="color: #7bd0ff"
+                        >99.9%</span
+                      >
+                    </div>
+                    <div
+                      class="h-[5px] rounded-full overflow-hidden"
+                      style="background: rgba(39, 54, 71, 0.8)"
+                    >
+                      <div
+                        class="h-full rounded-full prog-bar"
+                        style="
+                          --w: 99.9%;
+                          background: linear-gradient(90deg, #00a6e0, #7bd0ff);
+                        "
+                      ></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between text-[12px] mb-1.5">
+                      <span class="text-on-surface-variant"
+                        >Workflow Engine</span
+                      >
+                      <span class="font-bold" style="color: #bdc2ff"
+                        >97.2%</span
+                      >
+                    </div>
+                    <div
+                      class="h-[5px] rounded-full overflow-hidden"
+                      style="background: rgba(39, 54, 71, 0.8)"
+                    >
+                      <div
+                        class="h-full rounded-full prog-bar"
+                        style="
+                          --w: 97.2%;
+                          background: linear-gradient(90deg, #2f3aa3, #bdc2ff);
+                        "
+                      ></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between text-[12px] mb-1.5">
+                      <span class="text-on-surface-variant"
+                        >Database Cluster</span
+                      >
+                      <span class="font-bold" style="color: #4ade80">100%</span>
+                    </div>
+                    <div
+                      class="h-[5px] rounded-full overflow-hidden"
+                      style="background: rgba(39, 54, 71, 0.8)"
+                    >
+                      <div
+                        class="h-full rounded-full prog-bar"
+                        style="
+                          --w: 100%;
+                          background: linear-gradient(90deg, #166534, #4ade80);
+                        "
+                      ></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between text-[12px] mb-1.5">
+                      <span class="text-on-surface-variant">Storage Nodes</span>
+                      <span class="font-bold" style="color: #bec6e0"
+                        >91.4%</span
+                      >
+                    </div>
+                    <div
+                      class="h-[5px] rounded-full overflow-hidden"
+                      style="background: rgba(39, 54, 71, 0.8)"
+                    >
+                      <div
+                        class="h-full rounded-full prog-bar"
+                        style="
+                          --w: 91.4%;
+                          background: linear-gradient(90deg, #3f465c, #bec6e0);
+                        "
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <!-- /right col -->
+          </div>
+          <!-- /body grid -->
+        </div>
+        <!-- /content pad -->
+      </main>
+    </div>
+    <!-- /main area -->
+
+    <script>
+      /* ═══════════════════════════════════════════════
+       COLOUR PALETTE (inline styles — safe with CDN)
+       ═══════════════════════════════════════════════ */
+      const P = {
+        secondary: {
+          h: "#7bd0ff",
+          a10: "rgba(123,208,255,0.10)",
+          a15: "rgba(123,208,255,0.15)",
+          a20: "rgba(123,208,255,0.20)",
+          a30: "rgba(123,208,255,0.30)",
+          grad: "linear-gradient(135deg,#00a6e0,#7bd0ff)",
+        },
+        tertiary: {
+          h: "#bdc2ff",
+          a10: "rgba(189,194,255,0.10)",
+          a15: "rgba(189,194,255,0.15)",
+          a20: "rgba(189,194,255,0.20)",
+          a30: "rgba(189,194,255,0.30)",
+          grad: "linear-gradient(135deg,#2f3aa3,#bdc2ff)",
+        },
+        error: {
+          h: "#ffb4ab",
+          a10: "rgba(255,180,171,0.10)",
+          a15: "rgba(255,180,171,0.15)",
+          a20: "rgba(255,180,171,0.20)",
+          a30: "rgba(255,180,171,0.30)",
+          grad: "linear-gradient(135deg,#93000a,#ffb4ab)",
+        },
+        primary: {
+          h: "#bec6e0",
+          a10: "rgba(190,198,224,0.10)",
+          a15: "rgba(190,198,224,0.15)",
+          a20: "rgba(190,198,224,0.20)",
+          a30: "rgba(190,198,224,0.30)",
+          grad: "linear-gradient(135deg,#3f465c,#bec6e0)",
+        },
+        green: {
+          h: "#4ade80",
+          a10: "rgba(74,222,128,0.10)",
+          a15: "rgba(74,222,128,0.15)",
+          a20: "rgba(74,222,128,0.20)",
+          a30: "rgba(74,222,128,0.30)",
+          grad: "linear-gradient(135deg,#166534,#4ade80)",
+        },
+      };
+
+      /* ═══════════════════════════════════════════════
+       ROLE CONFIG
+       ═══════════════════════════════════════════════ */
+      const ROLES = {
+        admin: {
+          label: "System Admin",
+          icon: "admin_panel_settings",
+          accent: "secondary",
+          nav: [
+            {
+              icon: "dashboard",
+              label: "Dashboard",
+              href: "./dashboard.html",
+              active: true,
+            },
+            {
+              icon: "group",
+              label: "User Management",
+              href: "./admin/user-management.html",
+            },
+            {
+              icon: "policy",
+              label: "Global Audit",
+              href: "./admin/global-audit.html",
+            },
+            {
+              icon: "security",
+              label: "Security & Compliance",
+              href: "./admin/security-and-compliance.html",
+            },
+            {
+              icon: "monitor_heart",
+              label: "System Health",
+              href: "./admin/system-health.html",
+            },
+            {
+              icon: "receipt_long",
+              label: "Billing",
+              href: "./admin/billing.html",
+            },
+          ],
+          stats: [
+            {
+              icon: "group",
+              label: "Total Users",
+              value: "1,284",
+              delta: "+12 this week",
+              up: true,
+              color: "secondary",
+            },
+            {
+              icon: "security",
+              label: "Security Score",
+              value: "98.4%",
+              delta: "+0.2% vs last month",
+              up: true,
+              color: "green",
+            },
+            {
+              icon: "monitor_heart",
+              label: "System Uptime",
+              value: "99.9%",
+              delta: "30-day average",
+              up: null,
+              color: "tertiary",
+            },
+            {
+              icon: "receipt_long",
+              label: "Monthly Spend",
+              value: "$42.8k",
+              delta: "-3.1% cost saved",
+              up: true,
+              color: "primary",
+            },
+          ],
+          activity: [
+            {
+              icon: "person_add",
+              label: "New user registered",
+              detail: "sarah.kim@company.com joined",
+              time: "2m ago",
+              color: "secondary",
+            },
+            {
+              icon: "lock_reset",
+              label: "Bulk password reset sent",
+              detail: "Applied to 12 accounts (Tier 1)",
+              time: "18m ago",
+              color: "error",
+            },
+            {
+              icon: "verified_user",
+              label: "2FA enforced globally",
+              detail: "Architect role — all regions",
+              time: "1h ago",
+              color: "tertiary",
+            },
+            {
+              icon: "policy",
+              label: "Audit log exported",
+              detail: "Q2 compliance report — PDF",
+              time: "3h ago",
+              color: "primary",
+            },
+            {
+              icon: "group_remove",
+              label: "User account suspended",
+              detail: "T. Wright — security breach flag",
+              time: "5h ago",
+              color: "error",
+            },
+          ],
+        },
+
+        devops: {
+          label: "DevOps Engineer",
+          icon: "terminal",
+          accent: "secondary",
+          nav: [
+            {
+              icon: "dashboard",
+              label: "Dashboard",
+              href: "./dashboard.html",
+              active: true,
+            },
+            {
+              icon: "device_hub",
+              label: "CI/CD Pipelines",
+              href: "./devops/ci-cd-pipelines.html",
+            },
+            {
+              icon: "cloud_upload",
+              label: "Node Deployment",
+              href: "./devops/node-deployment.html",
+            },
+            {
+              icon: "open_in_full",
+              label: "Infrastructure Scaling",
+              href: "./devops/infrastructure-scaling.html",
+            },
+            {
+              icon: "receipt_long",
+              label: "Execution Logs",
+              href: "./devops/execution-logs.html",
+            },
+            {
+              icon: "notifications_active",
+              label: "Performance Alerts",
+              href: "./devops/performance-alerts.html",
+            },
+          ],
+          stats: [
+            {
+              icon: "play_circle",
+              label: "Pipelines Running",
+              value: "24",
+              delta: "+3 since yesterday",
+              up: true,
+              color: "secondary",
+            },
+            {
+              icon: "check_circle",
+              label: "Deploy Success Rate",
+              value: "97.2%",
+              delta: "+1.1% improvement",
+              up: true,
+              color: "green",
+            },
+            {
+              icon: "schedule",
+              label: "Avg Build Time",
+              value: "4m 12s",
+              delta: "−18s faster than avg",
+              up: true,
+              color: "tertiary",
+            },
+            {
+              icon: "warning",
+              label: "Active Alerts",
+              value: "3",
+              delta: "−2 resolved today",
+              up: true,
+              color: "error",
+            },
+          ],
+          activity: [
+            {
+              icon: "check_circle",
+              label: "Pipeline #441 passed",
+              detail: "main → production (2m 47s)",
+              time: "4m ago",
+              color: "green",
+            },
+            {
+              icon: "cloud_upload",
+              label: "Cluster auto-scaled",
+              detail: "+2 replicas — us-east-1",
+              time: "22m ago",
+              color: "secondary",
+            },
+            {
+              icon: "warning",
+              label: "CPU spike on node-07",
+              detail: "94% utilisation (resolved)",
+              time: "41m ago",
+              color: "error",
+            },
+            {
+              icon: "cancel",
+              label: "Pipeline #439 failed",
+              detail: "Integration test timeout 30s",
+              time: "2h ago",
+              color: "error",
+            },
+            {
+              icon: "device_hub",
+              label: "New pipeline created",
+              detail: '"staging-v2" — by you',
+              time: "4h ago",
+              color: "tertiary",
+            },
+          ],
+        },
+
+        architect: {
+          label: "System Architect",
+          icon: "account_tree",
+          accent: "tertiary",
+          nav: [
+            {
+              icon: "dashboard",
+              label: "Dashboard",
+              href: "./dashboard.html",
+              active: true,
+            },
+            {
+              icon: "account_tree",
+              label: "Orchestration",
+              href: "./architect/orchestration.html",
+            },
+            {
+              icon: "hub",
+              label: "Topology Map",
+              href: "./architect/topology-map.html",
+            },
+            {
+              icon: "api",
+              label: "API Management",
+              href: "./architect/api-management.html",
+            },
+            {
+              icon: "integration_instructions",
+              label: "Integration Hub",
+              href: "./architect/integration-hub.html",
+            },
+            {
+              icon: "schema",
+              label: "Resource Schema",
+              href: "./architect/resource-schema.html",
+            },
+          ],
+          stats: [
+            {
+              icon: "account_tree",
+              label: "Active Workflows",
+              value: "186",
+              delta: "+9 this week",
+              up: true,
+              color: "tertiary",
+            },
+            {
+              icon: "hub",
+              label: "System Nodes",
+              value: "342",
+              delta: "+14 newly registered",
+              up: true,
+              color: "secondary",
+            },
+            {
+              icon: "api",
+              label: "API Endpoints",
+              value: "1,047",
+              delta: "+23 endpoints added",
+              up: true,
+              color: "primary",
+            },
+            {
+              icon: "schema",
+              label: "Schema Version",
+              value: "v12.4",
+              delta: "current stable release",
+              up: null,
+              color: "green",
+            },
+          ],
+          activity: [
+            {
+              icon: "account_tree",
+              label: 'Workflow "data-sync-v3" deployed',
+              detail: "Production environment — healthy",
+              time: "8m ago",
+              color: "tertiary",
+            },
+            {
+              icon: "api",
+              label: "New endpoint registered",
+              detail: "POST /v2/orchestrations/run",
+              time: "1h ago",
+              color: "secondary",
+            },
+            {
+              icon: "hub",
+              label: "Topology updated",
+              detail: "3 new edge nodes added to cluster",
+              time: "2h ago",
+              color: "primary",
+            },
+            {
+              icon: "schema",
+              label: "Schema v12.4 published",
+              detail: "Breaking: deprecated fields removed",
+              time: "5h ago",
+              color: "error",
+            },
+            {
+              icon: "integration_instructions",
+              label: "Integration webhook linked",
+              detail: "GitHub Actions → Nexus bridge",
+              time: "1d ago",
+              color: "tertiary",
+            },
+          ],
+        },
+
+        developer: {
+          label: "Developer",
+          icon: "code",
+          accent: "secondary",
+          nav: [
+            {
+              icon: "dashboard",
+              label: "Dashboard",
+              href: "./dashboard.html",
+              active: true,
+            },
+            {
+              icon: "science",
+              label: "Sandbox",
+              href: "./developer/sandbox.html",
+            },
+            {
+              icon: "key",
+              label: "API Access",
+              href: "./developer/api-access.html",
+            },
+            {
+              icon: "webhook",
+              label: "Webhooks",
+              href: "./developer/webhook.html",
+            },
+            {
+              icon: "bug_report",
+              label: "Debugging",
+              href: "./developer/debugging.html",
+            },
+            {
+              icon: "description",
+              label: "Documentation",
+              href: "./developer/documentation.html",
+            },
+          ],
+          stats: [
+            {
+              icon: "api",
+              label: "API Calls Today",
+              value: "14,820",
+              delta: "+2.3k vs yesterday",
+              up: true,
+              color: "secondary",
+            },
+            {
+              icon: "webhook",
+              label: "Active Webhooks",
+              value: "8",
+              delta: "+1 configured",
+              up: true,
+              color: "tertiary",
+            },
+            {
+              icon: "bug_report",
+              label: "Open Bugs",
+              value: "5",
+              delta: "−3 resolved today",
+              up: true,
+              color: "error",
+            },
+            {
+              icon: "science",
+              label: "Sandbox Runs",
+              value: "203",
+              delta: "executed today",
+              up: null,
+              color: "primary",
+            },
+          ],
+          activity: [
+            {
+              icon: "key",
+              label: "API key generated",
+              detail: "prod-key-0x44F (read-only)",
+              time: "10m ago",
+              color: "secondary",
+            },
+            {
+              icon: "webhook",
+              label: "Webhook triggered",
+              detail: "POST /events/deploy — 200 OK",
+              time: "28m ago",
+              color: "tertiary",
+            },
+            {
+              icon: "bug_report",
+              label: "Bug #204 resolved",
+              detail: "Auth token expiry edge case",
+              time: "1h ago",
+              color: "green",
+            },
+            {
+              icon: "science",
+              label: "Sandbox test passed",
+              detail: "workflow-alpha-test-7 (12 ms)",
+              time: "3h ago",
+              color: "tertiary",
+            },
+            {
+              icon: "api",
+              label: "Rate limit increased",
+              detail: "10k → 15k requests per minute",
+              time: "1d ago",
+              color: "secondary",
+            },
+          ],
+        },
+
+        "operations-manager": {
+          label: "Operations Manager",
+          icon: "bar_chart",
+          accent: "secondary",
+          nav: [
+            {
+              icon: "dashboard",
+              label: "Dashboard",
+              href: "./dashboard.html",
+              active: true,
+            },
+            {
+              icon: "groups",
+              label: "Team Workflows",
+              href: "./operations-manager/team-workflows.html",
+            },
+            {
+              icon: "bar_chart",
+              label: "Performance Reports",
+              href: "./operations-manager/performance-reports.html",
+            },
+            {
+              icon: "fact_check",
+              label: "SLA Tracking",
+              href: "./operations-manager/sla-tracking.html",
+            },
+            {
+              icon: "storage",
+              label: "Resource Usage",
+              href: "./operations-manager/resource-usage.html",
+            },
+            {
+              icon: "trending_up",
+              label: "Efficiency & ROI",
+              href: "./operations-manager/efficiency-roi.html",
+            },
+          ],
+          stats: [
+            {
+              icon: "groups",
+              label: "Team Members",
+              value: "48",
+              delta: "+3 onboarded this month",
+              up: true,
+              color: "secondary",
+            },
+            {
+              icon: "fact_check",
+              label: "SLA Compliance",
+              value: "96.8%",
+              delta: "+1.2% improvement",
+              up: true,
+              color: "green",
+            },
+            {
+              icon: "trending_up",
+              label: "ROI This Month",
+              value: "$128k",
+              delta: "+18% above Q2 target",
+              up: true,
+              color: "tertiary",
+            },
+            {
+              icon: "storage",
+              label: "Resource Util.",
+              value: "71%",
+              delta: "−4% from optimisation",
+              up: true,
+              color: "primary",
+            },
+          ],
+          activity: [
+            {
+              icon: "groups",
+              label: "Team workflow updated",
+              detail: '"sprint-release" flow modified',
+              time: "15m ago",
+              color: "secondary",
+            },
+            {
+              icon: "fact_check",
+              label: "SLA breach — resolved",
+              detail: "API response >2s corrected",
+              time: "1h ago",
+              color: "error",
+            },
+            {
+              icon: "bar_chart",
+              label: "Monthly report ready",
+              detail: "June 2025 performance summary",
+              time: "3h ago",
+              color: "primary",
+            },
+            {
+              icon: "trending_up",
+              label: "ROI milestone hit",
+              detail: "Q2 target exceeded by 18%",
+              time: "1d ago",
+              color: "green",
+            },
+            {
+              icon: "storage",
+              label: "Resource alert cleared",
+              detail: "Storage cluster back to normal",
+              time: "2d ago",
+              color: "tertiary",
+            },
+          ],
+        },
+      };
+
+      /* ═══════════════════════════════════════════════
+       HELPERS
+       ═══════════════════════════════════════════════ */
+      function initials(email) {
+        const local = email.split("@")[0];
+        const parts = local
+          .replace(/[._\-+]/g, " ")
+          .trim()
+          .split(/\s+/);
+        return parts.length >= 2
+          ? (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
+          : local.slice(0, 2).toUpperCase();
+      }
+
+      function displayName(email) {
+        return email
+          .split("@")[0]
+          .replace(/[._\-+]/g, " ")
+          .replace(/\b\w/g, (c) => c.toUpperCase())
+          .trim();
+      }
+
+      function greeting() {
+        const h = new Date().getHours();
+        return h < 12
+          ? "Good morning"
+          : h < 17
+            ? "Good afternoon"
+            : "Good evening";
+      }
+
+      function set(id, prop, val) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        if (prop === "text") el.textContent = val;
+        else if (prop === "html") el.innerHTML = val;
+        else el.style[prop] = val;
+      }
+
+      /* ═══════════════════════════════════════════════
+       CLOCK
+       ═══════════════════════════════════════════════ */
+      function startClock() {
+        function tick() {
+          const now = new Date();
+          const t = now.toLocaleTimeString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: false,
+          });
+          const d = now.toLocaleDateString("en-US", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          });
+          set("clk-time", "text", t);
+          set("clk-date", "text", d);
+        }
+        tick();
+        setInterval(tick, 1000);
+      }
+
+      /* ═══════════════════════════════════════════════
+       SIDEBAR
+       ═══════════════════════════════════════════════ */
+      function buildSidebar(cfg, inits, name, email) {
+        const c = P[cfg.accent] || P.secondary;
+
+        // Icon
+        set("sb-icon", "text", cfg.icon);
+        set("sb-icon", "color", c.h);
+        set("sb-icon-wrap", "background", c.a20);
+        set("sb-role", "text", cfg.label);
+
+        // Avatars
+        ["sb-av", "hdr-av"].forEach((id) => {
+          const el = document.getElementById(id);
+          if (!el) return;
+          el.textContent = inits;
+          el.style.color = c.h;
+          el.style.background = c.a15;
+          el.style.borderColor = c.a30;
+        });
+
+        // User info
+        set("sb-name", "text", name);
+        set("sb-email", "text", email);
+
+        // Nav items
+        const nav = document.getElementById("sb-nav");
+        if (!nav) return;
+        nav.innerHTML = cfg.nav
+          .map((item) => {
+            const isActive = !!item.active;
+            return `
+        <a href="${item.href}"
+           class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13px] transition-all group${isActive ? " active" : ""}"
+           style="${
+             isActive
+               ? `color:${c.h}; background:${c.a10}; border-right-color:${c.h};`
+               : "color:#c6c6cd;"
+           }">
+          <span class="material-symbols-outlined text-[19px]" style="${isActive ? `font-variation-settings:'FILL' 1; color:${c.h};` : ""}">${item.icon}</span>
+          <span class="font-semibold flex-1">${item.label}</span>
+          ${!isActive ? `<span class="material-symbols-outlined text-[13px] opacity-0 group-hover:opacity-60 transition-opacity" style="color:${c.h}">chevron_right</span>` : ""}
+        </a>`;
+          })
+          .join("");
+      }
+
+      /* ═══════════════════════════════════════════════
+       HEADER
+       ═══════════════════════════════════════════════ */
+      function buildHeader(cfg, name) {
+        const c = P[cfg.accent] || P.secondary;
+        const el = document.getElementById("hdr-crumb");
+        if (el) {
+          el.textContent = cfg.label;
+          el.style.color = c.h;
+        }
+        set("hdr-greet", "text", `${greeting()}, ${name}`);
+      }
+
+      /* ═══════════════════════════════════════════════
+       WELCOME BANNER
+       ═══════════════════════════════════════════════ */
+      function buildBanner(cfg, name, email) {
+        const c = P[cfg.accent] || P.secondary;
+        const badge = document.getElementById("welcome-badge");
+        if (badge) {
+          badge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full pdot" style="background:${c.h};"></span>${cfg.label}`;
+          badge.style.background = c.a10;
+          badge.style.borderColor = c.a30;
+          badge.style.color = c.h;
+        }
+        set("welcome-head", "text", `${greeting()}, ${name} 👋`);
+        set(
+          "welcome-sub",
+          "text",
+          `Signed in as ${email} · ${cfg.label} workspace active.`,
+        );
+      }
+
+      /* ═══════════════════════════════════════════════
+       STAT CARDS
+       ═══════════════════════════════════════════════ */
+      function buildStats(stats) {
+        const grid = document.getElementById("stats-grid");
+        if (!grid) return;
+        grid.innerHTML = stats
+          .map((s, i) => {
+            const c = P[s.color] || P.secondary;
+            const arrow =
+              s.up === null ? "remove" : s.up ? "trending_up" : "trending_down";
+            const arrowCol =
+              s.up === null ? "#909097" : s.up ? "#4ade80" : "#ffb4ab";
+            return `
+        <div class="stat-card glass-panel rounded-2xl p-4 md:p-5 relative overflow-hidden anim-in" style="animation-delay:${100 + i * 70}ms;">
+          <div class="absolute -right-6 -top-6 w-24 h-24 rounded-full blur-2xl pointer-events-none" style="background:${c.a10};"></div>
+          <div class="flex items-start justify-between mb-3 md:mb-4">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background:${c.a20};">
+              <span class="material-symbols-outlined text-[20px]" style="color:${c.h}; font-variation-settings:'FILL' 1;">${s.icon}</span>
+            </div>
+            <span class="text-[11px] font-bold flex items-center gap-0.5" style="color:${arrowCol};">
+              <span class="material-symbols-outlined text-[15px]">${arrow}</span>
+            </span>
+          </div>
+          <p class="font-bold text-on-surface mb-0.5" style="font-size:clamp(20px,2.5vw,28px); font-family:'JetBrains Mono',monospace; color:${c.h};">${s.value}</p>
+          <p class="text-[11px] font-bold uppercase tracking-wider text-on-surface-variant">${s.label}</p>
+          <p class="text-[11px] mt-1" style="color:rgba(198,198,205,0.55);">${s.delta}</p>
+        </div>`;
+          })
+          .join("");
+      }
+
+      /* ═══════════════════════════════════════════════
+       ACTIVITY FEED
+       ═══════════════════════════════════════════════ */
+      function buildActivity(items) {
+        const feed = document.getElementById("activity-feed");
+        if (!feed) return;
+        feed.innerHTML = items
+          .map((item, i) => {
+            const c = P[item.color] || P.secondary;
+            return `
+        <div class="activity-row flex items-start gap-3.5 px-5 md:px-6 py-4 border-b border-outline-variant/10 last:border-0 anim-in" style="animation-delay:${220 + i * 60}ms;">
+          <div class="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background:${c.a20};">
+            <span class="material-symbols-outlined text-[17px]" style="color:${c.h}; font-variation-settings:'FILL' 1;">${item.icon}</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="text-[13px] font-semibold text-on-surface leading-snug truncate">${item.label}</p>
+            <p class="text-[12px] text-on-surface-variant truncate mt-0.5">${item.detail}</p>
+          </div>
+          <span class="text-[11px] flex-shrink-0 mt-0.5 whitespace-nowrap" style="color:rgba(198,198,205,0.5); font-family:'JetBrains Mono',monospace;">${item.time}</span>
+        </div>`;
+          })
+          .join("");
+      }
+
+      /* ═══════════════════════════════════════════════
+       QUICK ACTIONS
+       ═══════════════════════════════════════════════ */
+      function buildQuickActions(nav) {
+        const el = document.getElementById("quick-actions");
+        if (!el) return;
+        el.innerHTML = nav
+          .filter((n) => !n.active)
+          .map(
+            (item) => `
+        <a href="${item.href}" class="quick-btn flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant text-[13px] group">
+          <span class="material-symbols-outlined text-[18px]" style="color:#7bd0ff;">${item.icon}</span>
+          <span class="flex-1 font-semibold group-hover:text-on-surface transition-colors">${item.label}</span>
+          <span class="material-symbols-outlined text-[13px] opacity-0 group-hover:opacity-60 transition-opacity" style="color:#7bd0ff;">arrow_forward</span>
+        </a>`,
+          )
+          .join("");
+      }
+
+      /* ═══════════════════════════════════════════════
+       SIDEBAR TOGGLE (mobile)
+       ═══════════════════════════════════════════════ */
+      function sbOpen() {
+        document
+          .getElementById("sidebar")
+          .classList.replace("-translate-x-full", "translate-x-0");
+        const ov = document.getElementById("sb-overlay");
+        ov.classList.replace("opacity-0", "opacity-100");
+        ov.classList.remove("pointer-events-none");
+      }
+      function sbClose() {
+        document
+          .getElementById("sidebar")
+          .classList.replace("translate-x-0", "-translate-x-full");
+        const ov = document.getElementById("sb-overlay");
+        ov.classList.replace("opacity-100", "opacity-0");
+        ov.classList.add("pointer-events-none");
+      }
+
+      /* ═══════════════════════════════════════════════
+       LOGOUT
+       ═══════════════════════════════════════════════ */
+      function doLogout() {
+        sessionStorage.removeItem("stackly_user");
+        localStorage.removeItem("stackly_user");
+        window.location.href = "../login.html";
+      }
+
+      /* ═══════════════════════════════════════════════
+       INIT — read session, guard, render
+       ═══════════════════════════════════════════════ */
+      (function init() {
+        let user = null;
+        try {
+          const raw =
+            sessionStorage.getItem("stackly_user") ||
+            localStorage.getItem("stackly_user");
+          if (raw) user = JSON.parse(raw);
+        } catch (e) {}
+
+        if (!user || !user.email) {
+          window.location.href = "../login.html";
+          return;
+        }
+
+        const role = user.role || "admin";
+        const email = user.email || "";
+        const cfg = ROLES[role] || ROLES.admin;
+        const name = displayName(email);
+        const inits = initials(email);
+
+        document.title = `Stackly | ${cfg.label}`;
+
+        buildSidebar(cfg, inits, name, email);
+        buildHeader(cfg, name);
+        buildBanner(cfg, name, email);
+        buildStats(cfg.stats);
+        buildActivity(cfg.activity);
+        buildQuickActions(cfg.nav);
+        startClock();
+      })();
+    </script>
+  </body>
+</html>

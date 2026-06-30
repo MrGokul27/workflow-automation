@@ -1,0 +1,618 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=JetBrains+Mono:wght@400;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      .dot-grid {
+        background-image: radial-gradient(circle, #1e293b 1px, transparent 1px);
+        background-size: 24px 24px;
+      }
+      .glass-card {
+        background: rgba(18, 33, 49, 0.7);
+        backdrop-filter: blur(12px);
+        border: 1px solid #1e293b;
+      }
+      .node-accent-blue {
+        border-left: 4px solid #7bd0ff;
+      }
+      .node-accent-green {
+        border-left: 4px solid #10b981;
+      }
+      .node-accent-purple {
+        border-left: 4px solid #bdc2ff;
+      }
+
+      @keyframes pulse-glow {
+        0% {
+          box-shadow: 0 0 5px rgba(123, 208, 255, 0.2);
+        }
+        50% {
+          box-shadow: 0 0 15px rgba(123, 208, 255, 0.5);
+        }
+        100% {
+          box-shadow: 0 0 5px rgba(123, 208, 255, 0.2);
+        }
+      }
+      .active-glow {
+        animation: pulse-glow 2s infinite;
+      }
+    </style>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-lowest": "#010f1f",
+              "surface-container-high": "#1c2b3c",
+              "primary-fixed-dim": "#bec6e0",
+              "inverse-primary": "#565e74",
+              "error-container": "#93000a",
+              "on-surface": "#d4e4fa",
+              "on-primary-fixed": "#131b2e",
+              "on-primary": "#283044",
+              "on-tertiary": "#131e8c",
+              "on-tertiary-container": "#6c77e1",
+              "on-surface-variant": "#c6c6cd",
+              "surface-bright": "#2c3a4c",
+              "surface-tint": "#bec6e0",
+              outline: "#909097",
+              "on-background": "#d4e4fa",
+              "surface-dim": "#051424",
+              tertiary: "#bdc2ff",
+              "on-secondary-fixed-variant": "#004c69",
+              "tertiary-container": "#00055c",
+              background: "#051424",
+              "on-primary-container": "#798098",
+              "secondary-fixed": "#c4e7ff",
+              error: "#ffb4ab",
+              "on-error-container": "#ffdad6",
+              "outline-variant": "#45464d",
+              "on-secondary-fixed": "#001e2c",
+              "secondary-fixed-dim": "#7bd0ff",
+              "surface-container": "#122131",
+              "tertiary-fixed-dim": "#bdc2ff",
+              "on-tertiary-fixed-variant": "#2f3aa3",
+              "inverse-surface": "#d4e4fa",
+              "on-secondary": "#00354a",
+              "surface-variant": "#273647",
+              surface: "#051424",
+              "on-error": "#690005",
+              "secondary-container": "#00a6e0",
+              "primary-container": "#0f172a",
+              "surface-container-low": "#0d1c2d",
+              "inverse-on-surface": "#233143",
+              "primary-fixed": "#dae2fd",
+              "surface-container-highest": "#273647",
+              "on-primary-fixed-variant": "#3f465c",
+              "on-tertiary-fixed": "#000767",
+              "on-secondary-container": "#00374d",
+              secondary: "#7bd0ff",
+              primary: "#bec6e0",
+              "tertiary-fixed": "#e0e0ff",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              "margin-mobile": "16px",
+              unit: "4px",
+              "margin-desktop": "32px",
+              gutter: "16px",
+              "max-width": "1440px",
+            },
+            fontFamily: {
+              "code-sm": ["JetBrains Mono"],
+              "body-lg": ["Inter"],
+              "label-md": ["Inter"],
+              "headline-xl-mobile": ["Inter"],
+              "body-md": ["Inter"],
+              "headline-xl": ["Inter"],
+              "headline-lg": ["Inter"],
+              "headline-md": ["Inter"],
+            },
+            fontSize: {
+              "code-sm": ["13px", { lineHeight: "18px", fontWeight: "400" }],
+              "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-xl-mobile": [
+                "28px",
+                {
+                  lineHeight: "34px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+              "headline-xl": [
+                "36px",
+                {
+                  lineHeight: "44px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "headline-lg": [
+                "24px",
+                {
+                  lineHeight: "32px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-md": [
+                "20px",
+                { lineHeight: "28px", fontWeight: "600" },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="bg-background text-on-surface font-body-md"
+  >
+    <div id="sb-overlay"></div>
+    <!-- SideNavBar (Shared Component) -->
+    <aside id="sidebar"></aside>
+    <main class="lg:ml-[272px] min-h-screen flex flex-col relative">
+      <!-- TopAppBar (Shared Component) -->
+      <header
+        class="bg-surface dark:bg-surface h-16 flex items-center justify-between px-margin-desktop w-full z-40"
+      >
+        <div class="flex items-center gap-8">
+          <div class="flex gap-6">
+            <a
+              class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-all duration-150 font-label-md text-label-md"
+              href="#"
+              >Dashboard</a
+            >
+            <a
+              class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-all duration-150 font-label-md text-label-md"
+              href="#"
+              >Logs</a
+            >
+            <a
+              class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-all duration-150 font-label-md text-label-md"
+              href="#"
+              >Status</a
+            >
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="relative hidden lg:block">
+            <span
+              class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]"
+              >search</span
+            >
+            <input
+              class="bg-surface-container-low border-none rounded-full py-1.5 pl-10 pr-4 text-body-md w-64 focus:ring-1 focus:ring-primary"
+              placeholder="Search resources..."
+              type="text"
+            />
+          </div>
+          <div class="flex items-center gap-2">
+            <button
+              class="p-2 text-on-surface-variant hover:text-primary transition-colors"
+            >
+              <span class="material-symbols-outlined">notifications</span>
+            </button>
+            <button
+              class="bg-primary text-on-primary-fixed px-4 py-1.5 rounded-full font-label-md text-label-md hover:bg-opacity-90 transition-all"
+            >
+              Deploy
+            </button>
+          </div>
+        </div>
+      </header>
+      <!-- Sandbox Content -->
+      <div class="flex-1 overflow-y-auto p-margin-desktop dot-grid relative">
+        <!-- Page Header Section -->
+        <div class="flex justify-between items-end mb-8 relative z-10">
+          <div>
+            <div class="flex items-center gap-3 mb-2">
+              <span
+                class="bg-secondary-container/20 text-secondary px-2 py-0.5 rounded text-[10px] font-bold tracking-widest uppercase border border-secondary/30"
+                >Isolated Environment</span
+              >
+              <div
+                class="flex items-center gap-1.5 px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20"
+              >
+                <span
+                  class="w-2 h-2 rounded-full bg-emerald-500 active-glow"
+                ></span>
+                <span class="text-[10px] font-bold text-emerald-500"
+                  >SYSTEM READY</span
+                >
+              </div>
+            </div>
+            <h2 class="font-headline-xl text-headline-xl text-on-surface">
+              Sandbox
+              <span class="text-primary/50 font-normal">Environment</span>
+            </h2>
+            <p
+              class="text-on-surface-variant max-w-2xl mt-2 font-body-lg text-body-lg"
+            >
+              Stage, test, and iterate on your automation logic in a safe,
+              non-destructive container. Production data is emulated via
+              real-time schema mirroring.
+            </p>
+          </div>
+          <div class="flex gap-3">
+            <button
+              class="bg-surface-container-high border border-outline-variant text-on-surface px-5 py-2.5 rounded-lg font-label-md flex items-center gap-2 hover:bg-surface-variant transition-all"
+            >
+              <span class="material-symbols-outlined text-[20px]">sync</span>
+              Sync Schemas
+            </button>
+            <button
+              class="bg-error-container text-on-error-container px-5 py-2.5 rounded-lg font-label-md flex items-center gap-2 hover:brightness-110 transition-all"
+              onclick="confirmReset()"
+            >
+              <span class="material-symbols-outlined text-[20px]"
+                >restart_alt</span
+              >
+              Reset Sandbox
+            </button>
+          </div>
+        </div>
+        <!-- Dashboard Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 relative z-10">
+          <!-- Status & Metrics Bento -->
+          <div class="col-span-12 lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div
+              class="glass-card p-6 rounded-xl border-l-4 border-l-secondary active-glow"
+            >
+              <p class="text-on-surface-variant font-label-md mb-2">
+                Active Flows
+              </p>
+              <h3 class="text-3xl font-bold text-secondary">14</h3>
+              <p
+                class="text-[10px] text-emerald-500 mt-2 flex items-center gap-1"
+              >
+                <span class="material-symbols-outlined text-[14px]"
+                  >trending_up</span
+                >
+                +2 since reset
+              </p>
+            </div>
+            <div class="glass-card p-6 rounded-xl border-l-4 border-l-tertiary">
+              <p class="text-on-surface-variant font-label-md mb-2">
+                Data Objects
+              </p>
+              <h3 class="text-3xl font-bold text-tertiary">1.2k</h3>
+              <p class="text-[10px] text-on-surface-variant mt-2">
+                Mock records
+              </p>
+            </div>
+            <div class="glass-card p-6 rounded-xl border-l-4 border-l-primary">
+              <p class="text-on-surface-variant font-label-md mb-2">
+                Sync Status
+              </p>
+              <h3 class="text-xl font-bold text-primary mt-1">Mirroring</h3>
+              <p class="text-[10px] text-primary/60 mt-3">Last: 4 mins ago</p>
+            </div>
+            <!-- Workflow Preview (Visualizing "Safe Space") -->
+            <div
+              class="col-span-3 glass-card rounded-xl p-6 min-h-[400px] flex flex-col"
+            >
+              <div class="flex justify-between items-center mb-6">
+                <h4 class="font-headline-md text-headline-md">
+                  Active Simulation:
+                  <span class="text-primary">Order_Fulfillment_V4</span>
+                </h4>
+                <div class="flex gap-2">
+                  <button
+                    class="p-1.5 rounded bg-surface-container-highest text-on-surface hover:text-primary"
+                  >
+                    <span class="material-symbols-outlined text-[20px]"
+                      >play_arrow</span
+                    >
+                  </button>
+                  <button
+                    class="p-1.5 rounded bg-surface-container-highest text-on-surface hover:text-error"
+                  >
+                    <span class="material-symbols-outlined text-[20px]"
+                      >stop</span
+                    >
+                  </button>
+                </div>
+              </div>
+              <div
+                class="flex-1 relative border border-outline-variant/30 rounded-lg bg-surface-container-lowest/50 p-4 overflow-hidden"
+              >
+                <!-- Background pattern for the canvas -->
+                <div class="absolute inset-0 opacity-20 dot-grid"></div>
+                <!-- Node 1 -->
+                <div
+                  class="absolute left-10 top-20 w-48 glass-card rounded-lg node-accent-blue p-3 shadow-xl z-20"
+                >
+                  <div class="flex justify-between items-center mb-2">
+                    <span class="text-[10px] font-bold text-secondary uppercase"
+                      >Trigger</span
+                    >
+                    <span
+                      class="material-symbols-outlined text-secondary text-[14px]"
+                      >bolt</span
+                    >
+                  </div>
+                  <p class="text-xs font-bold truncate">On Order Created</p>
+                  <div class="mt-4 flex justify-end">
+                    <div
+                      class="w-3 h-3 rounded-full bg-secondary border-2 border-background -mr-4.5"
+                    ></div>
+                  </div>
+                </div>
+                <!-- Connection Line -->
+                <svg
+                  class="absolute inset-0 w-full h-full pointer-events-none z-10"
+                >
+                  <path
+                    d="M 232 112 L 340 112"
+                    fill="none"
+                    stroke="#7bd0ff"
+                    stroke-dasharray="4"
+                    stroke-width="2"
+                  ></path>
+                  <path
+                    d="M 436 112 L 544 112"
+                    fill="none"
+                    stroke="#10b981"
+                    stroke-dasharray="4"
+                    stroke-width="2"
+                  ></path>
+                </svg>
+                <!-- Node 2 -->
+                <div
+                  class="absolute left-64 top-20 w-48 glass-card rounded-lg node-accent-purple p-3 shadow-xl z-20"
+                >
+                  <div class="flex justify-between items-center mb-2">
+                    <span class="text-[10px] font-bold text-tertiary uppercase"
+                      >Filter</span
+                    >
+                    <span
+                      class="material-symbols-outlined text-tertiary text-[14px]"
+                      >filter_alt</span
+                    >
+                  </div>
+                  <p class="text-xs font-bold truncate">Region == 'EMEA'</p>
+                  <div class="mt-4 flex justify-between">
+                    <div
+                      class="w-3 h-3 rounded-full bg-tertiary border-2 border-background -ml-4.5"
+                    ></div>
+                    <div
+                      class="w-3 h-3 rounded-full bg-tertiary border-2 border-background -mr-4.5"
+                    ></div>
+                  </div>
+                </div>
+                <!-- Node 3 -->
+                <div
+                  class="absolute left-[480px] top-20 w-48 glass-card rounded-lg node-accent-green p-3 shadow-xl z-20"
+                >
+                  <div class="flex justify-between items-center mb-2">
+                    <span
+                      class="text-[10px] font-bold text-emerald-500 uppercase"
+                      >Action</span
+                    >
+                    <span
+                      class="material-symbols-outlined text-emerald-500 text-[14px]"
+                      >send</span
+                    >
+                  </div>
+                  <p class="text-xs font-bold truncate">Notify Slack #ops</p>
+                  <div class="mt-4 flex justify-start">
+                    <div
+                      class="w-3 h-3 rounded-full bg-emerald-500 border-2 border-background -ml-4.5"
+                    ></div>
+                  </div>
+                </div>
+                <div
+                  class="absolute bottom-4 right-4 text-[10px] font-mono text-on-surface-variant bg-surface-container-high/80 px-2 py-1 rounded"
+                >
+                  FPS: 60 | Latency: 12ms (Emulated)
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Mock Data & Inspector -->
+          <div class="col-span-12 lg:col-span-4 flex flex-col gap-6">
+            <div class="glass-card rounded-xl p-6 flex-1 flex flex-col">
+              <div class="flex justify-between items-center mb-4">
+                <h4 class="font-headline-md text-headline-md">
+                  Mock Data Objects
+                </h4>
+                <button class="text-primary text-[12px] hover:underline">
+                  Edit All
+                </button>
+              </div>
+              <div class="space-y-3 overflow-y-auto max-h-[600px] pr-2">
+                <!-- Mock Object Item -->
+                <div
+                  class="bg-surface-container-low border border-outline-variant/30 rounded-lg p-3 hover:border-primary/50 transition-all cursor-pointer group"
+                >
+                  <div class="flex items-start gap-3">
+                    <div
+                      class="w-8 h-8 rounded bg-primary-container flex items-center justify-center text-primary"
+                    >
+                      <span class="material-symbols-outlined text-[18px]"
+                        >person</span
+                      >
+                    </div>
+                    <div class="flex-1">
+                      <div class="flex justify-between">
+                        <p class="font-bold text-xs">Customer_Entity</p>
+                        <span
+                          class="text-[10px] text-on-surface-variant font-mono"
+                          >ID: 0x92f</span
+                        >
+                      </div>
+                      <p class="text-[10px] text-on-surface-variant mt-1">
+                        Schema: production_v2.mirror
+                      </p>
+                    </div>
+                  </div>
+                  <div class="mt-3 grid grid-cols-2 gap-2">
+                    <div
+                      class="bg-surface-container-lowest p-2 rounded text-[10px] font-mono"
+                    >
+                      <span class="text-on-surface-variant">name:</span> "Jane
+                      Doe"
+                    </div>
+                    <div
+                      class="bg-surface-container-lowest p-2 rounded text-[10px] font-mono"
+                    >
+                      <span class="text-on-surface-variant">tier:</span> "Gold"
+                    </div>
+                  </div>
+                </div>
+                <!-- Mock Object Item -->
+                <div
+                  class="bg-surface-container-low border border-outline-variant/30 rounded-lg p-3 hover:border-primary/50 transition-all cursor-pointer"
+                >
+                  <div class="flex items-start gap-3">
+                    <div
+                      class="w-8 h-8 rounded bg-primary-container flex items-center justify-center text-primary"
+                    >
+                      <span class="material-symbols-outlined text-[18px]"
+                        >shopping_cart</span
+                      >
+                    </div>
+                    <div class="flex-1">
+                      <div class="flex justify-between">
+                        <p class="font-bold text-xs">Order_Transaction</p>
+                        <span
+                          class="text-[10px] text-on-surface-variant font-mono"
+                          >ID: 0x11a</span
+                        >
+                      </div>
+                      <p class="text-[10px] text-on-surface-variant mt-1">
+                        Schema: payments.v1
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <!-- Mock Object Item -->
+                <div
+                  class="bg-surface-container-low border border-outline-variant/30 rounded-lg p-3 hover:border-primary/50 transition-all cursor-pointer"
+                >
+                  <div class="flex items-start gap-3">
+                    <div
+                      class="w-8 h-8 rounded bg-primary-container flex items-center justify-center text-primary"
+                    >
+                      <span class="material-symbols-outlined text-[18px]"
+                        >inventory_2</span
+                      >
+                    </div>
+                    <div class="flex-1">
+                      <div class="flex justify-between">
+                        <p class="font-bold text-xs">Inventory_Stock</p>
+                        <span
+                          class="text-[10px] text-on-surface-variant font-mono"
+                          >ID: 0x48c</span
+                        >
+                      </div>
+                      <p class="text-[10px] text-on-surface-variant mt-1">
+                        Schema: warehouse.global
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button
+                class="w-full mt-4 border border-dashed border-outline-variant text-on-surface-variant py-2 rounded-lg text-xs hover:border-primary hover:text-primary transition-all"
+              >
+                + Add Mock Object
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Notification Toast (Hidden by default) -->
+      <div
+        class="fixed bottom-8 right-8 bg-surface-container-highest text-on-surface px-6 py-4 rounded-xl shadow-2xl border border-primary/20 translate-y-20 opacity-0 transition-all duration-300 z-[100] flex items-center gap-4"
+        id="reset-toast"
+      >
+        <span class="material-symbols-outlined text-primary">info</span>
+        <div>
+          <p class="font-bold text-sm">Sandbox Reset Successful</p>
+          <p class="text-xs text-on-surface-variant">
+            Environment has been purged and re-initialized.
+          </p>
+        </div>
+        <button
+          class="ml-4 hover:text-primary transition-colors"
+          onclick="closeToast()"
+        >
+          <span class="material-symbols-outlined text-[18px]">close</span>
+        </button>
+      </div>
+    </main>
+    <script>
+      function confirmReset() {
+        if (
+          confirm(
+            "Warning: This will delete all temporary data in the sandbox and revert to production schemas. Proceed?",
+          )
+        ) {
+          const toast = document.getElementById("reset-toast");
+          toast.classList.remove("translate-y-20", "opacity-0");
+
+          // Simulate refresh
+          setTimeout(() => {
+            closeToast();
+          }, 4000);
+        }
+      }
+
+      function closeToast() {
+        const toast = document.getElementById("reset-toast");
+        toast.classList.add("translate-y-20", "opacity-0");
+      }
+
+      // Simple interactive micro-effect for cards
+      document.querySelectorAll(".glass-card").forEach((card) => {
+        card.addEventListener("mousemove", (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty("--mouse-x", `${x}px`);
+          card.style.setProperty("--mouse-y", `${y}px`);
+        });
+      });
+    </script>
+    <script src="../dash-sidebar.js"></script>
+  </body>
+</html>

@@ -1,0 +1,796 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>NexusFlow | API Access Management</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=JetBrains+Mono:wght@400;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      .dot-grid {
+        background-image: radial-gradient(circle, #1e293b 1px, transparent 1px);
+        background-size: 24px 24px;
+      }
+      .terminal-text {
+        font-family: "JetBrains Mono", monospace;
+      }
+      .glass-panel {
+        background: rgba(18, 33, 49, 0.7);
+        backdrop-filter: blur(12px);
+        border: 1px solid #1e293b;
+      }
+      .node-accent-blue {
+        border-left: 4px solid #7bd0ff;
+      }
+      .node-accent-green {
+        border-left: 4px solid #22c55e;
+      }
+      .node-accent-orange {
+        border-left: 4px solid #f59e0b;
+      }
+
+      /* Custom scrollbar for data-dense areas */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #051424;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #1c2b3c;
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #273647;
+      }
+    </style>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-lowest": "#010f1f",
+              "surface-container-high": "#1c2b3c",
+              "primary-fixed-dim": "#bec6e0",
+              "inverse-primary": "#565e74",
+              "error-container": "#93000a",
+              "on-surface": "#d4e4fa",
+              "on-primary-fixed": "#131b2e",
+              "on-primary": "#283044",
+              "on-tertiary": "#131e8c",
+              "on-tertiary-container": "#6c77e1",
+              "on-surface-variant": "#c6c6cd",
+              "surface-bright": "#2c3a4c",
+              "surface-tint": "#bec6e0",
+              outline: "#909097",
+              "on-background": "#d4e4fa",
+              "surface-dim": "#051424",
+              tertiary: "#bdc2ff",
+              "on-secondary-fixed-variant": "#004c69",
+              "tertiary-container": "#00055c",
+              background: "#051424",
+              "on-primary-container": "#798098",
+              "secondary-fixed": "#c4e7ff",
+              error: "#ffb4ab",
+              "on-error-container": "#ffdad6",
+              "outline-variant": "#45464d",
+              "on-secondary-fixed": "#001e2c",
+              "secondary-fixed-dim": "#7bd0ff",
+              "surface-container": "#122131",
+              "tertiary-fixed-dim": "#bdc2ff",
+              "on-tertiary-fixed-variant": "#2f3aa3",
+              "inverse-surface": "#d4e4fa",
+              "on-secondary": "#00354a",
+              "surface-variant": "#273647",
+              surface: "#051424",
+              "on-error": "#690005",
+              "secondary-container": "#00a6e0",
+              "primary-container": "#0f172a",
+              "surface-container-low": "#0d1c2d",
+              "inverse-on-surface": "#233143",
+              "primary-fixed": "#dae2fd",
+              "surface-container-highest": "#273647",
+              "on-primary-fixed-variant": "#3f465c",
+              "on-tertiary-fixed": "#000767",
+              "on-secondary-container": "#00374d",
+              secondary: "#7bd0ff",
+              primary: "#bec6e0",
+              "tertiary-fixed": "#e0e0ff",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              "margin-mobile": "16px",
+              unit: "4px",
+              "margin-desktop": "32px",
+              gutter: "16px",
+              "max-width": "1440px",
+            },
+            fontFamily: {
+              "code-sm": ["JetBrains Mono"],
+              "body-lg": ["Inter"],
+              "label-md": ["Inter"],
+              "headline-xl-mobile": ["Inter"],
+              "body-md": ["Inter"],
+              "headline-xl": ["Inter"],
+              "headline-lg": ["Inter"],
+              "headline-md": ["Inter"],
+            },
+            fontSize: {
+              "code-sm": ["13px", { lineHeight: "18px", fontWeight: "400" }],
+              "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-xl-mobile": [
+                "28px",
+                {
+                  lineHeight: "34px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+              "headline-xl": [
+                "36px",
+                {
+                  lineHeight: "44px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "headline-lg": [
+                "24px",
+                {
+                  lineHeight: "32px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-md": [
+                "20px",
+                { lineHeight: "28px", fontWeight: "600" },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="bg-background text-on-background font-body-md selection:bg-secondary/30"
+  >
+    <div id="sb-overlay"></div>
+    <!-- Sidebar Navigation Shell -->
+    <aside id="sidebar"></aside>
+    <!-- Main Content Canvas -->
+    <main class="lg:ml-[272px] min-h-screen relative dot-grid">
+      <!-- Top App Bar -->
+      <header
+        class="fixed top-0 right-0 lg:left-[272px] h-16 bg-surface flex items-center justify-between px-margin-desktop z-40"
+      >
+        <div class="flex items-center gap-8">
+          <div class="flex items-center gap-4 text-on-surface-variant">
+            <a
+              class="text-on-surface-variant hover:text-primary transition-all font-label-md text-label-md"
+              href="#"
+              >Dashboard</a
+            >
+            <a
+              class="text-on-surface-variant hover:text-primary transition-all font-label-md text-label-md"
+              href="#"
+              >Logs</a
+            >
+            <a
+              class="text-on-surface-variant hover:text-primary transition-all font-label-md text-label-md"
+              href="#"
+              >Status</a
+            >
+          </div>
+        </div>
+        <div class="flex items-center gap-6">
+          <div class="relative group">
+            <span
+              class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline text-[20px]"
+              >search</span
+            >
+            <input
+              class="bg-surface-container-low border-none rounded-full pl-10 pr-4 py-1.5 text-xs w-64 focus:ring-1 focus:ring-secondary transition-all outline-none text-on-surface"
+              placeholder="Search keys or logs..."
+              type="text"
+            />
+          </div>
+          <div class="flex items-center gap-4">
+            <button
+              class="relative text-on-surface-variant hover:text-primary transition-all"
+            >
+              <span class="material-symbols-outlined" data-icon="notifications"
+                >notifications</span
+              >
+              <span
+                class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full border border-surface"
+              ></span>
+            </button>
+            <button
+              class="flex items-center gap-2 bg-primary text-on-primary px-4 py-1.5 rounded-lg font-label-md hover:brightness-110 transition-all"
+            >
+              Deploy
+              <span class="material-symbols-outlined text-[16px]"
+                >rocket_launch</span
+              >
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Content Area -->
+      <div class="pb-12 px-margin-desktop max-w-6xl">
+        <header class="mb-10">
+          <h2 class="font-headline-xl text-headline-xl text-primary mb-2">
+            API Access Management
+          </h2>
+          <p
+            class="text-on-surface-variant font-body-lg text-body-lg max-w-2xl"
+          >
+            Manage authentication credentials, monitor usage quotas, and
+            configure security scopes for your NexusFlow integration.
+          </p>
+        </header>
+        <!-- Usage Summary Bento Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+          <div
+            class="glass-panel p-6 rounded-xl node-accent-blue flex flex-col justify-between"
+          >
+            <div>
+              <div class="flex justify-between items-start mb-4">
+                <span
+                  class="text-xs font-bold uppercase tracking-widest text-secondary"
+                  >Total Requests</span
+                >
+                <span class="material-symbols-outlined text-secondary"
+                  >analytics</span
+                >
+              </div>
+              <div class="text-3xl font-bold font-headline-lg text-on-surface">
+                1,284,092
+              </div>
+              <div class="text-xs text-on-surface-variant mt-1">
+                +12% from last month
+              </div>
+            </div>
+            <div
+              class="mt-6 w-full h-1 bg-surface-container-highest rounded-full overflow-hidden"
+            >
+              <div
+                class="h-full bg-secondary w-3/4 shadow-[0_0_10px_rgba(123,208,255,0.4)]"
+              ></div>
+            </div>
+          </div>
+          <div
+            class="glass-panel p-6 rounded-xl node-accent-green flex flex-col justify-between"
+          >
+            <div>
+              <div class="flex justify-between items-start mb-4">
+                <span
+                  class="text-xs font-bold uppercase tracking-widest text-on-tertiary-container"
+                  >Active Keys</span
+                >
+                <span
+                  class="material-symbols-outlined text-on-tertiary-container"
+                  >key</span
+                >
+              </div>
+              <div class="text-3xl font-bold font-headline-lg text-on-surface">
+                14
+              </div>
+              <div class="text-xs text-on-surface-variant mt-1">
+                3 environments synced
+              </div>
+            </div>
+            <div class="mt-6 flex gap-1">
+              <div class="h-1 bg-on-tertiary-container w-4 rounded-full"></div>
+              <div class="h-1 bg-on-tertiary-container w-4 rounded-full"></div>
+              <div class="h-1 bg-on-tertiary-container w-4 rounded-full"></div>
+              <div
+                class="h-1 bg-surface-container-highest w-4 rounded-full"
+              ></div>
+            </div>
+          </div>
+          <div
+            class="glass-panel p-6 rounded-xl node-accent-orange flex flex-col justify-between"
+          >
+            <div>
+              <div class="flex justify-between items-start mb-4">
+                <span
+                  class="text-xs font-bold uppercase tracking-widest text-error"
+                  >Security Alerts</span
+                >
+                <span class="material-symbols-outlined text-error"
+                  >gpp_maybe</span
+                >
+              </div>
+              <div class="text-3xl font-bold font-headline-lg text-on-surface">
+                0
+              </div>
+              <div class="text-xs text-on-surface-variant mt-1">
+                System healthy
+              </div>
+            </div>
+            <div class="mt-6 text-xs font-code-sm text-on-surface-variant">
+              Last scan: 2 mins ago
+            </div>
+          </div>
+        </div>
+        <!-- Main API Keys Section -->
+        <div
+          class="glass-panel rounded-xl overflow-hidden border border-outline-variant/30"
+        >
+          <div
+            class="px-6 py-4 border-b border-outline-variant/30 bg-surface-container-high/50 flex items-center justify-between"
+          >
+            <h3 class="font-headline-md text-headline-md text-on-surface">
+              Access Credentials
+            </h3>
+            <div class="flex items-center gap-2">
+              <span class="text-xs text-on-surface-variant mr-2"
+                >Filter by Environment:</span
+              >
+              <select
+                class="bg-surface-container text-xs border border-outline-variant/50 rounded-lg px-2 py-1 outline-none text-on-surface"
+              >
+                <option>All Environments</option>
+                <option>Production</option>
+                <option>Staging</option>
+                <option>Sandbox</option>
+              </select>
+            </div>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead
+                class="bg-surface-container-low text-xs uppercase tracking-widest text-on-surface-variant font-bold"
+              >
+                <tr>
+                  <th class="px-6 py-4">Label & Environment</th>
+                  <th class="px-6 py-4">API Key</th>
+                  <th class="px-6 py-4">Scopes</th>
+                  <th class="px-6 py-4">Usage (Quota)</th>
+                  <th class="px-6 py-4 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-outline-variant/20">
+                <!-- Key Row: Production -->
+                <tr class="hover:bg-surface-variant/30 transition-colors">
+                  <td class="px-6 py-6">
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-error rounded-full"></div>
+                      <div>
+                        <p class="font-bold text-on-surface">
+                          Core Infrastructure
+                        </p>
+                        <p
+                          class="text-[10px] text-on-surface-variant uppercase"
+                        >
+                          Production
+                        </p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-6">
+                    <div
+                      class="flex items-center gap-2 terminal-text text-on-surface bg-surface-container-lowest px-3 py-1.5 rounded border border-outline-variant/30 w-fit"
+                    >
+                      <span>nk_live_•••••••••w8x2</span>
+                      <button
+                        class="text-on-surface-variant hover:text-secondary transition-colors"
+                      >
+                        <span class="material-symbols-outlined text-sm"
+                          >content_copy</span
+                        >
+                      </button>
+                    </div>
+                  </td>
+                  <td class="px-6 py-6">
+                    <div class="flex flex-wrap gap-1">
+                      <span
+                        class="px-2 py-0.5 bg-secondary/10 text-secondary text-[10px] rounded border border-secondary/20"
+                        >read:flows</span
+                      >
+                      <span
+                        class="px-2 py-0.5 bg-secondary/10 text-secondary text-[10px] rounded border border-secondary/20"
+                        >write:nodes</span
+                      >
+                      <span
+                        class="px-2 py-0.5 bg-on-surface-variant/10 text-on-surface-variant text-[10px] rounded"
+                        >+2</span
+                      >
+                    </div>
+                  </td>
+                  <td class="px-6 py-6">
+                    <div class="w-32">
+                      <div class="flex justify-between text-[10px] mb-1">
+                        <span class="text-on-surface">82%</span>
+                        <span class="text-on-surface-variant">1M limit</span>
+                      </div>
+                      <div
+                        class="h-1 w-full bg-surface-container rounded-full overflow-hidden"
+                      >
+                        <div class="h-full bg-error w-[82%]"></div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-6 text-right">
+                    <div class="flex justify-end gap-2">
+                      <button
+                        class="p-2 hover:bg-surface-container text-on-surface-variant hover:text-primary rounded transition-all"
+                        title="Rotate Key"
+                      >
+                        <span class="material-symbols-outlined text-[20px]"
+                          >refresh</span
+                        >
+                      </button>
+                      <button
+                        class="p-2 hover:bg-surface-container text-on-surface-variant hover:text-primary rounded transition-all"
+                        title="Edit Scopes"
+                      >
+                        <span class="material-symbols-outlined text-[20px]"
+                          >tune</span
+                        >
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Key Row: Staging -->
+                <tr class="hover:bg-surface-variant/30 transition-colors">
+                  <td class="px-6 py-6">
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-secondary rounded-full"></div>
+                      <div>
+                        <p class="font-bold text-on-surface">CI/CD Pipeline</p>
+                        <p
+                          class="text-[10px] text-on-surface-variant uppercase"
+                        >
+                          Staging
+                        </p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-6">
+                    <div
+                      class="flex items-center gap-2 terminal-text text-on-surface bg-surface-container-lowest px-3 py-1.5 rounded border border-outline-variant/30 w-fit"
+                    >
+                      <span>nk_test_•••••••••q9z4</span>
+                      <button
+                        class="text-on-surface-variant hover:text-secondary transition-colors"
+                      >
+                        <span class="material-symbols-outlined text-sm"
+                          >content_copy</span
+                        >
+                      </button>
+                    </div>
+                  </td>
+                  <td class="px-6 py-6">
+                    <div class="flex flex-wrap gap-1">
+                      <span
+                        class="px-2 py-0.5 bg-secondary/10 text-secondary text-[10px] rounded border border-secondary/20"
+                        >admin:all</span
+                      >
+                    </div>
+                  </td>
+                  <td class="px-6 py-6">
+                    <div class="w-32">
+                      <div class="flex justify-between text-[10px] mb-1">
+                        <span class="text-on-surface">14%</span>
+                        <span class="text-on-surface-variant">Unlimited</span>
+                      </div>
+                      <div
+                        class="h-1 w-full bg-surface-container rounded-full overflow-hidden"
+                      >
+                        <div class="h-full bg-secondary w-[14%]"></div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-6 text-right">
+                    <div class="flex justify-end gap-2">
+                      <button
+                        class="p-2 hover:bg-surface-container text-on-surface-variant hover:text-primary rounded transition-all"
+                        title="Rotate Key"
+                      >
+                        <span class="material-symbols-outlined text-[20px]"
+                          >refresh</span
+                        >
+                      </button>
+                      <button
+                        class="p-2 hover:bg-surface-container text-on-surface-variant hover:text-primary rounded transition-all"
+                        title="Edit Scopes"
+                      >
+                        <span class="material-symbols-outlined text-[20px]"
+                          >tune</span
+                        >
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Key Row: Sandbox -->
+                <tr class="hover:bg-surface-variant/30 transition-colors">
+                  <td class="px-6 py-6">
+                    <div class="flex items-center gap-3">
+                      <div
+                        class="w-2 h-2 bg-on-surface-variant rounded-full"
+                      ></div>
+                      <div>
+                        <p class="font-bold text-on-surface">
+                          Dev Personal Key
+                        </p>
+                        <p
+                          class="text-[10px] text-on-surface-variant uppercase"
+                        >
+                          Sandbox
+                        </p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-6">
+                    <div
+                      class="flex items-center gap-2 terminal-text text-on-surface bg-surface-container-lowest px-3 py-1.5 rounded border border-outline-variant/30 w-fit"
+                    >
+                      <span>nk_dev_•••••••••m1a7</span>
+                      <button
+                        class="text-on-surface-variant hover:text-secondary transition-colors"
+                      >
+                        <span class="material-symbols-outlined text-sm"
+                          >content_copy</span
+                        >
+                      </button>
+                    </div>
+                  </td>
+                  <td class="px-6 py-6">
+                    <div class="flex flex-wrap gap-1">
+                      <span
+                        class="px-2 py-0.5 bg-secondary/10 text-secondary text-[10px] rounded border border-secondary/20"
+                        >read:metrics</span
+                      >
+                    </div>
+                  </td>
+                  <td class="px-6 py-6">
+                    <div class="w-32">
+                      <div class="flex justify-between text-[10px] mb-1">
+                        <span class="text-on-surface">2%</span>
+                        <span class="text-on-surface-variant">50k limit</span>
+                      </div>
+                      <div
+                        class="h-1 w-full bg-surface-container rounded-full overflow-hidden"
+                      >
+                        <div class="h-full bg-secondary w-[2%]"></div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-6 text-right">
+                    <div class="flex justify-end gap-2">
+                      <button
+                        class="p-2 hover:bg-surface-container text-on-surface-variant hover:text-primary rounded transition-all"
+                        title="Rotate Key"
+                      >
+                        <span class="material-symbols-outlined text-[20px]"
+                          >refresh</span
+                        >
+                      </button>
+                      <button
+                        class="p-2 hover:bg-surface-container text-on-surface-variant hover:text-primary rounded transition-all"
+                        title="Edit Scopes"
+                      >
+                        <span class="material-symbols-outlined text-[20px]"
+                          >tune</span
+                        >
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div
+            class="px-6 py-4 bg-surface-container-low text-xs flex justify-between items-center text-on-surface-variant"
+          >
+            <div>Showing 3 of 14 total active keys</div>
+            <div class="flex gap-4">
+              <button class="hover:text-primary underline">
+                Download Config JSON
+              </button>
+              <button class="hover:text-primary underline">
+                Clear Revoked Keys
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Security Configuration Footer -->
+        <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="glass-panel p-6 rounded-xl border-l-4 border-error">
+            <div class="flex items-start gap-4">
+              <div class="bg-error/10 p-3 rounded-lg text-error">
+                <span class="material-symbols-outlined"
+                  >security_update_warning</span
+                >
+              </div>
+              <div>
+                <h4 class="font-bold text-on-surface mb-1">IP Whitelisting</h4>
+                <p class="text-xs text-on-surface-variant mb-4">
+                  Restricting API access to specific IP ranges is strongly
+                  recommended for production keys.
+                </p>
+                <div class="flex gap-2">
+                  <input
+                    class="bg-surface-container-low border border-outline-variant/30 rounded px-3 py-1.5 text-xs text-on-surface outline-none flex-1"
+                    placeholder="192.168.1.1/24"
+                    type="text"
+                  />
+                  <button
+                    class="bg-primary text-on-primary px-4 py-1.5 rounded font-label-md text-xs"
+                  >
+                    Add IP
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="glass-panel p-6 rounded-xl border-l-4 border-tertiary">
+            <div class="flex items-start gap-4">
+              <div class="bg-tertiary/10 p-3 rounded-lg text-tertiary">
+                <span class="material-symbols-outlined">rotate_right</span>
+              </div>
+              <div>
+                <h4 class="font-bold text-on-surface mb-1">
+                  Key Rotation Policy
+                </h4>
+                <p class="text-xs text-on-surface-variant mb-4">
+                  Automatic key rotation is currently
+                  <span class="text-secondary font-bold">DISABLED</span> for
+                  your organization.
+                </p>
+                <button
+                  class="text-secondary border border-secondary/30 px-4 py-1.5 rounded font-label-md text-xs hover:bg-secondary/10 transition-all"
+                >
+                  Configure Rotation
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Floating Action Button -->
+      <button
+        class="fixed bottom-8 right-8 w-14 h-14 bg-secondary text-on-secondary rounded-full flex items-center justify-center shadow-lg hover:scale-105 transition-transform z-50 group"
+      >
+        <span class="material-symbols-outlined text-[32px]">add</span>
+        <span
+          class="absolute right-16 bg-surface-container-high text-on-surface px-4 py-2 rounded-lg text-xs opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap border border-outline-variant/30"
+        >
+          Create New API Key
+        </span>
+      </button>
+    </main>
+    <!-- Key Rotation Modal (Hidden by Default) -->
+    <div
+      class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm"
+      id="rotate-modal"
+    >
+      <div
+        class="glass-panel w-full max-w-md p-8 rounded-2xl shadow-2xl scale-95 opacity-0 transition-all duration-300"
+      >
+        <div class="flex items-center gap-4 text-error mb-6">
+          <span class="material-symbols-outlined text-[40px]">warning</span>
+          <h3 class="font-headline-md text-headline-md font-bold">
+            Rotate API Key?
+          </h3>
+        </div>
+        <p class="text-on-surface-variant mb-6 leading-relaxed">
+          You are about to rotate the
+          <span class="text-on-surface font-bold">Core Infrastructure</span>
+          production key. The current key will be revoked in
+          <span class="text-error font-bold">24 hours</span>. Please ensure your
+          applications are updated with the new credential immediately.
+        </p>
+        <div class="space-y-4">
+          <div
+            class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant/30"
+          >
+            <p class="text-[10px] text-on-surface-variant uppercase mb-2">
+              New Production Key
+            </p>
+            <div
+              class="flex items-center justify-between terminal-text text-on-surface"
+            >
+              <span>nk_live_v2_9f8r2k...</span>
+              <span class="material-symbols-outlined text-sm cursor-pointer"
+                >content_copy</span
+              >
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <button
+              class="flex-1 py-3 rounded-xl border border-outline-variant text-on-surface font-label-md"
+              onclick="closeModal()"
+            >
+              Cancel
+            </button>
+            <button
+              class="flex-1 py-3 rounded-xl bg-error text-on-error font-label-md shadow-[0_0_20px_rgba(239,68,68,0.3)]"
+            >
+              Confirm Rotation
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      // Simple Micro-interactions
+      const modal = document.getElementById("rotate-modal");
+      const modalContent = modal.querySelector(".glass-panel");
+
+      function openModal() {
+        modal.classList.remove("hidden");
+        setTimeout(() => {
+          modalContent.classList.remove("scale-95", "opacity-0");
+          modalContent.classList.add("scale-100", "opacity-100");
+        }, 10);
+      }
+
+      function closeModal() {
+        modalContent.classList.remove("scale-100", "opacity-100");
+        modalContent.classList.add("scale-95", "opacity-0");
+        setTimeout(() => {
+          modal.classList.add("hidden");
+        }, 300);
+      }
+
+      // Attach to all refresh icons for demo
+      document.querySelectorAll('[title="Rotate Key"]').forEach((btn) => {
+        btn.addEventListener("click", openModal);
+      });
+
+      // Close modal on background click
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeModal();
+      });
+
+      // Search bar interaction
+      const searchInput = document.querySelector('input[type="text"]');
+      searchInput.addEventListener("focus", () => {
+        searchInput.classList.add("w-80");
+      });
+      searchInput.addEventListener("blur", () => {
+        searchInput.classList.remove("w-80");
+      });
+    </script>
+    <script src="../dash-sidebar.js"></script>
+  </body>
+</html>

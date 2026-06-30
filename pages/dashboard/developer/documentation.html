@@ -1,0 +1,539 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>NexusFlow | Developer Documentation</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=JetBrains+Mono:wght@400;500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-lowest": "#010f1f",
+              "surface-container-high": "#1c2b3c",
+              "primary-fixed-dim": "#bec6e0",
+              "inverse-primary": "#565e74",
+              "error-container": "#93000a",
+              "on-surface": "#d4e4fa",
+              "on-primary-fixed": "#131b2e",
+              "on-primary": "#283044",
+              "on-tertiary": "#131e8c",
+              "on-tertiary-container": "#6c77e1",
+              "on-surface-variant": "#c6c6cd",
+              "surface-bright": "#2c3a4c",
+              "surface-tint": "#bec6e0",
+              outline: "#909097",
+              "on-background": "#d4e4fa",
+              "surface-dim": "#051424",
+              tertiary: "#bdc2ff",
+              "on-secondary-fixed-variant": "#004c69",
+              "tertiary-container": "#00055c",
+              background: "#051424",
+              "on-primary-container": "#798098",
+              "secondary-fixed": "#c4e7ff",
+              error: "#ffb4ab",
+              "on-error-container": "#ffdad6",
+              "outline-variant": "#45464d",
+              "on-secondary-fixed": "#001e2c",
+              "secondary-fixed-dim": "#7bd0ff",
+              "surface-container": "#122131",
+              "tertiary-fixed-dim": "#bdc2ff",
+              "on-tertiary-fixed-variant": "#2f3aa3",
+              "inverse-surface": "#d4e4fa",
+              "on-secondary": "#00354a",
+              "surface-variant": "#273647",
+              surface: "#051424",
+              "on-error": "#690005",
+              "secondary-container": "#00a6e0",
+              "primary-container": "#0f172a",
+              "surface-container-low": "#0d1c2d",
+              "inverse-on-surface": "#233143",
+              "primary-fixed": "#dae2fd",
+              "surface-container-highest": "#273647",
+              "on-primary-fixed-variant": "#3f465c",
+              "on-tertiary-fixed": "#000767",
+              "on-secondary-container": "#00374d",
+              secondary: "#7bd0ff",
+              primary: "#bec6e0",
+              "tertiary-fixed": "#e0e0ff",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              "margin-mobile": "16px",
+              unit: "4px",
+              "margin-desktop": "32px",
+              gutter: "16px",
+              "max-width": "1440px",
+            },
+            fontFamily: {
+              "code-sm": ["JetBrains Mono"],
+              "body-lg": ["Inter"],
+              "label-md": ["Inter"],
+              "headline-xl-mobile": ["Inter"],
+              "body-md": ["Inter"],
+              "headline-xl": ["Inter"],
+              "headline-lg": ["Inter"],
+              "headline-md": ["Inter"],
+            },
+            fontSize: {
+              "code-sm": ["13px", { lineHeight: "18px", fontWeight: "400" }],
+              "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-xl-mobile": [
+                "28px",
+                {
+                  lineHeight: "34px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+              "headline-xl": [
+                "36px",
+                {
+                  lineHeight: "44px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "headline-lg": [
+                "24px",
+                {
+                  lineHeight: "32px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-md": [
+                "20px",
+                { lineHeight: "28px", fontWeight: "600" },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0d1c2d;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #1e293b;
+        border-radius: 3px;
+      }
+      .dot-grid {
+        background-image: radial-gradient(#1e293b 1px, transparent 1px);
+        background-size: 24px 24px;
+      }
+    </style>
+  </head>
+  <body class="bg-background text-on-surface font-body-md overflow-hidden">
+    <div id="sb-overlay"></div>
+    <!-- TopAppBar Shell -->
+    <header
+      class="fixed top-0 right-0 lg:left-[272px] h-16 bg-surface flex items-center justify-between px-margin-desktop z-40"
+    >
+      <div class="flex items-center gap-8">
+        <h1 class="font-headline-md text-headline-md font-black text-primary">
+          NexusFlow
+        </h1>
+        <nav class="hidden md:flex gap-6">
+          <a
+            class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all duration-150"
+            href="#"
+            >Dashboard</a
+          >
+          <a
+            class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all duration-150"
+            href="#"
+            >Logs</a
+          >
+          <a
+            class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all duration-150"
+            href="#"
+            >Status</a
+          >
+          <a
+            class="font-label-md text-label-md text-primary border-b-2 border-primary pb-1"
+            href="#"
+            >Documentation</a
+          >
+        </nav>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="relative group">
+          <span
+            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
+            >search</span
+          >
+          <input
+            class="bg-surface-container-low border-none rounded-lg pl-10 pr-4 py-2 text-body-md focus:ring-1 focus:ring-secondary w-64 transition-all duration-200"
+            placeholder="Search API docs..."
+            type="text"
+          />
+        </div>
+        <button
+          class="bg-secondary text-on-secondary-container px-4 py-1.5 rounded-lg font-label-md hover:opacity-90 transition-all"
+        >
+          Deploy
+        </button>
+        <div class="flex gap-2">
+          <button
+            class="p-2 text-on-surface-variant hover:text-primary transition-colors"
+          >
+            <span class="material-symbols-outlined">notifications</span>
+          </button>
+          <button
+            class="p-2 text-on-surface-variant hover:text-primary transition-colors"
+          >
+            <span class="material-symbols-outlined">account_circle</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <!-- SideNavBar Shell -->
+    <aside id="sidebar"></aside>
+    <!-- Main Content Canvas -->
+    <main
+      class="lg:ml-[272px] h-[calc(100vh-62px)] overflow-y-auto dot-grid"
+    >
+      <div
+        class="max-w-[1200px] mx-auto p-margin-desktop grid grid-cols-1 lg:grid-cols-12 gap-8"
+      >
+        <!-- Left Column: Content -->
+        <div class="lg:col-span-7 space-y-8">
+          <!-- Hero Section -->
+          <section>
+            <div class="flex items-center gap-2 text-secondary mb-2">
+              <span class="material-symbols-outlined text-[18px]"
+                >verified</span
+              >
+              <span
+                class="font-label-md text-label-md uppercase tracking-widest"
+                >v2.4.0 Release</span
+              >
+            </div>
+            <h2 class="font-headline-xl text-headline-xl mb-4">
+              Core API Reference
+            </h2>
+            <p
+              class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl leading-relaxed"
+            >
+              The NexusFlow API provides programmatic access to our distributed
+              workflow engine. Connect your existing infrastructure to automate
+              deployments, monitor health metrics, and trigger sophisticated
+              CI/CD pipelines.
+            </p>
+          </section>
+          <!-- API Endpoint Documentation -->
+          <section
+            class="bg-surface-container rounded-xl border border-outline-variant/30 overflow-hidden"
+          >
+            <div
+              class="p-6 border-b border-outline-variant/30 flex justify-between items-center bg-surface-container-high/50"
+            >
+              <div class="flex items-center gap-3">
+                <span
+                  class="px-2 py-0.5 bg-tertiary-container text-tertiary rounded font-bold text-[12px]"
+                  >POST</span
+                >
+                <code class="font-code-sm text-code-sm text-primary"
+                  >/v2/workflow/trigger</code
+                >
+              </div>
+              <span
+                class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary"
+                >link</span
+              >
+            </div>
+            <div class="p-6 space-y-6">
+              <div>
+                <h3 class="font-headline-md text-headline-md mb-2">
+                  Trigger Workflow
+                </h3>
+                <p class="text-on-surface-variant">
+                  Initiates a predefined workflow sequence based on an external
+                  event or manual call.
+                </p>
+              </div>
+              <div class="space-y-4">
+                <h4
+                  class="font-label-md text-label-md text-on-surface uppercase opacity-50"
+                >
+                  Parameters
+                </h4>
+                <div class="space-y-3">
+                  <div
+                    class="flex items-start gap-4 p-3 bg-surface-container-low rounded-lg border border-outline-variant/20"
+                  >
+                    <code class="text-secondary font-code-sm">workflow_id</code>
+                    <div class="flex-1">
+                      <p class="text-body-md font-bold">
+                        string
+                        <span class="text-error text-[10px] ml-2"
+                          >REQUIRED</span
+                        >
+                      </p>
+                      <p class="text-on-surface-variant text-body-md">
+                        The unique identifier for the targeted workflow
+                        blueprint.
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-start gap-4 p-3 bg-surface-container-low rounded-lg border border-outline-variant/20"
+                  >
+                    <code class="text-secondary font-code-sm">payload</code>
+                    <div class="flex-1">
+                      <p class="text-body-md font-bold">
+                        object
+                        <span class="text-on-surface-variant text-[10px] ml-2"
+                          >OPTIONAL</span
+                        >
+                      </p>
+                      <p class="text-on-surface-variant text-body-md">
+                        Custom JSON metadata to be passed into the workflow
+                        context.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- Response Explorer -->
+          <section>
+            <h3 class="font-headline-md text-headline-md mb-4">
+              Response Codes
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div
+                class="p-4 bg-surface-container-low rounded-lg border-l-4 border-secondary/50"
+              >
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="font-code-sm text-secondary font-bold"
+                    >202 Accepted</span
+                  >
+                </div>
+                <p class="text-on-surface-variant text-body-md">
+                  The request was valid and the workflow has entered the queue.
+                </p>
+              </div>
+              <div
+                class="p-4 bg-surface-container-low rounded-lg border-l-4 border-error/50"
+              >
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="font-code-sm text-error font-bold"
+                    >429 Rate Limit</span
+                  >
+                </div>
+                <p class="text-on-surface-variant text-body-md">
+                  Request quota exceeded. See headers for retry timing.
+                </p>
+              </div>
+            </div>
+          </section>
+        </div>
+        <!-- Right Column: Code & Inspector -->
+        <div class="lg:col-span-5 relative">
+          <div class="sticky top-8 space-y-6">
+            <!-- Code Snippet Card -->
+            <div
+              class="bg-surface-container-lowest rounded-xl border border-outline-variant/50 shadow-2xl overflow-hidden"
+            >
+              <div
+                class="bg-surface-container-highest px-4 py-2 flex items-center justify-between border-b border-outline-variant/50"
+              >
+                <div class="flex gap-4">
+                  <button
+                    class="text-label-md font-label-md py-2 border-b-2 border-secondary text-on-surface"
+                    id="btn-python"
+                    onclick="selectLang('python')"
+                  >
+                    Python
+                  </button>
+                  <button
+                    class="text-label-md font-label-md py-2 text-on-surface-variant hover:text-on-surface"
+                    id="btn-node"
+                    onclick="selectLang('node')"
+                  >
+                    Node.js
+                  </button>
+                  <button
+                    class="text-label-md font-label-md py-2 text-on-surface-variant hover:text-on-surface"
+                    id="btn-go"
+                    onclick="selectLang('go')"
+                  >
+                    Go
+                  </button>
+                </div>
+                <button
+                  class="p-1.5 text-on-surface-variant hover:text-secondary transition-colors"
+                >
+                  <span class="material-symbols-outlined text-[20px]"
+                    >content_copy</span
+                  >
+                </button>
+              </div>
+              <div
+                class="p-6 font-code-sm text-code-sm leading-relaxed overflow-x-auto min-h-[300px]"
+                id="code-window"
+              >
+                <pre
+                  class="text-on-primary-container"
+                ><span class="text-tertiary">import</span> nexusflow
+
+client = nexusflow.Client(api_key=<span class="text-secondary">"sk_live_..."</span>)
+
+response = client.workflows.trigger(
+    id=<span class="text-secondary">"wf_882910"</span>,
+    payload={
+        <span class="text-secondary">"env"</span>: <span class="text-secondary">"production"</span>,
+        <span class="text-secondary">"force"</span>: <span class="text-tertiary">True</span>
+    }
+)
+
+<span class="text-on-surface-variant"># Output workflow status</span>
+print(response.status)</pre>
+              </div>
+            </div>
+            <!-- Interactive Console Card -->
+            <div
+              class="bg-surface-container rounded-xl p-6 border border-outline-variant/30"
+            >
+              <h4
+                class="font-label-md text-label-md text-on-surface uppercase opacity-50 mb-4"
+              >
+                Request Preview
+              </h4>
+              <div class="space-y-4">
+                <div
+                  class="flex items-center justify-between bg-surface-container-low p-3 rounded-lg border border-outline-variant/20"
+                >
+                  <span class="text-body-md">workflow_id</span>
+                  <input
+                    class="bg-transparent border-none text-right text-secondary focus:ring-0 font-code-sm"
+                    type="text"
+                    value="wf_882910"
+                  />
+                </div>
+                <button
+                  class="w-full bg-secondary text-on-secondary-container py-3 rounded-lg font-bold hover:brightness-110 transition-all active:scale-[0.98]"
+                >
+                  Try Endpoint
+                </button>
+              </div>
+            </div>
+            <!-- Visual Tech Card -->
+            <div class="relative h-48 rounded-xl overflow-hidden group">
+              <div
+                class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                data-alt="A futuristic high-tech data visualization showing glowing connections between abstract nodes in a dark obsidian-colored environment. Soft electric blue pulses travel along geometric paths. The scene is cinematic with shallow depth of field, emphasizing the technical precision of a high-speed automation engine."
+                style="
+                  background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuASViw147ghOXthwXw_iW2qTXUlg9CyFEMFnJqcx9sp7XZFxaHhVXutNfFlrJGAqooJglrdUCp_wAaVWl0iTMzhSRVvIVDmy8_L3o2Ss_s87A_Q_RJYwUUnVQic-kdQh8fFbPPPpkhOuTy_XddiaLGVH28nLgHAa681ov6GM_8s6-ucGWVL2Grrts3twaTEBgIfGJew2aOGPtJ56T8owDVOiFdKm6E87HzgYOHOlO4d4hsj8FuzOVPCrtWUaMSHQBGUxeufT642EpIN&quot;);
+                "
+              ></div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80"
+              ></div>
+              <div class="absolute bottom-4 left-4 right-4">
+                <p
+                  class="font-label-md text-secondary uppercase tracking-widest text-[10px]"
+                >
+                  Developer Insight
+                </p>
+                <h5 class="text-on-surface font-bold">
+                  Real-time Node Telemetry
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Micro-interaction Scripts -->
+    <script>
+      const codeSnippets = {
+        python: `<pre class="text-on-primary-container"><span class="text-tertiary">import</span> nexusflow\n\nclient = nexusflow.Client(api_key=<span class="text-secondary">"sk_live_..."</span>)\n\nresponse = client.workflows.trigger(\n    id=<span class="text-secondary">"wf_882910"</span>,\n    payload={\n        <span class="text-secondary">"env"</span>: <span class="text-secondary">"production"</span>,\n        <span class="text-secondary">"force"</span>: <span class="text-tertiary">True</span>\n    }\n)\n\n<span class="text-on-surface-variant"># Output workflow status</span>\nprint(response.status)</pre>`,
+        node: `<pre class="text-on-primary-container"><span class="text-tertiary">const</span> NexusFlow = <span class="text-tertiary">require</span>(<span class="text-secondary">'nexusflow'</span>);\n\n<span class="text-tertiary">const</span> client = <span class="text-tertiary">new</span> NexusFlow(<span class="text-secondary">'sk_live_...'</span>);\n\n<span class="text-tertiary">await</span> client.workflows.trigger({\n    id: <span class="text-secondary">'wf_882910'</span>,\n    payload: {\n        env: <span class="text-secondary">'production'</span>,\n        force: <span class="text-tertiary">true</span>\n    }\n});</pre>`,
+        go: `<pre class="text-on-primary-container"><span class="text-tertiary">import</span> (<n    <span class="text-secondary">"github.com/nexusflow/sdk-go"</span>\n)\n\nclient := nexusflow.NewClient(<span class="text-secondary">"sk_live_..."</span>)\n\nres, err := client.TriggerWorkflow(<span class="text-secondary">"wf_882910"</span>, nexusflow.Payload{\n    <span class="text-secondary">"env"</span>: <span class="text-secondary">"production"</span>,\n})</pre>`,
+      };
+
+      function selectLang(lang) {
+        document.getElementById("code-window").innerHTML = codeSnippets[lang];
+
+        // Reset styles
+        ["python", "node", "go"].forEach((l) => {
+          const btn = document.getElementById(`btn-${l}`);
+          btn.classList.remove(
+            "border-b-2",
+            "border-secondary",
+            "text-on-surface",
+          );
+          btn.classList.add("text-on-surface-variant");
+        });
+
+        // Set active
+        const activeBtn = document.getElementById(`btn-${lang}`);
+        activeBtn.classList.add(
+          "border-b-2",
+          "border-secondary",
+          "text-on-surface",
+        );
+        activeBtn.classList.remove("text-on-surface-variant");
+      }
+
+      // Simple Fade-in microinteraction for main content
+      window.addEventListener("DOMContentLoaded", () => {
+        const sections = document.querySelectorAll("main section, main aside");
+        sections.forEach((s, i) => {
+          s.style.opacity = "0";
+          s.style.transform = "translateY(10px)";
+          s.style.transition = `opacity 0.5s ease ${i * 0.1}s, transform 0.5s ease ${i * 0.1}s`;
+          setTimeout(() => {
+            s.style.opacity = "1";
+            s.style.transform = "translateY(0)";
+          }, 100);
+        });
+      });
+    </script>
+    <script src="../dash-sidebar.js"></script>
+  </body>
+</html>

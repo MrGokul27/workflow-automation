@@ -319,7 +319,11 @@
           </p>
         </div>
         <!-- Form Section -->
-        <form class="px-8 pb-10 space-y-6" onsubmit="event.preventDefault()">
+        <form
+          class="px-8 pb-10 space-y-6"
+          id="login-form"
+          onsubmit="handleLogin(event)"
+        >
           <!-- Role Selection -->
           <div class="space-y-2">
             <label
@@ -333,11 +337,11 @@
                 id="role"
                 name="role"
               >
-                <option value="admin">Admin</option>
+                <option value="admin">System Admin</option>
                 <option value="devops">DevOps Engineer</option>
                 <option value="architect">System Architect</option>
-                <option value="manager">Ops Manager</option>
-                <option value="admin">Platform Admin</option>
+                <option value="operations-manager">Operations Manager</option>
+                <option value="developer">Developer</option>
               </select>
               <div
                 class="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none"
@@ -363,6 +367,7 @@
                 name="email"
                 placeholder="name@company.com"
                 type="email"
+                required
               />
               <div
                 class="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none"
@@ -485,7 +490,30 @@
       </div>
     </main>
     <script>
-      // Simple micro-interaction for password visibility toggle
+      /* ── Login handler: save session, redirect to dashboard ── */
+      function handleLogin(e) {
+        e.preventDefault();
+        const role = document.getElementById("role").value;
+        const email = document.getElementById("email").value.trim();
+        const remember = document.getElementById("remember").checked;
+
+        if (!email) {
+          document.getElementById("email").focus();
+          return;
+        }
+
+        const userData = { role, email, loginTime: Date.now() };
+
+        // Always store in sessionStorage; persist to localStorage only if "Remember me"
+        sessionStorage.setItem("stackly_user", JSON.stringify(userData));
+        if (remember)
+          localStorage.setItem("stackly_user", JSON.stringify(userData));
+
+        // Redirect to the dashboard main page
+        window.location.href = "./dashboard/dashboard.html";
+      }
+
+      /* ── Password visibility toggle ── */
       document
         .querySelector('button[type="button"]')
         .addEventListener("click", function () {
@@ -500,12 +528,11 @@
           }
         });
 
-      // Interactive background node reactivity (optional)
+      /* ── Background node parallax ── */
       document.addEventListener("mousemove", (e) => {
         const x = e.clientX / window.innerWidth;
         const y = e.clientY / window.innerHeight;
-        const nodes = document.querySelectorAll(".node-float");
-        nodes.forEach((node, i) => {
+        document.querySelectorAll(".node-float").forEach((node, i) => {
           const speed = (i + 1) * 10;
           node.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
         });

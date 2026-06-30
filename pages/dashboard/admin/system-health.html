@@ -1,0 +1,364 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>NexusFlow | System Health Monitor</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      .dot-grid {
+        background-image: radial-gradient(circle, #1e293b 1px, transparent 1px);
+        background-size: 8px 8px;
+      }
+      .glass-card {
+        background: rgba(18, 33, 49, 0.7);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(30, 41, 59, 0.5);
+      }
+      .node-active-glow {
+        box-shadow: 0 0 15px rgba(0, 166, 224, 0.15);
+      }
+      @keyframes pulse-soft {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.7;
+        }
+      }
+      .animate-pulse-soft {
+        animation: pulse-soft 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+    </style>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-container": "#00a6e0",
+              "surface-container-low": "#0d1c2d",
+              "on-primary-fixed-variant": "#3f465c",
+              "on-secondary-fixed": "#001e2c",
+              "tertiary-fixed": "#e0e0ff",
+              "surface-variant": "#273647",
+              surface: "#051424",
+              "on-background": "#d4e4fa",
+              primary: "#bec6e0",
+              "inverse-on-surface": "#233143",
+              error: "#ffb4ab",
+              "on-tertiary-fixed": "#000767",
+              "secondary-fixed": "#c4e7ff",
+              "on-primary-container": "#798098",
+              "inverse-surface": "#d4e4fa",
+              "error-container": "#93000a",
+              "on-primary": "#283044",
+              "on-secondary": "#00354a",
+              "secondary-fixed-dim": "#7bd0ff",
+              "surface-container-lowest": "#010f1f",
+              "primary-fixed": "#dae2fd",
+              "on-secondary-fixed-variant": "#004c69",
+              "inverse-primary": "#565e74",
+              tertiary: "#bdc2ff",
+              "primary-fixed-dim": "#bec6e0",
+              "surface-bright": "#2c3a4c",
+              "on-tertiary-container": "#6c77e1",
+              "tertiary-fixed-dim": "#bdc2ff",
+              "surface-tint": "#bec6e0",
+              "on-surface": "#d4e4fa",
+              "tertiary-container": "#00055c",
+              outline: "#909097",
+              "surface-container-highest": "#273647",
+              "surface-container-high": "#1c2b3c",
+              background: "#051424",
+              "primary-container": "#0f172a",
+              "on-secondary-container": "#00374d",
+              "on-surface-variant": "#c6c6cd",
+              "outline-variant": "#45464d",
+              "on-error-container": "#ffdad6",
+              "on-primary-fixed": "#131b2e",
+              "surface-dim": "#051424",
+              "surface-container": "#122131",
+              "on-error": "#690005",
+              "on-tertiary-fixed-variant": "#2f3aa3",
+              secondary: "#7bd0ff",
+              "on-tertiary": "#131e8c",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              "margin-mobile": "16px",
+              "margin-desktop": "32px",
+              gutter: "16px",
+              "max-width": "1440px",
+              unit: "4px",
+            },
+            fontFamily: {
+              "headline-xl-mobile": ["Inter"],
+              "body-md": ["Inter"],
+              "code-sm": ["JetBrains Mono"],
+              "headline-lg": ["Inter"],
+              "headline-xl": ["Inter"],
+              "body-lg": ["Inter"],
+              "headline-md": ["Inter"],
+              "label-md": ["Inter"],
+            },
+            fontSize: {
+              "headline-xl-mobile": [
+                "28px",
+                {
+                  lineHeight: "34px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+              "code-sm": ["13px", { lineHeight: "18px", fontWeight: "400" }],
+              "headline-lg": [
+                "24px",
+                {
+                  lineHeight: "32px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-xl": [
+                "36px",
+                {
+                  lineHeight: "44px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "headline-md": [
+                "20px",
+                { lineHeight: "28px", fontWeight: "600" },
+              ],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "600",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="bg-background text-on-surface font-body-md selection:bg-secondary/30"
+  >
+    <div id="sb-overlay"></div>
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar"></aside>
+    <!-- Main Content -->
+    <main class="lg:ml-[272px] min-h-screen dot-grid">
+      <!-- Header -->
+      <header
+        class="h-16 flex justify-between items-center px-margin-desktop bg-surface-container-low/80 backdrop-blur-md sticky top-0 z-40 border-b border-outline-variant/10"
+      >
+        <div class="flex items-center gap-4">
+          <h2
+            class="font-headline-lg text-headline-lg font-bold text-secondary"
+          >
+            System Health Monitor
+          </h2>
+          <div
+            class="flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full"
+          >
+            <span
+              class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"
+            ></span>
+            <span class="font-label-md text-label-md text-emerald-400"
+              >All Nodes Operational</span
+            >
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="relative group">
+            <span
+              class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-secondary transition-colors"
+              >notifications</span
+            >
+            <span
+              class="absolute top-0 right-0 w-2 h-2 bg-secondary rounded-full border-2 border-surface-container-low"
+            ></span>
+          </div>
+          <div
+            class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant/30 cursor-pointer active:scale-95 duration-200"
+          >
+            <img
+              class="w-full h-full object-cover"
+              data-alt="A professional headshot of a system administrator in a high-tech environment with soft blue rim lighting, wearing modern minimalist tech apparel, set against a blurred background of data server racks and glowing indicators."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0H7T2U_E2DgZ2yR_VgqO658QliukP29T9TB1eetv5fMpkKRNQxWV8LgmF9v83ZptlW-JzQ4HSj2VkmAUQBNOrnQlzo3ftqm0Jj5Sf9zEHlPApapd-rWsAHREzkweiTw_D6UT5m1YsMSKoQj0Fyd6UQBNOrnQlzo3ftqm0Jj5Sf9zEHlPApapd-rWsAHREzkweiTw-yFMuL4cTpOhgYLJxjpgelruY4B2hasrXFkadLTGgniFDKhOMH64tdSrH2d33_JhvPXZp-J7Q"
+            />
+          </div>
+        </div>
+      </header>
+      <div class="p-margin-desktop max-w-max-width mx-auto space-y-8">
+        <!-- Infrastructure Pulse -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+          <!-- CPU Usage -->
+          <div class="glass-card p-6 rounded-xl flex flex-col gap-4">
+            <div class="flex justify-between items-center">
+              <span
+                class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest"
+                >CPU Cluster Usage</span
+              >
+              <span class="font-code-sm text-code-sm text-secondary"
+                >24.8%</span
+              >
+            </div>
+            <div class="h-32 w-full flex items-end gap-1">
+              <!-- Simulated Sparkline -->
+              <div
+                class="flex-1 bg-secondary/10 rounded-t-sm h-[30%]"
+                style="height: 30%"
+              ></div>
+              <div
+                class="flex-1 bg-secondary/10 rounded-t-sm h-[45%]"
+                style="height: 45%"
+              ></div>
+              <div
+                class="flex-1 bg-secondary/10 rounded-t-sm h-[38%]"
+                style="height: 38%"
+              ></div>
+              <div
+                class="flex-1 bg-secondary/20 rounded-t-sm h-[60%]"
+                style="height: 60%"
+              ></div>
+              <div
+                class="flex-1 bg-secondary/20 rounded-t-sm h-[52%]"
+                style="height: 52%"
+              ></div>
+              <div
+                class="flex-1 bg-secondary/40 rounded-t-sm h-[75%]"
+                style="height: 75%"
+              ></div>
+              <div
+                class="flex-1 bg-secondary/30 rounded-t-sm h-[68%]"
+                style="height: 68%"
+              ></div>
+              <div
+                class="flex-1 bg-secondary/20 rounded-t-sm h-[50%]"
+                style="height: 50%"
+              ></div>
+              <div
+                class="flex-1 bg-secondary/60 rounded-t-sm h-[82%]"
+                style="height: 82%"
+              ></div>
+              <div
+                class="flex-1 bg-secondary/10 rounded-t-sm h-[35%]"
+                style="height: 35%"
+              ></div>
+              <div
+                class="flex-1 bg-secondary/20 rounded-t-sm h-[42%]"
+                style="height: 42%"
+              ></div>
+              <div
+                class="flex-1 bg-secondary/50 rounded-t-sm h-[24.8%]"
+                style="height: 24.8%"
+              ></div>
+            </div>
+          </div>
+          <!-- Memory -->
+          <div class="glass-card p-6 rounded-xl flex flex-col gap-4">
+            <div class="flex justify-between items-center">
+              <span
+                class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest"
+                >Memory Allocation</span
+              >
+              <span class="font-code-sm text-code-sm text-secondary"
+                >62.1%</span
+              >
+            </div>
+            <div class="h-32 w-full flex items-end gap-1">
+              <div
+                class="flex-1 bg-secondary/30 rounded-t-sm h-[60%]"
+                style="height: 60%"
+              ></div>
+              <div
+                class="flex-1 bg-secondary/30 rounded-t-sm h-[58%]"
+                style="height: 58%"
+              ></div>
+              <div
+                class="flex-1 bg-secondary/30 rounded-t-sm h-[62%]"
+                style="height: 62%"
+              ></div>
+              <div
+                class="flex-1 bg-secondary/30 rounded-t-sm h-[61%]"
+                style="height: 61%"
+              ></div>
+              <div
+                class="flex-1 bg-secondary/30 rounded-t-sm h-[63%]"
+                style="height: 63%"
+              ></div>
+              <div
+                class="flex-1 bg-secondary/30 rounded-t-sm h-[60%]"
+                style="height: 60%"
+              ></div>
+              <div
+                class="flex-1 bg-secondary/30 rounded-t-sm h-[62.1%]"
+                style="height: 62.1%"
+              ></div>
+            </div>
+          </div>
+          <!-- Disk -->
+          <div class="glass-card p-6 rounded-xl flex flex-col gap-4">
+            <div class="flex justify-between items-center">
+              <span
+                class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest"
+                >Disk I/O Latency</span
+              >
+              <span class="font-code-sm text-code-sm text-emerald-400"
+                >Stable</span
+              >
+            </div>
+            <div class="h-32 w-full flex items-center justify-center">
+              <div class="relative w-24 h-24">
+                <svg class="w-full h-full -rotate-90" viewbox="0 0 36 36">
+                  <path
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                    fill="none"
+                    stroke="#1E293B"
+                    stroke-width="2.5"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <script src="../dash-sidebar.js"></script>
+  </body>
+</html>

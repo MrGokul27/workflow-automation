@@ -1,0 +1,739 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>NexusFlow | Live Debugger</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=JetBrains+Mono:wght@400;500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      .syntax-keyword {
+        color: #bdc2ff;
+      }
+      .syntax-string {
+        color: #7bd0ff;
+      }
+      .syntax-function {
+        color: #bec6e0;
+      }
+      .syntax-comment {
+        color: #45464d;
+      }
+      .syntax-number {
+        color: #00a6e0;
+      }
+
+      .line-highlight {
+        background: rgba(190, 198, 224, 0.1);
+        border-left: 2px solid #bec6e0;
+      }
+      .breakpoint {
+        color: #ffb4ab;
+        font-variation-settings: "FILL" 1;
+      }
+
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #1c2b3c;
+        border-radius: 10px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #273647;
+      }
+
+      @keyframes pulse-glow {
+        0%,
+        100% {
+          opacity: 0.6;
+        }
+        50% {
+          opacity: 1;
+          text-shadow: 0 0 8px #bec6e0;
+        }
+      }
+      .live-indicator {
+        animation: pulse-glow 2s infinite;
+      }
+    </style>
+    <!-- Tailwind Config Injection -->
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-lowest": "#010f1f",
+              "surface-container-high": "#1c2b3c",
+              "primary-fixed-dim": "#bec6e0",
+              "inverse-primary": "#565e74",
+              "error-container": "#93000a",
+              "on-surface": "#d4e4fa",
+              "on-primary-fixed": "#131b2e",
+              "on-primary": "#283044",
+              "on-tertiary": "#131e8c",
+              "on-tertiary-container": "#6c77e1",
+              "on-surface-variant": "#c6c6cd",
+              "surface-bright": "#2c3a4c",
+              "surface-tint": "#bec6e0",
+              outline: "#909097",
+              "on-background": "#d4e4fa",
+              "surface-dim": "#051424",
+              tertiary: "#bdc2ff",
+              "on-secondary-fixed-variant": "#004c69",
+              "tertiary-container": "#00055c",
+              background: "#051424",
+              "on-primary-container": "#798098",
+              "secondary-fixed": "#c4e7ff",
+              error: "#ffb4ab",
+              "on-error-container": "#ffdad6",
+              "outline-variant": "#45464d",
+              "on-secondary-fixed": "#001e2c",
+              "secondary-fixed-dim": "#7bd0ff",
+              "surface-container": "#122131",
+              "tertiary-fixed-dim": "#bdc2ff",
+              "on-tertiary-fixed-variant": "#2f3aa3",
+              "inverse-surface": "#d4e4fa",
+              "on-secondary": "#00354a",
+              "surface-variant": "#273647",
+              surface: "#051424",
+              "on-error": "#690005",
+              "secondary-container": "#00a6e0",
+              "primary-container": "#0f172a",
+              "surface-container-low": "#0d1c2d",
+              "inverse-on-surface": "#233143",
+              "primary-fixed": "#dae2fd",
+              "surface-container-highest": "#273647",
+              "on-primary-fixed-variant": "#3f465c",
+              "on-tertiary-fixed": "#000767",
+              "on-secondary-container": "#00374d",
+              secondary: "#7bd0ff",
+              primary: "#bec6e0",
+              "tertiary-fixed": "#e0e0ff",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              "margin-mobile": "16px",
+              unit: "4px",
+              "margin-desktop": "32px",
+              gutter: "16px",
+              "max-width": "1440px",
+            },
+            fontFamily: {
+              "code-sm": ["JetBrains Mono"],
+              "body-lg": ["Inter"],
+              "label-md": ["Inter"],
+              "headline-xl-mobile": ["Inter"],
+              "body-md": ["Inter"],
+              "headline-xl": ["Inter"],
+              "headline-lg": ["Inter"],
+              "headline-md": ["Inter"],
+            },
+            fontSize: {
+              "code-sm": ["13px", { lineHeight: "18px", fontWeight: "400" }],
+              "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-xl-mobile": [
+                "28px",
+                {
+                  lineHeight: "34px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+              "headline-xl": [
+                "36px",
+                {
+                  lineHeight: "44px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "headline-lg": [
+                "24px",
+                {
+                  lineHeight: "32px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-md": [
+                "20px",
+                { lineHeight: "28px", fontWeight: "600" },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="bg-background text-on-surface font-body-md selection:bg-primary/30"
+  >
+    <div id="sb-overlay"></div>
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar"></aside>
+    <!-- Top AppBar -->
+    <header
+      class="fixed top-0 right-0 lg:left-[272px] h-16 bg-surface flex items-center justify-between px-margin-desktop z-40"
+    >
+      <div class="flex items-center gap-8">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-secondary live-indicator"></span>
+          <span
+            class="font-label-md text-label-md uppercase tracking-widest text-secondary"
+            >Live Session: ID_8829-X</span
+          >
+        </div>
+        <nav class="hidden md:flex items-center gap-6">
+          <a
+            class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all"
+            href="#"
+            >Dashboard</a
+          >
+          <a
+            class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all"
+            href="#"
+            >Logs</a
+          >
+          <a
+            class="font-label-md text-label-md text-primary border-b-2 border-primary pb-1"
+            href="#"
+            >Status</a
+          >
+        </nav>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="relative group">
+          <input
+            class="bg-surface-container-low border-none rounded-full px-4 py-1.5 text-sm w-64 focus:ring-1 focus:ring-primary placeholder:text-outline/50 transition-all"
+            placeholder="Search trace..."
+            type="text"
+          />
+          <span
+            class="material-symbols-outlined absolute right-3 top-1.5 text-on-surface-variant text-[18px]"
+            >search</span
+          >
+        </div>
+        <button
+          class="bg-primary text-on-primary px-4 py-1.5 rounded-lg font-label-md hover:brightness-110 transition-all"
+        >
+          Deploy
+        </button>
+        <div
+          class="flex items-center gap-2 border-l border-outline-variant/30 pl-4"
+        >
+          <span
+            class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary"
+            >notifications</span
+          >
+          <div
+            class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center overflow-hidden border border-outline-variant"
+          >
+            <span class="material-symbols-outlined text-[20px]"
+              >account_circle</span
+            >
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- Main Workspace -->
+    <main
+      class="lg:ml-[272px] min-h-screen flex flex-col relative"
+    >
+      <!-- Step Execution Control Bar -->
+      <div
+        class="h-12 bg-surface-container-low border-b border-outline-variant/20 flex items-center justify-between px-6"
+      >
+        <div class="flex items-center gap-1">
+          <button
+            class="p-1.5 hover:bg-surface-variant rounded transition-colors text-tertiary"
+            title="Resume (F8)"
+          >
+            <span
+              class="material-symbols-outlined"
+              style="font-variation-settings: &quot;FILL&quot; 1"
+              >play_arrow</span
+            >
+          </button>
+          <button
+            class="p-1.5 hover:bg-surface-variant rounded transition-colors text-on-surface-variant"
+            title="Step Over (F10)"
+          >
+            <span class="material-symbols-outlined">step_over</span>
+          </button>
+          <button
+            class="p-1.5 hover:bg-surface-variant rounded transition-colors text-on-surface-variant"
+            title="Step Into (F11)"
+          >
+            <span class="material-symbols-outlined">step_into</span>
+          </button>
+          <button
+            class="p-1.5 hover:bg-surface-variant rounded transition-colors text-on-surface-variant"
+            title="Step Out (Shift+F11)"
+          >
+            <span class="material-symbols-outlined">step_out</span>
+          </button>
+          <div class="w-[1px] h-6 bg-outline-variant/30 mx-2"></div>
+          <button
+            class="p-1.5 hover:bg-surface-variant rounded transition-colors text-error"
+            title="Stop"
+          >
+            <span
+              class="material-symbols-outlined"
+              style="font-variation-settings: &quot;FILL&quot; 1"
+              >stop</span
+            >
+          </button>
+        </div>
+        <div class="flex items-center gap-4">
+          <span
+            class="font-code-sm text-code-sm text-on-surface-variant/70 italic"
+            >Call Stack: handleWorkflowTrigger() line 142</span
+          >
+          <div
+            class="flex items-center gap-2 bg-surface-container p-1 rounded-lg"
+          >
+            <span class="text-[10px] font-bold text-on-surface-variant/50 px-2"
+              >CPU: 4%</span
+            >
+            <span
+              class="text-[10px] font-bold text-on-surface-variant/50 px-2 border-l border-outline-variant/30"
+              >MEM: 128MB</span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="flex-1 flex flex-col lg:flex-row overflow-auto lg:overflow-hidden">
+        <!-- Left Pane: Code Editor / Trace View -->
+        <div
+          class="w-full lg:w-1/2 border-r border-outline-variant/20 flex flex-col bg-surface-container-lowest min-h-[400px]"
+        >
+          <div
+            class="flex items-center justify-between px-4 py-2 bg-surface-container-low border-b border-outline-variant/20"
+          >
+            <div class="flex gap-4">
+              <span
+                class="text-label-md font-label-md text-primary border-b border-primary pb-1"
+                >trigger_handler.ts</span
+              >
+              <span
+                class="text-label-md font-label-md text-on-surface-variant/40"
+                >data_parser.ts</span
+              >
+            </div>
+          </div>
+          <div
+            class="flex-1 font-code-sm text-code-sm p-4 overflow-y-auto custom-scrollbar relative"
+          >
+            <!-- Line Numbers & Code -->
+            <div class="flex">
+              <div
+                class="w-10 flex flex-col text-on-surface-variant/30 text-right pr-4 select-none"
+              >
+                <span>138</span><span>139</span><span>140</span><span>141</span
+                ><span>142</span><span>143</span><span>144</span><span>145</span
+                ><span>146</span><span>147</span><span>148</span><span>149</span
+                ><span>150</span>
+              </div>
+              <div class="flex-1 text-on-surface/90">
+                <div class="whitespace-pre">
+                  <span class="syntax-keyword">async function</span>
+                  <span class="syntax-function">handleWorkflowTrigger</span
+                  >(payload: <span class="syntax-keyword">any</span>) {
+                </div>
+                <div class="whitespace-pre">
+                  <span class="syntax-keyword">const</span> logger =
+                  <span class="syntax-keyword">new</span>
+                  <span class="syntax-function">Logger</span>(<span
+                    class="syntax-string"
+                    >"NexusFlow.Core"</span
+                  >);
+                </div>
+                <div class="whitespace-pre"></div>
+                <div class="whitespace-pre">
+                  <span class="syntax-keyword">try</span> {
+                </div>
+                <div class="line-highlight flex whitespace-pre">
+                  <span class="syntax-keyword">const</span> result =
+                  <span class="syntax-keyword">await</span>
+                  <span class="syntax-function">validateInputs</span
+                  >(payload.data);
+                  <span
+                    class="material-symbols-outlined breakpoint absolute left-2 text-[14px]"
+                    >radio_button_checked</span
+                  >
+                </div>
+                <div class="whitespace-pre">
+                  <span class="syntax-keyword">if</span> (!result.isValid) {
+                </div>
+                <div class="whitespace-pre">
+                  <span class="syntax-keyword">throw new</span>
+                  <span class="syntax-function">Error</span>(<span
+                    class="syntax-string"
+                    >"Invalid payload schema"</span
+                  >);
+                </div>
+                <div class="whitespace-pre">}</div>
+                <div class="whitespace-pre"></div>
+                <div class="whitespace-pre">
+                  <span class="syntax-comment"
+                    >// Step 2: Initialize internal state engine</span
+                  >
+                </div>
+                <div class="whitespace-pre">
+                  <span class="syntax-keyword">const</span> engine =
+                  <span class="syntax-keyword">new</span>
+                  <span class="syntax-function">ExecutionEngine</span
+                  >(payload.workflowId);
+                </div>
+                <div class="whitespace-pre">
+                  <span class="syntax-keyword">return await</span> engine.<span
+                    class="syntax-function"
+                    >start</span
+                  >();
+                </div>
+                <div class="whitespace-pre">
+                  } <span class="syntax-keyword">catch</span> (err) {
+                </div>
+              </div>
+            </div>
+            <!-- Floating Highlight Overlay for execution context -->
+            <div
+              class="absolute top-[108px] right-8 bg-surface-container p-3 rounded-lg border border-primary/20 shadow-xl max-w-xs animate-in fade-in slide-in-from-right-4 duration-300"
+            >
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-bold text-primary uppercase"
+                  >Current Scope</span
+                >
+                <span
+                  class="material-symbols-outlined text-[14px] text-on-surface-variant"
+                  >close</span
+                >
+              </div>
+              <div class="space-y-1">
+                <div class="flex justify-between font-code-sm text-[11px]">
+                  <span class="text-on-surface-variant">payload.id</span>
+                  <span class="text-secondary">"TRG_0091"</span>
+                </div>
+                <div class="flex justify-between font-code-sm text-[11px]">
+                  <span class="text-on-surface-variant">payload.status</span>
+                  <span class="text-tertiary">"PENDING"</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Right Pane: Variable Inspector & Console -->
+        <div class="w-full lg:w-1/2 flex flex-col min-h-[400px]">
+          <!-- Variable Inspector (Bento Grid Style) -->
+          <div
+            class="h-1/2 bg-surface-container-low p-4 overflow-y-auto custom-scrollbar border-b border-outline-variant/20"
+          >
+            <div class="flex items-center justify-between mb-4">
+              <h3
+                class="font-label-md text-label-md text-primary uppercase tracking-wider"
+              >
+                State Inspector
+              </h3>
+              <div class="flex gap-2">
+                <span
+                  class="text-[10px] bg-outline-variant/20 px-2 py-0.5 rounded text-on-surface-variant"
+                  >Local</span
+                >
+                <span
+                  class="text-[10px] bg-primary/10 px-2 py-0.5 rounded text-primary border border-primary/30"
+                  >Global</span
+                >
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div
+                class="bg-surface-container p-3 rounded-lg border border-outline-variant/10 hover:border-primary/40 transition-all cursor-pointer"
+              >
+                <div class="flex items-center gap-2 mb-1">
+                  <span
+                    class="material-symbols-outlined text-secondary text-[16px]"
+                    >variables</span
+                  >
+                  <span class="font-code-sm text-[12px] text-on-surface"
+                    >system_config</span
+                  >
+                </div>
+                <div
+                  class="font-code-sm text-[11px] text-on-surface-variant/60 truncate italic"
+                >
+                  { timeout: 3000, retry: true... }
+                </div>
+              </div>
+              <div
+                class="bg-surface-container p-3 rounded-lg border border-outline-variant/10 hover:border-primary/40 transition-all cursor-pointer"
+              >
+                <div class="flex items-center gap-2 mb-1">
+                  <span
+                    class="material-symbols-outlined text-tertiary text-[16px]"
+                    >data_object</span
+                  >
+                  <span class="font-code-sm text-[12px] text-on-surface"
+                    >runtime_meta</span
+                  >
+                </div>
+                <div
+                  class="font-code-sm text-[11px] text-on-surface-variant/60 truncate italic"
+                >
+                  { env: "PROD", region: "US-E" }
+                </div>
+              </div>
+              <div
+                class="bg-surface-container p-3 rounded-lg border border-outline-variant/10 hover:border-primary/40 transition-all cursor-pointer col-span-2"
+              >
+                <div class="flex items-center gap-2 mb-1">
+                  <span
+                    class="material-symbols-outlined text-primary text-[16px]"
+                    >list</span
+                  >
+                  <span class="font-code-sm text-[12px] text-on-surface"
+                    >event_stack (4 items)</span
+                  >
+                </div>
+                <div class="space-y-1 mt-2">
+                  <div
+                    class="h-1 w-full bg-outline-variant/20 rounded-full overflow-hidden"
+                  >
+                    <div class="h-full bg-primary w-[75%]"></div>
+                  </div>
+                  <span class="text-[10px] text-on-surface-variant/40"
+                    >Queue utilization at critical threshold</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="mt-6">
+              <h3
+                class="font-label-md text-label-md text-on-surface-variant/50 uppercase tracking-wider mb-2"
+              >
+                Breakpoints
+              </h3>
+              <div class="space-y-2">
+                <div
+                  class="flex items-center justify-between p-2 rounded bg-surface/40 border-l-2 border-error"
+                >
+                  <span class="font-code-sm text-[12px]"
+                    >trigger_handler.ts : 142</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-on-surface-variant/30 text-[18px]"
+                    >check_box</span
+                  >
+                </div>
+                <div
+                  class="flex items-center justify-between p-2 rounded bg-surface/40 border-l-2 border-outline-variant"
+                >
+                  <span
+                    class="font-code-sm text-[12px] text-on-surface-variant/50 italic line-through"
+                    >data_parser.ts : 88</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-on-surface-variant/30 text-[18px]"
+                    >check_box_outline_blank</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Real-time System Console -->
+          <div class="h-1/2 bg-surface-container p-0 flex flex-col">
+            <div
+              class="px-4 py-2 flex items-center justify-between border-b border-outline-variant/20 bg-surface-container-high/50"
+            >
+              <div class="flex items-center gap-2">
+                <span
+                  class="material-symbols-outlined text-[16px] text-on-surface-variant"
+                  >terminal</span
+                >
+                <span class="font-label-md text-label-md">Debug Console</span>
+              </div>
+              <div class="flex gap-3">
+                <button
+                  class="material-symbols-outlined text-[16px] text-on-surface-variant hover:text-on-surface"
+                >
+                  block
+                </button>
+                <button
+                  class="material-symbols-outlined text-[16px] text-on-surface-variant hover:text-on-surface"
+                >
+                  download
+                </button>
+              </div>
+            </div>
+            <div
+              class="flex-1 p-4 overflow-y-auto custom-scrollbar font-code-sm text-code-sm space-y-1"
+            >
+              <div class="flex gap-2">
+                <span class="text-on-surface-variant/30">[14:02:11]</span>
+                <span class="text-tertiary">INFO:</span>
+                <span class="text-on-surface-variant"
+                  >Connection established to worker node node_b772.</span
+                >
+              </div>
+              <div class="flex gap-2">
+                <span class="text-on-surface-variant/30">[14:02:12]</span>
+                <span class="text-secondary">DEBUG:</span>
+                <span class="text-on-surface-variant"
+                  >Parsing environment variables... OK</span
+                >
+              </div>
+              <div class="flex gap-2">
+                <span class="text-on-surface-variant/30">[14:02:12]</span>
+                <span class="text-secondary">DEBUG:</span>
+                <span class="text-on-surface-variant"
+                  >Injecting trace headers: { x-nf-trace-id: 8829-X }</span
+                >
+              </div>
+              <div class="flex gap-2 bg-error-container/20 -mx-4 px-4 py-0.5">
+                <span class="text-on-surface-variant/30">[14:02:15]</span>
+                <span class="text-error">ERROR:</span>
+                <span class="text-on-error-container"
+                  >Step "validateInputs" halted at breakpoint 1. Execution
+                  paused.</span
+                >
+              </div>
+              <div class="flex gap-2">
+                <span class="text-on-surface-variant/30">[14:02:15]</span>
+                <span class="text-primary">></span>
+                <span class="text-primary italic animate-pulse"
+                  >| Waiting for user input...</span
+                >
+              </div>
+            </div>
+            <!-- Console Input Area -->
+            <div
+              class="p-2 bg-surface-container-low border-t border-outline-variant/20 flex items-center gap-3"
+            >
+              <span class="material-symbols-outlined text-[16px] text-primary"
+                >chevron_right</span
+              >
+              <input
+                class="bg-transparent border-none text-sm w-full focus:ring-0 placeholder:text-on-surface-variant/30"
+                placeholder="Evaluate expression..."
+                type="text"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Floating Detail Tooltip (Canvas style interaction) -->
+      <div
+        class="absolute bottom-10 left-margin-desktop bg-surface-container-highest p-4 rounded-xl border border-primary shadow-2xl z-50 flex items-center gap-4 max-w-sm hidden md:flex"
+      >
+        <div
+          class="w-12 h-12 rounded bg-primary/20 flex items-center justify-center text-primary"
+        >
+          <span class="material-symbols-outlined text-[32px]">info</span>
+        </div>
+        <div>
+          <h4 class="font-label-md text-label-md text-primary">
+            Live Optimization Tip
+          </h4>
+          <p
+            class="text-body-md text-body-md text-on-surface-variant/80 text-[12px]"
+          >
+            The current loop on line 145 is operating with O(n²) complexity.
+            Consider mapping the payload for faster access.
+          </p>
+        </div>
+        <button
+          class="text-on-surface-variant hover:text-primary transition-colors"
+        >
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+    </main>
+    <script>
+      // Simple micro-interaction for the console input
+      const consoleInput = document.querySelector(
+        'input[placeholder="Evaluate expression..."]',
+      );
+      const consoleOutput = document.querySelector(
+        ".flex-1.p-4.overflow-y-auto",
+      );
+
+      consoleInput.addEventListener("keypress", function (e) {
+        if (e.key === "Enter" && this.value.trim() !== "") {
+          const newLog = document.createElement("div");
+          newLog.className =
+            "flex gap-2 animate-in fade-in slide-in-from-left-2 duration-300";
+          newLog.innerHTML = `
+                    <span class="text-on-surface-variant/30">[${new Date().toLocaleTimeString([], { hour12: false })}]</span>
+                    <span class="text-primary">></span>
+                    <span class="text-on-surface">${this.value}</span>
+                `;
+          consoleOutput.appendChild(newLog);
+
+          // Mock result
+          setTimeout(() => {
+            const result = document.createElement("div");
+            result.className =
+              "flex gap-2 ml-4 text-on-surface-variant/60 italic";
+            result.innerHTML = `<span>result: undefined (executed successfully)</span>`;
+            consoleOutput.appendChild(result);
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+          }, 400);
+
+          this.value = "";
+          consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        }
+      });
+
+      // Hover effect for variables
+      document
+        .querySelectorAll(".bg-surface-container.p-3.rounded-lg")
+        .forEach((item) => {
+          item.addEventListener("mouseenter", () => {
+            item.style.transform = "translateY(-2px)";
+          });
+          item.addEventListener("mouseleave", () => {
+            item.style.transform = "translateY(0)";
+          });
+        });
+    </script>
+    <script src="../dash-sidebar.js"></script>
+  </body>
+</html>

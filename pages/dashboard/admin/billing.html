@@ -1,0 +1,628 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>NexusFlow | Billing & Logistics</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+        vertical-align: middle;
+      }
+      .dot-grid {
+        background-image: radial-gradient(circle, #1e293b 1px, transparent 1px);
+        background-size: 24px 24px;
+      }
+      .glass-panel {
+        background: rgba(18, 33, 49, 0.7);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(30, 41, 59, 0.5);
+      }
+      .electric-glow {
+        box-shadow: 0 0 15px rgba(0, 166, 224, 0.2);
+      }
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #051424;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #1c2b3c;
+        border-radius: 10px;
+      }
+    </style>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-container": "#00a6e0",
+              "surface-container-low": "#0d1c2d",
+              "on-primary-fixed-variant": "#3f465c",
+              "on-secondary-fixed": "#001e2c",
+              "tertiary-fixed": "#e0e0ff",
+              "surface-variant": "#273647",
+              surface: "#051424",
+              "on-background": "#d4e4fa",
+              primary: "#bec6e0",
+              "inverse-on-surface": "#233143",
+              error: "#ffb4ab",
+              "on-tertiary-fixed": "#000767",
+              "secondary-fixed": "#c4e7ff",
+              "on-primary-container": "#798098",
+              "inverse-surface": "#d4e4fa",
+              "error-container": "#93000a",
+              "on-primary": "#283044",
+              "on-secondary": "#00354a",
+              "secondary-fixed-dim": "#7bd0ff",
+              "surface-container-lowest": "#010f1f",
+              "primary-fixed": "#dae2fd",
+              "on-secondary-fixed-variant": "#004c69",
+              "inverse-primary": "#565e74",
+              tertiary: "#bdc2ff",
+              "primary-fixed-dim": "#bec6e0",
+              "surface-bright": "#2c3a4c",
+              "on-tertiary-container": "#6c77e1",
+              "tertiary-fixed-dim": "#bdc2ff",
+              "surface-tint": "#bec6e0",
+              "on-surface": "#d4e4fa",
+              "tertiary-container": "#00055c",
+              outline: "#909097",
+              "surface-container-highest": "#273647",
+              "surface-container-high": "#1c2b3c",
+              background: "#051424",
+              "primary-container": "#0f172a",
+              "on-secondary-container": "#00374d",
+              "on-surface-variant": "#c6c6cd",
+              "outline-variant": "#45464d",
+              "on-error-container": "#ffdad6",
+              "on-primary-fixed": "#131b2e",
+              "surface-dim": "#051424",
+              "surface-container": "#122131",
+              "on-error": "#690005",
+              "on-tertiary-fixed-variant": "#2f3aa3",
+              secondary: "#7bd0ff",
+              "on-tertiary": "#131e8c",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              "margin-mobile": "16px",
+              "margin-desktop": "32px",
+              gutter: "16px",
+              "max-width": "1440px",
+              unit: "4px",
+            },
+            fontFamily: {
+              "headline-xl-mobile": ["Inter"],
+              "body-md": ["Inter"],
+              "code-sm": ["JetBrains Mono"],
+              "headline-lg": ["Inter"],
+              "headline-xl": ["Inter"],
+              "body-lg": ["Inter"],
+              "headline-md": ["Inter"],
+              "label-md": ["Inter"],
+            },
+            fontSize: {
+              "headline-xl-mobile": [
+                "28px",
+                {
+                  lineHeight: "34px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+              "code-sm": ["13px", { lineHeight: "18px", fontWeight: "400" }],
+              "headline-lg": [
+                "24px",
+                {
+                  lineHeight: "32px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-xl": [
+                "36px",
+                {
+                  lineHeight: "44px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "headline-md": [
+                "20px",
+                { lineHeight: "28px", fontWeight: "600" },
+              ],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "600",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="bg-background text-on-background font-body-md selection:bg-secondary-container selection:text-white"
+  >
+    <div id="sb-overlay"></div>
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar"></aside>
+    <!-- Main Content Canvas -->
+    <main class="lg:ml-[272px] min-h-screen dot-grid p-margin-desktop">
+      <!-- Header: Financial Overview -->
+      <header
+        class="flex flex-col md:flex-row justify-between items-end mb-8 gap-6"
+      >
+        <div class="space-y-1">
+          <div class="flex items-center gap-2 mb-2">
+            <span
+              class="w-2 h-2 bg-secondary-container rounded-full animate-pulse"
+            ></span>
+            <span
+              class="font-label-md text-label-md text-secondary tracking-widest uppercase"
+              >Financial Overview</span
+            >
+          </div>
+          <h2 class="font-headline-xl text-headline-xl text-on-surface">
+            NexusFlow Fiscal Dashboard
+          </h2>
+          <p class="text-on-surface-variant opacity-60">
+            Real-time consumption analytics and enterprise-tier resource
+            logistics.
+          </p>
+        </div>
+        <div class="flex gap-4">
+          <div class="glass-panel p-4 rounded-xl min-w-[200px]">
+            <p class="text-label-md font-label-md text-on-surface-variant mb-1">
+              CURRENT MONTH SPEND
+            </p>
+            <p class="text-headline-lg font-headline-lg text-secondary">
+              $14,204.50
+            </p>
+          </div>
+          <div
+            class="glass-panel p-4 rounded-xl min-w-[200px] border-l-4 border-l-secondary"
+          >
+            <p class="text-label-md font-label-md text-on-surface-variant mb-1">
+              PROJECTED COST
+            </p>
+            <p class="text-headline-lg font-headline-lg text-on-surface">
+              $18,450.00
+            </p>
+          </div>
+        </div>
+      </header>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Consumption Metrics: Bento Grid Layout -->
+        <section class="col-span-12 lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="col-span-1 md:col-span-3">
+            <h3 class="font-headline-md text-headline-md text-on-surface mb-4">
+              Consumption Metrics
+            </h3>
+          </div>
+          <!-- API Calls -->
+          <div
+            class="bg-surface-container-high p-6 rounded-xl border border-outline-variant/20 flex flex-col justify-between"
+          >
+            <div>
+              <div class="flex justify-between items-start mb-4">
+                <span
+                  class="material-symbols-outlined text-secondary"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >api</span
+                >
+                <span class="text-label-md text-on-surface-variant font-code-sm"
+                  >+12% vs LY</span
+                >
+              </div>
+              <h4
+                class="font-headline-sm text-on-surface-variant font-bold mb-1"
+              >
+                API Requests
+              </h4>
+              <p class="font-headline-md text-on-surface">
+                24.8M <span class="text-sm opacity-50">/ 50M</span>
+              </p>
+            </div>
+            <div
+              class="mt-4 w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden"
+            >
+              <div class="bg-secondary h-full" style="width: 49.6%"></div>
+            </div>
+          </div>
+          <!-- Compute Hours -->
+          <div
+            class="bg-surface-container-high p-6 rounded-xl border border-outline-variant/20 flex flex-col justify-between"
+          >
+            <div>
+              <div class="flex justify-between items-start mb-4">
+                <span
+                  class="material-symbols-outlined text-secondary"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >memory</span
+                >
+                <span class="text-label-md text-error font-code-sm"
+                  >+28% spike</span
+                >
+              </div>
+              <h4
+                class="font-headline-sm text-on-surface-variant font-bold mb-1"
+              >
+                Compute Hours
+              </h4>
+              <p class="font-headline-md text-on-surface">
+                1,240 <span class="text-sm opacity-50">hrs</span>
+              </p>
+            </div>
+            <div
+              class="mt-4 w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden"
+            >
+              <div class="bg-error h-full" style="width: 78%"></div>
+            </div>
+          </div>
+          <!-- Data Storage -->
+          <div
+            class="bg-surface-container-high p-6 rounded-xl border border-outline-variant/20 flex flex-col justify-between"
+          >
+            <div>
+              <div class="flex justify-between items-start mb-4">
+                <span
+                  class="material-symbols-outlined text-secondary"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >database</span
+                >
+                <span class="text-label-md text-secondary font-code-sm"
+                  >Stable</span
+                >
+              </div>
+              <h4
+                class="font-headline-sm text-on-surface-variant font-bold mb-1"
+              >
+                Data Storage
+              </h4>
+              <p class="font-headline-md text-on-surface">
+                4.2 <span class="text-sm opacity-50">TB</span>
+              </p>
+            </div>
+            <div
+              class="mt-4 w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden"
+            >
+              <div class="bg-secondary h-full" style="width: 34%"></div>
+            </div>
+          </div>
+          <!-- AI Cost Optimization Card -->
+          <div
+            class="col-span-1 md:col-span-3 glass-panel p-6 rounded-xl border border-secondary/30 bg-secondary/5 relative overflow-hidden group"
+          >
+            <div
+              class="absolute -right-12 -top-12 w-48 h-48 bg-secondary/10 blur-[80px] rounded-full group-hover:bg-secondary/20 transition-all duration-700"
+            ></div>
+            <div class="flex items-start gap-6 relative z-10">
+              <div
+                class="w-12 h-12 bg-secondary/20 border border-secondary/40 rounded-lg flex items-center justify-center"
+              >
+                <span
+                  class="material-symbols-outlined text-secondary animate-bounce"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >auto_awesome</span
+                >
+              </div>
+              <div class="flex-1">
+                <h4
+                  class="font-headline-md text-headline-md text-secondary mb-1"
+                >
+                  Cost Optimization Suggestions
+                </h4>
+                <p class="text-on-surface-variant mb-4">
+                  Our AI logistics engine has identified 3 underutilized edge
+                  nodes in your 'Production-West' workflow clusters.
+                </p>
+                <div
+                  class="flex items-center gap-4 p-4 bg-surface-container-lowest/50 rounded-lg border border-outline-variant/20"
+                >
+                  <span class="material-symbols-outlined text-secondary"
+                    >insights</span
+                  >
+                  <p class="font-body-md text-on-surface">
+                    Downsize 3 underutilized nodes to save
+                    <span class="font-bold text-secondary">$450.00/mo</span>
+                    without impacting throughput.
+                  </p>
+                  <button
+                    class="ml-auto px-4 py-2 bg-secondary text-on-secondary font-label-md rounded hover:brightness-110 transition-all active:scale-95"
+                  >
+                    Apply Fix
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Sidebar Info: Subscription & Payment -->
+        <section class="col-span-12 lg:col-span-4 space-y-6">
+          <!-- Subscription Plan -->
+          <div
+            class="bg-surface-container-high rounded-xl border border-outline-variant/20 overflow-hidden"
+          >
+            <div class="bg-secondary-container p-6 text-on-secondary-container">
+              <div class="flex justify-between items-center mb-2">
+                <span
+                  class="text-label-md font-label-md uppercase tracking-widest opacity-80"
+                  >Current Plan</span
+                >
+                <span class="material-symbols-outlined">verified</span>
+              </div>
+              <h3 class="text-headline-lg font-headline-xl mb-4">
+                Enterprise Tier
+              </h3>
+              <div class="flex items-center gap-2 font-code-sm text-sm">
+                <span class="material-symbols-outlined text-sm"
+                  >calendar_today</span
+                >
+                Renewing on January 12, 2025
+              </div>
+            </div>
+            <div class="p-6 space-y-4">
+              <div class="flex justify-between items-center">
+                <span class="text-on-surface-variant font-label-md"
+                  >Seat Usage</span
+                >
+                <span class="text-on-surface font-bold">142 / 200</span>
+              </div>
+              <div
+                class="w-full bg-surface-container-lowest h-2 rounded-full overflow-hidden"
+              >
+                <div class="bg-secondary h-full" style="width: 71%"></div>
+              </div>
+              <div class="grid grid-cols-2 gap-3 pt-2">
+                <button
+                  class="py-2 px-3 border border-outline-variant/30 text-label-md font-label-md rounded hover:bg-surface-variant/50 transition-colors"
+                >
+                  Manage Seats
+                </button>
+                <button
+                  class="py-2 px-3 border border-outline-variant/30 text-label-md font-label-md rounded hover:bg-surface-variant/50 transition-colors"
+                >
+                  Change Plan
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Payment Methods -->
+          <div
+            class="bg-surface-container-high p-6 rounded-xl border border-outline-variant/20"
+          >
+            <div class="flex justify-between items-center mb-6">
+              <h4 class="font-headline-sm text-on-surface font-bold">
+                Payment Methods
+              </h4>
+              <button class="text-secondary text-sm hover:underline">
+                Add New
+              </button>
+            </div>
+            <div class="space-y-4">
+              <div
+                class="flex items-center gap-4 p-4 bg-surface-container-lowest/50 rounded-lg border border-outline-variant/20"
+              >
+                <div class="w-10 h-10 flex items-center justify-center">
+                  <span
+                    class="material-symbols-outlined text-on-surface-variant"
+                    >credit_card</span
+                  >
+                </div>
+                <div class="flex-1">
+                  <p class="text-sm font-bold text-on-surface">
+                    Visa ending in 8842
+                  </p>
+                  <p class="text-xs text-on-surface-variant">
+                    Expires 10/26 • Primary
+                  </p>
+                </div>
+                <span
+                  class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-on-surface"
+                  >more_vert</span
+                >
+              </div>
+              <div
+                class="flex items-center gap-4 p-4 bg-surface-container-lowest/50 rounded-lg border border-outline-variant/10"
+              >
+                <div class="w-10 h-10 flex items-center justify-center">
+                  <span
+                    class="material-symbols-outlined text-on-surface-variant"
+                    >account_balance</span
+                  >
+                </div>
+                <div class="flex-1">
+                  <p class="text-sm font-bold text-on-surface opacity-70">
+                    Wire Transfer
+                  </p>
+                  <p class="text-xs text-on-surface-variant italic">
+                    ACH Verified
+                  </p>
+                </div>
+                <span
+                  class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-on-surface"
+                  >settings</span
+                >
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Invoice History: Full Width List -->
+        <section class="col-span-12">
+          <div
+            class="bg-surface-container-high rounded-xl border border-outline-variant/20 overflow-hidden"
+          >
+            <div
+              class="p-6 border-b border-outline-variant/10 flex justify-between items-center"
+            >
+              <h3 class="font-headline-md text-headline-md text-on-surface">
+                Invoice History
+              </h3>
+              <div
+                class="flex items-center gap-2 px-3 py-1.5 bg-surface-container-lowest rounded-lg border border-outline-variant/20"
+              >
+                <span class="material-symbols-outlined text-sm"
+                  >filter_alt</span
+                >
+                <span class="text-label-md font-label-md">Filter by Date</span>
+              </div>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left">
+                <thead>
+                  <tr
+                    class="bg-surface-container-lowest/30 text-label-md font-label-md text-on-surface-variant border-b border-outline-variant/10"
+                  >
+                    <th class="px-6 py-4">INVOICE ID</th>
+                    <th class="px-6 py-4">BILLING PERIOD</th>
+                    <th class="px-6 py-4">DATE PAID</th>
+                    <th class="px-6 py-4">AMOUNT</th>
+                    <th class="px-6 py-4 text-right">ACTION</th>
+                  </tr>
+                </thead>
+                <tbody
+                  class="divide-y divide-outline-variant/10 font-code-sm text-sm"
+                >
+                  <tr class="hover:bg-surface-variant/10 transition-colors">
+                    <td class="px-6 py-4 font-bold text-on-surface">
+                      #INV-2024-0012
+                    </td>
+                    <td class="px-6 py-4 text-on-surface-variant">
+                      Nov 01 - Nov 30, 2024
+                    </td>
+                    <td class="px-6 py-4 text-on-surface-variant">
+                      Dec 02, 2024
+                    </td>
+                    <td class="px-6 py-4 text-on-surface font-bold">
+                      $13,940.22
+                    </td>
+                    <td class="px-6 py-4 text-right">
+                      <button
+                        class="text-secondary hover:text-white transition-colors flex items-center gap-2 justify-end ml-auto"
+                      >
+                        <span class="material-symbols-outlined text-sm"
+                          >download</span
+                        >
+                        PDF
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="hover:bg-surface-variant/10 transition-colors">
+                    <td class="px-6 py-4 font-bold text-on-surface">
+                      #INV-2024-0011
+                    </td>
+                    <td class="px-6 py-4 text-on-surface-variant">
+                      Oct 01 - Oct 31, 2024
+                    </td>
+                    <td class="px-6 py-4 text-on-surface-variant">
+                      Nov 01, 2024
+                    </td>
+                    <td class="px-6 py-4 text-on-surface font-bold">
+                      $12,850.00
+                    </td>
+                    <td class="px-6 py-4 text-right">
+                      <button
+                        class="text-secondary hover:text-white transition-colors flex items-center gap-2 justify-end ml-auto"
+                      >
+                        <span class="material-symbols-outlined text-sm"
+                          >download</span
+                        >
+                        PDF
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="hover:bg-surface-variant/10 transition-colors">
+                    <td class="px-6 py-4 font-bold text-on-surface">
+                      #INV-2024-0010
+                    </td>
+                    <td class="px-6 py-4 text-on-surface-variant">
+                      Sep 01 - Sep 30, 2024
+                    </td>
+                    <td class="px-6 py-4 text-on-surface-variant">
+                      Oct 02, 2024
+                    </td>
+                    <td class="px-6 py-4 text-on-surface font-bold">
+                      $14,102.15
+                    </td>
+                    <td class="px-6 py-4 text-right">
+                      <button
+                        class="text-secondary hover:text-white transition-colors flex items-center gap-2 justify-end ml-auto"
+                      >
+                        <span class="material-symbols-outlined text-sm"
+                          >download</span
+                        >
+                        PDF
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div
+              class="p-4 bg-surface-container-lowest/50 text-center border-t border-outline-variant/10"
+            >
+              <button
+                class="text-label-md font-label-md text-on-surface-variant hover:text-on-surface transition-colors"
+              >
+                Load Older Invoices
+              </button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <script>
+      // Simple micro-interaction for applying optimization
+      document
+        .querySelector("button.ml-auto")
+        ?.addEventListener("click", function () {
+          const btn = this;
+          btn.innerHTML =
+            '<span class="material-symbols-outlined animate-spin text-sm">sync</span> Processing';
+          btn.classList.add("opacity-50", "pointer-events-none");
+
+          setTimeout(() => {
+            const parent = btn.closest(".flex.items-center");
+            parent.innerHTML = `
+                    <span class="material-symbols-outlined text-secondary">check_circle</span>
+                    <p class="font-body-md text-secondary">Optimization successful! $450/mo savings will reflect on next cycle.</p>
+                `;
+          }, 1500);
+        });
+    </script>
+    <script src="../dash-sidebar.js"></script>
+  </body>
+</html>

@@ -1,0 +1,635 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>NexusFlow | Security & Compliance Center</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+        vertical-align: middle;
+      }
+      .dot-grid {
+        background-image: radial-gradient(circle, #1e293b 1px, transparent 1px);
+        background-size: 24px 24px;
+      }
+      .glass-panel {
+        background: rgba(18, 33, 49, 0.8);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(30, 41, 59, 0.5);
+      }
+      @keyframes pulse-glow {
+        0% {
+          box-shadow: 0 0 0 0 rgba(0, 166, 224, 0.4);
+        }
+        70% {
+          box-shadow: 0 0 0 10px rgba(0, 166, 224, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(0, 166, 224, 0);
+        }
+      }
+      .status-pulse {
+        animation: pulse-glow 2s infinite;
+      }
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #051424;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #273647;
+        border-radius: 10px;
+      }
+    </style>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-container": "#00a6e0",
+              "surface-container-low": "#0d1c2d",
+              "on-primary-fixed-variant": "#3f465c",
+              "on-secondary-fixed": "#001e2c",
+              "tertiary-fixed": "#e0e0ff",
+              "surface-variant": "#273647",
+              surface: "#051424",
+              "on-background": "#d4e4fa",
+              primary: "#bec6e0",
+              "inverse-on-surface": "#233143",
+              error: "#ffb4ab",
+              "on-tertiary-fixed": "#000767",
+              "secondary-fixed": "#c4e7ff",
+              "on-primary-container": "#798098",
+              "inverse-surface": "#d4e4fa",
+              "error-container": "#93000a",
+              "on-primary": "#283044",
+              "on-secondary": "#00354a",
+              "secondary-fixed-dim": "#7bd0ff",
+              "surface-container-lowest": "#010f1f",
+              "primary-fixed": "#dae2fd",
+              "on-secondary-fixed-variant": "#004c69",
+              "inverse-primary": "#565e74",
+              tertiary: "#bdc2ff",
+              "primary-fixed-dim": "#bec6e0",
+              "surface-bright": "#2c3a4c",
+              "on-tertiary-container": "#6c77e1",
+              "tertiary-fixed-dim": "#bdc2ff",
+              "surface-tint": "#bec6e0",
+              "on-surface": "#d4e4fa",
+              "tertiary-container": "#00055c",
+              outline: "#909097",
+              "surface-container-highest": "#273647",
+              "surface-container-high": "#1c2b3c",
+              background: "#051424",
+              "primary-container": "#0f172a",
+              "on-secondary-container": "#00374d",
+              "on-surface-variant": "#c6c6cd",
+              "outline-variant": "#45464d",
+              "on-error-container": "#ffdad6",
+              "on-primary-fixed": "#131b2e",
+              "surface-dim": "#051424",
+              "surface-container": "#122131",
+              "on-error": "#690005",
+              "on-tertiary-fixed-variant": "#2f3aa3",
+              secondary: "#7bd0ff",
+              "on-tertiary": "#131e8c",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              "margin-mobile": "16px",
+              "margin-desktop": "32px",
+              gutter: "16px",
+              "max-width": "1440px",
+              unit: "4px",
+            },
+            fontFamily: {
+              "headline-xl-mobile": ["Inter"],
+              "body-md": ["Inter"],
+              "code-sm": ["JetBrains Mono"],
+              "headline-lg": ["Inter"],
+              "headline-xl": ["Inter"],
+              "body-lg": ["Inter"],
+              "headline-md": ["Inter"],
+              "label-md": ["Inter"],
+            },
+            fontSize: {
+              "headline-xl-mobile": [
+                "28px",
+                {
+                  lineHeight: "34px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+              "code-sm": ["13px", { lineHeight: "18px", fontWeight: "400" }],
+              "headline-lg": [
+                "24px",
+                {
+                  lineHeight: "32px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-xl": [
+                "36px",
+                {
+                  lineHeight: "44px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "headline-md": [
+                "20px",
+                { lineHeight: "28px", fontWeight: "600" },
+              ],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "600",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="bg-background text-on-surface font-body-md selection:bg-secondary/30"
+  >
+    <div id="sb-overlay"></div>
+    <!-- Side Navigation -->
+    <aside id="sidebar"></aside>
+    <!-- Main Canvas -->
+    <main class="lg:ml-[272px] min-h-screen dot-grid pb-20">
+      <!-- Top Bar -->
+      <header
+        class="h-16 bg-surface-container-low shadow-sm flex justify-between items-center px-margin-desktop sticky top-0 z-40"
+      >
+        <div class="flex items-center gap-4">
+          <span
+            class="font-headline-lg text-headline-lg font-bold text-secondary"
+            >Security & Compliance Center</span
+          >
+          <span
+            class="px-2 py-1 bg-surface-variant text-on-surface-variant font-code-sm text-code-sm rounded border border-outline-variant/20"
+            >v4.2.0-STABLE</span
+          >
+        </div>
+        <div class="flex items-center gap-6">
+          <div
+            class="flex items-center gap-2 bg-surface-container-highest/30 px-3 py-1.5 rounded-full border border-secondary/20"
+          >
+            <span
+              class="material-symbols-outlined text-secondary text-sm"
+              style="font-variation-settings: &quot;FILL&quot; 1"
+              >verified_user</span
+            >
+            <span class="font-label-md text-label-md text-on-surface"
+              >Global Score:</span
+            >
+            <span class="font-headline-md text-headline-md text-secondary"
+              >98<span class="text-xs text-on-surface-variant">/100</span></span
+            >
+          </div>
+          <div class="flex items-center gap-4">
+            <button
+              class="p-2 hover:bg-surface-variant/50 rounded-full transition-all text-on-surface-variant"
+            >
+              <span class="material-symbols-outlined">notifications</span>
+            </button>
+            <div
+              class="w-8 h-8 rounded-full bg-surface-variant border border-outline-variant/30 overflow-hidden"
+            >
+              <img
+                class="w-full h-full object-cover"
+                data-alt="A professional close-up headshot of a technical system administrator with a focused expression, set against a dark, tech-oriented studio background with soft cyan and navy lighting. The aesthetic is clean and modern, representing the high-security enterprise environment of NexusFlow."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJscmoeABBrgKTW4BHP5JJwZUKdvowUSA7uw4InmAjCdZyJgIe0q_eRsq6DRBKsfPjppg6TrgffM2z8p0QLvJeO-sKUlI5_67312fcLp4g76o4wrR6Q2q9lGy3u7PfoLZ74UpNn1TO8OWJPhDaFlY-fnLQYDW4UmVBFOOds9XqXozH3F6PdFz4mZLI76DxXUiyDJm0gN-UJ9UQBNOrnQlzo3ftqm0Jj5Sf9zEHlPApapd-rWsAHREzkweiTw_ql45ng1qbaRiS5jYe"
+              />
+            </div>
+          </div>
+        </div>
+      </header>
+      <!-- Content Grid -->
+      <div
+        class="p-margin-desktop grid grid-cols-12 gap-gutter max-w-max-width mx-auto"
+      >
+        <!-- Threat Detection Feed -->
+        <section
+          class="col-span-12 lg:col-span-8 glass-panel rounded-xl overflow-hidden flex flex-col h-[400px]"
+        >
+          <div
+            class="px-6 py-4 border-b border-outline-variant/20 flex justify-between items-center"
+          >
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-error">radar</span>
+              <h2 class="font-headline-md text-headline-md">
+                Live Threat Detection
+              </h2>
+            </div>
+            <div class="flex items-center gap-2">
+              <span
+                class="flex h-2 w-2 rounded-full bg-error animate-pulse"
+              ></span>
+              <span
+                class="text-xs font-label-md text-on-surface-variant uppercase tracking-widest"
+                >Real-time monitoring active</span
+              >
+            </div>
+          </div>
+          <div
+            class="flex-1 overflow-y-auto font-code-sm text-code-sm p-4 space-y-2 bg-surface-container-lowest/50"
+          >
+            <div
+              class="flex gap-4 p-2 rounded hover:bg-surface-variant/20 group"
+            >
+              <span class="text-on-surface-variant/50 shrink-0">14:22:01</span>
+              <span class="text-error shrink-0">[BLOCKED]</span>
+              <span class="text-on-surface"
+                >SSH Login Attempt from
+                <span class="text-secondary">192.168.1.45</span> (Invalid
+                Credentials)</span
+              >
+              <span
+                class="ml-auto opacity-0 group-hover:opacity-100 text-on-surface-variant cursor-pointer transition-opacity underline"
+                >Details</span
+              >
+            </div>
+            <div
+              class="flex gap-4 p-2 rounded hover:bg-surface-variant/20 group"
+            >
+              <span class="text-on-surface-variant/50 shrink-0">14:21:44</span>
+              <span class="text-tertiary shrink-0">[WARN]</span>
+              <span class="text-on-surface"
+                >API Rate-limit Warning: Endpoint
+                <span class="font-bold">/v1/deploy</span> exceeded threshold for
+                user <span class="text-secondary">usr_9921</span></span
+              >
+              <span
+                class="ml-auto opacity-0 group-hover:opacity-100 text-on-surface-variant cursor-pointer transition-opacity underline"
+                >View Trace</span
+              >
+            </div>
+            <div
+              class="flex gap-4 p-2 rounded bg-error/5 border border-error/20 group"
+            >
+              <span class="text-on-surface-variant/50 shrink-0">14:20:12</span>
+              <span class="text-error font-bold shrink-0">[ALERT]</span>
+              <span class="text-on-surface"
+                >Suspicious IP activity detected:
+                <span class="text-error">45.22.11.90</span> flagged by Global
+                Blacklist</span
+              >
+              <span
+                class="ml-auto opacity-100 text-error cursor-pointer underline"
+                >Mitigate</span
+              >
+            </div>
+            <div
+              class="flex gap-4 p-2 rounded hover:bg-surface-variant/20 group"
+            >
+              <span class="text-on-surface-variant/50 shrink-0">14:18:55</span>
+              <span class="text-error shrink-0">[BLOCKED]</span>
+              <span class="text-on-surface"
+                >SQL Injection Pattern detected on search param
+                <span class="text-on-surface-variant italic"
+                  >'%OR 1=1--'</span
+                ></span
+              >
+              <span
+                class="ml-auto opacity-0 group-hover:opacity-100 text-on-surface-variant cursor-pointer transition-opacity underline"
+                >Details</span
+              >
+            </div>
+            <div
+              class="flex gap-4 p-2 rounded hover:bg-surface-variant/20 group"
+            >
+              <span class="text-on-surface-variant/50 shrink-0">14:15:30</span>
+              <span class="text-on-secondary-container shrink-0">[INFO]</span>
+              <span class="text-on-surface"
+                >Firewall rules updated: 14 new IP ranges whitelisted for Node
+                Cluster A</span
+              >
+              <span
+                class="ml-auto opacity-0 group-hover:opacity-100 text-on-surface-variant cursor-pointer transition-opacity underline"
+                >Log</span
+              >
+            </div>
+            <!-- More logs fill here -->
+          </div>
+        </section>
+        <!-- Incident Response Panel -->
+        <section class="col-span-12 lg:col-span-4 flex flex-col gap-gutter">
+          <div class="glass-panel rounded-xl p-6 relative overflow-hidden">
+            <div class="relative z-10">
+              <h2 class="font-headline-md text-headline-md mb-2">
+                Incident Response
+              </h2>
+              <p class="text-on-surface-variant font-body-md mb-6">
+                Immediate countermeasures for active breaches or security
+                protocol enforcement.
+              </p>
+              <div class="space-y-3">
+                <button
+                  class="w-full py-4 bg-error-container text-on-error-container rounded-lg font-bold flex items-center justify-center gap-3 hover:bg-error transition-all active:scale-[0.98] group"
+                >
+                  <span
+                    class="material-symbols-outlined text-2xl group-hover:animate-pulse"
+                    >lock_person</span
+                  >
+                  Initialize Lockdown
+                </button>
+                <button
+                  class="w-full py-4 bg-surface-variant border border-outline-variant/30 text-on-surface rounded-lg font-bold flex items-center justify-center gap-3 hover:bg-surface-bright transition-all active:scale-[0.98]"
+                >
+                  <span class="material-symbols-outlined text-2xl"
+                    >key_off</span
+                  >
+                  Purge Session Keys
+                </button>
+              </div>
+            </div>
+            <div
+              class="absolute -right-4 -bottom-4 opacity-5 pointer-events-none"
+            >
+              <span class="material-symbols-outlined text-9xl"
+                >emergency_home</span
+              >
+            </div>
+          </div>
+          <div class="glass-panel rounded-xl p-6 border-l-4 border-l-secondary">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="material-symbols-outlined text-secondary"
+                >description</span
+              >
+              <h2 class="font-headline-md text-headline-md">
+                Encryption Status
+              </h2>
+            </div>
+            <div class="space-y-4">
+              <div class="flex justify-between items-center">
+                <span class="text-on-surface-variant font-label-md"
+                  >Data-at-Rest</span
+                >
+                <span
+                  class="px-2 py-0.5 bg-secondary/20 text-secondary rounded font-code-sm text-[10px]"
+                  >AES-256 VERIFIED</span
+                >
+              </div>
+              <div
+                class="w-full bg-surface-container-highest rounded-full h-1.5"
+              >
+                <div
+                  class="bg-secondary h-1.5 rounded-full"
+                  style="width: 100%"
+                ></div>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-on-surface-variant font-label-md"
+                  >In-Transit</span
+                >
+                <span
+                  class="px-2 py-0.5 bg-secondary/20 text-secondary rounded font-code-sm text-[10px]"
+                  >TLS 1.3 ACTIVE</span
+                >
+              </div>
+              <div
+                class="w-full bg-surface-container-highest rounded-full h-1.5"
+              >
+                <div
+                  class="bg-secondary h-1.5 rounded-full"
+                  style="width: 100%"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Compliance Check & SSL Monitor -->
+        <section class="col-span-12 grid grid-cols-12 gap-gutter">
+          <!-- Compliance Checklist -->
+          <div
+            class="col-span-12 md:col-span-7 glass-panel rounded-xl overflow-hidden"
+          >
+            <div class="px-6 py-4 border-b border-outline-variant/20">
+              <h2 class="font-headline-md text-headline-md">
+                Compliance Matrix
+              </h2>
+            </div>
+            <div class="divide-y divide-outline-variant/10">
+              <div
+                class="px-6 py-4 flex items-center justify-between hover:bg-surface-variant/10 transition-colors"
+              >
+                <div class="flex items-center gap-4">
+                  <span
+                    class="material-symbols-outlined text-secondary"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >check_circle</span
+                  >
+                  <div>
+                    <div class="font-bold">SOC2 Type II</div>
+                    <div class="text-xs text-on-surface-variant">
+                      Continuous controls monitoring active
+                    </div>
+                  </div>
+                </div>
+                <span
+                  class="text-secondary font-label-md bg-secondary/10 px-3 py-1 rounded-full border border-secondary/20"
+                  >COMPLIANT</span
+                >
+              </div>
+              <div
+                class="px-6 py-4 flex items-center justify-between hover:bg-surface-variant/10 transition-colors"
+              >
+                <div class="flex items-center gap-4">
+                  <span
+                    class="material-symbols-outlined text-secondary"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >check_circle</span
+                  >
+                  <div>
+                    <div class="font-bold">GDPR Article 32</div>
+                    <div class="text-xs text-on-surface-variant">
+                      Data processing agreement validated
+                    </div>
+                  </div>
+                </div>
+                <span
+                  class="text-secondary font-label-md bg-secondary/10 px-3 py-1 rounded-full border border-secondary/20"
+                  >COMPLIANT</span
+                >
+              </div>
+              <div
+                class="px-6 py-4 flex items-center justify-between bg-error-container/5 hover:bg-error-container/10 transition-colors"
+              >
+                <div class="flex items-center gap-4">
+                  <span class="material-symbols-outlined text-error"
+                    >warning</span
+                  >
+                  <div>
+                    <div class="font-bold">ISO 27001:2022</div>
+                    <div class="text-xs text-on-surface-variant">
+                      Clause 8.1: Operational planning review due in 4 days
+                    </div>
+                  </div>
+                </div>
+                <span
+                  class="text-error font-label-md bg-error/10 px-3 py-1 rounded-full border border-error/20"
+                  >WARNING</span
+                >
+              </div>
+            </div>
+          </div>
+          <!-- SSL Monitor -->
+          <div class="col-span-12 md:col-span-5 glass-panel rounded-xl p-6">
+            <div class="flex items-center gap-3 mb-6">
+              <span class="material-symbols-outlined text-secondary"
+                >verified</span
+              >
+              <h2 class="font-headline-md text-headline-md">SSL/TLS Monitor</h2>
+            </div>
+            <div class="space-y-6">
+              <div class="relative">
+                <div class="flex justify-between mb-2">
+                  <span class="font-code-sm">nexusflow-prod-cluster.io</span>
+                  <span class="text-secondary font-bold">128 Days</span>
+                </div>
+                <div
+                  class="w-full bg-surface-container-highest rounded-full h-1.5 overflow-hidden"
+                >
+                  <div
+                    class="bg-secondary h-1.5 rounded-full"
+                    style="width: 85%"
+                  ></div>
+                </div>
+              </div>
+              <div class="relative">
+                <div class="flex justify-between mb-2">
+                  <span class="font-code-sm">api.nexusflow.sh</span>
+                  <span class="text-error font-bold">9 Days</span>
+                </div>
+                <div
+                  class="w-full bg-surface-container-highest rounded-full h-1.5 overflow-hidden"
+                >
+                  <div
+                    class="bg-error h-1.5 rounded-full"
+                    style="width: 12%"
+                  ></div>
+                </div>
+              </div>
+              <div class="relative">
+                <div class="flex justify-between mb-2">
+                  <span class="font-code-sm">auth.nexusflow-internal.net</span>
+                  <span class="text-on-surface-variant">294 Days</span>
+                </div>
+                <div
+                  class="w-full bg-surface-container-highest rounded-full h-1.5 overflow-hidden"
+                >
+                  <div
+                    class="bg-secondary h-1.5 rounded-full opacity-50"
+                    style="width: 95%"
+                  ></div>
+                </div>
+              </div>
+            </div>
+            <button
+              class="mt-8 w-full border border-secondary/30 text-secondary font-label-md py-3 rounded hover:bg-secondary/5 transition-all"
+            >
+              Renew All Near-Term Certificates
+            </button>
+          </div>
+        </section>
+      </div>
+    </main>
+    <script>
+      // Micro-interactions for live feed
+      const feed = document.querySelector(".overflow-y-auto");
+      let logCounter = 0;
+
+      const logs = [
+        {
+          time: "14:25:11",
+          type: "BLOCKED",
+          color: "text-error",
+          text: "DDoS mitigation pattern active for Subnet-8",
+        },
+        {
+          time: "14:26:02",
+          type: "INFO",
+          color: "text-on-secondary-container",
+          text: "Automated cleanup of expired tokens (4,201 purged)",
+        },
+        {
+          time: "14:27:45",
+          type: "WARN",
+          color: "text-tertiary",
+          text: "Memory spike detected in HSM module-2",
+        },
+      ];
+
+      setInterval(() => {
+        const log = logs[logCounter % logs.length];
+        const div = document.createElement("div");
+        div.className =
+          "flex gap-4 p-2 rounded hover:bg-surface-variant/20 group opacity-0 transition-opacity duration-500";
+        div.innerHTML = `
+        <span class="text-on-surface-variant/50 shrink-0">${log.time}</span>
+        <span class="${log.color} shrink-0">[${log.type}]</span>
+        <span class="text-on-surface">${log.text}</span>
+        <span class="ml-auto opacity-0 group-hover:opacity-100 text-on-surface-variant cursor-pointer transition-opacity underline">Details</span>
+      `;
+        feed.insertBefore(div, feed.firstChild);
+        setTimeout(() => div.classList.remove("opacity-0"), 100);
+        logCounter++;
+
+        if (feed.children.length > 30) {
+          feed.removeChild(feed.lastChild);
+        }
+      }, 8000);
+
+      // Interactive button state
+      const lockdownBtn = document.querySelector(".bg-error-container");
+      lockdownBtn.addEventListener("click", () => {
+        if (
+          confirm(
+            "CRITICAL ACTION: Initialize site-wide lockdown? This will disconnect all non-essential clusters.",
+          )
+        ) {
+          lockdownBtn.innerText = "Lockdown Active";
+          lockdownBtn.classList.add("animate-pulse");
+          document.body.classList.add("grayscale");
+        }
+      });
+    </script>
+    <script src="../dash-sidebar.js"></script>
+  </body>
+</html>

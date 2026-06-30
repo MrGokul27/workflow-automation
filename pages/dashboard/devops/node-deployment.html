@@ -1,0 +1,813 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>NexusFlow | Node Deployment</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      .dot-grid {
+        background-image: radial-gradient(circle, #1e293b 1px, transparent 1px);
+        background-size: 24px 24px;
+      }
+      .node-glow-active {
+        box-shadow: 0 0 15px rgba(123, 208, 255, 0.3);
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: #0d1c2d;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #1c2b3c;
+        border-radius: 10px;
+      }
+      @keyframes pulse-subtle {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.6;
+        }
+      }
+      .animate-pulse-subtle {
+        animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+    </style>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-high": "#1c2b3c",
+              surface: "#051424",
+              "primary-fixed-dim": "#bec6e0",
+              "on-primary-fixed-variant": "#3f465c",
+              "on-primary-container": "#798098",
+              "on-tertiary-container": "#6c77e1",
+              "on-background": "#d4e4fa",
+              "tertiary-container": "#00055c",
+              "primary-fixed": "#dae2fd",
+              "inverse-primary": "#565e74",
+              "tertiary-fixed-dim": "#bdc2ff",
+              "surface-container-highest": "#273647",
+              "error-container": "#93000a",
+              "tertiary-fixed": "#e0e0ff",
+              "on-secondary-fixed-variant": "#004c69",
+              "on-secondary-fixed": "#001e2c",
+              background: "#051424",
+              outline: "#909097",
+              "on-surface-variant": "#c6c6cd",
+              "inverse-surface": "#d4e4fa",
+              "secondary-fixed": "#c4e7ff",
+              "inverse-on-surface": "#233143",
+              "on-secondary-container": "#00374d",
+              "surface-container": "#122131",
+              "on-tertiary": "#131e8c",
+              "on-surface": "#d4e4fa",
+              "on-error": "#690005",
+              "on-primary-fixed": "#131b2e",
+              "on-primary": "#283044",
+              "surface-container-low": "#0d1c2d",
+              secondary: "#7bd0ff",
+              "primary-container": "#0f172a",
+              "outline-variant": "#45464d",
+              "on-tertiary-fixed": "#000767",
+              "surface-dim": "#051424",
+              "secondary-fixed-dim": "#7bd0ff",
+              primary: "#bec6e0",
+              "surface-tint": "#bec6e0",
+              tertiary: "#bdc2ff",
+              "on-tertiary-fixed-variant": "#2f3aa3",
+              "surface-bright": "#2c3a4c",
+              "surface-container-lowest": "#010f1f",
+              error: "#ffb4ab",
+              "surface-variant": "#273647",
+              "on-secondary": "#00354a",
+              "secondary-container": "#00a6e0",
+              "on-error-container": "#ffdad6",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              "margin-desktop": "32px",
+              gutter: "16px",
+              "max-width": "1440px",
+              unit: "4px",
+              "margin-mobile": "16px",
+            },
+            fontFamily: {
+              "headline-xl": ["Inter"],
+              "code-sm": ["JetBrains Mono"],
+              "headline-md": ["Inter"],
+              "body-lg": ["Inter"],
+              "headline-xl-mobile": ["Inter"],
+              "label-md": ["Inter"],
+              "headline-lg": ["Inter"],
+              "body-md": ["Inter"],
+            },
+            fontSize: {
+              "headline-xl": [
+                "36px",
+                {
+                  lineHeight: "44px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "code-sm": ["13px", { lineHeight: "18px", fontWeight: "400" }],
+              "headline-md": [
+                "20px",
+                { lineHeight: "28px", fontWeight: "600" },
+              ],
+              "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "headline-xl-mobile": [
+                "28px",
+                {
+                  lineHeight: "34px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "700",
+                },
+              ],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-lg": [
+                "24px",
+                {
+                  lineHeight: "32px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-surface text-on-surface font-body-md overflow-hidden">
+    <div id="sb-overlay"></div>
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar"></aside>
+    <!-- Top App Bar -->
+    <header
+      class="lg:ml-[272px] sticky top-0 bg-surface-dim border-b border-outline-variant flex justify-between items-center h-16 px-8 z-40"
+    >
+      <div class="flex items-center flex-1 max-w-xl">
+        <div class="relative w-full group">
+          <span
+            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm"
+            >search</span
+          >
+          <input
+            class="w-full bg-surface-container-lowest border-none ring-1 ring-outline-variant focus:ring-secondary rounded py-1.5 pl-10 pr-4 text-body-md text-on-surface transition-all"
+            placeholder="Search clusters, nodes or logs..."
+            type="text"
+          />
+        </div>
+      </div>
+      <div class="flex items-center space-x-6">
+        <button
+          class="relative text-on-surface-variant hover:text-on-surface transition-colors"
+        >
+          <span class="material-symbols-outlined">notifications</span>
+          <span
+            class="absolute top-0 right-0 w-2 h-2 bg-secondary rounded-full border border-surface-dim"
+          ></span>
+        </button>
+        <div class="flex items-center space-x-3 cursor-pointer">
+          <div class="text-right hidden sm:block">
+            <p class="font-label-md text-on-surface">Ops Admin</p>
+            <p
+              class="text-[10px] text-on-surface-variant uppercase tracking-tighter"
+            >
+              Production Access
+            </p>
+          </div>
+          <span class="material-symbols-outlined text-3xl text-secondary"
+            >account_circle</span
+          >
+        </div>
+      </div>
+    </header>
+    <!-- Main Content Canvas -->
+    <main
+      class="lg:ml-[272px] h-[calc(100vh-64px)] overflow-y-auto dot-grid relative p-8"
+    >
+      <!-- Action Bar -->
+      <div
+        class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8"
+      >
+        <div>
+          <h2 class="font-headline-lg text-headline-lg text-on-surface">
+            Global Node Deployment
+          </h2>
+          <p class="text-on-surface-variant font-body-md">
+            Manage and scale ephemeral nodes across 12 distributed regions.
+          </p>
+        </div>
+        <div class="flex items-center space-x-3">
+          <div
+            class="flex bg-surface-container-low p-1 rounded-lg border border-outline-variant"
+          >
+            <button
+              class="px-4 py-1.5 bg-surface-container-high text-secondary font-label-md rounded shadow-inner"
+            >
+              Map View
+            </button>
+            <button
+              class="px-4 py-1.5 text-on-surface-variant font-label-md hover:text-on-surface transition-colors"
+            >
+              Grid View
+            </button>
+          </div>
+          <button
+            class="flex items-center px-5 py-2 bg-secondary text-on-secondary font-label-md rounded shadow-lg hover:brightness-110 active:scale-95 transition-all"
+            onclick="
+              document
+                .getElementById('deploy-wizard')
+                .classList.remove('hidden')
+            "
+          >
+            <span
+              class="material-symbols-outlined text-sm mr-2"
+              style="font-variation-settings: &quot;FILL&quot; 1"
+              >add</span
+            >
+            Deploy New Node
+          </button>
+        </div>
+      </div>
+      <!-- Bento Grid Stats & Map -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
+        <!-- Map Visualization Card -->
+        <div
+          class="col-span-12 lg:col-span-8 bg-surface-container-low border border-outline-variant rounded-xl overflow-hidden relative min-h-[400px]"
+        >
+          <div class="absolute top-4 left-4 z-10 flex flex-col space-y-2">
+            <div
+              class="bg-surface/80 backdrop-blur px-3 py-1.5 rounded border border-outline-variant flex items-center"
+            >
+              <span
+                class="w-2 h-2 bg-emerald-500 rounded-full mr-2 animate-pulse"
+              ></span>
+              <span class="text-xs font-label-md">142 Healthy Nodes</span>
+            </div>
+            <div
+              class="bg-surface/80 backdrop-blur px-3 py-1.5 rounded border border-outline-variant flex items-center"
+            >
+              <span class="w-2 h-2 bg-amber-500 rounded-full mr-2"></span>
+              <span class="text-xs font-label-md">3 Rolling Updates</span>
+            </div>
+          </div>
+          <div
+            class="w-full h-full bg-[#030912] flex items-center justify-center p-4"
+          >
+            <!-- Map Placeholder with Location Data -->
+            <div class="w-full h-full relative" data-location="Global">
+              <img
+                class="w-full h-full object-contain opacity-60"
+                data-alt="A stylized futuristic world map for a tech-noir dashboard in dark navy and electric blue. The map shows global connections with glowing circuit-like lines and pulsing data nodes in major cities like New York, London, Tokyo, and Frankfurt. The aesthetic is clean, high-tech, and minimalist with a faint hexagonal grid overlay."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuApfoSM05qaP4RKYPTw_tFca0LaYoEjRgx75irel_b9Or_mikWBy0WzcuSZtNLVBdtKgbyauH1SR-lV6VhOUwR8UTfBH7otu9JCcQ9T4WOpmFptjqrcPtHc7RhUoF4mxajeHZU-vC1BVGhvYkgOan6cBrzjU-87hkbpZ2bVbhI1NFiagYLEHe5bF4P_5OALVL8lGNIqCsQo5i2iDaacR2Q_dPVH2YWysqYtxUE8ZrQTZfKuAxgXw-feMjF8TZPEqPcqYuaSRYdE0dy5"
+              />
+              <!-- Pulse Markers -->
+              <div class="absolute top-[35%] left-[22%] group">
+                <div
+                  class="w-4 h-4 bg-secondary rounded-full absolute -inset-1 animate-ping opacity-20"
+                ></div>
+                <div
+                  class="w-2 h-2 bg-secondary rounded-full relative cursor-pointer"
+                ></div>
+                <div
+                  class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-surface-container-highest p-2 rounded shadow-xl border border-outline-variant opacity-0 group-hover:opacity-100 transition-opacity w-32 pointer-events-none"
+                >
+                  <p class="text-[10px] font-bold text-secondary">
+                    US-East-1 (VA)
+                  </p>
+                  <p class="text-[9px] text-on-surface-variant">
+                    42 Nodes • 99.9% Up
+                  </p>
+                </div>
+              </div>
+              <div class="absolute top-[30%] left-[48%] group">
+                <div
+                  class="w-2 h-2 bg-secondary rounded-full relative cursor-pointer"
+                ></div>
+              </div>
+              <div class="absolute top-[45%] left-[75%] group">
+                <div
+                  class="w-4 h-4 bg-amber-500 rounded-full absolute -inset-1 animate-ping opacity-20"
+                ></div>
+                <div
+                  class="w-2 h-2 bg-amber-500 rounded-full relative cursor-pointer"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Rolling Updates Tracker -->
+        <div class="col-span-12 lg:col-span-4 flex flex-col gap-6">
+          <div
+            class="flex-1 bg-surface-container-low border border-outline-variant rounded-xl p-6"
+          >
+            <h3
+              class="font-label-md text-secondary uppercase tracking-widest mb-4"
+            >
+              Active Rolling Updates
+            </h3>
+            <div class="space-y-6">
+              <!-- Update Item 1 -->
+              <div>
+                <div class="flex justify-between items-center mb-2">
+                  <span class="font-body-md font-bold"
+                    >API Gateway Cluster</span
+                  >
+                  <span class="text-xs font-code-sm text-secondary"
+                    >v2.4.1-rc</span
+                  >
+                </div>
+                <div
+                  class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden mb-2"
+                >
+                  <div class="bg-secondary h-full" style="width: 65%"></div>
+                </div>
+                <div
+                  class="flex justify-between text-[10px] text-on-surface-variant"
+                >
+                  <span>13/20 Nodes Replaced</span>
+                  <span>65% Complete</span>
+                </div>
+              </div>
+              <!-- Update Item 2 -->
+              <div>
+                <div class="flex justify-between items-center mb-2">
+                  <span class="font-body-md font-bold">Auth Service (EU)</span>
+                  <span class="text-xs font-code-sm text-secondary"
+                    >v1.12.0</span
+                  >
+                </div>
+                <div
+                  class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden mb-2"
+                >
+                  <div
+                    class="bg-secondary h-full animate-pulse"
+                    style="width: 12%"
+                  ></div>
+                </div>
+                <div
+                  class="flex justify-between text-[10px] text-on-surface-variant"
+                >
+                  <span>1/8 Nodes Replaced</span>
+                  <span>Initial Check...</span>
+                </div>
+              </div>
+            </div>
+            <button
+              class="w-full mt-6 py-2 border border-outline-variant rounded hover:bg-surface-container-high transition-colors text-xs font-label-md uppercase"
+            >
+              View Release Manager
+            </button>
+          </div>
+          <div
+            class="bg-surface-container-low border border-outline-variant rounded-xl p-5 flex items-center justify-between"
+          >
+            <div>
+              <p
+                class="text-[10px] text-on-surface-variant uppercase font-bold mb-1"
+              >
+                Infrastructure Health
+              </p>
+              <p class="text-2xl font-headline-md text-emerald-400">Stable</p>
+            </div>
+            <div class="w-16 h-8 flex items-end space-x-1">
+              <div class="bg-emerald-500/30 w-full h-[60%]"></div>
+              <div class="bg-emerald-500/30 w-full h-[70%]"></div>
+              <div class="bg-emerald-500/30 w-full h-[65%]"></div>
+              <div class="bg-emerald-500/30 w-full h-[85%]"></div>
+              <div class="bg-emerald-500 w-full h-[90%]"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Regional Grid View -->
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+        <!-- Region Card: US-EAST -->
+        <div
+          class="bg-surface-container-low border border-outline-variant rounded-xl p-5 hover:border-secondary transition-all group"
+        >
+          <div class="flex justify-between items-start mb-4">
+            <div class="p-2 bg-secondary/10 rounded">
+              <span class="material-symbols-outlined text-secondary"
+                >cloud</span
+              >
+            </div>
+            <div class="flex space-x-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+            </div>
+          </div>
+          <h4 class="font-headline-md text-on-surface">US-East-1</h4>
+          <p class="text-xs text-on-surface-variant mb-4 font-code-sm">
+            N. Virginia Cluster
+          </p>
+          <div
+            class="grid grid-cols-2 gap-4 border-t border-outline-variant/30 pt-4"
+          >
+            <div>
+              <p
+                class="text-[10px] text-on-surface-variant uppercase font-bold"
+              >
+                Capacity
+              </p>
+              <p class="text-sm font-code-sm">1.2 TB / 4 TB</p>
+            </div>
+            <div>
+              <p
+                class="text-[10px] text-on-surface-variant uppercase font-bold"
+              >
+                Nodes
+              </p>
+              <p class="text-sm font-code-sm">42 Active</p>
+            </div>
+          </div>
+          <div class="mt-4 flex items-center justify-between">
+            <span
+              class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 font-bold"
+              >OPTIMIZED</span
+            >
+            <button
+              class="opacity-0 group-hover:opacity-100 transition-opacity text-secondary text-xs font-bold underline"
+            >
+              Manage
+            </button>
+          </div>
+        </div>
+        <!-- Region Card: EU-WEST -->
+        <div
+          class="bg-surface-container-low border border-outline-variant rounded-xl p-5 hover:border-secondary transition-all group"
+        >
+          <div class="flex justify-between items-start mb-4">
+            <div class="p-2 bg-secondary/10 rounded">
+              <span class="material-symbols-outlined text-secondary"
+                >cloud</span
+              >
+            </div>
+            <div class="flex space-x-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              <span
+                class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"
+              ></span>
+            </div>
+          </div>
+          <h4 class="font-headline-md text-on-surface">EU-West-2</h4>
+          <p class="text-xs text-on-surface-variant mb-4 font-code-sm">
+            London Cluster
+          </p>
+          <div
+            class="grid grid-cols-2 gap-4 border-t border-outline-variant/30 pt-4"
+          >
+            <div>
+              <p
+                class="text-[10px] text-on-surface-variant uppercase font-bold"
+              >
+                Capacity
+              </p>
+              <p class="text-sm font-code-sm">840 GB / 2 TB</p>
+            </div>
+            <div>
+              <p
+                class="text-[10px] text-on-surface-variant uppercase font-bold"
+              >
+                Nodes
+              </p>
+              <p class="text-sm font-code-sm">18 Deploying</p>
+            </div>
+          </div>
+          <div class="mt-4 flex items-center justify-between">
+            <span
+              class="text-[10px] px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 font-bold"
+              >ROLLING</span
+            >
+            <button
+              class="opacity-0 group-hover:opacity-100 transition-opacity text-secondary text-xs font-bold underline"
+            >
+              Manage
+            </button>
+          </div>
+        </div>
+        <!-- Region Card: AP-NORTHEAST -->
+        <div
+          class="bg-surface-container-low border border-outline-variant rounded-xl p-5 hover:border-secondary transition-all group"
+        >
+          <div class="flex justify-between items-start mb-4">
+            <div class="p-2 bg-secondary/10 rounded">
+              <span class="material-symbols-outlined text-secondary"
+                >cloud</span
+              >
+            </div>
+            <div class="flex space-x-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+            </div>
+          </div>
+          <h4 class="font-headline-md text-on-surface">AP-Northeast-1</h4>
+          <p class="text-xs text-on-surface-variant mb-4 font-code-sm">
+            Tokyo Cluster
+          </p>
+          <div
+            class="grid grid-cols-2 gap-4 border-t border-outline-variant/30 pt-4"
+          >
+            <div>
+              <p
+                class="text-[10px] text-on-surface-variant uppercase font-bold"
+              >
+                Capacity
+              </p>
+              <p class="text-sm font-code-sm">512 GB / 1 TB</p>
+            </div>
+            <div>
+              <p
+                class="text-[10px] text-on-surface-variant uppercase font-bold"
+              >
+                Nodes
+              </p>
+              <p class="text-sm font-code-sm">24 Active</p>
+            </div>
+          </div>
+          <div class="mt-4 flex items-center justify-between">
+            <span
+              class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 font-bold"
+              >OPTIMIZED</span
+            >
+            <button
+              class="opacity-0 group-hover:opacity-100 transition-opacity text-secondary text-xs font-bold underline"
+            >
+              Manage
+            </button>
+          </div>
+        </div>
+        <!-- Region Card: SA-EAST -->
+        <div
+          class="bg-surface-container-low border border-outline-variant rounded-xl p-5 hover:border-secondary transition-all group"
+        >
+          <div class="flex justify-between items-start mb-4">
+            <div class="p-2 bg-secondary/10 rounded">
+              <span class="material-symbols-outlined text-secondary"
+                >cloud</span
+              >
+            </div>
+            <div class="flex space-x-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+            </div>
+          </div>
+          <h4 class="font-headline-md text-on-surface">SA-East-1</h4>
+          <p class="text-xs text-on-surface-variant mb-4 font-code-sm">
+            São Paulo Cluster
+          </p>
+          <div
+            class="grid grid-cols-2 gap-4 border-t border-outline-variant/30 pt-4"
+          >
+            <div>
+              <p
+                class="text-[10px] text-on-surface-variant uppercase font-bold"
+              >
+                Capacity
+              </p>
+              <p class="text-sm font-code-sm">120 GB / 2 TB</p>
+            </div>
+            <div>
+              <p
+                class="text-[10px] text-on-surface-variant uppercase font-bold"
+              >
+                Nodes
+              </p>
+              <p class="text-sm font-code-sm">2 Offline</p>
+            </div>
+          </div>
+          <div class="mt-4 flex items-center justify-between">
+            <span
+              class="text-[10px] px-2 py-0.5 rounded bg-error-container text-error font-bold"
+              >DEGRADED</span
+            >
+            <button
+              class="opacity-0 group-hover:opacity-100 transition-opacity text-secondary text-xs font-bold underline"
+            >
+              Manage
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Deployment Wizard Modal (Hidden by Default) -->
+    <div
+      class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4"
+      id="deploy-wizard"
+    >
+      <div
+        class="absolute inset-0 bg-surface-container-lowest/80 backdrop-blur-sm"
+        onclick="this.parentElement.classList.add('hidden')"
+      ></div>
+      <div
+        class="relative bg-surface-container border border-outline-variant rounded-xl w-full max-w-2xl overflow-hidden shadow-2xl"
+      >
+        <!-- Header -->
+        <div
+          class="bg-surface-container-high px-8 py-6 border-b border-outline-variant flex justify-between items-center"
+        >
+          <div>
+            <h3 class="font-headline-lg text-on-surface">Deploy New Node</h3>
+            <p class="text-sm text-on-surface-variant">
+              Configure environment and resource allocation.
+            </p>
+          </div>
+          <button
+            class="text-on-surface-variant hover:text-on-surface"
+            onclick="
+              document.getElementById('deploy-wizard').classList.add('hidden')
+            "
+          >
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <!-- Wizard Body -->
+        <div class="p-8 space-y-6">
+          <!-- Step Navigation -->
+          <div class="flex items-center space-x-4 mb-8">
+            <div class="flex items-center">
+              <div
+                class="w-8 h-8 rounded-full bg-secondary text-on-secondary flex items-center justify-center text-xs font-bold"
+              >
+                1
+              </div>
+              <span class="ml-2 text-xs font-label-md text-on-surface"
+                >Environment</span
+              >
+            </div>
+            <div class="h-px bg-outline-variant flex-1"></div>
+            <div class="flex items-center opacity-40">
+              <div
+                class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface flex items-center justify-center text-xs font-bold"
+              >
+                2
+              </div>
+              <span class="ml-2 text-xs font-label-md text-on-surface"
+                >Resources</span
+              >
+            </div>
+          </div>
+          <!-- Form Fields -->
+          <div class="grid grid-cols-2 gap-6">
+            <div class="col-span-2 sm:col-span-1">
+              <label
+                class="block text-xs font-label-md text-on-surface-variant uppercase mb-2"
+                >Target Region</label
+              >
+              <select
+                class="w-full bg-surface-container-low border border-outline-variant rounded p-2.5 text-body-md focus:ring-1 focus:ring-secondary focus:border-secondary outline-none"
+              >
+                <option>US-East-1 (Virginia)</option>
+                <option>EU-West-2 (London)</option>
+                <option>AP-Northeast-1 (Tokyo)</option>
+              </select>
+            </div>
+            <div class="col-span-2 sm:col-span-1">
+              <label
+                class="block text-xs font-label-md text-on-surface-variant uppercase mb-2"
+                >Version Control</label
+              >
+              <div class="flex">
+                <select
+                  class="w-1/3 bg-surface-container-low border border-outline-variant rounded-l p-2.5 text-body-md border-r-0 focus:ring-1 focus:ring-secondary outline-none"
+                >
+                  <option>Branch</option>
+                  <option>Tag</option>
+                </select>
+                <input
+                  class="w-2/3 bg-surface-container-low border border-outline-variant rounded-r p-2.5 text-body-md focus:ring-1 focus:ring-secondary focus:border-secondary outline-none"
+                  type="text"
+                  value="main"
+                />
+              </div>
+            </div>
+            <div class="col-span-2">
+              <label
+                class="block text-xs font-label-md text-on-surface-variant uppercase mb-2"
+                >Instance Type</label
+              >
+              <div class="grid grid-cols-3 gap-3">
+                <button
+                  class="border border-secondary bg-secondary/10 p-3 rounded text-left group"
+                >
+                  <p class="text-xs font-bold text-secondary">Nano</p>
+                  <p class="text-[10px] text-on-surface-variant">
+                    1vCPU • 1GB RAM
+                  </p>
+                </button>
+                <button
+                  class="border border-outline-variant p-3 rounded text-left hover:border-secondary transition-colors"
+                >
+                  <p class="text-xs font-bold">Standard</p>
+                  <p class="text-[10px] text-on-surface-variant">
+                    2vCPU • 4GB RAM
+                  </p>
+                </button>
+                <button
+                  class="border border-outline-variant p-3 rounded text-left hover:border-secondary transition-colors"
+                >
+                  <p class="text-xs font-bold">High-Mem</p>
+                  <p class="text-[10px] text-on-surface-variant">
+                    4vCPU • 16GB RAM
+                  </p>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Footer -->
+        <div
+          class="bg-surface-container-low px-8 py-5 border-t border-outline-variant flex justify-between items-center"
+        >
+          <p class="text-xs text-on-surface-variant">
+            Estimated cost:
+            <span class="text-on-surface font-bold font-code-sm"
+              >$0.042/hr</span
+            >
+          </p>
+          <div class="flex space-x-3">
+            <button
+              class="px-5 py-2 text-on-surface-variant font-label-md hover:text-on-surface transition-colors"
+              onclick="
+                document.getElementById('deploy-wizard').classList.add('hidden')
+              "
+            >
+              Cancel
+            </button>
+            <button
+              class="px-6 py-2 bg-secondary text-on-secondary font-label-md rounded shadow-lg hover:brightness-110 active:scale-95 transition-all"
+            >
+              Initialize Deployment
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Background Shader Atmospheric Effect -->
+    <div class="fixed inset-0 -z-10 pointer-events-none opacity-20"></div>
+    <script>
+      // Micro-interactions and data simulation
+      document.addEventListener("DOMContentLoaded", () => {
+        // Simulated real-time node count update
+        const counters = document.querySelectorAll(".animate-pulse");
+        setInterval(() => {
+          counters.forEach((c) => {
+            c.classList.toggle("opacity-50");
+          });
+        }, 1000);
+
+        // Escape key to close modal
+        window.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") {
+            document.getElementById("deploy-wizard").classList.add("hidden");
+          }
+        });
+      });
+    </script>
+    <script src="../dash-sidebar.js"></script>
+  </body>
+</html>
