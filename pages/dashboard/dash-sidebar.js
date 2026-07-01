@@ -667,6 +667,69 @@
       }, 300);
     }
   };
+  /* ══════════════════════════════════════════════
+     REDIRECT EMPTY / # LINKS TO 404
+  ══════════════════════════════════════════════ */
+  function intercept404Links() {
+    /* Resolve 404.html relative to this script's own location.
+       dash-sidebar.js lives at pages/dashboard/dash-sidebar.js,
+       so two levels up from the script = project root. */
+    var scriptSrc =
+      (document.currentScript && document.currentScript.src) ||
+      (function () {
+        var scripts = document.getElementsByTagName("script");
+        for (var i = 0; i < scripts.length; i++) {
+          if (scripts[i].src && scripts[i].src.indexOf("dash-sidebar") !== -1) {
+            return scripts[i].src;
+          }
+        }
+        return "";
+      })();
+
+    var url404;
+    if (scriptSrc) {
+      /* strip filename → pages/dashboard/ → pages/ → root, then append 404.html */
+      url404 =
+        scriptSrc
+          .replace(/\/[^\/]+$/, "")
+          .replace(/\/[^\/]+$/, "")
+          .replace(/\/[^\/]+$/, "") + "/404.html";
+    } else {
+      /* fallback: resolve from current page location */
+      var parts = window.location.href.split("/");
+      var depth = window.location.pathname
+        .replace(/\/+$/, "")
+        .split("/")
+        .filter(Boolean).length;
+      var back = depth >= 3 ? 3 : 2;
+      parts.splice(parts.length - back, back);
+      url404 = parts.join("/") + "/404.html";
+    }
+
+    document.addEventListener("click", function (e) {
+      /* buttons with no real action */
+      var btn = e.target.closest("button");
+      if (
+        btn &&
+        !btn.hasAttribute("onclick") &&
+        btn.id !== "sb-hamburger" &&
+        btn.id !== "sb-close-btn"
+      ) {
+        e.preventDefault();
+        window.location.href = url404;
+        return;
+      }
+      /* anchor links with # or empty href */
+      var a = e.target.closest("a");
+      if (!a) return;
+      var href = a.getAttribute("href");
+      if (href === "#" || href === "" || href === null) {
+        e.preventDefault();
+        window.location.href = url404;
+      }
+    });
+  }
+
   window.doLogout = function () {
     sessionStorage.removeItem("stackly_user");
     localStorage.removeItem("stackly_user");
@@ -701,6 +764,7 @@
     buildHeader(cfg, email);
     applySidebarBreakpoint();
     applyMainMargins();
+    intercept404Links();
 
     /* update page title */
     var pname = pageName();

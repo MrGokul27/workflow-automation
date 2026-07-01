@@ -1456,6 +1456,32 @@
       }
 
       /* ═══════════════════════════════════════════════
+       REDIRECT # / EMPTY LINKS TO 404
+       ═══════════════════════════════════════════════ */
+      document.addEventListener("click", function (e) {
+        /* buttons with no real action */
+        var btn = e.target.closest("button");
+        if (
+          btn &&
+          !btn.hasAttribute("onclick") &&
+          btn.id !== "sb-hamburger" &&
+          btn.id !== "sb-close-btn"
+        ) {
+          e.preventDefault();
+          window.location.href = "../../404.html";
+          return;
+        }
+        /* anchor links with # or empty href */
+        var a = e.target.closest("a");
+        if (!a) return;
+        var href = a.getAttribute("href");
+        if (href === "#" || href === "" || href === null) {
+          e.preventDefault();
+          window.location.href = "../../404.html";
+        }
+      });
+
+      /* ═══════════════════════════════════════════════
        LOGOUT
        ═══════════════════════════════════════════════ */
       function doLogout() {
