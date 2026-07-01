@@ -1,0 +1,28 @@
+{
+  "name": "workflow-automation",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "node --experimental-vm-modules ./node_modules/@tailwindcss/cli/dist/index.mjs -i ./src/tailwind.css -o ./assets/css/tailwind.css --minify",
+    "watch:css": "node --experimental-vm-modules ./node_modules/@tailwindcss/cli/dist/index.mjs -i ./src/tailwind.css -o ./assets/css/tailwind.css --watch",
+    "build": "npm run build:css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrGokul27/workflow-automation.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MrGokul27/workflow-automation/issues"
+  },
+  "homepage": "https://github.com/MrGokul27/workflow-automation#readme",
+  "description": "",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.2",
+    "@tailwindcss/container-queries": "^0.1.1",
+    "@tailwindcss/forms": "^0.5.11",
+    "tailwindcss": "^4.3.2"
+  }
+}

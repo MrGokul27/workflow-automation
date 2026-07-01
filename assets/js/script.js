@@ -80,17 +80,17 @@ function setActiveNavLink() {
    relative to the current page.
    ========================================= */
 function resolveNavLinks() {
-  const isPages = CONFIG.rootPath === "..";
+  const root = CONFIG.rootPath;
   document
     .querySelectorAll("#site-header a, #site-footer a")
     .forEach((link) => {
       const href = link.getAttribute("href");
       if (href && href.startsWith("/")) {
         if (href === "/index.html") {
-          link.href = isPages ? "../index.html" : "./index.html";
+          link.href = `${root}/index.html`;
         } else if (href.startsWith("/pages/")) {
           const pageName = href.replace("/pages/", "");
-          link.href = isPages ? `./${pageName}` : `./pages/${pageName}`;
+          link.href = `${root}/pages/${pageName}`;
         }
       }
     });
@@ -490,6 +490,7 @@ function initScrollToTop() {
 
 window.addEventListener("load", () => {
   const loader = document.getElementById("page-loader");
+  if (!loader) return;
 
   setTimeout(() => {
     loader.classList.add("hide");
@@ -511,7 +512,9 @@ document.addEventListener("click", function (event) {
     // Check if href is missing, completely empty, or exactly '#'
     if (!href || href.trim() === "" || href.trim() === "#") {
       event.preventDefault(); // Stop default anchor behavior
-      window.location.href = CONFIG.rootPath + "/pages/components/404.html"; // Redirect to your 404 page
+      const root = CONFIG.rootPath;
+      // Normalise to avoid double-slash when rootPath is already '..'
+      window.location.href = root + "/pages/components/404.html";
     }
   }
 });

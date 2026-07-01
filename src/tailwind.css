@@ -1,0 +1,125 @@
+/* ─────────────────────────────────────────────────────────────
+   Tailwind CSS v4 — Project Input File
+   Build:  npm run build:css
+   Watch:  npm run watch:css
+───────────────────────────────────────────────────────────── */
+
+/* Core framework */
+@import "tailwindcss";
+
+/* ── Plugins ── */
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/container-queries";
+
+/* ── Content sources (every HTML & JS file in project) ── */
+@source "../*.html";
+@source "../pages/**/*.html";
+@source "../assets/js/**/*.js";
+@source "../pages/dashboard/**/*.js";
+
+/* ─────────────────────────────────────────────────────────────
+   Design-System Theme Tokens
+   (mirrors the inline tailwind.config blocks removed from HTML)
+───────────────────────────────────────────────────────────── */
+@theme {
+  /* ── Colour Palette ── */
+  --color-surface-container-low: #0d1c2d;
+  --color-outline: #909097;
+  --color-on-secondary-fixed: #001e2c;
+  --color-tertiary-container: #00055c;
+  --color-surface-container-high: #1c2b3c;
+  --color-primary: #bec6e0;
+  --color-on-background: #d4e4fa;
+  --color-primary-fixed-dim: #bec6e0;
+  --color-surface: #051424;
+  --color-on-secondary: #00354a;
+  --color-outline-variant: #45464d;
+  --color-on-error: #690005;
+  --color-on-secondary-container: #00374d;
+  --color-tertiary: #bdc2ff;
+  --color-background: #051424;
+  --color-on-tertiary-fixed: #000767;
+  --color-inverse-on-surface: #233143;
+  --color-surface-container: #122131;
+  --color-inverse-surface: #d4e4fa;
+  --color-on-surface: #d4e4fa;
+  --color-on-primary-fixed-variant: #3f465c;
+  --color-on-error-container: #ffdad6;
+  --color-secondary-container: #00a6e0;
+  --color-on-tertiary-container: #6c77e1;
+  --color-surface-container-highest: #273647;
+  --color-secondary-fixed-dim: #7bd0ff;
+  --color-surface-variant: #273647;
+  --color-error: #ffb4ab;
+  --color-surface-bright: #2c3a4c;
+  --color-secondary: #7bd0ff;
+  --color-secondary-fixed: #c4e7ff;
+  --color-on-primary: #283044;
+  --color-inverse-primary: #565e74;
+  --color-on-surface-variant: #c6c6cd;
+  --color-surface-dim: #051424;
+  --color-on-primary-fixed: #131b2e;
+  --color-surface-tint: #bec6e0;
+  --color-tertiary-fixed: #e0e0ff;
+  --color-surface-container-lowest: #010f1f;
+  --color-tertiary-fixed-dim: #bdc2ff;
+  --color-primary-fixed: #dae2fd;
+  --color-on-secondary-fixed-variant: #004c69;
+  --color-primary-container: #0f172a;
+  --color-error-container: #93000a;
+  --color-on-primary-container: #798098;
+  --color-on-tertiary-fixed-variant: #2f3aa3;
+  --color-on-tertiary: #131e8c;
+
+  /* ── Border Radius ── */
+  --radius-DEFAULT: 0.125rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.5rem;
+  --radius-full: 0.75rem;
+
+  /* ── Spacing Tokens ── */
+  --spacing-unit: 4px;
+  --spacing-gutter: 16px;
+  --spacing-max-width: 1440px;
+  --spacing-margin-desktop: 32px;
+  --spacing-margin-mobile: 16px;
+
+  /* ── Font Families ── */
+  --font-family-body-lg: "Inter", system-ui, sans-serif;
+  --font-family-headline-xl: "Inter", system-ui, sans-serif;
+  --font-family-headline-md: "Inter", system-ui, sans-serif;
+  --font-family-headline-lg: "Inter", system-ui, sans-serif;
+  --font-family-headline-xl-mobile: "Inter", system-ui, sans-serif;
+  --font-family-body-md: "Inter", system-ui, sans-serif;
+  --font-family-code-sm: "JetBrains Mono", monospace;
+  --font-family-label-md: "Inter", system-ui, sans-serif;
+
+  /* ── Font Sizes ── */
+  --font-size-body-lg: 16px;
+  --line-height-body-lg: 24px;
+
+  --font-size-headline-xl: 36px;
+  --line-height-headline-xl: 44px;
+  --letter-spacing-headline-xl: -0.02em;
+
+  --font-size-headline-md: 20px;
+  --line-height-headline-md: 28px;
+
+  --font-size-headline-lg: 24px;
+  --line-height-headline-lg: 32px;
+  --letter-spacing-headline-lg: -0.01em;
+
+  --font-size-headline-xl-mobile: 28px;
+  --line-height-headline-xl-mobile: 34px;
+  --letter-spacing-headline-xl-mobile: -0.01em;
+
+  --font-size-body-md: 14px;
+  --line-height-body-md: 20px;
+
+  --font-size-code-sm: 13px;
+  --line-height-code-sm: 18px;
+
+  --font-size-label-md: 12px;
+  --line-height-label-md: 16px;
+  --letter-spacing-label-md: 0.05em;
+}
